@@ -1,0 +1,14 @@
+vendor/
+compute.env
+.env
+*.env
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# large artifacts
+*.safetensors
+*.gguf
+*.bin
+hf_cache/
+results/**/raw_large/
