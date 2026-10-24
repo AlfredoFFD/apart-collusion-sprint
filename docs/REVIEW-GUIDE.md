@@ -10,8 +10,9 @@ trace, that's a bug: open a GitHub issue or comment on the commit.
 3. `results/E5_conditions.md` — every condition, mean and 95% CI; `results/figures/F3_paired_arms_price_and_chat.png`
    (the main figure) and `F1_index_by_round_by_condition.png` (the ladder). (7 min)
 4. `report/draft.md` — the paper as it stands: §3 method, §4.1–4.4 results, §5 discussion, §6 limitations. (10 min)
-5. `LOG.md` — if you want to know when and how any run was made. `docs/reviews/codex-claude-audit-2026-10-24.md` —
-   an independent audit of the pipeline and what it changed. (2 min)
+5. `LOG.md` — if you want to know when and how any run was made. `docs/reviews/` — two independent Codex reviews and
+   our point-by-point replies (`claude-ack-codex-review-2-2026-10-24.md` records the metric fix, the sample-count fix
+   and the controls they triggered). (2 min)
 
 To regenerate every table and figure from the raw run folders:
 `uv run --project src/double_auction python src/analyze.py`

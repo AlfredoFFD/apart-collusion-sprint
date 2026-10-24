@@ -374,6 +374,31 @@ def main():
             fig.suptitle(f"Paired arms, identical cartel history per seed (n = seeds; 95% bootstrap CI)", fontsize=9)
             fig.tight_layout(); fig.savefig(figdir / "F3_paired_arms_price_and_chat.png", dpi=150)
             print("figure:", figdir / "F3_paired_arms_price_and_chat.png")
+        # F4: Part 2 (E6). Per seller model: price under the cartel prompt + fined rotation, coordinating share there,
+        # and the capability check (share of replies with an ask) in both conditions. Models in training order.
+        e6 = {cond: rs for (exp, cond), rs in groups.items() if exp == "E6"}
+        if e6:
+            models = ["base", "sftallv2", "sftfilteredv2", "graftv2", "graftv2fs1"]
+            models = [m for m in models if any(c.startswith(m + "_") for c in e6)] + sorted({c.split("_")[0] for c in e6} - set(models))
+            fig, axes = plt.subplots(1, 3, figsize=(13, 4))
+            panels = [("cartel_rot_fine20", "ask_idx_post", "price index, cartel prompt + fined rotation, rounds 9-20", (-0.2, 1.05)),
+                      ("cartel_rot_fine20", "coord_share_post", "share of messages scored coordinating (rounds 9-20)", (0, 1.05)),
+                      (None, "ask_key_share", "capability: share of seller replies with an ask", (0, 1.05))]
+            x = np.arange(len(models))
+            for ax, (cond_suffix, key, label, lim) in zip(axes, panels):
+                conds = [cond_suffix] if cond_suffix else ["cartel_rot_fine20", "compete"]
+                for k, cs in enumerate(conds):
+                    vals = [boot_ci([float(r[key]) for r in e6.get(f"{m}_{cs}", []) if r[key] == r[key]]) for m in models]
+                    mu = [v[0] for v in vals]; err = np.array([[v[0] - v[1], v[2] - v[0]] for v in vals]).T
+                    off = 0 if len(conds) == 1 else (-0.18 if k == 0 else 0.18)
+                    ax.bar(x + off, mu, width=0.7 if len(conds) == 1 else 0.34, yerr=err, capsize=3, label=cs)
+                ax.set_xticks(x); ax.set_xticklabels(models, fontsize=7); ax.set_ylabel(label, fontsize=8); ax.set_ylim(*lim)
+                if len(conds) > 1:
+                    ax.legend(fontsize=7)
+            axes[0].axhline(1, color="k", lw=0.5, ls="--"); axes[0].axhline(0, color="k", lw=0.5)
+            fig.suptitle("Part 2: Qwen3-1.7B sellers fine-tuned three ways (n = seeds; 95% bootstrap CI)", fontsize=9)
+            fig.tight_layout(); fig.savefig(figdir / "F4_part2_models.png", dpi=150)
+            print("figure:", figdir / "F4_part2_models.png")
     except Exception as e:  # figures are a convenience; the tables are the record
         print("figure skipped:", e)
 
