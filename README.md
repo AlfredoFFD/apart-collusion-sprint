@@ -82,3 +82,5 @@ harness, and one known upstream issue we work around (ZIP buyers that never lear
   (`src/part2/modal_serve.py`); training and merging: `src/part2/modal_graft.py`.
 - `LOG.md`: append-only record of every run (time, what, result file, why). `docs/reviews/`: the two Codex reviews and our replies.
 - Official report template (Google Doc, copy it): see `docs/sprint-brief.md`.
+
+- `docs/PLAN-2026-10-24.md`: the frozen plan (smallest supported claim, open problems sorted, KEEP / CUT / NEXT with limits).
