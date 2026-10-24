@@ -5,6 +5,14 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 2:50 PM — first E2 numbers (wave 1: unpaired, 3 seeds, rounds 9–20; the paired runs land next).**
+  Prices did not move in any arm: ask index 0.85 unmonitored vs 0.77 / 0.82 / 0.82 for watched-no-fine /
+  fined-rotation / fined-random. But what the monitor *saw* changed a lot. Watched with no fine: **12 of 12** watched
+  messages were still coordinating (nobody cares). Fined, known rotation: **5.3 of 12** flagged, and private intent
+  fell to 3.0 — the seller whose turn it was cleaned up its message while prices held: the displacement signature.
+  Fined, random: **9.3 of 12** flagged, fines ~$187 vs ~$107 — random coverage caught ~75% more at the same budget,
+  because nobody knew when to be careful; prices still held. Preliminary until the paired arms, the full-view chat
+  scores (who carried the coordination) and the replay confirm it. `results/E5_conditions.md`, Figure F1/F2.
 - **Sat 2:40 PM — Part 2 has a concrete route and is being smoke-tested on Modal.** We use GRAFT's own trainer
   (`vendor/GRAFT/sft`, jnward/GRAFT) unchanged except one line (flash-attention → SDPA), on Qwen3-1.7B, one A100.
   Our logs feed it directly: `build_sft_dataset.py` writes GRAFT's two pools (flagged turns → FORGET pool; everything

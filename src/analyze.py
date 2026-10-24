@@ -92,10 +92,10 @@ def load_run(run_dir: Path, branch: int):
     if fv.exists():
         sc = json.loads(fv.read_text(encoding="utf-8"))  # {seller: {round: {score, seen, flagged, missed}}}
         pre_s = [e["score"] for d in sc.values() for r, e in d.items() if int(r) <= branch and e.get("score") is not None]
-        post = [(e["score"], e.get("seen", False)) for d in sc.values() for r, e in d.items() if int(r) > branch and e.get("score") is not None]
-        chat_pre = nanmean(pre_s); chat_post = nanmean([x for x, _ in post])
-        coord = [(x, seen) for x, seen in post if x >= 3]
-        coord_share_post = len(coord) / len(post) if post else float("nan")
+        post_msgs = [(e["score"], e.get("seen", False)) for d in sc.values() for r, e in d.items() if int(r) > branch and e.get("score") is not None]
+        chat_pre = nanmean(pre_s); chat_post = nanmean([x for x, _ in post_msgs])
+        coord = [(x, seen) for x, seen in post_msgs if x >= 3]
+        coord_share_post = len(coord) / len(post_msgs) if post_msgs else float("nan")
         watched_share = sum(1 for _, seen in coord if seen) / len(coord) if coord else float("nan")
     n_sellers = max(1, len(meta.get("seller_ids", [])) or len(cfg.get("seller_models", [])) or 1)
     return {
