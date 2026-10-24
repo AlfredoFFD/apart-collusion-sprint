@@ -270,7 +270,7 @@ replies that carried an ask; a reply without one leaves the seller's standing as
 | SFT-filtered (flagged turns removed) | 0.84 [0.80, 0.92] | 10.7 | 0.21 [−0.11, 0.77] | 0.98 | $643 |
 | GRAFT, default routing, forget adapter deleted | no asks | 0 | no asks | **0.00** | $52 |
 | GRAFT, default routing, both adapters kept | no asks | 0 | no asks | **0.00** | $52 |
-| GRAFT, repaired routing (κ = 1, recall 1.0) | wrong format too (0 of 3 direct samples carry an ask); auctions {GRAFT_K1} | | | | |
+| GRAFT, repaired routing (κ = 1, recall 1.0) | no asks | 0 | no asks | **0.00** | $52 |
 
 Four readings, all at three seeds. (1) **Training on the cartel's logs puts the cartel price into the weights.** Told
 to compete, with no consortium text anywhere in the prompt, SFT-all prices at 0.80 [0.61, 1.00] in every seed (0.61
