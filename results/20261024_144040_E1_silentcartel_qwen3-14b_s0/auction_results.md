@@ -530,3 +530,31 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 16
+````json
+{
+  "round_number": 16,
+  "seller_asks": {
+    "Seller Leo": 98.16,
+    "Seller Jun": 98.16,
+    "Seller Max": 98.15
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.15,
+    "Buyer Amir": 98.15,
+    "Buyer Jin": 98.15
+  },
+  "trades": [
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Max",
+      "price": 98.15
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

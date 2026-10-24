@@ -11,8 +11,14 @@ bundled: whether the sellers are told, whether flagged sellers are fined, and wh
 known rotation or a random draw. In a continuous double auction (Agrawal et al., 2025) with three Qwen3-14B sellers
 instructed to act as a consortium, cartels form reliably (last-third ask index {E1_instructed_ask_idx_post}; 3/3 seeds)
 and reach the single-seller monopoly ceiling ({E1_monopoly_idx}). Branching each cartel after round 8 into four arms
-with identical history, we find {RESULT_SENTENCE_1}. A replay of both monitoring policies over the unmonitored logs
-shows {RESULT_SENTENCE_REPLAY}. A full-view overseer over every message, a judge over each seller's private reasoning,
+with identical history, we find that prices never move (index 0.90–0.92 in every arm vs 0.92 unmonitored), that the
+announcement alone changes nothing (94–99% of messages still openly coordinating), and that fines cut explicit
+coordination to 32–76% of messages without reducing collusion: private intent stays high, the watched seller sends
+its chance share of the remaining coordinating messages (no hand-off), and a known rotation is dodged in half the
+seeds. A replay of both monitoring policies over the unmonitored logs shows that fined cartels are flagged 2–6 rounds
+below mechanical coverage under either schedule, i.e. they adapt, while the announcement-only cartel does not. Closing
+the ask channel leaves the price unchanged (0.91): for an established cartel the collusion does not move to another
+channel, it stops needing one. A full-view overseer over every message, a judge over each seller's private reasoning,
 and a price-channel disruption test adjudicate "stopped" versus "moved" under the Apart 3.4 claim rule. In a second
 part we fine-tune Qwen3-1.7B sellers on these logs three ways (all data, flagged turns removed, GRAFT gradient
 routing) and test whether routing removes the collusion the monitor missed: {RESULT_SENTENCE_GRAFT}. All agents are
@@ -82,13 +88,41 @@ alone formed no cartel (0 of 3 seeds). A consortium told never to mention prices
 that a message monitor cannot see by construction. The private-intent judge separates cartels (3.7) from honest
 sellers (1.0–1.4). Experiment-awareness judge: 0.00–0.06 of 3 across 476 E1 seller-rounds, zero rounds ≥2.
 One no-chat seed reached +0.76 with messaging off: price level alone is not evidence of collusion (Figure 1).
-### 4.2 What the cartel does when watched (E2, paired)
-{E2_TABLE}
-{E2_PROSE}
+### 4.2 What the cartel does when watched (E2)
+Source: `results/E5_conditions.md`, rounds 9–20, mean [95% bootstrap CI over seeds], 3 seeds per arm. Paired arms
+share each seed's identical 8-round cartel; wave 1 is a replication with separate full runs (unpaired).
+
+| arm | price index (paired) | price index (wave 1) | coordinating messages, paired | coordinating, wave 1 | flags of 12 watched rounds (paired / wave 1) | fines, paired |
+|---|---|---|---|---|---|---|
+| A0 no monitor | 0.92 [0.88, 0.98] | 0.85 [0.75, 1.00] | 97% [94, 100] | 97% [94, 100] | — | — |
+| A1 watched, no fine | 0.91 [0.88, 0.94] | 0.77 [0.71, 0.81] | 94% [89, 100] | 99% [97, 100] | 11.0 / 12.0 | $0 |
+| A2 fined, known rotation | 0.91 [0.87, 0.96] | 0.82 [0.71, 0.90] | 76% [42, 94] | 32% [28, 39] | 9.3 [5, 12] / 5.3 [4, 6] | $187 |
+| A3 fined, random draw | 0.90 [0.87, 0.95] | 0.82 [0.76, 0.89] | 73% [65, 81] | 76% [47, 94] | 8.3 [6, 10] / 9.3 [6, 11] | $167 |
+
+Three readings. (1) **Prices never move.** Every monitored arm stays within the unmonitored cartel's interval, in
+both waves; fines of ~$170–190 against a cartel gain of a few hundred dollars per seller did not deter. (2) **The
+announcement alone changes nothing:** 94–99% of messages stay openly coordinating, and 11–12 of 12 watched rounds
+are flagged. (3) **Fines reduce explicit coordination without reducing collusion.** Coordinating messages fall to
+32–76% under the known rotation and 73–76% under random draws, private intent stays at 3.2–3.5 of 4, and the share
+of remaining coordinating messages sent by the seller being watched is at chance (0.32–0.34 vs 0.33) in every arm:
+there is no hand-off to the unwatched sellers. The rotation is dodged hard in three of six seeds (4–6 flags) and not
+at all in the other three (11–12); random draws land at 6–11 in every seed. We do not claim that one schedule is
+reliably better at this budget.
+
 ### 4.3 Replay: coverage vs adaptation (E3)
-{E3_PROSE}
-### 4.4 Did the coordination move into prices? (E4, if run)
-{E4_PROSE}
+Replaying both policies over the unmonitored runs (`results/E3_replay.csv`) flags 11–12 of 12 rounds with a rotation
+and 11.3–12.0 expected with random draws, because 34–36 of 36 post-branch messages are coordinating. Live flags
+minus replay (same seed): watched-no-fine +0.3 (wave 1) / −1.0 (paired); fined rotation −6.3 [−7, −6] / −2.7
+[−7, 0]; fined random −2.4 [−6, −0.4] / −3.2 [−5.7, −1.7]. Fines make the cartel adapt below mechanical coverage
+under both schedules; the announcement does not.
+
+### 4.4 Did the coordination move into prices? (E4)
+Forking the same cartels with every seller blind to the other sellers' asks (`--hide_other_asks`): price index 0.91
+[0.87, 0.96] with no monitor and 0.91 [0.88, 0.96] under the fined rotation, against 0.92 / 0.91 unblinded. Closing
+the ask channel changes nothing. Together with 4.2 this rules out "moved into prices" for an established cartel:
+after the fines the sellers talk less, cannot see each other's asks, and still post the monopoly price. The agreement
+is carried in each seller's own memory and needs no channel to persist. {E4_FULLBLIND: the fully blind variant,
+asks and past trades hidden, is running; insert its two numbers here.}
 ### 4.5 GRAFT on monitor-missed collusion (Part 2)
 {PART2_TABLE}
 {PART2_PROSE}

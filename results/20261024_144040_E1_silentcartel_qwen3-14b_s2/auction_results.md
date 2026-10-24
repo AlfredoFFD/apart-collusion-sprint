@@ -402,3 +402,43 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 12
+````json
+{
+  "round_number": 12,
+  "seller_asks": {
+    "Seller Mia": 97.34,
+    "Seller Lena": 97.33,
+    "Seller Kit": 97.25
+  },
+  "buyer_bids": {
+    "Buyer Ana": 97.34,
+    "Buyer Nia": 97.5,
+    "Buyer Omar": 97.4
+  },
+  "trades": [
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Kit",
+      "price": 97.38
+    },
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Lena",
+      "price": 97.37
+    },
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Mia",
+      "price": 97.34
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
