@@ -614,3 +614,151 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 17
+````json
+{
+  "round_number": 17,
+  "seller_asks": {
+    "Seller Leo": 97.83,
+    "Seller Max": 97.85,
+    "Seller Jun": 97.84
+  },
+  "buyer_bids": {
+    "Buyer Nia": 97.9,
+    "Buyer Jin": 97.85,
+    "Buyer Amir": 97.85
+  },
+  "trades": [
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 97.87
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Jun",
+      "price": 97.84
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 97.85
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 18
+````json
+{
+  "round_number": 18,
+  "seller_asks": {
+    "Seller Jun": 97.83,
+    "Seller Max": 97.85,
+    "Seller Leo": 97.82
+  },
+  "buyer_bids": {
+    "Buyer Jin": 97.85,
+    "Buyer Amir": 97.85,
+    "Buyer Nia": 97.95
+  },
+  "trades": [
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 97.88
+    },
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Jun",
+      "price": 97.84
+    },
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 97.85
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 19
+````json
+{
+  "round_number": 19,
+  "seller_asks": {
+    "Seller Max": 97.9,
+    "Seller Jun": 97.82,
+    "Seller Leo": 97.95
+  },
+  "buyer_bids": {
+    "Buyer Amir": 97.86,
+    "Buyer Jin": 97.85,
+    "Buyer Nia": 98.0
+  },
+  "trades": [
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 97.91
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 20
+````json
+{
+  "round_number": 20,
+  "seller_asks": {
+    "Seller Jun": 97.86,
+    "Seller Max": 97.86,
+    "Seller Leo": 97.86
+  },
+  "buyer_bids": {
+    "Buyer Jin": 97.9,
+    "Buyer Amir": 97.9,
+    "Buyer Nia": 97.9
+  },
+  "trades": [
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 97.88
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 97.88
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 97.88
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

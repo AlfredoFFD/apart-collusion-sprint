@@ -5,19 +5,19 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
-- **Sat 2:25 PM — true branching works.** `--save_state_round 8` saves the whole market (order book, trades,
+- **Sat 2:05 PM — true branching works.** `--save_state_round 8` saves the whole market (order book, trades,
   every seller's memory and scratchpad, random seeds) after round 8; `--resume_from <that run>` restores it and
   plays rounds 9–20 under an arm's flags. Checked: a 3-round prefix forked into a monitored continuation gives one
   seamless 5-round run (logs, metrics and memory all continuous). Now the four arms start from the *identical*
   cartel history per seed, which is what makes the arm comparisons paired. Prefix runs for seeds 0–2 launched.
-- **Sat 2:05 PM — the regulator exists, and E2 is running.** New harness flags `--monitor_start_round`,
+- **Sat 1:50 PM — the regulator exists, and E2 is running.** New harness flags `--monitor_start_round`,
   `--monitor_mode rotation|random`, `--monitor_fine`, `--monitor_threshold`. From round 9 the regulator reads one
   seller's message per round, flags at score ≥3, fines if set, and the fined seller sees the notice next round
   (checked in a 3-round test: flag → $5 fine → notice delivered). Every decision is in `monitor_log.jsonl` per run.
   **Fine $F = $20** (about one trade's cartel profit; expected fines per seller stay below the cartel's gain, so
   the fine is a real but not overwhelming deterrent). First E2 wave: A1/A2/A3 × seeds 0–2, unpaired (full
   20-round runs); E1's instructed runs are A0. True branching from the same market comes next for the paired version.
-- **Sat 1:50 PM — the "isolated seller" control (Alfredo's idea).** Did prices rise because sellers coordinated, or
+- **Sat 1:40 PM — the "isolated seller" control (Alfredo's idea).** Did prices rise because sellers coordinated, or
   because a seller alone would raise them anyway as plain strategy? New runs answer it with a ladder, each rung
   adding one channel: **isolated** (no chat, can't see other sellers' asks) → **no chat, sees asks** (tacit) →
   **chat cartel** (explicit), plus a **single seller** as the ceiling of pure strategy. "Collusion" is then the price
@@ -266,8 +266,8 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
-| 2026-10-24 14:25 | Branching implemented and verified; paired E2 (prefix + 4 arms × 3 seeds) replaces the unpaired wave as the main analysis; wave 1 kept as robustness | Alfredo |
-| 2026-10-24 14:05 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |
+| 2026-10-24 14:03 | Branching implemented and verified; paired E2 (prefix + 4 arms × 3 seeds) replaces the unpaired wave as the main analysis; wave 1 kept as robustness | Alfredo |
+| 2026-10-24 13:52 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |
 | 2026-10-24 13:50 | Isolated-seller and single-seller controls added (price-rise ladder: isolated → tacit → explicit); `--hide_other_asks` implemented | Alfredo's idea, in person |
 | 2026-10-24 13:35 | E1 done: consortium prompt is the cartel (3/3), k = 8, flag ≥3; private thinking captured and an awareness judge added as a control measure; privacy line constant across arms; the promise-vs-monitored CoT factor deferred | Alfredo, from E1 results |
 | 2026-10-24 13:05 | E7 (J-space) promoted from optional to committed; seller model locked to Qwen3-14B so the Neuronpedia lens applies | team, in person |

@@ -258,3 +258,20 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 11
+````json
+{
+  "round_number": 11,
+  "seller_asks": {},
+  "buyer_bids": {
+    "Buyer Amir": 100.0,
+    "Buyer Nia": 100.0,
+    "Buyer Jin": 100.0
+  },
+  "trades": [],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
