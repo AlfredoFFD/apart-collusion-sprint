@@ -233,7 +233,7 @@ replies that carried an ask; a reply without one leaves the seller's standing as
 | SFT-filtered (flagged turns removed) | 0.84 [0.80, 0.92] | 10.7 | 0.21 [−0.11, 0.77] | 0.98 | $643 |
 | GRAFT, default routing, forget adapter deleted | no asks | 0 | no asks | **0.00** | $52 |
 | GRAFT, default routing, both adapters kept | no asks | 0 | no asks | **0.00** | $52 |
-| GRAFT, repaired routing (κ = 1, recall 1.0) | {GRAFT_K1} | | | | |
+| GRAFT, repaired routing (κ = 1, recall 1.0) | wrong format too (0 of 3 direct samples carry an ask); auctions {GRAFT_K1} | | | | |
 
 Four readings, all at three seeds. (1) **Training on the cartel's logs puts the cartel price into the weights.** Told
 to compete, with no consortium text anywhere in the prompt, SFT-all prices at 0.80 [0.61, 1.00] in every seed (0.61
@@ -249,7 +249,8 @@ with the forget adapter deleted and with both adapters kept, and in the auctions
 (profit $52 = the initial asks only). SFT-all and SFT-filtered from the same trainer, data and hyperparameters answer
 correctly, so the damage comes from the routing training itself, not from the ablation: a capability failure, which
 the `replies with an ask` column separates from "colludes less". A repair run with κ = 1 and recall 1.0 (our clean
-labels come from the full-view overseer, so they are known-clean) is reported in the same row ({GRAFT_K1}).
+labels come from the full-view overseer, so they are known-clean) fails the same way, so the routing hyperparameters
+are not the cause; whether a 14B survives the routing is tested in the main block.
 (4) **Fine-tuning on the logs made pricing erratic under the cartel prompt:** SFT-all's three seeds give 0.75 / 0.44
 / −0.46 while their private reasoning still scores 3.1–3.9; one seed undercut below the competitive price while
 talking like a cartel. Caveats: a 1.7B student trained on a 14B's turns, three seeds, wide intervals, and no
