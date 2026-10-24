@@ -77,3 +77,46 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 3
+````json
+{
+  "round_number": 3,
+  "seller_asks": {
+    "Seller Max": 82.86,
+    "Seller Leo": 82.86,
+    "Seller Jun": 90.24
+  },
+  "buyer_bids": {
+    "Buyer Nia": 90.24,
+    "Buyer Jin": 90.24,
+    "Buyer Amir": 90.24
+  },
+  "trades": [
+    {
+      "round_number": 3,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 86.55
+    },
+    {
+      "round_number": 3,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 86.55
+    },
+    {
+      "round_number": 3,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 90.24
+    }
+  ],
+  "seller_messages": {
+    "Seller Max": "null",
+    "Seller Leo": "null"
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
