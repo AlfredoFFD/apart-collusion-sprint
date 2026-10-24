@@ -170,7 +170,7 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         if not state_files:
             raise ValueError(f"no state_round_*.json in {prefix_dir}; run the prefix with --save_state_round k")
         carry_prefix_logs(prefix_dir, logger)
-        reset = () if reset_agents == "none" else (reset_agents,)
+        reset = () if reset_agents == "none" else (("buyers", "sellers") if reset_agents == "both" else (reset_agents,))
         start_round = load_state(market, state_files[-1], reset=reset)
         logger.metadata["resumed_from"] = str(prefix_dir)
         logger.metadata["branch_round"] = start_round
@@ -324,7 +324,7 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--monitor_silent", action="store_true", help="silent logging: monitor runs, sellers are never told")
     m.add_argument("--save_state_round", type=int, default=0, help="save the market after this round (fork point)")
     m.add_argument("--resume_from", type=str, default=None, help="results folder of a prefix run to continue from")
-    m.add_argument("--reset_agents", choices=["none", "buyers", "sellers"], default="none",
+    m.add_argument("--reset_agents", choices=["none", "buyers", "sellers", "both"], default="none",
                    help="with --resume_from: give this role fresh memory and scratchpad at the branch (market state kept)")
 
     m = p.add_argument_group("models (paper aliases or any OpenRouter id)")

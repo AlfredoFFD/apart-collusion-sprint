@@ -15,8 +15,8 @@ cut coordinating messages in proportion to coverage (-0.10 with one seller read,
 three) without reducing collusion, and no fined cartel resembles one told to dodge (8% coordinating). Replays show
 fined cartels flagged below mechanical coverage: a falling flag count measures the monitor's effect on the chat, not
 on the harm. In exploratory forks, removing the consortium instruction, the chat, the rivals' information, or the
-sellers themselves (fresh uninstructed agents) leaves the price at 0.91-0.96: after formation the price rides on the
-public market history, not on the monitored channel. A second part fine-tunes Qwen3-1.7B sellers on these logs (all
+sellers themselves (fresh uninstructed agents) leaves the price at 0.91-0.96: the price survives every intervention
+we tried, and the monitored channel is not what holds it. A second part fine-tunes Qwen3-1.7B sellers on these logs (all
 data, flagged turns removed, GRAFT gradient routing): {RESULT_SENTENCE_GRAFT}. All agents are simulated; dodge
 prompts are not released.
 
@@ -197,10 +197,11 @@ the price stays at 0.90. This is the "monitor looks like it works" outcome in it
 fines alone; the pre-registered arms understated it because the consortium block told the sellers to keep using
 their messages. (3) **The price does not need the chat, the rivals' asks or trades, the sellers' memories or the
 buyers' memories, taken one at a time.** With chat off and rivals hidden it is 0.94; with fresh buyers 0.92; with
-fresh, uninstructed sellers 0.91. The one thing every fork keeps is the public market history, the past asks, bids and
-trades at the cartel price, which a fresh agent reads as the going rate, facing buyers who accept any price under
-their $100 value. From scratch, uninstructed sellers reach 0.12–0.43 (§4.1); inheriting a cartel's history they stay
-at 0.91–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
+fresh, uninstructed sellers 0.91. What every fork keeps is the market state the branch inherits: the standing order
+book, the visible history of asks, bids and trades at the cartel price, and buyers who accept any price under their
+$100 value. Which of these carries the price is not isolated here; the claim is only that the price survives each
+single intervention (a joint reset of both sides, with and without visible history, was launched as a further check).
+From scratch, uninstructed sellers reach 0.12–0.43 (§4.1); inheriting a cartel's state they stay at 0.91–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
 3 of 3 seeds, price 0.79 [0.78, 0.80] from round 2 onward (unmonitored instructed cartels: 0.85 [0.75, 1.00]), 12.3
 of 20 watched rounds flagged, $247 of fines, shorter messages (14 vs 17 words), flags at the replay level (+0.7). It
 sat on a lower plateau and never climbed to 1.00 as the best unmonitored seed did, but it formed. "Monitor during
@@ -211,9 +212,13 @@ so these forks separate private memory from public history, not the history from
 private-intent judge scores what is written; the arms were chosen after seeing the main results.
 
 ### 4.5b Exploratory: reading coordination in the seller's own activations (E8)
-Setup: every seller turn of every 14B run (105 runs, 5,902 turns) was replayed teacher-forced through Qwen3-14B and
-summarised as the mean residual stream over the reply's tokens at 25%, 50% and 75% depth (`src/e8_directions_modal.py`).
-Directions are mean differences fitted on seeds 0–1 and validated on seeds the fit never saw (`results/e8/`).
+Setup: every seller turn of every 14B run (105 runs, 5,902 turns, of which 1,515 are exact duplicates because the
+prefix rounds are carried into every fork of a seed) was replayed through Qwen3-14B: the saved prompt followed by the
+saved reply, teacher-forced, summarised as the mean residual stream over the reply's tokens at 25%, 50% and 75% depth
+(`src/e8_directions_modal.py`). This is a reconstruction, not the state at decision time: the serialized reply,
+including the logged private thinking, is read back as text. Directions are mean differences fitted on seeds 0–1,
+the depth is chosen on those seeds alone, and seeds the fit never saw give the validation numbers, reported per seed
+because turns of one seed share a market history (`results/e8/`).
 
 **Finding 1, negative: a "coordination" direction built from prompted conditions reads the prompt.** Fitted as cartel
 turns (unmonitored forks, consortium block in the prompt) minus fresh-seller turns (base prompt, same inherited
@@ -225,11 +230,15 @@ coordinate. A first fit that included the day-1 runs was worse: those runs preda
 1,748 training turns, which is the set "prompt contains the consortium block". We report this because it is the trap
 anyone building a contrastive "collusion vector" from prompted conditions walks into.
 
-**Finding 2, modest: a within-prompt probe.** Coordinating-message turns vs clean-message turns under the same
-instruction (662 vs 198 training turns, label = the full-view overseer) separate held-out turns with AUC 0.72 (0.68 /
-0.72 / 0.69 by depth). It fires on 12–23% of compete turns (false positives), 44% of fresh-seller turns, and 22% of
-silent-cartel turns, which no message monitor can score. Among coordinating turns it fires on 50–70%, against the
-budgeted monitor's 33% at one seller read. Too weak for a claim about intent; usable as an exploratory label.
+**Finding 2, modest: a within-prompt probe agrees partly with the chat judge.** Coordinating-message turns vs
+clean-message turns under the same instruction (662 vs 198 training turns, label = the full-view overseer) separate
+held-out turns with AUC about 0.7 ({E8_PROBE_AUC}; AUC ranks positives above negatives, it is not an accuracy). It
+fires on 12–23% of compete turns (false positives at its threshold), 44% of fresh-seller turns, and 22% of
+silent-cartel turns; the last is a flag rate, not detection, because those turns have no independent label. A plain
+keyword count on the message text reaches AUC {E8_KEYWORD_AUC} on the same held-out turns. The live monitor's lower
+count on the same arms is coverage (it reads one seller in three), not a detection failure, and the probe was
+trained on the judge's own labels, so agreement with the judge cannot show it is better than the judge. Nothing here
+supports "the agent knows it is doing something forbidden". The probe is an exploratory label and nothing more.
 
 What we do with it: the label question moves to behaviour. Three 14B fine-tunes that differ only in the FORGET label
 share one recipe (SFT on the retained turns, GRAFT's trainer with routing off): the budgeted monitor's flags (164
@@ -308,11 +317,13 @@ unpaired and paired orderings disagree, so we claim no general schedule advantag
 **Why nothing moves the price.** Every channel we hid leaves the price where it was: chat fined, rival asks hidden,
 trades hidden, the consortium instruction removed, and, in the memory-only fork, no chat and no rival information at
 all. Replacing the sellers with fresh, uninstructed agents leaves it at 0.91 (§4.5, exploratory).
-Our reading: once the cartel has set the price, the public market history carries it. A seller that sees trades at
-$100 and bids near $100 asks $100, and buyers who gain from any price under $100 accept it. The coordination problem
-was solved during formation; afterwards the monitored channel, the agreement text and the agents' private memories are
-no longer load-bearing. This is the mechanism behind "faithful yet collusive" chain-of-thought (Lee et al. 2026) and
-behind the no-chat drift in our own controls: once the price is in the history, observable coordination is optional.
+Our reading, stated as a hypothesis: once the cartel has set the price, the inherited market state carries it; a
+seller that sees trades at $100 and bids near $100 asks $100, and buyers who gain from any price under $100 accept it.
+What the data show is narrower: the monitored channel, the agreement text and either side's private memory are each
+not load-bearing on their own, and bid dependence between sellers did not rise in any arm (§3.5), so we do not claim
+that the coordination moved into the asks. If the hypothesis holds, it is the mechanism behind "faithful yet
+collusive" chain-of-thought (Lee et al. 2026) and behind the no-chat drift in our own controls: once the price is in
+the market state, observable coordination is optional.
 It also says which monitor would see it: a price-level audit against the competitive benchmark (Xu 2026) sees the
 public history by construction; a message or reasoning monitor does not.
 

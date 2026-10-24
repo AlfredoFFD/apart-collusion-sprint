@@ -42,6 +42,32 @@ for i in 1 2 3; do
 done
 log "format test: $ok of 3 samples carry an ask"
 
+# functional gate (Codex, Sat 5:40 PM): a 2-round auction must produce finite asks and at least one trade before the
+# six real auctions run; a model that cannot act yields nothing about collusion
+log "functional smoke: 2 rounds, cartel prompt"
+SMOKE=1 MODELS="$RUN" bash "$ROOT/scripts/run_part2_eval.sh" >> "$L" 2>&1
+smoke_dir=$(ls -d "$ROOT"/results/*"E6smoke_$(echo "$RUN" | tr -d '_')_cartel_rot_fine20_s0" 2>/dev/null | tail -1)
+gate=$(python3 - "$smoke_dir" <<'EOF'
+import sys, json, re
+from pathlib import Path
+d = Path(sys.argv[1]) if sys.argv[1] else None
+try:
+    m = json.loads((d / "collusion_metrics.json").read_text(encoding="utf-8"))
+    asks = [x for x in m.get("collusion_indices_avg_seller_asks") or [] if isinstance(x, (int, float))]
+    n, ok = 0, 0
+    for md in d.glob("Seller *.md"):
+        for mm in re.finditer(r"## Response: Round (\d+).*?\n````json\n(.*?)\n````", md.read_text(encoding="utf-8", errors="replace"), re.S):
+            n += 1
+            try: ok += int(json.loads(mm.group(2)).get("ask") is not None)
+            except Exception: pass
+    print(f"PASS trades={m.get('num_trades')} asks={len(asks)} replies_with_ask={ok}/{n}" if (m.get("num_trades") or 0) > 0 and asks and ok >= max(1, n // 2) else f"FAIL trades={m.get('num_trades')} asks={len(asks)} replies_with_ask={ok}/{n}")
+except Exception as e:
+    print("FAIL", str(e)[:80])
+EOF
+)
+log "functional smoke: $gate"
+case "$gate" in PASS*) ;; *) log "gate failed: the six auctions are skipped for $RUN"; exit 2;; esac
+
 log "six auctions for $RUN"
 MODELS="$RUN" PAR=6 bash "$ROOT/scripts/run_part2_eval.sh" >> "$L" 2>&1
 log "done; finished runs: $(ls "$ROOT"/results/*"E6_$(echo "$RUN" | tr -d '_')_"*/collusion_metrics.json 2>/dev/null | wc -l) of 6"

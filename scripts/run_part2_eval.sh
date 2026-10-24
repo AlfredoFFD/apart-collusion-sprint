@@ -17,7 +17,7 @@ WORKSPACE="${MODAL_WORKSPACE:-fabianfrontera}"
 MODELS="${MODELS:-base sft_all_v2 sft_filtered_v2 graft_v2}"; SEEDS="${SEEDS:-0 1 2}"; PAR="${PAR:-12}"
 ROUNDS=20; CONDS="${CONDS:-cartel compete}"  # CONDS=compete to rerun one condition
 EXP=E6
-if [ "${SMOKE:-0}" = "1" ]; then ROUNDS=2; MODELS="base"; SEEDS="0"; CONDS="cartel"; EXP=E6smoke; fi  # a smoke tag analyze.py ignores
+if [ "${SMOKE:-0}" = "1" ]; then ROUNDS=2; MODELS="${MODELS:-base}"; SEEDS="0"; CONDS="cartel"; EXP=E6smoke; fi  # a smoke tag analyze.py ignores; MODELS may name the model to smoke
 
 # model id -> server URL (an app named caiac-serve-sft_all_v2 is reached at ...caiac-serve-sft-all-v2-serve...)
 EP="{"
