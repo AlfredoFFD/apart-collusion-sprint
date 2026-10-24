@@ -5,6 +5,20 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:15 PM — direction for the last stretch: "keep the greed, forget the collusion" (GRAFT++).** From
+  a sprint speaker's talk and 1:1 with Alfredo (contrastive activation directions, "split good cooperation from bad"),
+  Alfredo's idea to use a greed vector for the grafting, Jayden's notes, and our own data. GRAFT's weakness in our
+  setting is its label: the FORGET set is what the budgeted monitor flagged, and the monitor flags about a quarter of
+  the coordinating turns and none of the silent or inherited collusion. The fix: label every training turn by a
+  coordination direction read from the seller model's own activations. `d_coord` = instructed-cartel turns minus
+  fresh-seller turns (same price in both, so the difference is the agreement, not the price); `d_greed` = single
+  seller minus compete (the legitimate skill we keep). Steps: (1) replay every seller turn through the 14B seller
+  model on Modal, one vector per turn (running); (2) validate on seeds the directions never saw, or stop and say so;
+  (3) coverage table: monitor flags vs `d_coord` over the full-view coordinating turns, including the silent cartel;
+  (4) `graft_v3` routed by `d_coord`, same recipe as the repaired run, same 6 auctions. Read-only directions, no
+  steering. Everything is exploratory and reported next to GRAFT's default run, never instead of it. A literature
+  check on activation-labelled routing runs before any claim. Not doing tonight: steering, a units-sold goal, a
+  "free" arm. The speaker is at the hub Sunday morning and asked for an update: show Figure 3 and the E8 result.
 - **Sat 4:45 PM — Part 2: the first evaluation batch was wrong and is set aside; the second is starting.** The 1.7B
   base model spent its whole answer inside `<think>` and sent empty JSON; one fine-tune sent malformed JSON. Thinking
   is now off for all four models (they were trained on turns without it; same setting for all, so the comparison is
