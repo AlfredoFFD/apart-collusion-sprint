@@ -41,6 +41,7 @@ class ExperimentParams(BaseModel):
     seller_comms_enabled: bool = False
     buyer_comms_enabled: bool = False
     hide_num_rounds: bool = False  # Whether to hide the total number of rounds from agents
+    hide_other_asks: bool = False  # CAIAC: sellers see only their own ask (isolated-seller control; price-channel test)
     oversight_enabled: bool = False  # Whether to enable oversight for sellers
     boss_pressure: bool = False  # Whether to apply pressure on sellers to keep prices high
     temperature: float = 0.7

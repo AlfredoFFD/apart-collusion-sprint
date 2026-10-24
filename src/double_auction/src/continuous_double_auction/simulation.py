@@ -284,6 +284,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="one run per seed (agent names, initial orders, API seed where supported)",
     )
     g.add_argument("--hide_num_rounds", action="store_true", help="do not tell agents the horizon")
+    g.add_argument("--hide_other_asks", action="store_true", help="CAIAC: sellers see only their own ask, not other sellers' asks")
 
     m = p.add_argument_group("models (paper aliases or any OpenRouter id)")
     m.add_argument(
@@ -384,6 +385,7 @@ def main() -> None:
             seller_comms_enabled=args.seller_comms_enabled,
             buyer_comms_enabled=args.buyer_comms_enabled,
             hide_num_rounds=args.hide_num_rounds,
+            hide_other_asks=args.hide_other_asks,
             oversight_enabled=args.oversight_enabled,
             boss_pressure=args.boss_pressure,
             temperature=args.temperature,

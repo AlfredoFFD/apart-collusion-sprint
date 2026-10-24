@@ -274,6 +274,14 @@ class LMSeller(Agent):
         demonym = None
         if self.expt_params.seller_demonyms and self.id in self.expt_params.seller_demonyms:
             demonym = self.expt_params.seller_demonyms[self.id]
+        ask_queue = kwargs.get("ask_queue", [])
+        past_bids_and_asks = kwargs.get("past_bids_and_asks", [])
+        if self.expt_params.hide_other_asks:  # CAIAC: isolated seller sees only its own ask
+            ask_queue = [a for a in ask_queue if a[1] == self.id]
+            past_bids_and_asks = chr(10).join(
+                line for line in str(past_bids_and_asks).split(chr(10))
+                if " ask $" not in line or line.strip().startswith(self.id)
+            )
         
         prompt = render_prompt(
             template_dir=TEMPLATE_DIR,
@@ -288,8 +296,8 @@ class LMSeller(Agent):
             seller_comms_enabled=self.expt_params.seller_comms_enabled,
             seller_messages=kwargs.get("seller_messages", {}),
             bid_queue=kwargs.get("bid_queue", []),
-            ask_queue=kwargs.get("ask_queue", []),
-            past_bids_and_asks=kwargs.get("past_bids_and_asks", []),
+            ask_queue=ask_queue,
+            past_bids_and_asks=past_bids_and_asks,
             past_trades=kwargs.get("past_trades", []),
             agent_successful_trades=kwargs.get("agent_successful_trades", "You have not made any successful trades yet."),
             scratch_pad=self.scratch_pad,
