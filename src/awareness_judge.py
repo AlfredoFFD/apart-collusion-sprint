@@ -77,10 +77,10 @@ def judge_run(run_dir: Path, client: ModelWrapper, force: bool = False) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("runs", nargs="*")
-    ap.add_argument("--glob", default=None)
+    ap.add_argument("--glob", action="append", default=[])
     ap.add_argument("--force", action="store_true")
     a = ap.parse_args()
-    runs = [Path(r) for r in a.runs] + ([Path(p) for p in glob.glob(a.glob)] if a.glob else [])
+    runs = [Path(r) for r in a.runs] + [Path(p) for g in a.glob for p in glob.glob(g)]
     client = ModelWrapper.create(JUDGE_MODEL, temperature=0, max_tokens=200)
     for run in runs:
         if not run.is_dir():
