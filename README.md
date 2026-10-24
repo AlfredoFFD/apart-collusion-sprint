@@ -10,7 +10,8 @@ The plan and every decision: [`docs/PRD.md`](docs/PRD.md).
 
 ## Setup (once, about 5 minutes)
 You need git and [uv](https://docs.astral.sh/uv/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`). On Windows,
-use Git Bash.
+use Git Bash and clone into a short path such as `C:\dev`. Some files in the starter repo and in the `openai` package
+have very long names, and a deep folder breaks the install.
 ```bash
 git clone https://github.com/AlfredoFFD/apart-collusion-sprint
 cd apart-collusion-sprint

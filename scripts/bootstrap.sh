@@ -18,6 +18,14 @@ need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing $1. $2"; exit 1; }; 
 need git "Install git first."
 need uv "Install uv: curl -LsSf https://astral.sh/uv/install.sh | sh  (then open a new terminal)"
 
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    if [ "${#ROOT}" -gt 100 ]; then
+      echo "Warning: this folder's path is ${#ROOT} characters long. On Windows that can break the install with"
+      echo "'Filename too long' or a ModuleNotFoundError. If it does, clone into a short path such as C:\\dev."
+    fi ;;
+esac
+
 echo "== Starter repo -> vendor/collusion_hackathon at ${STARTER_REF:0:7}"
 # core.longpaths: some starter files have very long names, which break checkouts on Windows without it.
 if [ ! -d "$VENDOR/.git" ]; then
