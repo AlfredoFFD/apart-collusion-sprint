@@ -1,0 +1,10 @@
+[
+  {"id":"2606.10747","title":"The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to Detect Emergent Misalignment","author":"Tonini"},
+  {"id":"2609.03035","title":"You Can't Escape Your Own Activations: Evaluation Awareness and Multi-Agent Monitoring","author":"Das"},
+  {"id":"2607.07368","title":"Multi-Agent AI Control: Distributed Attacks Hamper Per-Instance Monitors","author":"Makins"},
+  {"id":"2602.15198","title":"Colosseum: Auditing Collusion in Cooperative Multi-Agent Systems","author":"Nakamura"},
+  {"id":"2510.04303","title":"Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs","author":"Tailor"},
+  {"id":"2608.19161","title":"Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication","author":"Kaur"},
+  {"id":"2610.16426","title":"AuthGateBench: Benchmarking LLMs as Authorization Gate","author":"Zhuang"},
+  {"id":"2610.28787","title":"Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets","author":"Tran"}
+]

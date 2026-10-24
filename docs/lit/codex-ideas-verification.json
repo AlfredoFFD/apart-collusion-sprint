@@ -1,0 +1,95 @@
+[
+ {
+  "id": "2606.10747",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to Detect Emergent Misalignment",
+  "found_authors": [
+   "Filippo Tonini",
+   "Federico Torrielli",
+   "Anton Danholt Lautrup"
+  ]
+ },
+ {
+  "id": "2609.03035",
+  "status": "OK",
+  "title_match": 0.99,
+  "author_ok": true,
+  "found_title": "You Can't Escape Your Own Activations : Evaluation Awareness and Multi-Agent Monitoring",
+  "found_authors": [
+   "Aritra Das",
+   "Jaee Ponde",
+   "Mihir More"
+  ]
+ },
+ {
+  "id": "2607.07368",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Multi-Agent AI Control: Distributed Attacks Hamper Per-Instance Monitors",
+  "found_authors": [
+   "Oliver Makins",
+   "Orazio Angelini",
+   "Zohreh Shams"
+  ]
+ },
+ {
+  "id": "2602.15198",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Colosseum: Auditing Collusion in Cooperative Multi-Agent Systems",
+  "found_authors": [
+   "Mason Nakamura",
+   "Abhinav Kumar",
+   "Saswat Das"
+  ]
+ },
+ {
+  "id": "2510.04303",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs",
+  "found_authors": [
+   "Om Tailor"
+  ]
+ },
+ {
+  "id": "2608.19161",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+  "found_authors": [
+   "Ramneet Kaur",
+   "Pradyumna Chari",
+   "Ramesh Raskar"
+  ]
+ },
+ {
+  "id": "2610.16426",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "AuthGateBench: Benchmarking LLMs as Authorization Gate",
+  "found_authors": [
+   "Zhixiong Zhuang",
+   "Jin Jia",
+   "Zhiwei Shang"
+  ]
+ },
+ {
+  "id": "2610.28787",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets",
+  "found_authors": [
+   "Hieu Tran",
+   "Hong Yu"
+  ]
+ }
+]

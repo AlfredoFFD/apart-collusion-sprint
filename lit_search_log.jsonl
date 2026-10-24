@@ -1,0 +1,363 @@
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:narrow AND all:finetuning AND all:readable AND all:traces AND all:activations AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:eliciting AND all:secret AND all:knowledge AND all:language AND all:model AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:emergent AND all:misalignment AND all:finetuning AND submittedDate:[202604260000 TO 202610232359]", "hits": 11}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:trigger AND all:inversion AND all:backdoor AND all:LLM AND submittedDate:[202604260000 TO 202610232359]", "hits": 2}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:model AND all:diffing AND all:fine-tuning AND submittedDate:[202604260000 TO 202610232359]", "hits": 3}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:backdoor AND all:detection AND all:without AND all:reference AND all:model AND submittedDate:[202604260000 TO 202610232359]", "hits": 9}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:weight AND all:difference AND all:interpretability AND all:finetune AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:auditing AND all:hidden AND all:objectives AND all:language AND all:models AND submittedDate:[202604260000 TO 202610232359]", "hits": 14}
+{"ts": "2026-10-23T20:31:35", "cmd": "search", "source": "arxiv", "query": "all:model AND all:organism AND all:misalignment AND all:audit AND submittedDate:[202604260000 TO 202610232359]", "hits": 3}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "arxiv", "query": "all:sleeper AND all:agents AND all:detection AND submittedDate:[202604260000 TO 202610232359]", "hits": 4}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "trigger inversion backdoor LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "emergent misalignment finetuning since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "model diffing fine-tuning since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "weight difference interpretability finetune since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "eliciting secret knowledge language model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "auditing hidden objectives language models since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "model organism misalignment audit since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "sleeper agents detection since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:36", "cmd": "search", "source": "openalex", "query": "backdoor detection without reference model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:38", "cmd": "search", "source": "arxiv", "query": "all:activations AND all:finetuning AND all:readable AND all:narrow AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:31:39", "cmd": "search", "source": "s2", "query": "trigger inversion backdoor LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:39", "cmd": "search", "source": "openalex", "query": "narrow finetuning readable traces activations since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:31:40", "cmd": "search", "source": "arxiv", "query": "all:trigger AND all:inversion AND all:backdoor AND all:LLM", "hits": 6}
+{"ts": "2026-10-23T20:31:40", "cmd": "search", "source": "openalex", "query": "trigger inversion backdoor LLM", "hits": 15}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "emergent misalignment finetuning since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "model diffing fine-tuning since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "eliciting secret knowledge language model since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "backdoor detection without reference model since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "model organism misalignment audit since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "weight difference interpretability finetune since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "auditing hidden objectives language models since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "s2", "query": "sleeper agents detection since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "arxiv", "query": "all:model AND all:diffing AND all:fine-tuning", "hits": 14}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "arxiv", "query": "all:emergent AND all:misalignment AND all:finetuning", "hits": 15}
+{"ts": "2026-10-23T20:31:56", "cmd": "search", "source": "arxiv", "query": "all:eliciting AND all:secret AND all:knowledge AND all:language AND all:model", "hits": 4}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "arxiv", "query": "all:weight AND all:difference AND all:interpretability AND all:finetune", "hits": 5}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "arxiv", "query": "all:model AND all:organism AND all:misalignment AND all:audit", "hits": 12}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "emergent misalignment finetuning", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "model diffing fine-tuning", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "eliciting secret knowledge language model", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "arxiv", "query": "all:backdoor AND all:detection AND all:without AND all:reference AND all:model", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "arxiv", "query": "all:auditing AND all:hidden AND all:objectives AND all:language AND all:models", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "weight difference interpretability finetune", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "model organism misalignment audit", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "arxiv", "query": "all:sleeper AND all:agents AND all:detection", "hits": 13}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "s2", "query": "emergent misalignment finetuning", "hits": 15}
+{"ts": "2026-10-23T20:31:57", "cmd": "search", "source": "openalex", "query": "auditing hidden objectives language models", "hits": 15}
+{"ts": "2026-10-23T20:31:58", "cmd": "search", "source": "openalex", "query": "sleeper agents detection", "hits": 15}
+{"ts": "2026-10-23T20:31:58", "cmd": "search", "source": "openalex", "query": "backdoor detection without reference model", "hits": 15}
+{"ts": "2026-10-23T20:31:58", "cmd": "search", "source": "s2", "query": "model diffing fine-tuning", "hits": 15}
+{"ts": "2026-10-23T20:31:59", "cmd": "search", "source": "s2", "query": "narrow finetuning readable traces activations since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:32:00", "cmd": "search", "source": "s2", "query": "trigger inversion backdoor LLM", "hits": 0}
+{"ts": "2026-10-23T20:32:08", "cmd": "search", "source": "s2", "query": "weight difference interpretability finetune", "hits": 15}
+{"ts": "2026-10-23T20:32:17", "cmd": "search", "source": "s2", "query": "eliciting secret knowledge language model", "hits": 0}
+{"ts": "2026-10-23T20:32:17", "cmd": "search", "source": "s2", "query": "model organism misalignment audit", "hits": 0}
+{"ts": "2026-10-23T20:32:17", "cmd": "search", "source": "s2", "query": "backdoor detection without reference model", "hits": 0}
+{"ts": "2026-10-23T20:32:17", "cmd": "search", "source": "s2", "query": "auditing hidden objectives language models", "hits": 0}
+{"ts": "2026-10-23T20:32:18", "cmd": "search", "source": "s2", "query": "sleeper agents detection", "hits": 0}
+{"ts": "2026-10-23T20:32:18", "cmd": "search", "source": "arxiv", "query": "all:narrow AND all:finetuning AND all:readable AND all:traces AND all:activations [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:32:39", "cmd": "search", "source": "arxiv", "query": "all:activations AND all:finetuning AND all:readable AND all:narrow [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:32:40", "cmd": "search", "source": "openalex", "query": "narrow finetuning readable traces activations", "hits": 15}
+{"ts": "2026-10-23T20:33:03", "cmd": "search", "source": "s2", "query": "narrow finetuning readable traces activations", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:evaluation AND all:awareness AND all:language AND all:models AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:spectral AND all:signature AND all:finetuning AND all:weights AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:linear AND all:probes AND all:deception AND all:detection AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:untrusted AND all:monitoring AND all:collusion AND all:signal AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:finetuning AND all:detection AND all:weights AND all:only AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:crosscoder AND all:model AND all:diffing AND all:chat AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:backdoor AND all:trigger AND all:reconstruction AND all:LLM AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:alignment AND all:faking AND all:monitored AND all:unmonitored AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:persona AND all:features AND all:emergent AND all:misalignment AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:auditing AND all:game AND all:hidden AND all:objective AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:weight AND all:space AND all:analysis AND all:without AND all:base AND all:model AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:steering AND all:misaligned AND all:behavior AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:14", "cmd": "search", "source": "arxiv", "query": "all:trojan AND all:detection AND all:large AND all:language AND all:models AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "crosscoder model diffing chat since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "linear probes deception detection since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "untrusted monitoring collusion signal since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "alignment faking monitored unmonitored since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "activation steering misaligned behavior since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "persona features emergent misalignment since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "finetuning detection weights only since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "spectral signature finetuning weights since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "auditing game hidden objective since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "arxiv", "query": "all:sparse AND all:autoencoder AND all:auditing AND all:finetuned AND all:model AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "backdoor trigger reconstruction LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "openalex", "query": "evaluation awareness language models since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:15", "cmd": "search", "source": "s2", "query": "backdoor trigger reconstruction LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "arxiv", "query": "all:detection AND all:language AND all:trojan AND all:models AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "arxiv", "query": "all:analysis AND all:without AND all:weight AND all:space AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "openalex", "query": "trojan detection large language models since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "openalex", "query": "weight space analysis without base model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "arxiv", "query": "all:autoencoder AND all:finetuned AND all:auditing AND all:sparse AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:34", "cmd": "search", "source": "s2", "query": "untrusted monitoring collusion signal since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "auditing game hidden objective since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "persona features emergent misalignment since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "alignment faking monitored unmonitored since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "linear probes deception detection since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "crosscoder model diffing chat since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "evaluation awareness language models since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "openalex", "query": "sparse autoencoder auditing finetuned model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "activation steering misaligned behavior since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "finetuning detection weights only since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "arxiv", "query": "all:backdoor AND all:trigger AND all:reconstruction AND all:LLM [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "spectral signature finetuning weights since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "s2", "query": "weight space analysis without base model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:35", "cmd": "search", "source": "openalex", "query": "backdoor trigger reconstruction LLM", "hits": 15}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:auditing AND all:game AND all:hidden AND all:objective [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:alignment AND all:faking AND all:monitored AND all:unmonitored [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:persona AND all:features AND all:emergent AND all:misalignment [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:crosscoder AND all:model AND all:diffing AND all:chat [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:untrusted AND all:monitoring AND all:collusion AND all:signal [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:linear AND all:probes AND all:deception AND all:detection [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "arxiv", "query": "all:evaluation AND all:awareness AND all:language AND all:models [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "s2", "query": "trojan detection large language models since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:33:54", "cmd": "search", "source": "openalex", "query": "auditing game hidden objective", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "arxiv", "query": "all:finetuning AND all:detection AND all:weights AND all:only [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:steering AND all:misaligned AND all:behavior [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "arxiv", "query": "all:spectral AND all:signature AND all:finetuning AND all:weights [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "alignment faking monitored unmonitored", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "s2", "query": "sparse autoencoder auditing finetuned model since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "arxiv", "query": "all:weight AND all:space AND all:analysis AND all:without AND all:base AND all:model [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "persona features emergent misalignment", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "linear probes deception detection", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "untrusted monitoring collusion signal", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "crosscoder model diffing chat", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "spectral signature finetuning weights", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "activation steering misaligned behavior", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "finetuning detection weights only", "hits": 15}
+{"ts": "2026-10-23T20:33:55", "cmd": "search", "source": "openalex", "query": "evaluation awareness language models", "hits": 15}
+{"ts": "2026-10-23T20:33:56", "cmd": "search", "source": "s2", "query": "backdoor trigger reconstruction LLM", "hits": 15}
+{"ts": "2026-10-23T20:34:14", "cmd": "search", "source": "arxiv", "query": "all:trojan AND all:detection AND all:large AND all:language AND all:models [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:34:14", "cmd": "search", "source": "arxiv", "query": "all:analysis AND all:without AND all:weight AND all:space [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:34:14", "cmd": "search", "source": "arxiv", "query": "all:sparse AND all:autoencoder AND all:auditing AND all:finetuned AND all:model [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:34:14", "cmd": "search", "source": "s2", "query": "auditing game hidden objective", "hits": 0}
+{"ts": "2026-10-23T20:34:14", "cmd": "search", "source": "s2", "query": "linear probes deception detection", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "persona features emergent misalignment", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "alignment faking monitored unmonitored", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "untrusted monitoring collusion signal", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "finetuning detection weights only", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "crosscoder model diffing chat", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "activation steering misaligned behavior", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "spectral signature finetuning weights", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "s2", "query": "evaluation awareness language models", "hits": 0}
+{"ts": "2026-10-23T20:34:15", "cmd": "search", "source": "openalex", "query": "weight space analysis without base model", "hits": 15}
+{"ts": "2026-10-23T20:34:34", "cmd": "search", "source": "arxiv", "query": "all:detection AND all:language AND all:trojan AND all:models [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:34:34", "cmd": "search", "source": "arxiv", "query": "all:autoencoder AND all:finetuned AND all:auditing AND all:sparse [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:34:34", "cmd": "search", "source": "openalex", "query": "sparse autoencoder auditing finetuned model", "hits": 15}
+{"ts": "2026-10-23T20:34:34", "cmd": "search", "source": "openalex", "query": "trojan detection large language models", "hits": 15}
+{"ts": "2026-10-23T20:34:35", "cmd": "search", "source": "s2", "query": "weight space analysis without base model", "hits": 0}
+{"ts": "2026-10-23T20:34:56", "cmd": "search", "source": "s2", "query": "trojan detection large language models", "hits": 0}
+{"ts": "2026-10-23T20:34:56", "cmd": "search", "source": "s2", "query": "sparse autoencoder auditing finetuned model", "hits": 0}
+{"ts": "2026-10-23T20:35:57", "cmd": "expand", "source": "openalex", "query": "refs of 2602.22755", "hits": 0}
+{"ts": "2026-10-23T20:36:22", "cmd": "expand", "source": "openalex", "query": "cites of 2602.22755", "hits": 1}
+{"ts": "2026-10-23T20:36:46", "cmd": "expand", "source": "openalex", "query": "recs of 2602.22755", "hits": 0}
+{"ts": "2026-10-23T20:37:12", "cmd": "expand", "source": "openalex", "query": "refs of 2605.00994", "hits": 0}
+{"ts": "2026-10-23T20:37:34", "cmd": "expand", "source": "openalex", "query": "cites of 2605.00994", "hits": 0}
+{"ts": "2026-10-23T20:37:55", "cmd": "expand", "source": "openalex", "query": "recs of 2605.00994", "hits": 0}
+{"ts": "2026-10-23T20:38:16", "cmd": "search", "source": "arxiv", "query": "all:alignment AND all:auditing AND all:agents AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:38:17", "cmd": "search", "source": "openalex", "query": "alignment auditing agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:38:19", "cmd": "expand", "source": "openalex", "query": "refs of 2510.13900", "hits": 0}
+{"ts": "2026-10-23T20:38:37", "cmd": "search", "source": "s2", "query": "alignment auditing agents since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:38:39", "cmd": "expand", "source": "openalex", "query": "cites of 2510.13900", "hits": 0}
+{"ts": "2026-10-23T20:38:42", "cmd": "expand", "source": "s2", "query": "recs of 2510.13900", "hits": 25}
+{"ts": "2026-10-23T20:38:46", "cmd": "expand", "source": "s2", "query": "refs of 2608.26462", "hits": 25}
+{"ts": "2026-10-23T20:38:46", "cmd": "expand", "source": "s2", "query": "cites of 2608.26462", "hits": 0}
+{"ts": "2026-10-23T20:38:47", "cmd": "expand", "source": "s2", "query": "recs of 2608.26462", "hits": 25}
+{"ts": "2026-10-23T20:38:50", "cmd": "expand", "source": "s2", "query": "refs of 2503.10965", "hits": 0}
+{"ts": "2026-10-23T20:38:51", "cmd": "expand", "source": "s2", "query": "cites of 2503.10965", "hits": 25}
+{"ts": "2026-10-23T20:38:51", "cmd": "expand", "source": "s2", "query": "recs of 2503.10965", "hits": 25}
+{"ts": "2026-10-23T20:38:59", "cmd": "search", "source": "arxiv", "query": "all:hidden AND all:behaviors AND all:model AND all:organisms AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:39:00", "cmd": "search", "source": "openalex", "query": "hidden behaviors model organisms since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:39:21", "cmd": "search", "source": "s2", "query": "hidden behaviors model organisms since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:39:35", "cmd": "search", "source": "arxiv", "query": "all:investigator AND all:agent AND all:misaligned AND all:model AND submittedDate:[202604260000 TO 202610232359]", "hits": 13}
+{"ts": "2026-10-23T20:39:35", "cmd": "search", "source": "openalex", "query": "investigator agent misaligned model since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:39:56", "cmd": "search", "source": "s2", "query": "investigator agent misaligned model since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:40:18", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:model AND all:organism AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:40:18", "cmd": "search", "source": "openalex", "query": "collusion model organism since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:40:39", "cmd": "search", "source": "s2", "query": "collusion model organism since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:41:02", "cmd": "search", "source": "arxiv", "query": "all:monitor AND all:collusion AND all:fine-tuned AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:41:03", "cmd": "search", "source": "openalex", "query": "monitor collusion fine-tuned since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:41:23", "cmd": "search", "source": "s2", "query": "monitor collusion fine-tuned since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:41:46", "cmd": "search", "source": "arxiv", "query": "all:behaves AND all:differently AND all:when AND all:observed AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:41:47", "cmd": "search", "source": "openalex", "query": "behaves differently when observed since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:41:50", "cmd": "search", "source": "s2", "query": "behaves differently when observed since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:42:12", "cmd": "search", "source": "arxiv", "query": "all:reference-free AND all:model AND all:audit AND submittedDate:[202604260000 TO 202610232359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-23T20:42:13", "cmd": "search", "source": "openalex", "query": "reference-free model audit since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:42:34", "cmd": "search", "source": "s2", "query": "reference-free model audit since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:53:33", "cmd": "search", "source": "arxiv", "query": "all:counterfactual AND all:prompt AND all:pairs AND all:backdoor AND all:detection", "hits": 0}
+{"ts": "2026-10-23T20:53:37", "cmd": "search", "source": "arxiv", "query": "all:counterfactual AND all:detection AND all:backdoor AND all:prompt", "hits": 0}
+{"ts": "2026-10-23T20:53:37", "cmd": "search", "source": "openalex", "query": "counterfactual prompt pairs backdoor detection", "hits": 15}
+{"ts": "2026-10-23T20:53:57", "cmd": "search", "source": "s2", "query": "counterfactual prompt pairs backdoor detection", "hits": 0}
+{"ts": "2026-10-23T20:54:00", "cmd": "search", "source": "arxiv", "query": "all:counterfactual AND all:prompt AND all:pairs AND all:backdoor AND all:detection AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:54:03", "cmd": "search", "source": "arxiv", "query": "all:counterfactual AND all:detection AND all:backdoor AND all:prompt AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:54:04", "cmd": "search", "source": "openalex", "query": "counterfactual prompt pairs backdoor detection since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:54:24", "cmd": "search", "source": "s2", "query": "counterfactual prompt pairs backdoor detection since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:54:27", "cmd": "search", "source": "arxiv", "query": "all:context AND all:sensitivity AND all:conditional AND all:behavior AND all:detection", "hits": 15}
+{"ts": "2026-10-23T20:54:28", "cmd": "search", "source": "openalex", "query": "context sensitivity conditional behavior detection", "hits": 15}
+{"ts": "2026-10-23T20:54:48", "cmd": "search", "source": "s2", "query": "context sensitivity conditional behavior detection", "hits": 0}
+{"ts": "2026-10-23T20:54:51", "cmd": "search", "source": "arxiv", "query": "all:context AND all:sensitivity AND all:conditional AND all:behavior AND all:detection AND submittedDate:[202604260000 TO 202610232359]", "hits": 8}
+{"ts": "2026-10-23T20:54:52", "cmd": "search", "source": "openalex", "query": "context sensitivity conditional behavior detection since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:54:58", "cmd": "search", "source": "s2", "query": "context sensitivity conditional behavior detection since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:55:01", "cmd": "search", "source": "arxiv", "query": "all:recovering AND all:pre-fine-tuning AND all:weights", "hits": 15}
+{"ts": "2026-10-23T20:55:01", "cmd": "search", "source": "openalex", "query": "recovering pre-fine-tuning weights", "hits": 15}
+{"ts": "2026-10-23T20:55:22", "cmd": "search", "source": "s2", "query": "recovering pre-fine-tuning weights", "hits": 0}
+{"ts": "2026-10-23T20:55:25", "cmd": "search", "source": "arxiv", "query": "all:recovering AND all:pre-fine-tuning AND all:weights AND submittedDate:[202604260000 TO 202610232359]", "hits": 7}
+{"ts": "2026-10-23T20:55:26", "cmd": "search", "source": "openalex", "query": "recovering pre-fine-tuning weights since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:55:47", "cmd": "search", "source": "s2", "query": "recovering pre-fine-tuning weights since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:55:49", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:context AND all:pairs AND all:hidden AND all:behavior", "hits": 2}
+{"ts": "2026-10-23T20:55:50", "cmd": "search", "source": "openalex", "query": "contrastive context pairs hidden behavior", "hits": 15}
+{"ts": "2026-10-23T20:56:11", "cmd": "search", "source": "s2", "query": "contrastive context pairs hidden behavior", "hits": 0}
+{"ts": "2026-10-23T20:56:13", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:context AND all:pairs AND all:hidden AND all:behavior AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T20:56:14", "cmd": "search", "source": "openalex", "query": "contrastive context pairs hidden behavior since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:56:25", "cmd": "search", "source": "s2", "query": "contrastive context pairs hidden behavior since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:56:28", "cmd": "search", "source": "arxiv", "query": "all:monitored AND all:unmonitored AND all:behavior AND all:gap", "hits": 2}
+{"ts": "2026-10-23T20:56:29", "cmd": "search", "source": "openalex", "query": "monitored unmonitored behavior gap", "hits": 15}
+{"ts": "2026-10-23T20:56:49", "cmd": "search", "source": "s2", "query": "monitored unmonitored behavior gap", "hits": 0}
+{"ts": "2026-10-23T20:56:53", "cmd": "search", "source": "arxiv", "query": "all:monitored AND all:unmonitored AND all:behavior AND all:gap AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T20:56:53", "cmd": "search", "source": "openalex", "query": "monitored unmonitored behavior gap since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:57:14", "cmd": "search", "source": "s2", "query": "monitored unmonitored behavior gap since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:57:17", "cmd": "search", "source": "arxiv", "query": "all:self-recognition AND all:collusion AND all:monitor", "hits": 1}
+{"ts": "2026-10-23T20:57:17", "cmd": "search", "source": "openalex", "query": "self-recognition collusion monitor", "hits": 15}
+{"ts": "2026-10-23T20:57:38", "cmd": "search", "source": "s2", "query": "self-recognition collusion monitor", "hits": 0}
+{"ts": "2026-10-23T20:57:43", "cmd": "search", "source": "arxiv", "query": "all:self-recognition AND all:collusion AND all:monitor AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:57:43", "cmd": "search", "source": "openalex", "query": "self-recognition collusion monitor since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:58:04", "cmd": "search", "source": "s2", "query": "self-recognition collusion monitor since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:58:07", "cmd": "search", "source": "arxiv", "query": "all:benign AND all:fine-tunes AND all:false AND all:positive AND all:audit", "hits": 4}
+{"ts": "2026-10-23T20:58:08", "cmd": "search", "source": "openalex", "query": "benign fine-tunes false positive audit", "hits": 15}
+{"ts": "2026-10-23T20:58:28", "cmd": "search", "source": "s2", "query": "benign fine-tunes false positive audit", "hits": 0}
+{"ts": "2026-10-23T20:58:31", "cmd": "search", "source": "arxiv", "query": "all:benign AND all:fine-tunes AND all:false AND all:positive AND all:audit AND submittedDate:[202604260000 TO 202610232359]", "hits": 2}
+{"ts": "2026-10-23T20:58:31", "cmd": "search", "source": "openalex", "query": "benign fine-tunes false positive audit since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T20:58:52", "cmd": "search", "source": "s2", "query": "benign fine-tunes false positive audit since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T20:59:20", "cmd": "search", "source": "arxiv", "query": "all:jspace AND submittedDate:[202609230000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T20:59:21", "cmd": "search", "source": "openalex", "query": "jspace since 2026-09-23", "hits": 4}
+{"ts": "2026-10-23T20:59:41", "cmd": "search", "source": "s2", "query": "jspace since 2026-09-23", "hits": 0}
+{"ts": "2026-10-23T20:59:45", "cmd": "search", "source": "arxiv", "query": "all:J-space AND all:language AND all:model AND submittedDate:[202609230000 TO 202610232359]", "hits": 4}
+{"ts": "2026-10-23T20:59:45", "cmd": "search", "source": "openalex", "query": "J-space language model since 2026-09-23", "hits": 10}
+{"ts": "2026-10-23T21:00:05", "cmd": "search", "source": "s2", "query": "J-space language model since 2026-09-23", "hits": 0}
+{"ts": "2026-10-23T21:00:10", "cmd": "search", "source": "arxiv", "query": "all:Jacobian AND all:space AND all:interpretability AND submittedDate:[202609230000 TO 202610232359]", "hits": 4}
+{"ts": "2026-10-23T21:00:11", "cmd": "search", "source": "openalex", "query": "Jacobian space interpretability since 2026-09-23", "hits": 10}
+{"ts": "2026-10-23T21:00:31", "cmd": "search", "source": "s2", "query": "Jacobian space interpretability since 2026-09-23", "hits": 0}
+{"ts": "2026-10-23T21:00:47", "cmd": "search", "source": "arxiv", "query": "all:attribution AND all:graphs AND all:Anthropic AND submittedDate:[202609230000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:00:47", "cmd": "search", "source": "openalex", "query": "attribution graphs Anthropic since 2026-09-23", "hits": 10}
+{"ts": "2026-10-23T21:01:08", "cmd": "search", "source": "s2", "query": "attribution graphs Anthropic since 2026-09-23", "hits": 0}
+{"ts": "2026-10-23T21:09:17", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:monitoring AND all:LLM AND all:agents AND all:covert AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T21:09:18", "cmd": "search", "source": "openalex", "query": "collusion monitoring LLM agents covert since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:09:24", "cmd": "search", "source": "s2", "query": "collusion monitoring LLM agents covert since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:09:26", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:monitoring AND all:LLM AND all:agents AND all:covert", "hits": 2}
+{"ts": "2026-10-23T21:09:26", "cmd": "search", "source": "openalex", "query": "collusion monitoring LLM agents covert", "hits": 15}
+{"ts": "2026-10-23T21:09:46", "cmd": "search", "source": "s2", "query": "collusion monitoring LLM agents covert", "hits": 0}
+{"ts": "2026-10-23T21:09:49", "cmd": "search", "source": "arxiv", "query": "all:oversight AND all:notice AND all:collusion AND all:language AND all:model AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:09:52", "cmd": "search", "source": "arxiv", "query": "all:oversight AND all:collusion AND all:language AND all:notice AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:09:52", "cmd": "search", "source": "openalex", "query": "oversight notice collusion language model agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:09:53", "cmd": "search", "source": "s2", "query": "oversight notice collusion language model agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:09:55", "cmd": "search", "source": "arxiv", "query": "all:oversight AND all:notice AND all:collusion AND all:language AND all:model AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:09:58", "cmd": "search", "source": "arxiv", "query": "all:oversight AND all:collusion AND all:language AND all:notice", "hits": 0}
+{"ts": "2026-10-23T21:09:59", "cmd": "search", "source": "openalex", "query": "oversight notice collusion language model agents", "hits": 15}
+{"ts": "2026-10-23T21:09:59", "cmd": "search", "source": "s2", "query": "oversight notice collusion language model agents", "hits": 15}
+{"ts": "2026-10-23T21:10:02", "cmd": "search", "source": "arxiv", "query": "all:leniency AND all:program AND all:cartel AND all:LLM AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:10:05", "cmd": "search", "source": "arxiv", "query": "all:leniency AND all:program AND all:cartel AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:10:06", "cmd": "search", "source": "openalex", "query": "leniency program cartel LLM agents since 2026-04-26", "hits": 1}
+{"ts": "2026-10-23T21:10:25", "cmd": "search", "source": "s2", "query": "leniency program cartel LLM agents since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:10:28", "cmd": "search", "source": "arxiv", "query": "all:leniency AND all:program AND all:cartel AND all:LLM AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:10:31", "cmd": "search", "source": "arxiv", "query": "all:leniency AND all:program AND all:cartel AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:10:31", "cmd": "search", "source": "openalex", "query": "leniency program cartel LLM agents", "hits": 15}
+{"ts": "2026-10-23T21:10:51", "cmd": "search", "source": "s2", "query": "leniency program cartel LLM agents", "hits": 11}
+{"ts": "2026-10-23T21:10:53", "cmd": "search", "source": "arxiv", "query": "all:whistleblowing AND all:collusion AND all:multi-agent AND all:LLM AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:10:54", "cmd": "search", "source": "openalex", "query": "whistleblowing collusion multi-agent LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:11:14", "cmd": "search", "source": "s2", "query": "whistleblowing collusion multi-agent LLM since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:11:16", "cmd": "search", "source": "arxiv", "query": "all:whistleblowing AND all:collusion AND all:multi-agent AND all:LLM", "hits": 0}
+{"ts": "2026-10-23T21:11:17", "cmd": "search", "source": "openalex", "query": "whistleblowing collusion multi-agent LLM", "hits": 15}
+{"ts": "2026-10-23T21:11:37", "cmd": "search", "source": "s2", "query": "whistleblowing collusion multi-agent LLM", "hits": 0}
+{"ts": "2026-10-23T21:11:39", "cmd": "search", "source": "arxiv", "query": "all:trusted AND all:agent AND all:disrupt AND all:collusion AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:11:39", "cmd": "search", "source": "openalex", "query": "trusted agent disrupt collusion since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:11:59", "cmd": "search", "source": "s2", "query": "trusted agent disrupt collusion since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:12:01", "cmd": "search", "source": "arxiv", "query": "all:trusted AND all:agent AND all:disrupt AND all:collusion", "hits": 0}
+{"ts": "2026-10-23T21:12:02", "cmd": "search", "source": "openalex", "query": "trusted agent disrupt collusion", "hits": 15}
+{"ts": "2026-10-23T21:12:22", "cmd": "search", "source": "s2", "query": "trusted agent disrupt collusion", "hits": 0}
+{"ts": "2026-10-23T21:12:24", "cmd": "search", "source": "arxiv", "query": "all:peer AND all:replacement AND all:detection AND all:LLM AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:12:28", "cmd": "search", "source": "arxiv", "query": "all:replacement AND all:detection AND all:agents AND all:peer AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T21:12:28", "cmd": "search", "source": "openalex", "query": "peer replacement detection LLM agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:12:48", "cmd": "search", "source": "s2", "query": "peer replacement detection LLM agents since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:12:50", "cmd": "search", "source": "arxiv", "query": "all:peer AND all:replacement AND all:detection AND all:LLM AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:12:55", "cmd": "search", "source": "arxiv", "query": "all:replacement AND all:detection AND all:agents AND all:peer", "hits": 2}
+{"ts": "2026-10-23T21:12:55", "cmd": "search", "source": "openalex", "query": "peer replacement detection LLM agents", "hits": 15}
+{"ts": "2026-10-23T21:13:15", "cmd": "search", "source": "s2", "query": "peer replacement detection LLM agents", "hits": 0}
+{"ts": "2026-10-23T21:13:17", "cmd": "search", "source": "arxiv", "query": "all:monitored AND all:agents AND all:shift AND all:communication AND all:channel AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T21:13:18", "cmd": "search", "source": "openalex", "query": "monitored agents shift communication channel since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:13:37", "cmd": "search", "source": "s2", "query": "monitored agents shift communication channel since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:13:40", "cmd": "search", "source": "arxiv", "query": "all:monitored AND all:agents AND all:shift AND all:communication AND all:channel", "hits": 1}
+{"ts": "2026-10-23T21:13:41", "cmd": "search", "source": "openalex", "query": "monitored agents shift communication channel", "hits": 15}
+{"ts": "2026-10-23T21:14:01", "cmd": "search", "source": "s2", "query": "monitored agents shift communication channel", "hits": 0}
+{"ts": "2026-10-23T21:14:04", "cmd": "search", "source": "arxiv", "query": "all:tacit AND all:collusion AND all:explicit AND all:communication AND all:monitoring AND all:LLM AND submittedDate:[202604260000 TO 202610232359]", "hits": 1}
+{"ts": "2026-10-23T21:14:04", "cmd": "search", "source": "openalex", "query": "tacit collusion explicit communication monitoring LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:14:24", "cmd": "search", "source": "s2", "query": "tacit collusion explicit communication monitoring LLM since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:14:26", "cmd": "search", "source": "arxiv", "query": "all:tacit AND all:collusion AND all:explicit AND all:communication AND all:monitoring AND all:LLM", "hits": 1}
+{"ts": "2026-10-23T21:14:27", "cmd": "search", "source": "openalex", "query": "tacit collusion explicit communication monitoring LLM", "hits": 15}
+{"ts": "2026-10-23T21:14:47", "cmd": "search", "source": "s2", "query": "tacit collusion explicit communication monitoring LLM", "hits": 0}
+{"ts": "2026-10-23T21:26:25", "cmd": "search", "source": "arxiv", "query": "all:gradient AND all:routing AND all:collusion", "hits": 1}
+{"ts": "2026-10-23T21:26:26", "cmd": "search", "source": "openalex", "query": "gradient routing collusion", "hits": 10}
+{"ts": "2026-10-23T21:26:26", "cmd": "search", "source": "s2", "query": "gradient routing collusion", "hits": 10}
+{"ts": "2026-10-23T21:26:29", "cmd": "search", "source": "arxiv", "query": "all:gradient AND all:routing AND all:multi-agent", "hits": 10}
+{"ts": "2026-10-23T21:26:29", "cmd": "search", "source": "openalex", "query": "gradient routing multi-agent", "hits": 10}
+{"ts": "2026-10-23T21:26:49", "cmd": "search", "source": "s2", "query": "gradient routing multi-agent", "hits": 0}
+{"ts": "2026-10-23T21:26:52", "cmd": "search", "source": "arxiv", "query": "all:steganographic AND all:collusion AND all:emergence AND all:overseer AND all:penalty", "hits": 0}
+{"ts": "2026-10-23T21:26:55", "cmd": "search", "source": "arxiv", "query": "all:steganographic AND all:collusion AND all:emergence AND all:overseer", "hits": 0}
+{"ts": "2026-10-23T21:26:55", "cmd": "search", "source": "openalex", "query": "steganographic collusion emergence overseer penalty", "hits": 10}
+{"ts": "2026-10-23T21:27:15", "cmd": "search", "source": "s2", "query": "steganographic collusion emergence overseer penalty", "hits": 0}
+{"ts": "2026-10-23T21:27:17", "cmd": "search", "source": "arxiv", "query": "all:localize AND all:remove AND all:collusion AND all:adapter", "hits": 0}
+{"ts": "2026-10-23T21:27:17", "cmd": "search", "source": "openalex", "query": "localize remove collusion adapter", "hits": 10}
+{"ts": "2026-10-23T21:27:20", "cmd": "search", "source": "s2", "query": "localize remove collusion adapter", "hits": 10}
+{"ts": "2026-10-23T21:38:17", "cmd": "search", "source": "arxiv", "query": "all:undercover AND all:agent AND all:collusion AND all:offer AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:38:17", "cmd": "search", "source": "openalex", "query": "undercover agent collusion offer since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:38:28", "cmd": "search", "source": "s2", "query": "undercover agent collusion offer since 2026-04-26", "hits": 4}
+{"ts": "2026-10-23T21:38:30", "cmd": "search", "source": "arxiv", "query": "all:undercover AND all:agent AND all:collusion AND all:offer", "hits": 0}
+{"ts": "2026-10-23T21:38:31", "cmd": "search", "source": "openalex", "query": "undercover agent collusion offer", "hits": 10}
+{"ts": "2026-10-23T21:38:51", "cmd": "search", "source": "s2", "query": "undercover agent collusion offer", "hits": 10}
+{"ts": "2026-10-23T21:38:53", "cmd": "search", "source": "arxiv", "query": "all:sting AND all:operation AND all:language AND all:model AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:38:56", "cmd": "search", "source": "arxiv", "query": "all:operation AND all:language AND all:agents AND all:sting AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:38:57", "cmd": "search", "source": "openalex", "query": "sting operation language model agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:39:17", "cmd": "search", "source": "s2", "query": "sting operation language model agents since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:39:19", "cmd": "search", "source": "arxiv", "query": "all:sting AND all:operation AND all:language AND all:model AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:39:22", "cmd": "search", "source": "arxiv", "query": "all:operation AND all:language AND all:agents AND all:sting", "hits": 0}
+{"ts": "2026-10-23T21:39:22", "cmd": "search", "source": "openalex", "query": "sting operation language model agents", "hits": 10}
+{"ts": "2026-10-23T21:39:43", "cmd": "search", "source": "s2", "query": "sting operation language model agents", "hits": 0}
+{"ts": "2026-10-23T21:39:45", "cmd": "search", "source": "arxiv", "query": "all:honeypot AND all:collusion AND all:agents AND all:offer AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:39:46", "cmd": "search", "source": "openalex", "query": "honeypot collusion agents offer since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:40:06", "cmd": "search", "source": "s2", "query": "honeypot collusion agents offer since 2026-04-26", "hits": 6}
+{"ts": "2026-10-23T21:40:08", "cmd": "search", "source": "arxiv", "query": "all:honeypot AND all:collusion AND all:agents AND all:offer", "hits": 0}
+{"ts": "2026-10-23T21:40:09", "cmd": "search", "source": "openalex", "query": "honeypot collusion agents offer", "hits": 10}
+{"ts": "2026-10-23T21:40:15", "cmd": "search", "source": "s2", "query": "honeypot collusion agents offer", "hits": 10}
+{"ts": "2026-10-23T21:40:17", "cmd": "search", "source": "arxiv", "query": "all:secret AND all:alliance AND all:offer AND all:LLM AND all:agents AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:40:20", "cmd": "search", "source": "arxiv", "query": "all:alliance AND all:secret AND all:agents AND all:offer AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:40:23", "cmd": "search", "source": "openalex", "query": "secret alliance offer LLM agents since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:40:42", "cmd": "search", "source": "s2", "query": "secret alliance offer LLM agents since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:40:45", "cmd": "search", "source": "arxiv", "query": "all:secret AND all:alliance AND all:offer AND all:LLM AND all:agents", "hits": 0}
+{"ts": "2026-10-23T21:40:48", "cmd": "search", "source": "arxiv", "query": "all:alliance AND all:secret AND all:agents AND all:offer", "hits": 0}
+{"ts": "2026-10-23T21:40:49", "cmd": "search", "source": "openalex", "query": "secret alliance offer LLM agents", "hits": 10}
+{"ts": "2026-10-23T21:40:51", "cmd": "search", "source": "s2", "query": "secret alliance offer LLM agents", "hits": 10}
+{"ts": "2026-10-23T21:40:54", "cmd": "search", "source": "arxiv", "query": "all:monitor AND all:budget AND all:partial AND all:monitoring AND all:collusion AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:40:57", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:collusion AND all:monitor AND all:partial AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:40:57", "cmd": "search", "source": "openalex", "query": "monitor budget partial monitoring collusion since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:41:18", "cmd": "search", "source": "s2", "query": "monitor budget partial monitoring collusion since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:41:21", "cmd": "search", "source": "arxiv", "query": "all:monitor AND all:budget AND all:partial AND all:monitoring AND all:collusion", "hits": 0}
+{"ts": "2026-10-23T21:41:26", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:collusion AND all:monitor AND all:partial", "hits": 3}
+{"ts": "2026-10-23T21:41:27", "cmd": "search", "source": "openalex", "query": "monitor budget partial monitoring collusion", "hits": 10}
+{"ts": "2026-10-23T21:41:47", "cmd": "search", "source": "s2", "query": "monitor budget partial monitoring collusion", "hits": 0}
+{"ts": "2026-10-23T21:41:50", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:sampling AND all:fraction AND all:LLM AND all:collusion AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:41:58", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:collusion AND all:sampling AND all:fraction AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:41:59", "cmd": "search", "source": "openalex", "query": "monitoring sampling fraction LLM collusion since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:42:19", "cmd": "search", "source": "s2", "query": "monitoring sampling fraction LLM collusion since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:42:21", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:sampling AND all:fraction AND all:LLM AND all:collusion", "hits": 0}
+{"ts": "2026-10-23T21:42:25", "cmd": "search", "source": "arxiv", "query": "all:monitoring AND all:collusion AND all:sampling AND all:fraction", "hits": 0}
+{"ts": "2026-10-23T21:42:25", "cmd": "search", "source": "openalex", "query": "monitoring sampling fraction LLM collusion", "hits": 10}
+{"ts": "2026-10-23T21:42:45", "cmd": "search", "source": "s2", "query": "monitoring sampling fraction LLM collusion", "hits": 0}
+{"ts": "2026-10-23T21:42:48", "cmd": "search", "source": "arxiv", "query": "all:peer AND all:swap AND all:convention AND all:multi-agent AND all:LLM AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:42:51", "cmd": "search", "source": "arxiv", "query": "all:multi-agent AND all:convention AND all:peer AND all:swap AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:42:52", "cmd": "search", "source": "openalex", "query": "peer swap convention multi-agent LLM since 2026-04-26", "hits": 15}
+{"ts": "2026-10-23T21:43:11", "cmd": "search", "source": "s2", "query": "peer swap convention multi-agent LLM since 2026-04-26", "hits": 0}
+{"ts": "2026-10-23T21:43:14", "cmd": "search", "source": "arxiv", "query": "all:peer AND all:swap AND all:convention AND all:multi-agent AND all:LLM", "hits": 0}
+{"ts": "2026-10-23T21:43:17", "cmd": "search", "source": "arxiv", "query": "all:multi-agent AND all:convention AND all:peer AND all:swap", "hits": 0}
+{"ts": "2026-10-23T21:43:18", "cmd": "search", "source": "openalex", "query": "peer swap convention multi-agent LLM", "hits": 10}
+{"ts": "2026-10-23T21:43:29", "cmd": "search", "source": "s2", "query": "peer swap convention multi-agent LLM", "hits": 10}

@@ -3,3 +3,9 @@
 Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · result file · one line on why`
 
 - 2026-10-23 · Alfredo (with Claude Code) · workspace created; starter repo cloned to `vendor/` · n/a · sprint setup
+
+- 2026-10-23 20:38 ET · Codex · Read official Track 2 and Dolos instructions; ran lit.py verify-file docs/lit/refs.json (arXiv HTTP 429; no automated citation clearance) · docs/lit/track2-preparation.md · Prepare a beginner explanation and distinguish selected track from proposed project route.
+
+- 2026-10-23 20:25 ET · Alfredo (with Claude Code) · `./setup.sh redteaming` (ok; installs CPU-only torch 2.11.0+cpu on Windows); downloaded Dolos-1.5B and Qwen2.5-1.5B-Instruct at the pinned revisions (Xet transfer stalled, retried with `HF_HUB_DISABLE_XET=1`); checked both safetensors headers (338 tensors each; Dolos fp32 6.18 GB, Qwen bf16 3.09 GB) · n/a (weights in the HF cache) · environment for the Dolos challenge; no model was run.
+- 2026-10-23 21:22 ET · Alfredo (with Claude Code) · lit-sprint on methods for the Dolos audit and a Track 3 scan: 50 phrasings, 283 searches + 15 citation-trail calls (`lit_search_log.jsonl`), 5 parallel readers (51 papers), `lit.py verify-file docs/lit/refs.json` → 76/76 OK · docs/lit/dolos-methods.md, docs/lit/track3-scan.md, docs/lit/prd-edits-proposed.md, docs/lit/notes/, docs/lit/refs.json · decide methods and the novelty claim before any experiment; no experiment run.
+- 2026-10-23 21:50 ET · Codex · Read Apart resource sections and close primary work; four lit-sprint searches, one citation expansion, two parallel readers, verify-file docs/lit/codex-ideas-refs.json (8/8 OK); no experiments · docs/lit/codex-practical-ideas.md · Propose audit-allocation and matched-confound studies with explicit prior-work boundaries.

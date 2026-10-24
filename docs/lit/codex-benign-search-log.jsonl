@@ -1,0 +1,3 @@
+{"ts": "2026-10-23T21:48:13", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:benign AND all:cooperation AND submittedDate:[202604260000 TO 202610232359]", "hits": 0}
+{"ts": "2026-10-23T21:48:13", "cmd": "search", "source": "openalex", "query": "collusion benign cooperation since 2026-04-26", "hits": 8}
+{"ts": "2026-10-23T21:48:33", "cmd": "search", "source": "s2", "query": "collusion benign cooperation since 2026-04-26", "hits": 0}
