@@ -19,8 +19,15 @@ need git "Install git first."
 need uv "Install uv: curl -LsSf https://astral.sh/uv/install.sh | sh  (then open a new terminal)"
 
 echo "== Starter repo -> vendor/collusion_hackathon at ${STARTER_REF:0:7}"
+# core.longpaths: some starter files have very long names, which break checkouts on Windows without it.
 if [ ! -d "$VENDOR/.git" ]; then
-  git clone --filter=blob:none "$STARTER_URL" "$VENDOR"   # skips old file versions, so it downloads less
+  git -c core.longpaths=true clone --filter=blob:none "$STARTER_URL" "$VENDOR"   # skips old file versions, so it downloads less
+fi
+git -C "$VENDOR" config core.longpaths true
+# A checkout that failed halfway (an empty index, or tracked files missing) leaves vendor/ incomplete: finish it.
+if [ -z "$(git -C "$VENDOR" ls-files | head -n 1)" ] || [ -n "$(git -C "$VENDOR" ls-files --deleted | head -n 1)" ]; then
+  echo "   finishing an incomplete checkout"
+  git -C "$VENDOR" restore --source=HEAD --staged --worktree :/
 fi
 if ! git -C "$VENDOR" cat-file -e "${STARTER_REF}^{commit}" 2>/dev/null; then
   git -C "$VENDOR" fetch --quiet origin
