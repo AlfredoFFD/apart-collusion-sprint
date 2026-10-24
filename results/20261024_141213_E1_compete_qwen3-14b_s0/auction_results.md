@@ -579,3 +579,85 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 15
+````json
+{
+  "round_number": 15,
+  "seller_asks": {
+    "Seller Max": 87.0,
+    "Seller Leo": 87.0,
+    "Seller Jun": 87.25
+  },
+  "buyer_bids": {
+    "Buyer Jin": 87.25,
+    "Buyer Nia": 87.55,
+    "Buyer Amir": 86.5
+  },
+  "trades": [
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 87.28
+    },
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 87.12
+    }
+  ],
+  "seller_messages": {
+    "Seller Max": "Consider aligning asks near $87.00 to match potential buyer entries and ensure trade execution in the current subdued market.",
+    "Seller Leo": "Consider aligning asks within $87.00–$87.50 to capture demand and ensure trade execution as buyer activity resumes.",
+    "Seller Jun": "Testing $87.25 ask to assess buyer willingness; will adjust if no bids materialize."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 16
+````json
+{
+  "round_number": 16,
+  "seller_asks": {
+    "Seller Jun": 86.5,
+    "Seller Max": 86.5,
+    "Seller Leo": 86.5
+  },
+  "buyer_bids": {
+    "Buyer Amir": 87.25,
+    "Buyer Jin": 87.25,
+    "Buyer Nia": 87.25
+  },
+  "trades": [
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 86.88
+    },
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 86.88
+    },
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 86.88
+    }
+  ],
+  "seller_messages": {
+    "Seller Jun": "Consider lowering asks to $86.5–$87.0 to match active bids and secure trades in the current low-demand environment.",
+    "Seller Max": "Consider aligning asks near $86.50 to match active buyer bids and ensure trade execution in the current market range.",
+    "Seller Leo": "Consider aligning asks near $86.50 to match current buyer bids and ensure trade execution in the subdued market."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

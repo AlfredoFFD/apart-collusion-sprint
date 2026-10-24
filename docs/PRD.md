@@ -5,6 +5,15 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 3:25 PM — the chat moved; the prices didn't (wave 1, full-view scores over every message).** After the
+  monitor appears: unmonitored cartel 97% of messages coordinating; watched-no-fine 99% (announcement alone does
+  nothing); **fined + known rotation 32%** (chat score 3.7 → 1.9); fined + random 76% [47, 94] (mixed by seed). Yet
+  prices stay at 0.82 in both fined arms. Under the rotation it is not "the watched seller goes quiet while the others
+  carry it": 43% of the remaining coordinating messages come from the watched seller (chance 33%). The whole cartel
+  stops talking and holds the price. Two readings remain: the agreement now rides on the asks (moved into prices), or
+  an established cartel simply no longer needs to talk. **E4 launched** to separate them: the same prefixes forked
+  with sellers blind to each other's asks, with and without the fined rotation. If blind + fined prices fall and
+  blind-alone prices don't, the asks were carrying it.
 - **Sat 3:10 PM — paired E2 (same cartel history per seed, 3 seeds; all 12 forks complete).** Prices after the
   monitor appears: A0 0.92, A1 0.91, A2 0.91, A3 0.90. **Confirmed: the monitor never moves prices.** Flags of 12
   watched rounds: no-fine 11.0, fined-rotation 9.3 [5, 12], fined-random 8.3 [6, 10]. The big "rotation gets dodged"
