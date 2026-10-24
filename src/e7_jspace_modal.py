@@ -78,6 +78,26 @@ class Lens:
             out.append({"best_rank": best, "top": top})
         return out
 
+    def _content_positions(self, prompt_text: str, resp: str, fields=("reflection", "plan_for_this_hour"), per_field: int = 10):
+        """Token positions inside the seller's own reasoning text (not JSON punctuation, not chat-control tokens)."""
+        positions = []
+        for f in fields:
+            key = f'"{f}":'
+            i = resp.find(key)
+            if i < 0:
+                continue
+            start = resp.find('"', i + len(key)) + 1  # first char of the value
+            end = resp.find('",', start)  # value ends at the next '",'
+            if start <= 0 or end <= start:
+                continue
+            t0 = len(self.tok(prompt_text + resp[:start])["input_ids"])
+            t1 = len(self.tok(prompt_text + resp[:end])["input_ids"])
+            if t1 - t0 < 2:
+                continue
+            step = max(1, (t1 - t0) // per_field)
+            positions += list(range(t0 + 1, t1 - 1, step))[:per_field]
+        return positions
+
     @modal.method()
     def score(self, records: list[dict]) -> list[dict]:
         results = []
@@ -85,16 +105,25 @@ class Lens:
             msgs = [{"role": "user", "content": rec["prompt"]}]
             prompt_text = self.tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
             resp = rec["response"]
-            cut = resp.find('"message_to_sellers"')
-            full = prompt_text + (resp[: cut + len('"message_to_sellers":')] if cut >= 0 else resp)
-            n_prompt = len(self.tok(prompt_text)["input_ids"])
-            positions = [n_prompt - 1, -1]
+            cut = resp.find('"new_memory"')  # reflection and plan come before new_memory in the harness JSON
+            text = prompt_text + (resp[:cut] if cut > 0 else resp)
+            positions = self._content_positions(prompt_text, resp)
+            if not positions:
+                results.append({"seller": rec["seller"], "round": rec["round"], "error": "no content positions"})
+                continue
             try:
-                pre_answer, pre_message = self._read(full, positions)
+                reads = self._read(text, positions)
             except Exception as e:  # keep going; record the failure
                 results.append({**{k: rec[k] for k in ("seller", "round")}, "error": str(e)[:300]})
                 continue
-            results.append({"seller": rec["seller"], "round": rec["round"], "pre_answer": pre_answer, "pre_message": pre_message})
+            best = {}
+            for r in reads:
+                for w, rank in r["best_rank"].items():
+                    best[w] = min(rank, best.get(w, 10**9))
+            # keep the top tokens of the position with the strongest monitor-word reading, for inspection
+            strongest = min(reads, key=lambda r: min(r["best_rank"].values()) if r["best_rank"] else 10**9)
+            results.append({"seller": rec["seller"], "round": rec["round"], "n_positions": len(positions),
+                            "reasoning": {"best_rank": best, "top": strongest["top"]}})
         return results
 
 

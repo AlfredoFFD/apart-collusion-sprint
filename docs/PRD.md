@@ -5,6 +5,12 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:15 PM — fully blind, still 0.9.** With the other sellers' asks *and* trades hidden: 0.90 [0.88, 0.93] with no
+  monitor, 0.92 [0.87, 0.96] under the fined rotation. Every channel we can close is closed and the cartel price
+  stands. E4 is done: for an established cartel the collusion lives in the agreement each seller remembers, not in
+  any channel a monitor could watch. Awareness in the silent cartel: 0.00. Running: confirmatory seeds 3–5 (12 forks),
+  told-to-dodge forks, three GRAFT trainings (epoch 1+ of 3), E7 re-smoke with corrected read positions (the first
+  positions read chat-control and JSON tokens; caught on inspection, replay stopped and re-pointed at reasoning tokens).
 - **Sat 5:00 PM — the silent cartel holds the price with no messages at all.** Consortium agreement, chat disabled,
   sellers see each other's asks: trade index +0.81 / +0.84 / +0.70 (last third 0.82 / 0.84 / 0.73), against 0.85 for
   the chat cartel and 0.28 for no-agreement-no-chat. The agreement alone does the work; the chat adds little even for

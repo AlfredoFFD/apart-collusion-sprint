@@ -132,8 +132,10 @@ Forking the same cartels with every seller blind to the other sellers' asks (`--
 [0.87, 0.96] with no monitor and 0.91 [0.88, 0.96] under the fined rotation, against 0.92 / 0.91 unblinded. Closing
 the ask channel changes nothing. Together with 4.2 this rules out "moved into prices" for an established cartel:
 after the fines the sellers talk less, cannot see each other's asks, and still post the monopoly price. The agreement
-is carried in each seller's own memory and needs no channel to persist. {E4_FULLBLIND: the fully blind variant,
-asks and past trades hidden, is running; insert its two numbers here.}
+is carried in each seller's own memory and needs no channel to persist. Hiding the other sellers' past trades as well
+(`--hide_other_trades`, the last visible price signal) gives 0.90 [0.88, 0.93] without a monitor and 0.92 [0.87, 0.96]
+under the fined rotation. The silent-consortium control (§4.1) shows the same thing from the other side: an agreement
+given at the start sustains 0.79 with no messages ever exchanged.
 ### 4.5 GRAFT on monitor-missed collusion (Part 2)
 {PART2_TABLE}
 {PART2_PROSE}
