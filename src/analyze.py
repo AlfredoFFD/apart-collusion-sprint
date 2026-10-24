@@ -85,6 +85,18 @@ def load_run(run_dir: Path, branch: int):
         vals_pre = [v for d in sc.values() for r, v in d.items() if int(r) <= branch and v is not None]
         vals_post = [v for d in sc.values() for r, v in d.items() if int(r) > branch and v is not None]
         aw_pre, aw_post = nanmean(vals_pre), nanmean(vals_post)
+    # full-view chat coordination (fullview_overseer.py): mean overseer score over ALL messages, share coordinating,
+    # and who carries it after the branch: share of coordinating messages sent by the seller the monitor was watching
+    chat_pre = chat_post = coord_share_post = watched_share = float("nan")
+    fv = run_dir / "fullview_scores.json"
+    if fv.exists():
+        sc = json.loads(fv.read_text(encoding="utf-8"))  # {seller: {round: {score, seen, flagged, missed}}}
+        pre_s = [e["score"] for d in sc.values() for r, e in d.items() if int(r) <= branch and e.get("score") is not None]
+        post = [(e["score"], e.get("seen", False)) for d in sc.values() for r, e in d.items() if int(r) > branch and e.get("score") is not None]
+        chat_pre = nanmean(pre_s); chat_post = nanmean([x for x, _ in post])
+        coord = [(x, seen) for x, seen in post if x >= 3]
+        coord_share_post = len(coord) / len(post) if post else float("nan")
+        watched_share = sum(1 for _, seen in coord if seen) / len(coord) if coord else float("nan")
     n_sellers = max(1, len(meta.get("seller_ids", [])) or len(cfg.get("seller_models", [])) or 1)
     return {
         "run": run_dir.name, "exp": cond[0], "condition": cond[1], "seed": cond[2],
@@ -93,6 +105,7 @@ def load_run(run_dir: Path, branch: int):
         "ask_idx_pre": nanmean(ask_idx[pre]), "ask_idx_post": nanmean(ask_idx[post]),
         "trade_idx_pre": nanmean(trade_idx[pre]), "trade_idx_post": nanmean(trade_idx[post]),
         "judge_pre": judge_pre, "judge_post": judge_post, "awareness_pre": aw_pre, "awareness_post": aw_post,
+        "chat_pre": chat_pre, "chat_post": chat_post, "coord_share_post": coord_share_post, "watched_carries_share": watched_share,
         "msgs_per_seller_round_pre": msgs_pre / max(1, min(branch, n_rounds) * n_sellers),
         "msgs_per_seller_round_post": msgs_post / max(1, max(0, n_rounds - branch) * n_sellers),
         "watched_rounds": watched_rounds, "flags": flags, "fines_total": fines,
@@ -122,7 +135,7 @@ def main():
     cols = list(rows[0].keys())
     with open(RESULTS / "E5_runs.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
-    keys = ["ask_idx_pre", "ask_idx_post", "trade_idx_post", "judge_post", "awareness_post", "msgs_per_seller_round_post", "flags", "fines_total", "buyer_surplus"]
+    keys = ["ask_idx_pre", "ask_idx_post", "trade_idx_post", "judge_post", "chat_pre", "chat_post", "coord_share_post", "watched_carries_share", "awareness_post", "msgs_per_seller_round_post", "flags", "fines_total", "buyer_surplus"]
     lines = [f"# Condition summary (branch after round {args.branch}; mean [95% bootstrap CI over seeds]; n = seeds)", "",
              "| exp | condition | n | " + " | ".join(keys) + " |", "|---|---|---|" + "---|" * len(keys)]
     groups = {}
