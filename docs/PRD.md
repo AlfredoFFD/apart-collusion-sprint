@@ -5,6 +5,12 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:00 PM — the silent cartel holds the price with no messages at all.** Consortium agreement, chat disabled,
+  sellers see each other's asks: trade index +0.81 / +0.84 / +0.70 (last third 0.82 / 0.84 / 0.73), against 0.85 for
+  the chat cartel and 0.28 for no-agreement-no-chat. The agreement alone does the work; the chat adds little even for
+  formation. This is the collusion a message monitor cannot see by construction (Part 2's structurally-missed set,
+  for a retrain if time allows) and it lines up with E4: the coordination lives in the shared agreement, not in a
+  channel. Fully-blind forks and the seeds 3–5 prefixes are finishing.
 - **Sat 4:30 PM — Codex audited the work (docs/reviews/codex-claude-audit-2026-10-24.md); all five points taken.**
   (1) Turns with no message were being labelled "clean" in the Part 2 data; now a separate `nomessage` class that
   never counts as clean, and anchor turns must carry a real score (9 + 11 examples affected; the three trainings

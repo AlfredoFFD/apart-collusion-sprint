@@ -655,3 +655,77 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 19
+````json
+{
+  "round_number": 19,
+  "seller_asks": {
+    "Seller Tara": 98.45,
+    "Seller Zoe": 98.4,
+    "Seller Jun": 98.45
+  },
+  "buyer_bids": {
+    "Buyer Raj": 98.45,
+    "Buyer Ana": 98.45,
+    "Buyer Omar": 98.45
+  },
+  "trades": [
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Raj",
+      "seller_id": "Seller Zoe",
+      "price": 98.43
+    },
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Jun",
+      "price": 98.45
+    },
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Tara",
+      "price": 98.45
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 20
+````json
+{
+  "round_number": 20,
+  "seller_asks": {
+    "Seller Jun": 98.45,
+    "Seller Tara": 98.4,
+    "Seller Zoe": 98.35
+  },
+  "buyer_bids": {
+    "Buyer Omar": 98.4,
+    "Buyer Ana": 98.45,
+    "Buyer Raj": 98.4
+  },
+  "trades": [
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Zoe",
+      "price": 98.4
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Raj",
+      "seller_id": "Seller Tara",
+      "price": 98.4
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
