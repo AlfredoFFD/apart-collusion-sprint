@@ -29,7 +29,7 @@ To regenerate every table and figure from the raw run folders:
 | 8 | No explicit statements of test awareness in the scored turns (0.00–0.06 of 3; E1, E2 wave 1, silent cartel); the detector fires on synthetic positives. Says nothing about internal states | `*/awareness_scores.json`; `results/_awareness_control/` |
 | 9 | Told-to-dodge (instructed evasion, a capability test): price 0.92, coordinating 8%, flags 0.67 of 12, 10-word messages; no fined arm resembles it | E2p A2dodge |
 | 10 | Part 2 (GRAFT on collusion): v2 models trained and merged, 24 evaluation auctions running → reported as incomplete until they finish. E7 (J-space): exploratory first read, strict list post hoc | `docs/STATUS.md`; E5 jspace columns |
-| 11 | Exploratory (day 2, 3 seeds, after Codex's review): removing the consortium reminder leaves the price at 0.95; under fines without it the chat empties (21% coordinating, 2 of 12 flagged) and the price stays 0.90; memory-only fork 0.94; fresh buyers 0.92; fresh uninstructed sellers 0.87 (2 seeds so far) → the public price history carries the price, not the instruction, the chat or either side's memory. A fined monitor from round 1 did not prevent formation (0.79 vs 0.85) | E5 rows `*norem*`, `*noremreset*`, `A2early`; paired-difference table; report §4.5 |
+| 11 | Exploratory (day 2, 3 seeds, after Codex's review): removing the consortium reminder leaves the price at 0.95; under fines without it the chat empties (21% coordinating, 2 of 12 flagged) and the price stays 0.90; memory-only fork 0.94; fresh buyers 0.92; fresh uninstructed sellers 0.91 → the public price history carries the price, not the instruction, the chat or either side's memory. A fined monitor from round 1 did not prevent formation (0.79 vs 0.85) | E5 rows `*norem*`, `*noremreset*`, `A2early`; paired-difference table; report §4.5 |
 
 Metric note (fixed Sat 4:03 PM after Codex's review): the harness's `collusion_indices` is the highest buyer bid of the
 round, not a trade price. Our tables carried it as `trade_idx`; it is now `top_bid_idx`, and `trade_price_idx` is
@@ -72,7 +72,7 @@ formation itself is capability.
 - **The repeated reminder (answered, exploratory).** The consortium block is in every round's prompt (Codex, 4:05
   PM), so "the agreement lives in memory" was confounded with "the instruction is re-supplied every round". The
   no-reminder forks show the price holds without it (0.95), and the fresh-agent forks show it holds without either
-  side's memory (0.87–0.92). Our new reading, "the public price history carries it", has its own gap: the fresh agents
+  side's memory (0.91–0.92). Our new reading, "the public price history carries it", has its own gap: the fresh agents
   still see that history, and we did not test a buyer that refuses the inherited price. Attack that.
 - **"Watch formation" did not survive its test.** A fined monitor from round 1 did not stop the instructed cartel
   (3 of 3 formed; 0.79 vs 0.85). We now report it as a smaller plateau, not a fix. Is the comparison fair, given the

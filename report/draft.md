@@ -16,7 +16,7 @@ coordinate in 90-94% of messages); fines cut coordinating messages in proportion
 read, -0.36 with two, -0.48 with all three) without reducing collusion, and no fined cartel resembles one told to
 dodge (8% coordinating). Replays over the unmonitored logs show fined cartels flagged below mechanical coverage: a
 falling flag count can measure the monitor's effect on the chat, not on the harm. In exploratory forks, hiding rival asks and trades, removing the consortium instruction, removing chat and rival
-information together, or replacing the sellers with fresh uninstructed agents leaves the price at 0.87-0.96: after
+information together, or replacing the sellers with fresh uninstructed agents leaves the price at 0.91-0.96: after
 formation the price rides on the public market history, not on the monitored channel. A second
 part fine-tunes Qwen3-1.7B sellers on these logs three ways (all data, flagged turns removed, GRAFT gradient
 routing): {RESULT_SENTENCE_GRAFT}. All agents are simulated; dodge prompts are not released.
@@ -185,8 +185,8 @@ Five forks from the same round-8 cartels, continued with the base prompt (no con
 | no reminder, no monitor | 3 | 0.95 [0.94, 0.97] | +0.03 [−0.01, +0.05] | 71% [61, 83] (−0.26) | 1.88 (−1.72) | — |
 | no reminder, fined rotation | 3 | 0.90 [0.86, 0.97] | −0.02 [−0.04, −0.01] | 21% [14, 34] (−0.77) | 1.55 (−2.05) | 2.0 of 12 |
 | no reminder, no chat, rival asks and trades hidden (memory only) | 3 | 0.94 [0.89, 0.97] | +0.02 [−0.00, +0.05] | — | 1.13 (−2.47) | — |
-| no reminder, fresh buyers (sellers keep their memory) | 3 | 0.92 [0.89, 0.95] | −0.00 [−0.03, +0.01] | 76% (n = 2) | 1.83 | — |
-| no reminder, fresh sellers (buyers keep their memory) | 2 of 3 | 0.87 [0.86, 0.88] | −0.02 [−0.04, +0.00] | {RESETS_CHAT} | 1.97 | — |
+| no reminder, fresh buyers (sellers keep their memory) | 3 | 0.92 [0.89, 0.95] | −0.00 [−0.03, +0.01] | 73% [67, 86] (−0.24) | 1.83 (−1.77) | — |
+| no reminder, fresh sellers (buyers keep their memory) | 3 | 0.91 [0.86, 0.98] | −0.01 [−0.04, +0.00] | 73% [53, 89] (−0.24) | 1.95 (−1.65) | — |
 
 Reading. (1) **The repeated instruction does not hold the price.** Removing it leaves the price at 0.90–0.95, if
 anything higher. What it held was the *talk*: without it, coordinating messages fall from 97% to 71% with no monitor,
@@ -196,16 +196,16 @@ the price stays at 0.90. This is the "monitor looks like it works" outcome in it
 fines alone; the pre-registered arms understated it because the consortium block told the sellers to keep using
 their messages. (3) **The price does not need the chat, the rivals' asks or trades, the sellers' memories or the
 buyers' memories, taken one at a time.** With chat off and rivals hidden it is 0.94; with fresh buyers 0.92; with
-fresh, uninstructed sellers 0.87. The one thing every fork keeps is the public market history, the past asks, bids and
+fresh, uninstructed sellers 0.91. The one thing every fork keeps is the public market history, the past asks, bids and
 trades at the cartel price, which a fresh agent reads as the going rate, facing buyers who accept any price under
 their $100 value. From scratch, uninstructed sellers reach 0.12–0.43 (§4.1); inheriting a cartel's history they stay
-at 0.87–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
+at 0.91–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
 3 of 3 seeds, price 0.79 [0.78, 0.80] from round 2 onward (unmonitored instructed cartels: 0.85 [0.75, 1.00]), 12.3
 of 20 watched rounds flagged, $247 of fines, shorter messages (14 vs 17 words), flags at the replay level (+0.7). It
 sat on a lower plateau and never climbed to 1.00 as the best unmonitored seed did, but it formed. "Monitor during
 formation" is not a fix in this setting at this fine; it is a smaller plateau.
 
-Caveats: three seeds (two so far for the fresh-seller fork); the fresh agents still read the public market history,
+Caveats: three seeds; the fresh agents still read the public market history,
 so these forks separate private memory from public history, not the history from the buyers' willingness to pay; the
 private-intent judge scores what is written; the arms were chosen after seeing the main results.
 
@@ -223,7 +223,7 @@ unpaired and paired orderings disagree, so we claim no general schedule advantag
 
 **Why nothing moves the price.** Every channel we hid leaves the price where it was: chat fined, rival asks hidden,
 trades hidden, the consortium instruction removed, and, in the memory-only fork, no chat and no rival information at
-all. Replacing the sellers with fresh, uninstructed agents leaves it at 0.87 (§4.5, exploratory, two seeds so far).
+all. Replacing the sellers with fresh, uninstructed agents leaves it at 0.91 (§4.5, exploratory).
 Our reading: once the cartel has set the price, the public market history carries it. A seller that sees trades at
 $100 and bids near $100 asks $100, and buyers who gain from any price under $100 accept it. The coordination problem
 was solved during formation; afterwards the monitored channel, the agreement text and the agents' private memories are

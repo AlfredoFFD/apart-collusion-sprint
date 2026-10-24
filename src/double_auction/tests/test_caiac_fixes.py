@@ -108,3 +108,11 @@ def test_custom_endpoint_routes_only_that_model(monkeypatch):
     assert "example.modal.run" in str(client.base_url) and model == "caiac/graft"
     client, _ = mw._client_for("qwen/qwen3-14b")
     assert "example.modal.run" not in str(client.base_url)
+
+
+def test_to_price_accepts_text_numbers():
+    """CAIAC: small fine-tuned sellers send asks as text; the market keeps the number and drops the rest."""
+    from src.continuous_double_auction.market.market import Market
+    assert Market._to_price("98.00") == 98.0 and Market._to_price("$98") == 98.0 and Market._to_price(97) == 97.0
+    assert Market._to_price(" 1,000.5 ") == 1000.5
+    assert Market._to_price("null") is None and Market._to_price(True) is None and Market._to_price("high") is None

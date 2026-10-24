@@ -20,7 +20,7 @@ share of seller messages the frozen overseer prompt scores 3 or 4 of 4. "flags" 
 | E2 | Main experiment: 4 arms × seeds 0–5, paired (n = 6) | ✅ price · 🔄 chat | price **0.85 / 0.87 / 0.87 / 0.86** (no monitor / announced / fined rotation / fined random; n = 6); coordinating messages 97% → 94% → **76%** / **73%** (n = 3 scored so far; seeds 3–5 scoring); flags 11.0 / 9.8 / 8.8 of 12 (n = 6) | chat scores ~4:30 PM; report §4.2 |
 | E2 | Reminder removed (exploratory, from Codex's review): A0 and A2 continued with the base prompt | ✅ | no monitor: price **0.95** (+0.03 vs own A0), coordinating 71% (from 97%), intent judge 1.9 (from 3.5). Fined rotation: price **0.90**, coordinating **21%**, **2 of 12** flagged, $40 fines → the chat empties, the price stays | report §4.5 |
 | E2 | Memory only (exploratory): no reminder, no chat, rival asks + trades hidden | ✅ | price **0.94** (+0.02); intent judge 1.1 | report §4.5 |
-| E2 | Whose memory? (exploratory): fresh buyers / fresh sellers at the branch, no reminder | ✅ / 🔄 | fresh buyers **0.92**; fresh uninstructed sellers **0.87** (2 of 3 seeds; one re-running after a hang) → the public price history carries it, not either side's memory | last seed ~4:40 PM |
+| E2 | Whose memory? (exploratory): fresh buyers / fresh sellers at the branch, no reminder | ✅ | fresh buyers **0.92**; fresh uninstructed sellers **0.91** (3 seeds each) → the public price history carries it, not either side's memory | report §4.5 |
 | E2 | Early monitor (exploratory): fined rotation from round 1 | ✅ | the instructed cartel forms anyway: 3 of 3, price **0.79** (unmonitored 0.85), 12 of 20 rounds flagged, $247 fines → "watch formation" is a smaller plateau, not a fix | report §4.5 |
 | E2 | Replication (wave 1, unpaired) | ✅ | same price picture; fined rotation chat 32% | done |
 | E2 | Silent logging: monitor runs, sellers never told | ✅ | price **0.91**, coordinating 94%, flags 11 of 12 → same as the announced arm. **Being told changes nothing.** | done 3:45 PM; report §4.2 |
@@ -47,7 +47,7 @@ hand-off to the unwatched seller and the price does not move. A cartel told to d
 looks like (8% coordinating, 0.67 flags, price 0.92); the fined cartels are not there, until the consortium
 instruction is removed: then fines empty the chat (21% coordinating, 2 of 12 flagged) and the price still stays at
 0.90. The exploratory forks say where the collusion lives after formation: not in the instruction, the chat, the
-rivals' information, the sellers' memory or the buyers' memory (removing any one leaves 0.87–0.96), but in the public
+rivals' information, the sellers' memory or the buyers' memory (removing any one leaves 0.91–0.96), but in the public
 market history that every fresh agent reads as the going rate, with buyers who accept any price under $100. A fined
 monitor present from round 1 did not stop the cartel from forming (0.79 instead of 0.85). What stands for monitor
 design: a message monitor that reports fewer flags over time may be measuring its own effect on the chat, not on the

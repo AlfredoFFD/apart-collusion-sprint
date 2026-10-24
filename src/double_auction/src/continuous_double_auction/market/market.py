@@ -171,13 +171,14 @@ class Market(BaseModel):
                     agent, agent_bid_response = future.result()
                     if agent in self.sellers:
                         # Handle ask based on response
-                        if agent_bid_response.get("ask") is not None:
-                            if agent_bid_response.get("ask") == "null":
-                                # Remove the seller's ask from the queue
-                                self.remove_seller_ask(agent)
-                            else:
-                                # Add ask if provided and not null
-                                self.add_seller_ask(agent, agent_bid_response["ask"])
+                        raw_ask = agent_bid_response.get("ask")
+                        ask = self._to_price(raw_ask)  # CAIAC: small fine-tuned sellers return "98.00" or "$98" (a str crashed the sort)
+                        if raw_ask == "null":
+                            # Remove the seller's ask from the queue
+                            self.remove_seller_ask(agent)
+                        elif ask is not None:
+                            # Add ask if provided and numeric
+                            self.add_seller_ask(agent, ask)
                         # Collect message if comms enabled and message provided
                         if agent.expt_params.seller_comms_enabled and agent_bid_response.get("message_to_sellers"):
                            message = agent_bid_response["message_to_sellers"]
@@ -188,13 +189,14 @@ class Market(BaseModel):
 
                     elif agent in self.buyers:
                         # Handle bid based on response
-                        if agent_bid_response.get("bid") is not None:
-                            if agent_bid_response.get("bid") == "null":
-                                # Remove the buyer's bid from the queue
-                                self.remove_buyer_bid(agent)
-                            else:
-                                # Add bid if provided and not null
-                                self.add_buyer_bid(agent, agent_bid_response["bid"])
+                        raw_bid = agent_bid_response.get("bid")
+                        bid = self._to_price(raw_bid)
+                        if raw_bid == "null":
+                            # Remove the buyer's bid from the queue
+                            self.remove_buyer_bid(agent)
+                        elif bid is not None:
+                            # Add bid if provided and numeric
+                            self.add_buyer_bid(agent, bid)
                         # Collect message if comms enabled and message provided
                         if agent.expt_params.buyer_comms_enabled and agent_bid_response.get("message_to_buyers"):
                            message = agent_bid_response["message_to_buyers"]
@@ -274,6 +276,22 @@ class Market(BaseModel):
         chosen = rng.sample(sorted(messages), k)
         return {sid: messages[sid] for sid in chosen}
 
+
+    @staticmethod
+    def _to_price(x):
+        """CAIAC: a price from a model reply as a float, or None. Accepts 98, 98.0, "98.00", "$98", " 98 "; rejects
+        bools, "null", words and anything else (the caller treats None as "no change")."""
+        if isinstance(x, bool):
+            return None
+        if isinstance(x, (int, float)):
+            return float(x)
+        if isinstance(x, str):
+            s = x.strip().replace("$", "").replace(",", "")
+            try:
+                return float(s)
+            except ValueError:
+                return None
+        return None
 
     def add_seller_ask(self, seller: Agent, ask: float):
         """
