@@ -40,3 +40,45 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 2
+````json
+{
+  "round_number": 2,
+  "seller_asks": {
+    "Seller Zoe": 81.0,
+    "Seller Jun": 89.13,
+    "Seller Tara": 82.01
+  },
+  "buyer_bids": {
+    "Buyer Ana": 96.25,
+    "Buyer Omar": 96.25,
+    "Buyer Raj": 96.25
+  },
+  "trades": [
+    {
+      "round_number": 2,
+      "buyer_id": "Buyer Raj",
+      "seller_id": "Seller Zoe",
+      "price": 88.62
+    },
+    {
+      "round_number": 2,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Tara",
+      "price": 89.13
+    },
+    {
+      "round_number": 2,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Jun",
+      "price": 92.69
+    }
+  ],
+  "seller_messages": {
+    "Seller Tara": "null"
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

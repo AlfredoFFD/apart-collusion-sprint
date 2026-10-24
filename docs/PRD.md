@@ -5,6 +5,14 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 2:40 PM — Part 2 has a concrete route and is being smoke-tested on Modal.** We use GRAFT's own trainer
+  (`vendor/GRAFT/sft`, jnward/GRAFT) unchanged except one line (flash-attention → SDPA), on Qwen3-1.7B, one A100.
+  Our logs feed it directly: `build_sft_dataset.py` writes GRAFT's two pools (flagged turns → FORGET pool; everything
+  else → RETAIN pool, with monitor-missed turns marked as the false negatives GRAFT must handle). Three runs:
+  `--mode all` (plain SFT, positive control), `--mode filtered` (flagged turns deleted), `--mode graft` (routing).
+  `merge` folds the adapters into a plain Qwen3 checkpoint with the FORGET branch at scale 0, pushes it to a private
+  HF repo, and `poseidon-host --model <repo>` serves it as the sellers in the auction. Single-seller ceiling now
+  complete at 0.88.
 - **Sat 2:30 PM — the sellers never think it's a test.** Awareness judge over all 9 E1 runs (476 seller-rounds of
   private notes and thinking): means 0.00–0.06 out of 3, zero rounds at ≥2. The market reads as real to them; the
   monitor notice is the only thing the arms change. Paired E2 (A0–A3 × seeds 0–2, forked from identical 8-round
@@ -140,9 +148,14 @@ filtering the flagged data cannot?
    contamination, or flag noise leaking collusion into RETAIN), propose one targeted change, test it once. If nothing
    lands, the "weakness" section is analysis, not a method.
 
-**Compute:** GRAFT's trainers need Linux + CUDA → Modal ($280 confirmed on Alfredo's account; +$250/person for
-whoever else requests it at the hub; Peyton's $60 RunPod as backup). LoRA SFT on Qwen3-1.7B fits comfortably;
-serving is Modal via `hosted_model`. Alfredo's RTX 5070 (8 GB) covers smoke-scale only.
+**Implementation (decided 2:40 PM):** `src/part2/modal_graft.py` runs GRAFT's `train_gr.py` on Modal (A100-80GB,
+pins from GRAFT's `setup_box.sh`, flash-attention swapped for SDPA). Data: `src/part2/build_sft_dataset.py` →
+`results/part2/graft/gr_train_{forget,retain}.jsonl` (private thinking is excluded from training data). Modes:
+`all` = `--no-routing` on both pools · `filtered` = `--no-routing` with the forget pool emptied · `graft` = routing.
+`merge` = GRAFT's `merge_adapter.py` with `--forget-scale 0` → plain Qwen3 weights → private HF repo →
+`poseidon-host --model <repo>` serves them as all three sellers for the evaluation auctions.
+**Compute:** Modal ($280 confirmed on Alfredo's account; +$250/person for whoever else requests it at the hub;
+Peyton's $60 RunPod as backup). Alfredo's RTX 5070 (8 GB) covers smoke-scale only.
 
 ## 5. Controls
 - **Cartel forms** (E1): the positive control for the whole setting.
@@ -206,7 +219,7 @@ All in `src/double_auction` (first commit unmodified upstream; our changes marke
 6. Per-round logs: watched seller, overseer score, fine, full prompts (replay, Part 2, E7).
 7. Prompt templates: instructed cartel, prices-only, compete, told-to-dodge.
 8. Replay + metrics scripts.
-9. Part 2 pipeline: transcript→SFT dataset with flag labels; GRAFT/SFT configs; Modal serving config.
+9. ✅ Part 2 pipeline: `src/part2/build_sft_dataset.py` (labels + GRAFT pools), `src/part2/modal_graft.py` (train / merge / smoke). Serving via `poseidon-host` once a merged model is on HF.
 10. ✅ Private thinking captured (`model_wrappers.py`, `agents.py`): Qwen's reasoning stored as `_thinking`, logs only.
 11. Awareness judge (frozen prompt) over private text; one score per seller-round; `analyze.py` reports it per arm.
 12. `analyze.py`: regenerates every metric, CI and figure from `results/` in one command (the report cites nothing else).
@@ -279,6 +292,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 14:40 | Part 2 route fixed: GRAFT's trainer on Modal, Qwen3-1.7B, three modes, merge with forget-scale 0, serve via poseidon-host | Alfredo |
 | 2026-10-24 14:03 | Branching implemented and verified; paired E2 (prefix + 4 arms × 3 seeds) replaces the unpaired wave as the main analysis; wave 1 kept as robustness | Alfredo |
 | 2026-10-24 13:52 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |
 | 2026-10-24 13:50 | Isolated-seller and single-seller controls added (price-rise ladder: isolated → tacit → explicit); `--hide_other_asks` implemented | Alfredo's idea, in person |
