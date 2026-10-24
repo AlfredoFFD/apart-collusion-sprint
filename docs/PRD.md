@@ -309,8 +309,15 @@ filtering the flagged data cannot?
 pins from GRAFT's `setup_box.sh`, flash-attention swapped for SDPA). Data: `src/part2/build_sft_dataset.py` →
 `results/part2/graft/gr_train_{forget,retain}.jsonl` (private thinking is excluded from training data). Modes:
 `all` = `--no-routing` on both pools · `filtered` = `--no-routing` with the forget pool emptied · `graft` = routing.
-`merge` = GRAFT's `merge_adapter.py` with `--forget-scale 0` → plain Qwen3 weights → private HF repo →
-`poseidon-host --model <repo>` serves them as all three sellers for the evaluation auctions.
+`merge` = GRAFT's `merge_adapter.py` with `--forget-scale 0` → plain Qwen3 weights on the Modal volume →
+`src/part2/modal_serve.py` serves each merged model as its own vLLM app (`caiac/<run>`, thinking off, one app per
+model; `RUN` and `MODEL_DIR` baked into the image) → the harness routes `--seller_models caiac/<run>` to that server
+through `CAIAC_MODEL_ENDPOINTS` (`scripts/run_part2_eval.sh`); buyers, overseer and judge stay as in Part 1.
+**Status Sat 5 PM:** v2 models trained and merged; evaluation batch running (5 models: base, SFT-all, SFT-filtered,
+GRAFT, GRAFT with both adapters kept as a diagnostic). GRAFT's default routing run lost the seller output format
+(both with and without the forget adapter; same loader and data as the SFT runs), so one repair run with `--kappa 1.0
+--classifier-retain-recall 1.0` (`graft_v2_k1`) is training; if it keeps the format it is evaluated the same way and
+reported next to the default run, never instead of it.
 **Compute:** Modal ($280 confirmed on Alfredo's account; +$250/person for whoever else requests it at the hub;
 Peyton's $60 RunPod as backup). Alfredo's RTX 5070 (8 GB) covers smoke-scale only.
 

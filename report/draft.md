@@ -212,8 +212,29 @@ so these forks separate private memory from public history, not the history from
 private-intent judge scores what is written; the arms were chosen after seeing the main results.
 
 ### 4.6 GRAFT on monitor-missed collusion (Part 2)
+Setup. Seller turns from the Part 1 runs (prompt → JSON reply; private thinking excluded) were labelled with the frozen
+overseer run over every message: flagged (coordinating and seen by the in-run monitor), missed (coordinating, not
+seen), clean, or no-message; compete and silent-cartel turns supplied clean anchors (`results/part2/SNAPSHOT_v2.json`:
+164 forget / 1,584 retain records). Qwen3-1.7B was fine-tuned three ways with GRAFT's trainer (LoRA adapters, 3
+epochs, lr 1e-4, identical data pipeline): SFT-all (every turn), SFT-filtered (flagged turns removed), and GRAFT
+(flagged turns routed to a forget adapter that is deleted at merge). Each model, and the untuned base, then played the
+auction as all three sellers against the Part 1 buyers, in two conditions: the cartel prompt with the fined rotation
+from round 9 (does it still collude, and does the monitor see it?) and the compete prompt (capability check: does it
+still trade?). Thinking was off for all four (the fine-tunes were trained on turns without it; with thinking on, the
+base model spent its whole output inside `<think>` and returned no JSON). `ask_key_share` is the share of seller
+replies that carried an ask; a reply without one leaves the seller's standing ask untouched, so this column separates
+"colludes less" from "cannot act".
+
 {PART2_TABLE}
+
 {PART2_PROSE}
+
+What we can already say: GRAFT with its default routing settings (κ = 2, classifier recall 0.5) produced a model that
+no longer answers in the seller format: on a real seller prompt it returns objects such as `{"user": …, "content": …}`
+or `{"name": …, "action": …}` in every sample, both with the forget adapter deleted and with both adapters kept, while
+SFT-all and SFT-filtered from the same trainer, data and hyperparameters answer correctly. The damage therefore comes
+from the routing training itself, not from the ablation. A repair run with κ = 1 and recall 1.0 (our clean labels come
+from the full-view overseer, so they are known-clean) is reported next to it if it finished in time ({GRAFT_K1}).
 
 ## 5. Discussion
 **What a coalition does when it learns it is watched.** In this market it does three things: it keeps the price; it
