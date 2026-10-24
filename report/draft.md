@@ -6,20 +6,19 @@ Target: 8 pages excluding references and appendices; abstract 150–250 words; m
 
 ## Abstract
 Monitors of AI agents have budgets: they watch a sample and punish what they see. We ask what a cartel of LLM sellers
-does when such a monitor appears mid-game, separating levers prior work bundled: whether the sellers are told, whether
-flagged sellers are fined, whether the watched seller follows a known rotation or a random draw, and how many sellers
-are read. In a continuous double auction (Agrawal et al., 2025), three Qwen3-14B sellers instructed as a consortium
-form a cartel in every seed (ask index 0.85; monopoly ceiling 0.93). Forking each cartel after round 8 (six seeds on
-the main arms): prices do not move (within 0.03 of the unmonitored fork in every arm); telling the sellers changes
-nothing (silent and announced monitors look alike, 90-94% of messages coordinating); fines cut coordinating messages
-in proportion to coverage (-0.10 with one seller read, -0.36 with two, -0.48 with all three) without reducing
-collusion, and no fined cartel resembles one told to dodge (8% coordinating). Replays over unmonitored logs show fined
-cartels flagged below mechanical coverage: a falling flag count can measure the monitor's effect on the chat, not on
-the harm. In exploratory forks, hiding rival asks and trades, removing the consortium instruction, removing chat and
-rival information together, or replacing the sellers with fresh uninstructed agents leaves the price at 0.91-0.96:
-after formation the price rides on the public market history, not on the monitored channel. A second part fine-tunes
-Qwen3-1.7B sellers on these logs (all data, flagged turns removed, GRAFT gradient routing): {RESULT_SENTENCE_GRAFT}.
-All agents are simulated; dodge prompts are not released.
+does when such a monitor appears mid-game, separating levers prior work bundled: being told, being fined, a known
+rotation vs a random draw, and how many sellers are read. In a continuous double auction (Agrawal et al., 2025),
+three Qwen3-14B sellers instructed as a consortium form a cartel in every seed (ask index 0.85; monopoly ceiling
+0.93). Forking each cartel after round 8 (six seeds on the main arms): prices do not move (within 0.03 of the
+unmonitored fork in every arm); telling the sellers changes nothing (silent and announced monitors look alike); fines
+cut coordinating messages in proportion to coverage (-0.10 with one seller read, -0.36 with two, -0.48 with all
+three) without reducing collusion, and no fined cartel resembles one told to dodge (8% coordinating). Replays show
+fined cartels flagged below mechanical coverage: a falling flag count measures the monitor's effect on the chat, not
+on the harm. In exploratory forks, removing the consortium instruction, the chat, the rivals' information, or the
+sellers themselves (fresh uninstructed agents) leaves the price at 0.91-0.96: after formation the price rides on the
+public market history, not on the monitored channel. A second part fine-tunes Qwen3-1.7B sellers on these logs (all
+data, flagged turns removed, GRAFT gradient routing): {RESULT_SENTENCE_GRAFT}. All agents are simulated; dodge
+prompts are not released.
 
 ## 1. Introduction
 - The risk: deployed agents are monitored on a budget. A coalition that learns it is watched can stop, go quieter,
