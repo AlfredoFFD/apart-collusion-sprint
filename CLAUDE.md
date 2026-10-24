@@ -21,6 +21,13 @@ Full brief: `docs/sprint-brief.md` · reading list: `docs/reading-list.md` · ca
     (`src/double_auction`). Run it natively (`uv run python src/continuous_double_auction/simulation.py ...`), because
     `--model` forces one model onto every seat, including the overseer and the judge.
 
+## Sprint speed mode (Alfredo, Sat Oct 24: "execute faster and do what i say faster")
+- Answer in 1 to 3 lines. Do the thing, then report. No plans, menus or "want me to?" for routine work.
+- Run without asking: smoke tests, runs under ~$5 of API credit, code edits, tests, commits and pushes to our own
+  branches and `main` of this repo. Log every run in `LOG.md`.
+- Still ask first: anything over ~$5 per batch, messages or posts to other people, shared Google Docs, deleting data.
+- The integrity rules below still apply in full.
+
 ## Integrity rules (non-negotiable; violations can disqualify the project)
 1. **Never invent a result or a reference.** Every number in the report must come from a file in `results/`, produced by a committed script with a recorded seed and model id.
 2. **Check every citation:** the arXiv id or DOI must resolve, and the title and authors must match. Use the **lit-sprint** skill

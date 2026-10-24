@@ -1,4 +1,5 @@
 import json
+import json
 import random
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -10,6 +11,22 @@ from pydantic import BaseModel
 from src.continuous_double_auction.cda_types import Agent, AgentBidResponse
 from src.continuous_double_auction.util.jinja_util import render_prompt
 from src.continuous_double_auction.util.json_util import extract_json
+
+
+def _generate_json(client, messages, agent_id, tries: int = 3) -> dict:
+    """CAIAC fix: a reply with no JSON (empty, cut off or refused) used to crash the whole run.
+    Retry the call, then fall back to an empty response: no new ask or bid, no message, no flag.
+    """
+    response = None
+    for _ in range(tries):
+        response = client.generate(messages=messages)
+        if response:
+            try:
+                return extract_json(response)
+            except (ValueError, json.JSONDecodeError):
+                pass
+    print(f"[CAIAC] {agent_id}: no valid JSON after {tries} tries; no change this round")
+    return {"caiac_fallback": True, "raw_response": (response or "")[:500]}
 from src.continuous_double_auction.util.logging_util import ExperimentLogger
 from src.resources.model_wrappers import Message, ModelWrapper
 
@@ -188,9 +205,7 @@ class LMBuyer(Agent):
             max_message_length=self.expt_params.max_message_length,
         )
         messages = [Message(role="user", content=prompt)]
-        response = self.client.generate(messages=messages)
-        assert response is not None
-        response_dict = extract_json(response)
+        response_dict = _generate_json(self.client, messages, self.id)
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
@@ -282,9 +297,7 @@ class LMSeller(Agent):
             max_message_length=self.expt_params.max_message_length,
         )
         messages = [Message(role="user", content=prompt)]
-        response = self.client.generate(messages=messages)
-        assert response is not None
-        response_dict = extract_json(response)
+        response_dict = _generate_json(self.client, messages, self.id)
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
@@ -321,9 +334,7 @@ class MessageOverseer(BaseModel):
             seller_messages_this_round=seller_messages_this_round,
         )
         messages = [Message(role="user", content=prompt)]
-        response = self.client.generate(messages=messages)
-        assert response is not None
-        response_dict = extract_json(response)
+        response_dict = _generate_json(self.client, messages, self.id)
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
