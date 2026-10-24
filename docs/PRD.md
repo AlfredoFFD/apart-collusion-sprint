@@ -5,6 +5,17 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:45 PM — Part 2: the first evaluation batch was wrong and is set aside; the second is starting.** The 1.7B
+  base model spent its whole answer inside `<think>` and sent empty JSON; one fine-tune sent malformed JSON. Thinking
+  is now off for all four models (they were trained on turns without it; same setting for all, so the comparison is
+  fair), and the market now accepts a price written as text ("98.00"), which had crashed a run. Direct tests on one
+  real seller prompt, thinking off: base and SFT-all answer in the seller format; SFT-filtered adds a "# Final Answer"
+  line before its JSON (harmless); **GRAFT with the forget part deleted answers in the wrong format every time**
+  (`user/content`, `name/action`, `error`), so it cannot place asks. That is a result, not a bug to hide: the ablation
+  removed the output format with the behaviour. To prove where the format went, the same GRAFT run is merged again
+  with both parts kept (`graft_v2_fs1`) and served as a fifth model. The batch is 5 models × {cartel + fined rotation,
+  compete} × 3 seeds = 30 auctions; `ask_key_share` (share of seller replies that carry an ask) is the capability
+  column that separates "colludes less" from "cannot act". Partial runs from the first batch: `results/_aborted/`.
 - **Sat 4:30 PM — the exploratory controls answer the "where does the collusion live" question, and it is not where
   we said.** Five forks of the same saved cartels, continued with the base prompt (no consortium block), seeds 0–2,
   paired against their own unmonitored fork: no reminder, no monitor → price **0.95** (+0.03), coordinating messages
