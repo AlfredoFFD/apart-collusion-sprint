@@ -1,0 +1,37 @@
+[
+  {
+    "id": "2610.17062",
+    "title": "Gradient Routing Localizes and Removes Unintended Behaviors in RL",
+    "author": "Ward"
+  },
+  {
+    "id": "2507.01413",
+    "title": "Evaluating LLM Agent Collusion in Double Auctions",
+    "author": "Agrawal"
+  },
+  {
+    "id": "2609.18346",
+    "title": "Faithful yet Collusive: Why Chain-of-Thought Monitoring Cannot Detect Collusion in LLM Pricing Agents under Oligopolistic Competition",
+    "author": "Lee"
+  },
+  {
+    "id": "2410.03768",
+    "title": "Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs",
+    "author": "Mathew"
+  },
+  {
+    "id": "2609.13037",
+    "title": "Mitigating Emergent Collusion in LLM Pricing Agents",
+    "author": "Garra"
+  },
+  {
+    "id": "2609.03035",
+    "title": "You Can't Escape Your Own Activations : Evaluation Awareness and Multi-Agent Monitoring",
+    "author": "Das"
+  },
+  {
+    "id": "2606.10747",
+    "title": "The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to Detect Emergent Misalignment",
+    "author": "Tonini"
+  }
+]

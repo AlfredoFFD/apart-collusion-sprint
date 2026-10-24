@@ -1,0 +1,83 @@
+[
+ {
+  "id": "2610.17062",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Gradient Routing Localizes and Removes Unintended Behaviors in RL",
+  "found_authors": [
+   "Jake Ward",
+   "Shawn Hu",
+   "Aria Wong"
+  ]
+ },
+ {
+  "id": "2507.01413",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Evaluating LLM Agent Collusion in Double Auctions",
+  "found_authors": [
+   "Kushal Agrawal",
+   "Verona Teo",
+   "Juan J. Vazquez"
+  ]
+ },
+ {
+  "id": "2609.18346",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Faithful yet Collusive: Why Chain-of-Thought Monitoring Cannot Detect Collusion in LLM Pricing Agents under Oligopolistic Competition",
+  "found_authors": [
+   "Dohun Lee",
+   "Hyunwoo Park"
+  ]
+ },
+ {
+  "id": "2410.03768",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs",
+  "found_authors": [
+   "Yohan Mathew",
+   "Ollie Matthews",
+   "Robert McCarthy"
+  ]
+ },
+ {
+  "id": "2609.13037",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Mitigating Emergent Collusion in LLM Pricing Agents",
+  "found_authors": [
+   "Abdullah Garra"
+  ]
+ },
+ {
+  "id": "2609.03035",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "You Can't Escape Your Own Activations : Evaluation Awareness and Multi-Agent Monitoring",
+  "found_authors": [
+   "Aritra Das",
+   "Jaee Ponde",
+   "Mihir More"
+  ]
+ },
+ {
+  "id": "2606.10747",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to Detect Emergent Misalignment",
+  "found_authors": [
+   "Filippo Tonini",
+   "Federico Torrielli",
+   "Anton Danholt Lautrup"
+  ]
+ }
+]

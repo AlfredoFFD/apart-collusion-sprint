@@ -20,3 +20,27 @@ trainable params: 68.8M  adapter scale: retain=0.8000, forget=0.8000  match_rslo
 
 
 
+Tokenizing gr_train_retain.jsonl (num_proc=8):  28%|██▊       | 442/1584 [00:06<00:15, 76.11 examples/s]
+
+
+Tokenizing gr_eval_retain.jsonl (eval retain) (num_proc=8):   0%|          | 0/158 [00:00<?, ? examples/s]
+
+
+Tokenizing gr_eval_forget.jsonl (eval forget) (num_proc=8):  12%|█▎        | 2/16 [00:02<00:18,  1.30s/ examples]
+Tokenizing gr_eval_forget.jsonl (eval forget) (num_proc=8):  25%|██▌       | 4/16 [00:04<00:12,  1.04s/ examples]
+
+train examples: 1748 (forget=164, unclassified=1429, retain=155) [classifier_retain_recall=0.5]
+world_size=1 step_size_global=16 step_size_local=16 steps/epoch=109 total_optim_steps=327 warmup=32
+skipping step-0 eval (--no-evals)
+starting training
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+epoch 1 complete; skipping eval (per flags)
+saved epoch-1 checkpoint to /ckpts/graft_v2/graft_v2/checkpoint-epoch-1
+epoch 2 complete; skipping eval (per flags)
+saved epoch-2 checkpoint to /ckpts/graft_v2/graft_v2/checkpoint-epoch-2
+epoch 3 complete; skipping eval (per flags)
+saved epoch-3 checkpoint to /ckpts/graft_v2/graft_v2/checkpoint-epoch-3
+saved adapter to /ckpts/graft_v2/graft_v2
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/fabianfrontera/main/ap-Z6SgFayrYmDj6HhFWO2iTt

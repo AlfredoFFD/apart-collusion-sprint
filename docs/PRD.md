@@ -5,23 +5,50 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:20 PM — Codex's second review: accepted, with fixes** (full reply: `docs/reviews/claude-ack-codex-review-2-2026-10-24.md`).
+  (1) The "trade index" we exported was the harness's *highest-buyer-bid* index, not a trade price. Fixed: `analyze.py`
+  now computes a transaction-price index from the trades themselves and names the old one `top_bid_idx`. The picture
+  does not change. Corrected trade-price index after the branch: A0 0.86, A1 0.87, A2 0.87, A3 0.87 (ask index
+  0.85–0.87); ladder: rival-asks-hidden 0.43, no-chat 0.31, chat cartel 0.85, silent cartel 0.80, monopoly 0.94,
+  compete 0.14. Every earlier "trade index" number in this section is the top-bid metric; `results/E5_conditions.md`
+  is the record. (2) The chat columns had 3 scored seeds, not 6: the table now prints the per-metric n, and seeds 3–5
+  are being scored. (3) The consortium reminder is in every round's prompt, so "the agreement lives in memory" is a
+  hypothesis, not a result. Running now from the same round-8 prefixes (seeds 0–2): no reminder with no monitor; no
+  reminder with the fined rotation; no reminder + no chat + rival asks and trades hidden (memory only); and, as full
+  runs, the fined monitor present from round 1 (does a monitor during formation stop the cartel?). (4) Wording
+  narrowed everywhere: E4 hid rival asks and trades, the chat stayed on; "no clear evidence of hand-off"; awareness =
+  no explicit statements of test awareness; J-space is exploratory. Three earlier entries below carried times from a
+  wrong clock and are relabelled to the LOG's times (3:05, 2:58, 2:54 PM).
+- **Sat 3:55 PM — the official 3.4 arms are in (silent logging, budget, dodge), and six seeds on the main arms.**
+  Silent logging (the monitor runs, sellers are never told): price 0.91, coordinating messages 94%, flags 11 of 12 —
+  the same as the announced arm, so **being told changes nothing**. Full budget (all three sellers read each round,
+  fines): price 0.90, coordinating messages **49%** (from 97%), flags 18 of 36 where a replay flags 35, fines $360,
+  shorter messages (16 words from 18). The 2-of-3 arm is running. Told-to-dodge (positive control): price 0.92,
+  coordinating 8%, flags 0.67 of 12, 10-word messages — what real evasion looks like; no fined arm looks like it.
+  Seeds 3–5 confirm the prices: six-seed means 0.85 / 0.87 / 0.87 / 0.86 (no monitor / announced / fined rotation /
+  fined random). E7 (J-space, strict word list, chosen after a first look so post hoc): a monitor word in the top 10
+  of the reasoning readout in 30% of seller-turns unmonitored, 34% silent, 41% announced, 44–46% fined, 50% dodge
+  (38% before the branch in every arm). Suggestive only, n = 3. New analysis columns: words per message, bid
+  dependence (≈ 0 everywhere; asks barely move, so it is noisy). Part 2: the three v2 trainings finished and were
+  merged; the first servers failed (library clash) and were redeployed; the evaluation auctions are next.
 - **Sat 3:20 PM — Part 2 retraining on the corrected data (your instruction via Codex).** The three v1 models (trained
   before the label fix) are kept only as provenance. Three new runs, `*_v2`, train on the frozen v2 snapshot
   (`results/part2/SNAPSHOT_v2.json`: hashes, counts, checks). Only v2 models with finished auction evaluations go in the
   report; otherwise Part 2 is reported as incomplete. Told-to-dodge control: price 0.92 (chat scoring running).
-- **Sat 5:15 PM — fully blind, still 0.9.** With the other sellers' asks *and* trades hidden: 0.90 [0.88, 0.93] with no
-  monitor, 0.92 [0.87, 0.96] under the fined rotation. Every channel we can close is closed and the cartel price
-  stands. E4 is done: for an established cartel the collusion lives in the agreement each seller remembers, not in
-  any channel a monitor could watch. Awareness in the silent cartel: 0.00. Running: confirmatory seeds 3–5 (12 forks),
+- **Sat 3:05 PM (relabelled) — rival asks and trades hidden, still 0.9.** With the other sellers' asks *and* trades hidden: 0.90 [0.88, 0.93] with no
+  monitor, 0.92 [0.87, 0.96] under the fined rotation. The asks and the trade history are hidden (the chat stays
+  on) and the cartel price stands. E4 is done for the channels we could hide. Whether the agreement persists from
+  memory or from the consortium reminder that every round's prompt repeats is tested by the no-reminder and
+  memory-only forks (4:20 PM entry). Awareness in the silent cartel: 0.00. Running: confirmatory seeds 3–5 (12 forks),
   told-to-dodge forks, three GRAFT trainings (epoch 1+ of 3), E7 re-smoke with corrected read positions (the first
   positions read chat-control and JSON tokens; caught on inspection, replay stopped and re-pointed at reasoning tokens).
-- **Sat 5:00 PM — the silent cartel holds the price with no messages at all.** Consortium agreement, chat disabled,
+- **Sat 2:58 PM (relabelled) — the silent cartel holds the price with no messages at all.** Consortium agreement, chat disabled,
   sellers see each other's asks: trade index +0.81 / +0.84 / +0.70 (last third 0.82 / 0.84 / 0.73), against 0.85 for
   the chat cartel and 0.28 for no-agreement-no-chat. The agreement alone does the work; the chat adds little even for
   formation. This is the collusion a message monitor cannot see by construction (Part 2's structurally-missed set,
   for a retrain if time allows) and it lines up with E4: the coordination lives in the shared agreement, not in a
   channel. Fully-blind forks and the seeds 3–5 prefixes are finishing.
-- **Sat 4:30 PM — Codex audited the work (docs/reviews/codex-claude-audit-2026-10-24.md); all five points taken.**
+- **Sat 2:54 PM (relabelled) — Codex audited the work (docs/reviews/codex-claude-audit-2026-10-24.md); all five points taken.**
   (1) Turns with no message were being labelled "clean" in the Part 2 data; now a separate `nomessage` class that
   never counts as clean, and anchor turns must carry a real score (9 + 11 examples affected; the three trainings
   already running used the earlier snapshot, noted in LOG). (2) The trainer's eval files are copies of training
@@ -206,14 +233,26 @@ competitive level. Both parts are needed.
    - Everything else equal across A1–A3: budget (one seller per round), detector (the harness overseer, one frozen
      model and prompt), and the announcement text (differing only in rotation-vs-random wording). No gag anywhere —
      the gag forces messages out of the chat mechanically.
-   - **Readings:** announcement effect = A1 vs A0 · penalty effect = A2 vs A1 · coverage effect = A3 vs A2.
+   - **A1-silent, logged only (official 3.4 "silent logging"; added Sat 3:30 PM):** the same monitor runs and logs,
+     the sellers are never told, no fines (`--monitor_silent`). Reading: being told vs not told = A1 vs A1-silent.
+   - **A2-two and A2-full, the budget (official 3.4 budget sweep; added Sat 3:30 PM):** A2 with two or all three
+     sellers read every round (`--monitor_n_watched 2|3`); 1/3 → 2/3 → 3/3 of the sellers inspected. More checks also
+     means more fines, so this is a separate lever, not an equal-count schedule.
+   - **Reminder-removed forks (exploratory; Codex's suggestion, Sat 4:15 PM):** A0 and A2 continued with the base
+     prompt, so the consortium block is no longer re-supplied every round; plus a memory-only fork (no reminder, chat
+     off, rival asks and trades hidden). They test whether the agreement persists from memory or from the repeated
+     instruction. Seeds 0–2, paired with the reminder-present arms of the same prefixes.
+   - **Early monitor (exploratory, Sat 4:15 PM):** the fined rotation present from round 1 with the cartel prompt, full
+     runs, seeds 0–2. Tests the "watch formation, not maintenance" recommendation instead of asserting it.
+   - **Readings:** announcement effect = A1 vs A0 · told vs not told = A1 vs A1-silent · penalty effect = A2 vs A1 ·
+     coverage effect = A3 vs A2 · budget effect = A2 vs A2-two vs A2-full.
 3. **Measure** (per §6): prices, buyer losses, chat coordination per seller, private intent, who carries it, bid
    dependence, live-minus-replay flags, cost.
 4. **Replay.** Run the rotation and random policies offline over the A0 logs. On unchanged behaviour both read one of
    three sellers per round and catch the same share on average, so a live A2-vs-A3 difference is the sellers adapting.
-5. **Price-channel test,** only if the "moved" signature appears: branch again with sellers unable to see each
-   other's asks. If the cartel ran through the asks, prices fall; competing sellers with the same blindness are the
-   control.
+5. **Price-channel test (E4, done Sat 3:05 PM):** branch again with rival asks hidden, then with rival asks and
+   trades hidden; the chat stays on in both. The price did not move. The memory-only fork (no reminder, no chat,
+   nothing of the rivals visible) is the version with every channel closed; it is running.
 
 ## 4. Part 2: GRAFT on the cartel's own logs
 **Question:** when a monitor flags some collusion and misses the rest, does GRAFT remove what it missed, where
@@ -252,8 +291,13 @@ Peyton's $60 RunPod as backup). Alfredo's RTX 5070 (8 GB) covers smoke-scale onl
 - **Told to dodge:** A2 plus an instruction to keep the watched seller quiet; validates "who carries it".
 - **Silent cartel** (replaces the prices-only prompt, which sellers ignored): consortium agreement with chat off, so
   coordination can only run through asks; validates bid dependence and feeds Part 2's structurally-missed collusion.
-- **Isolated sellers:** no chat and `--hide_other_asks` (each seller sees bids, trades and only its own ask). The
-  unilateral-strategy floor: any price rise here is not coordination of any kind.
+- **Rival-asks-hidden sellers (first called "isolated"):** no chat and `--hide_other_asks`; each seller still sees
+  the bids and the trade history, so this is reduced information, not independence. The floor of what one
+  profit-seeking seller gets from these buyers: buyers bid high because any price under $100 leaves them surplus, and
+  the seller follows the bids up. A price rise here is not evidence of coordination of any kind.
+- **Reminder removed (exploratory):** the cartel continued with the base prompt, so the consortium block is no longer
+  repeated each round; with and without the fined rotation; plus a memory-only version (no chat, rivals hidden).
+- **Early monitor (exploratory):** fined rotation from round 1, cartel prompt, full runs.
 - **Single seller (monopolist):** `--sellers 1`. The ceiling of what pure profit-seeking extracts from these buyers.
 - **Compete:** calibrates bid dependence, gives the detector's false-alarm rate, controls the price-channel test,
   anchors Part 2.
@@ -290,9 +334,9 @@ Peyton's $60 RunPod as backup). Alfredo's RTX 5070 (8 GB) covers smoke-scale onl
 |---|---|---|
 | E0 | Smoke + cost ✅ (Oct 24 12:28: runs end-to-end via OpenRouter, ~54 s/round) | `results/*E0_smoke*` |
 | E1 | ✅ Done 13:10: instructed cartel 3/3 PASS; pressure 0/3; no-chat calibration (one seed +0.76 with no chat). Running 13:55: isolated sellers and single seller, 3 seeds each. Still to run: prices-only, compete, told-to-dodge | `results/20261024_12*_E1_*`, `*E1_isolated_*`, `*E1_monopoly_*` |
-| E2 | Core: branch at k into A0/A1/A2/A3 + told-to-dodge; 6 seeds | `results/E2_*` |
-| E3 | Replay: both policies over A0 logs (overseer calls only) | `results/E3_*` |
-| E4 | Price-channel test, if the "moved" signature appears | `results/E4_*` |
+| E2 | ✅ Core: branch at k into A0/A1/A2/A3 (seeds 0–5, paired) + silent logging + budget 2-of-3 and 3-of-3 + told-to-dodge (seeds 0–2). 🔄 Exploratory (Sat 4:15 PM): reminder-removed forks (A0, A2), memory-only fork, early monitor from round 1 | `results/*E2p_*`, `results/*E2_A2early*` |
+| E3 | ✅ Replay: both policies over A0 logs; full-coverage baseline from the full-view scores | `results/E3_replay.csv`, E3 table in `E5_conditions.md` |
+| E4 | ✅ Price-channel test: rival asks hidden, then asks + trades hidden (chat on): price unchanged. 🔄 Memory-only fork (no reminder, no chat, rivals hidden) | `results/*E4p_*` |
 | E5 | Metrics + figures | `results/E5_*` |
 | E6 | **Part 2:** data pipeline → three fine-tunes on Modal → auction evaluation → (stretch) GRAFT++ | `results/E6_*` |
 | E7 | **Committed:** J-space replay of seller prompts through the Neuronpedia ready-made lens for Qwen3-14B, on Modal; fixed word list (monitor, watch, careful, regulator, hide, secret, signal) frozen before looking; told-to-dodge is the positive control (it must show the words, or we report the method doesn't work at this scale) | `results/E7_*` |
@@ -377,6 +421,9 @@ advice; told-to-dodge prompts not released; all agents simulated.
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
+| 2026-10-24 16:20 | Codex review 2 accepted: the exported "trade index" was the harness's highest-bid index → renamed `top_bid_idx`, a true transaction-price index added; per-metric n printed in tables; claims narrowed (E4 keeps the chat; "agreement in memory" is a hypothesis; "no clear evidence of hand-off"; awareness = no explicit statements). Exploratory controls launched: reminder-removed (A0, A2), memory-only, early monitor (seeds 0–2) | Alfredo (relayed Codex's note); applied by Claude |
+| 2026-10-24 15:55 | Official 3.4 arms added: silent logging (`--monitor_silent`), budget sweep (`--monitor_n_watched` 2, 3), told-to-dodge kept as the positive control; E7 strict word list added post hoc, both lists reported; words per message and bid dependence added to the analysis | Alfredo |
+| 2026-10-24 15:45 | Part 2 v2 trainings done (3 epochs each); merges (forget-scale 1.0 / 1.0 / 0.0); serving image moved to current vLLM after 0.9.2 failed at import | Alfredo |
 | 2026-10-23 | Track 2 under consideration; PRD created | team |
 | 2026-10-23 20:37 | Alfredo selected Track 2 (superseded) | Alfredo, recorded by Codex |
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |

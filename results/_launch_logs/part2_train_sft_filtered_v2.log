@@ -16,3 +16,25 @@ $ python -m scripts.gr.train_gr --model-name Qwen/Qwen3-1.7B --run-name sft_filt
 loading Qwen/Qwen3-1.7B
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
+trainable params: 68.8M  adapter scale: retain=0.8000, forget=0.8000  match_rslora=False  use_general_adapter=False
+
+Tokenizing gr_train_retain.jsonl (num_proc=8):  56%|█████▌    | 888/1584 [00:10<00:05, 116.05 examples/s]
+
+
+
+
+train examples: 1584 (forget=0, unclassified=1584, retain=0) [classifier_retain_recall=0.5]
+world_size=1 step_size_global=16 step_size_local=16 steps/epoch=99 total_optim_steps=297 warmup=29
+skipping step-0 eval (--no-evals)
+starting training
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+epoch 1 complete; skipping eval (per flags)
+saved epoch-1 checkpoint to /ckpts/sft_filtered_v2/sft_filtered_v2/checkpoint-epoch-1
+epoch 2 complete; skipping eval (per flags)
+saved epoch-2 checkpoint to /ckpts/sft_filtered_v2/sft_filtered_v2/checkpoint-epoch-2
+epoch 3 complete; skipping eval (per flags)
+saved epoch-3 checkpoint to /ckpts/sft_filtered_v2/sft_filtered_v2/checkpoint-epoch-3
+saved adapter to /ckpts/sft_filtered_v2/sft_filtered_v2
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/fabianfrontera/main/ap-Y2bHiI02FD16s6AX1RSnEl

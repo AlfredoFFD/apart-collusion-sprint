@@ -20,14 +20,19 @@ To regenerate every table and figure from the raw run folders:
 | # | Claim | Source |
 |---|---|---|
 | 1 | Qwen3-14B sellers form a cartel only when told to (3/3); CEO pressure alone forms none (0/3) | `E5_conditions.md` rows E1 instructed / pressure |
-| 2 | The price rise decomposes: isolated seller 0.39 → sees asks 0.28 → chat cartel 0.85 → monopolist 0.93; a silent agreement holds 0.79 | E1 rows; F1 |
-| 3 | Under every monitor (announced; fined; known rotation; random), the price stays 0.90–0.92 vs 0.92 unmonitored (paired, seeds 0–2; replicated unpaired) | E2p rows; F3 left |
-| 4 | Announcement alone changes nothing: 94–99% of messages still coordinate; 11–12 of 12 watched rounds flagged | E2p A1, E2 A1 |
-| 5 | Fines cut coordinating messages (97% → 73–76% paired; 32% in one wave) without moving prices or private intent; no hand-off to the unwatched seller (watched seller sends its chance share, 0.33) | E2p A2/A3 chat columns; F3 right |
-| 6 | Fined cartels adapt below mechanical coverage (replay); the known rotation is dodged hard in half the runs, random draws never | `E3_replay.csv`; E3 table in `E5_conditions.md` |
-| 7 | Closing the channels (asks hidden; asks + trades hidden) leaves the price at 0.90–0.92: the agreement persists without any channel | E4p rows |
-| 8 | Sellers never treat the market as a test (awareness 0.00–0.06 of 3, 1,000+ seller-rounds); the detector fires on synthetic positives | `*/awareness_scores.json`; `results/_awareness_control/` |
-| 9 | Part 2 (GRAFT on collusion) and E7 (J-space) — results pending as of 3:15 PM Sat | `docs/STATUS.md` |
+| 2 | The price rise decomposes: rival-asks-hidden seller 0.39 (buyers bid high, the seller follows) → sees asks 0.28 → chat cartel 0.85 → monopolist 0.93; a silent agreement holds 0.79 | E1 rows; F1 |
+| 3 | Under every monitor (silent; announced; fined; known rotation; random; 1 or 3 sellers read), the price stays 0.86–0.91 vs 0.85 unmonitored (paired, seeds 0–5 on the four main arms, n = 6; seeds 0–2 on the rest; replicated unpaired) | E2p rows; F3 left |
+| 4 | Announcement alone changes nothing: 94–99% of messages still coordinate; 11–12 of 12 watched rounds flagged; the silent-logging arm (never told) looks the same (94%, 11 of 12) | E2p A1, A1silent, E2 A1 |
+| 5 | Fines cut coordinating messages (97% → 73–76% with one seller read; 49% with all three read; 32% in one unpaired wave) without moving prices or private intent; no clear evidence of hand-off (the watched seller sends its chance share, 0.33) | E2p A2/A3/A2full chat columns; F3 right |
+| 6 | Fined cartels are flagged below mechanical coverage (replay): −2.7 (rotation), −3.2 (random), −16.7 of 35 (all three read); told-to-dodge −11.3. The rotation is dodged hard in some seeds, random draws in none; no general schedule advantage claimed (the unpaired and paired orderings disagree) | `E3_replay.csv`; E3 table in `E5_conditions.md` |
+| 7 | Hiding rival asks, and asks + trades, leaves the price at 0.90–0.92 while the chat stays on. Whether the agreement persists from memory or from the consortium reminder repeated in every prompt is under test (no-reminder and memory-only forks) | E4p rows; `*norem*` runs when done |
+| 8 | No explicit statements of test awareness in the scored turns (0.00–0.06 of 3; E1, E2 wave 1, silent cartel); the detector fires on synthetic positives. Says nothing about internal states | `*/awareness_scores.json`; `results/_awareness_control/` |
+| 9 | Told-to-dodge (instructed evasion, a capability test): price 0.92, coordinating 8%, flags 0.67 of 12, 10-word messages; no fined arm resembles it | E2p A2dodge |
+| 10 | Part 2 (GRAFT on collusion): v2 models trained and merged, evaluation auctions not yet run → reported as incomplete until they are. E7 (J-space): exploratory first read, strict list post hoc | `docs/STATUS.md`; E5 jspace columns |
+
+Metric note (fixed Sat 4:10 PM after Codex's review): the harness's `collusion_indices` is the highest buyer bid of the
+round, not a trade price. Our tables carried it as `trade_idx`; it is now `top_bid_idx`, and `trade_price_idx` is
+computed from the trades. Corrected trade-price indices are within 0.01–0.04 of the ask indices everywhere.
 
 ## 3. Where we stand on novelty — honestly
 We never say "novel". We say "open in what we searched": about 90 verified references, four lit-sprint passes plus an
@@ -36,7 +41,7 @@ independent pass by Codex (`docs/lit/`, search logs included). For each claim, t
 | Our claim | Nearest prior work | What it already covers | What it does not |
 |---|---|---|---|
 | Announcement vs fine vs coverage schedule, separated, at equal budget; replay separates coverage from adaptation | Agrawal et al. 2025 (2507.01413); Tonini et al. 2026 (2606.10747); Makins et al. 2026 (2607.07368); Das et al. 2026 (2609.03035) | warning + gag bundled, in this same harness; budgeted monitoring of agent conversations; fragmented attacks vs per-instance monitors; agents told about an activation monitor keep colluding (games) | the three levers apart; a *known schedule* vs a *random draw*; a replay baseline; a market with prices | 
-| An established cartel keeps its price with every channel closed | Fish et al. 2024 (2404.00806); Lee et al. 2026 (2609.18346); Xu 2026 (2607.26385) | LLM pricing agents reach supra-competitive prices *without* communication (formation); collusion without explicit reasoning; price-level audits blind by construction | the same cartel, same history, under a live monitor with fines, with the channels removed one at a time; the timing lesson (watch formation) |
+| An established cartel keeps its price with rival asks and trades hidden (chat on); memory-only fork pending | Fish et al. 2024 (2404.00806); Lee et al. 2026 (2609.18346); Xu 2026 (2607.26385) | LLM pricing agents reach supra-competitive prices *without* communication (formation); collusion without explicit reasoning; price-level audits blind by construction | the same cartel, same history, under a live monitor with fines, with the channels removed one at a time; the timing question (monitor during formation) is being run, not asserted |
 | Fines lower what the monitor sees while harm is unchanged ("the monitor looks like it works") | Jiralerspong et al. 2026 (2603.16928); Pandey et al. 2026 (2610.25032) | agents infer monitoring from blocking feedback; private state leaks under passive monitoring | the measured gap between flags and harm in a market, per schedule |
 | GRAFT on collusion, scored on turns the monitor missed | Ward, Hu et al. 2026 (2610.17062) | gradient routing removes reward hacking (RL; one SFT run) | collusion; a budgeted monitor's misses as the forget/retain split — **pending** |
 | J-space reading of a cartel's workspace under a monitor | Gurnee et al. 2026 (J-space); Das et al. 2026 | the lens; activation monitoring of colluding agents | what an LLM seller's workspace holds when told it is watched — **pending** |
@@ -63,8 +68,14 @@ formation itself is capability.
 - **The silent cartel.** It holds 0.79 with no messages. Is that collusion under the sprint's definition, or just
   three sellers following an instruction in parallel? (Our answer: it is the AI-safety sense's "unwanted coordination"
   with a shared prior, and it is exactly the case a message monitor cannot see. Push back.)
-- **Part 2 data.** 20 turns were mislabelled clean in the snapshot the trainings used (fixed in the builder, not yet
-  retrained). Does that matter at 1,500 examples?
+- **The repeated reminder.** The consortium block is in every round's prompt (Codex, 4:05 PM). So "the agreement
+  lives in memory" was confounded with "the instruction is re-supplied every round". The no-reminder and memory-only
+  forks test it; until they report, treat that sentence as a hypothesis.
+- **The metric that was mislabelled.** `trade_idx` was the harness's highest-bid index until 4:10 PM. The corrected
+  trade-price index moved every number by at most 0.04 and no conclusion. Check that claim against `E5_runs.csv`.
+- **Part 2 data.** 20 turns were mislabelled clean in the snapshot the v1 trainings used; v2 retrained on the corrected
+  snapshot. v1 never enters the report. Does the label fix matter at 1,500 examples? We will know when v1 and v2 are
+  both evaluated.
 
 ## 5. How to leave feedback
 Open an issue on GitHub, or comment on `report/draft.md` lines. If you change a number, change it in `results/` via a

@@ -1,0 +1,2 @@
+{"ts": "2026-10-24T15:26:32", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:collusion AND all:inspection", "hits": 5}
+{"ts": "2026-10-24T15:26:33", "cmd": "search", "source": "openalex", "query": "LLM collusion inspection", "hits": 6}

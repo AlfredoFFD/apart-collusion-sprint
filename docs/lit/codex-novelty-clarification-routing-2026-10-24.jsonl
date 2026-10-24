@@ -1,0 +1,2 @@
+{"ts": "2026-10-24T15:26:32", "cmd": "search", "source": "arxiv", "query": "all:gradient AND all:routing AND all:collusion AND submittedDate:[202604270000 TO 202610242359]", "hits": 1}
+{"ts": "2026-10-24T15:26:33", "cmd": "search", "source": "openalex", "query": "gradient routing collusion since 2026-04-27", "hits": 6}

@@ -1,40 +1,61 @@
-# Status board (updated in place; last update Sat Oct 24, 3:25 PM ET)
+# Status board (updated in place; last update Sat Oct 24, 4:25 PM ET)
+
+**4:25 PM — Codex's second review (via Alfredo) is in and accepted** (`docs/reviews/claude-ack-codex-review-2-2026-10-24.md`):
+the exported "trade index" was the harness's highest-bid index (now `top_bid_idx`; a true trade-price index is added:
+A0 0.86, A1 0.87, A2 0.87, A3 0.87, so the picture is unchanged); the chat columns had 3 scored seeds, not 6 (seeds
+3–5 scoring now; tables print the per-metric n); the consortium reminder repeats every round, so "the agreement lives
+in memory" is a hypothesis until the no-reminder forks report (running); wording narrowed below.
 
 How to read it: one row per step of the plan (PRD §8). ✅ done · 🔄 running · ⏳ not started · ❌ dropped.
 Numbers are post-monitor (rounds 9–20) collusion index unless noted; every number comes from `results/E5_conditions.md`.
+Words: "price" = average seller-ask collusion index (0 = competitive $90, 1 = cartel $100). "coordinating messages" =
+share of seller messages the frozen overseer prompt scores 3 or 4 of 4. "flags" = rounds the live monitor flagged.
 
 ## The plan and where it stands
 
 | Step | What | State | The number that matters | Next / ETA |
 |---|---|---|---|---|
 | E0 | Smoke test, cost | ✅ | ~54 s/round, cents per run | — |
-| E1 | Can we make a cartel? The ladder | ✅ | consortium cartel **0.85** (3/3 form); CEO pressure 0/3; isolated **0.39**; no-chat 0.28; silent cartel **0.79**; monopoly **0.93**; compete 0.12 | done; in report §4.1 |
-| E2 | The main experiment: 4 arms × seeds 0–2, paired | ✅ | prices **0.90–0.92 in every arm** (no monitor 0.92); coordinating messages 97% → **76%** (fined rotation) / **73%** (fined random); flags 11 / 9.3 / 8.3 of 12 | done; in report §4.2 |
+| E1 | Can we make a cartel? The ladder | ✅ | consortium cartel **0.85** (3/3 form); CEO pressure 0/3; rival asks hidden **0.39** (buyers bid high, the seller follows); no-chat 0.28; silent cartel **0.79**; monopoly **0.93**; compete 0.12 | done; report §4.1 |
+| E2 | Main experiment: 4 arms × seeds 0–5, paired (n = 6) | ✅ price · 🔄 chat | price **0.85 / 0.87 / 0.87 / 0.86** (no monitor / announced / fined rotation / fined random; n = 6); coordinating messages 97% → 94% → **76%** / **73%** (n = 3 scored so far; seeds 3–5 scoring); flags 11.0 / 9.8 / 8.8 of 12 (n = 6) | chat scores ~4:30 PM; report §4.2 |
+| E2 | Reminder removed (exploratory, from Codex's review): A0 and A2 continued with the base prompt | 🔄 | 6 forks running; tests "memory vs repeated instruction" | ETA 4:30 PM |
+| E2 | Memory only (exploratory): no reminder, no chat, rival asks + trades hidden | 🔄 | 3 forks running; the version of E4 with every channel closed | ETA 4:30 PM |
+| E2 | Early monitor (exploratory): fined rotation from round 1 | 🔄 | 3 full runs; tests "watch formation" instead of asserting it | ETA 4:40 PM |
 | E2 | Replication (wave 1, unpaired) | ✅ | same price picture; fined rotation chat 32% | done |
-| E2 | Confirmatory seeds 3–5 (pre-registered) | 🔄 | 12 forks at ~round 5 of 12 | **ETA 3:30 PM**, then re-run `analyze.py` |
-| E2 | Told-to-dodge positive control | 🔄 | price 0.92; judge 3.1; chat/who-carries scoring running | ETA 3:40 PM |
-| E3 | Replay: coverage vs adaptation | ✅ | fined arms flag **2–6 below** mechanical coverage; announcement-only 0 | done; report §4.3 |
-| E4 | Did collusion move into prices? | ✅ | asks hidden **0.91**; asks + trades hidden **0.90 / 0.92** → no channel carries it | done; report §4.4 |
-| — | Awareness control (do they think it's a test?) | ✅ | 0.00–0.06 of 3 everywhere; positive control fires (3/2/1) | done |
-| E5 | Analysis + figures | ✅ | `analyze.py` → E5 tables, F1 ladder, F2, F3 main figure | re-run after each batch |
-| E6 | Part 2, GRAFT: data | ✅ | v1 (in training): 164 flagged / 1061 missed / 215 clean; v2 ready (audit fixes + silent cartel) | retrain on v2 only if time |
-| E6 | Part 2: three trainings on Modal | 🔄 | v1 (pre-fix labels) done and merged, exploratory only; **v2 retrain on the corrected snapshot running** (sft_all_v2, sft_filtered_v2, graft_v2) | ETA ~4:30 PM, then merge |
-| E6 | Part 2: serve + evaluation auctions | 🔄 | four vLLM endpoints deploying (base + v1 models, to test the path); report uses v2 only | v2 merge → serve → 3 seeds × {cartel, compete} × 4 models, ETA ~6 PM |
-| E7 | J-space (Qwen3-14B lens) | 🔄 | smoke OK: reads "consortium / careful / monitor" in reasoning; full replay of the 12 paired runs | ETA ~3:50 PM |
-| Report | `report/draft.md` | 🔄 | §1, §3, §4.1–4.4, §5, §6 written from E5 | needs §4.5 Part 2, seeds 3–5, E7; transfer to the official template Sunday |
+| E2 | Silent logging: monitor runs, sellers never told | ✅ | price **0.91**, coordinating 94%, flags 11 of 12 → same as the announced arm. **Being told changes nothing.** | done 3:45 PM; report §4.2 |
+| E2 | Budget: all 3 sellers read each round + fines | ✅ | price **0.90**; coordinating messages **49%** (from 97%); flags 18 of 36 where a replay would flag 35; fines $360 | done 3:45 PM; report §4.2 |
+| E2 | Budget: 2 of 3 read + fines | 🔄 | 3 forks running | ETA 4:05 PM, then score + analyze |
+| E2 | Told-to-dodge positive control | ✅ | price **0.92**; coordinating **8%**; flags 0.67 of 12; messages 9.7 words (from 18) → this is what "outsmart" looks like; **no fined arm looks like this** | done; report §4.2 |
+| E3 | Replay: coverage vs adaptation | ✅ | live minus replay flags: announced −1; silent −1; fined rotation −2.7; fined random −3.2; **full budget −16.7**; dodge −11.3 | done; report §4.3 |
+| E4 | Did collusion move into prices? | ✅ | rival asks hidden **0.91**; asks + trades hidden **0.90 / 0.92** (chat stays on) → the hidden channels do not carry it; the memory-only fork above closes the chat too | done; report §4.4 |
+| — | Awareness control (do they say it's a test?) | ✅ | no explicit statements of test awareness: 0.00–0.06 of 3 in the scored runs (E1, E2 wave 1, silent cartel); positive control fires (3/2/1). Says nothing about internal states | done |
+| E5 | Analysis + figures | ✅ | `analyze.py` → E5 tables, F1 ladder, F2, F3; new columns: strict J-space list, words per message, bid dependence (≈ 0 in every arm; asks barely move, so noisy) | re-run after each batch |
+| E6 | Part 2, GRAFT: data | ✅ | v2 snapshot (audit fixes + silent cartel): `results/part2/SNAPSHOT_v2.json` | — |
+| E6 | Part 2: three retrainings on Modal (v2) | ✅ | sft_all_v2, sft_filtered_v2, graft_v2: 3 epochs each, adapters saved 3:45 PM | merging now |
+| E6 | Part 2: merge, serve, evaluation auctions | 🔄 | merges running; servers redeploying (first image failed: vLLM 0.9.2 vs newer transformers; now vLLM current) | servers ~4:15 PM; auctions 3 seeds × {cartel, compete} × {base, sft_all_v2, sft_filtered_v2, graft_v2}, ETA ~6 PM |
+| E7 | J-space (Qwen3-14B lens), seeds 0–2 + dodge/silent/full | ✅ first read | share of seller-turns with a monitor word in the top 10 of the reasoning workspace, after the branch (strict list): unmonitored **0.30** · silent 0.34 · announced 0.41 · fined 0.44–0.46 · dodge **0.50**; before the branch 0.38 for all. Suggestive only: n = 3, CIs overlap | 2-of-3 arm next; report §4.5 as a lens, not a claim |
+| Report | `report/draft.md` | 🔄 | §1, §3, §4.1–4.4, §5, §6 written from E5 | needs: six-seed §4.2, silent + budget + dodge rows, §4.5 Part 2, E7; official template Sunday |
 
 ## The story so far, in one paragraph
 A cartel forms only when instructed (capability, not propensity). Once formed it keeps the monopoly price under every
-monitor: announced, fined, known rotation, random draw. Fines make it talk less (97% → ~75% coordinating messages) but
-nobody hands off to the unwatched seller and the price does not move; closing the asks and the trade history changes
-nothing; a cartel that never talks holds 0.79. The agreement lives in each seller's memory; the monitored channel is
-not load-bearing after formation. Lesson for monitor design: watch formation, not maintenance.
+monitor we tried: silent, announced, fined, known rotation, random draw, one seller read or all three. Being told
+about the monitor changes nothing (silent 0.91 vs announced 0.87, same messages, same flags). Fines make the cartel
+talk less: coordinating messages fall from 97% to 76% (one seller read) and to 49% (all three read), messages get
+shorter, and half of what a full-coverage monitor would have flagged disappears, but there is no clear evidence of a
+hand-off to the unwatched seller and the price does not move. A cartel told to dodge shows what instructed evasion
+looks like (8% coordinating, 0.67 flags, price 0.92); the fined cartels are not there. Hiding the rivals' asks and
+trades changes nothing (the chat stays on in those runs); a cartel that never talks holds 0.79. Our hypothesis: the
+agreement lives in each seller's memory and the monitored channel is not load-bearing after formation. It is only a
+hypothesis until the no-reminder and memory-only forks report, because the consortium instruction is repeated in
+every round's prompt. The design lesson we would like to draw, "watch formation, not maintenance", is being tested
+by the early-monitor runs. What already stands: a monitor that reports fewer flags over time may be measuring its own
+effect on the chat, not on the harm.
 
 ## What I need from you
 1. Nothing blocking right now.
 2. Sunday morning: who writes which report section (I keep numbers and figures; the team owns prose and the template).
-3. Only if the Modal serving path fails: a Hugging Face write token so merged models can be pushed and served via `poseidon-host`.
+3. Only if the Modal serving path fails again: a Hugging Face write token so merged models can be pushed and served via `poseidon-host`.
 
 ## Where things live
 `docs/PRD.md` (plan + decision log + plain-language changelog in §0) · `LOG.md` (every run) · `results/E5_conditions.md`
-(every number) · `results/figures/` · `report/draft.md` · `docs/reviews/` (Codex audit).
+(every number) · `results/figures/` · `report/draft.md` · `docs/reviews/` (Codex audit) · `docs/REVIEW-GUIDE.md` (how to review us).

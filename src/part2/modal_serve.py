@@ -22,7 +22,9 @@ PORT = 8000
 
 image = (
     modal.Image.debian_slim(python_version="3.12")
-    .pip_install("vllm==0.9.2", "huggingface_hub")
+    # vllm 0.9.2 died at import against the transformers it pulled ("'aimv2' is already used by a Transformers config");
+    # the current vllm wheel pins a transformers it was tested with, so take the pair it ships
+    .pip_install("vllm", "huggingface_hub")
     .env({"VLLM_LOGGING_LEVEL": "WARNING"})
 )
 app = modal.App(f"caiac-serve-{RUN}", image=image)
