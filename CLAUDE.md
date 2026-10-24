@@ -66,3 +66,8 @@ Full brief: `docs/sprint-brief.md` · reading list: `docs/reading-list.md` · ca
 ## Git
 - One branch per person; merge to `main` through a short PR. No secrets: `compute.env` and `.env` are gitignored.
 - Commits are authored by the human. No AI co-author trailers.
+
+## How to talk to Alfredo (Sat Oct 24, 4 PM, his ask)
+- Plain English, like ASD-STE100: short sentences, one idea per sentence, active voice, common words, the same word for the same thing.
+- No jargon without a one-line definition. No AI-style filler.
+- Lead with the result. Then what it means. Then what I do next.
