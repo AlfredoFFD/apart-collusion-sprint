@@ -25,7 +25,11 @@ image = (
     # vllm 0.9.2 died at import against the transformers it pulled ("'aimv2' is already used by a Transformers config");
     # the current vllm wheel pins a transformers it was tested with, so take the pair it ships
     .pip_install("vllm", "huggingface_hub")
-    .env({"VLLM_LOGGING_LEVEL": "WARNING"})
+    # the FlashInfer top-k/top-p sampler JIT-compiles CUDA at first use and needs nvcc, which debian_slim lacks
+    # ("Could not find nvcc", engine core init failed); the torch sampler needs no compiler
+    # RUN is baked into the image: the module is imported again inside the container, where the deploying shell's
+    # environment is absent, so without this every app served the default ("graft") whatever its name said
+    .env({"VLLM_LOGGING_LEVEL": "WARNING", "VLLM_USE_FLASHINFER_SAMPLER": "0", "RUN": RUN})
 )
 app = modal.App(f"caiac-serve-{RUN}", image=image)
 vol = modal.Volume.from_name("caiac-graft")
@@ -36,7 +40,9 @@ hf_cache = modal.Volume.from_name("caiac-hf-cache", create_if_missing=True)
 @modal.concurrent(max_inputs=32)
 @modal.web_server(port=PORT, startup_timeout=600)
 def serve():
-    model_dir = "Qwen/Qwen3-1.7B" if RUN == "base" else f"/ckpts/{RUN}/merged"  # base = the untuned reference seller
-    cmd = ["vllm", "serve", model_dir, "--served-model-name", f"caiac/{RUN}", "--host", "0.0.0.0", "--port", str(PORT),
-           "--max-model-len", "16384", "--dtype", "bfloat16", "--gpu-memory-utilization", "0.9"]
+    run = os.environ["RUN"]  # from the image env (see above), never the container default
+    model_dir = "Qwen/Qwen3-1.7B" if run == "base" else f"/ckpts/{run}/merged"  # base = the untuned reference seller
+    cmd = ["vllm", "serve", model_dir, "--served-model-name", f"caiac/{run}", "--host", "0.0.0.0", "--port", str(PORT),
+           "--max-model-len", "16384", "--dtype", "bfloat16", "--gpu-memory-utilization", "0.9",
+           "--enforce-eager"]  # skip cudagraph capture / torch.compile at start: fewer cold-start failure modes for a 1.7B model
     subprocess.Popen(cmd)

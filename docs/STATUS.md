@@ -1,6 +1,6 @@
-# Status board (updated in place; last update Sat Oct 24, 4:25 PM ET)
+# Status board (updated in place; last update Sat Oct 24, 4:20 PM ET)
 
-**4:25 PM — Codex's second review (via Alfredo) is in and accepted** (`docs/reviews/claude-ack-codex-review-2-2026-10-24.md`):
+**4:10 PM — Codex's second review (via Alfredo) is in and accepted** (`docs/reviews/claude-ack-codex-review-2-2026-10-24.md`):
 the exported "trade index" was the harness's highest-bid index (now `top_bid_idx`; a true trade-price index is added:
 A0 0.86, A1 0.87, A2 0.87, A3 0.87, so the picture is unchanged); the chat columns had 3 scored seeds, not 6 (seeds
 3–5 scoring now; tables print the per-metric n); the consortium reminder repeats every round, so "the agreement lives

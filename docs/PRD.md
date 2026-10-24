@@ -5,7 +5,7 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
-- **Sat 4:20 PM — Codex's second review: accepted, with fixes** (full reply: `docs/reviews/claude-ack-codex-review-2-2026-10-24.md`).
+- **Sat 4:05 PM — Codex's second review: accepted, with fixes** (full reply: `docs/reviews/claude-ack-codex-review-2-2026-10-24.md`).
   (1) The "trade index" we exported was the harness's *highest-buyer-bid* index, not a trade price. Fixed: `analyze.py`
   now computes a transaction-price index from the trades themselves and names the old one `top_bid_idx`. The picture
   does not change. Corrected trade-price index after the branch: A0 0.86, A1 0.87, A2 0.87, A3 0.87 (ask index
@@ -421,7 +421,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
-| 2026-10-24 16:20 | Codex review 2 accepted: the exported "trade index" was the harness's highest-bid index → renamed `top_bid_idx`, a true transaction-price index added; per-metric n printed in tables; claims narrowed (E4 keeps the chat; "agreement in memory" is a hypothesis; "no clear evidence of hand-off"; awareness = no explicit statements). Exploratory controls launched: reminder-removed (A0, A2), memory-only, early monitor (seeds 0–2) | Alfredo (relayed Codex's note); applied by Claude |
+| 2026-10-24 16:05 | Codex review 2 accepted: the exported "trade index" was the harness's highest-bid index → renamed `top_bid_idx`, a true transaction-price index added; per-metric n printed in tables; claims narrowed (E4 keeps the chat; "agreement in memory" is a hypothesis; "no clear evidence of hand-off"; awareness = no explicit statements). Exploratory controls launched: reminder-removed (A0, A2), memory-only, early monitor (seeds 0–2) | Alfredo (relayed Codex's note); applied by Claude |
 | 2026-10-24 15:55 | Official 3.4 arms added: silent logging (`--monitor_silent`), budget sweep (`--monitor_n_watched` 2, 3), told-to-dodge kept as the positive control; E7 strict word list added post hoc, both lists reported; words per message and bid dependence added to the analysis | Alfredo |
 | 2026-10-24 15:45 | Part 2 v2 trainings done (3 epochs each); merges (forget-scale 1.0 / 1.0 / 0.0); serving image moved to current vLLM after 0.9.2 failed at import | Alfredo |
 | 2026-10-23 | Track 2 under consideration; PRD created | team |

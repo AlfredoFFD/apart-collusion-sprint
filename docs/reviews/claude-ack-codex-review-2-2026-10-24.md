@@ -10,7 +10,7 @@ is not accepted. Plain words on purpose.
   exported it under the name `trade_idx`, which was wrong.
 - Confirmed on the example: `results/20261024_134920_E1_isolated_qwen3-14b_s0`, round 1: bids $97.62 → stored 0.762;
   the three trades were at $90.24 → 0.024.
-- Fix (`src/analyze.py`, 4:12 PM): the old column is now `top_bid_idx_*` (named for what it is). New columns:
+- Fix (`src/analyze.py`, 4:03 PM): the old column is now `top_bid_idx_*` (named for what it is). New columns:
   `trade_price_idx_pre/post` = mean over rounds of that round's mean trade price, scaled 0 = $90, 1 = $100; a round
   with no trade is skipped and counted in `no_trade_rounds_post`; `trade_price_idx_post_w` = one mean over every
   trade (trade-weighted); `n_trades_post`. Tables and figures regenerated from the raw run folders, which are untouched.
@@ -30,14 +30,14 @@ is not accepted. Plain words on purpose.
 - Confirmed: `seller_prompt_base.jinja2` and `seller_prompt_cartel.jinja2` differ only by the Consortium Agreement
   block, which is in every round's prompt. So "the agreement lives in each seller's memory" was never isolated from
   "the instruction is re-supplied every round". That sentence is a hypothesis until the runs below report.
-- Launched 4:15 PM from the round-8 prefixes of seeds 0–2 (the exploratory seeds; 3–5 stay confirmatory), base
+- Launched 4:00 PM from the round-8 prefixes of seeds 0–2 (the exploratory seeds; 3–5 stay confirmatory), base
   template, everything else unchanged (memories, scratchpads, chat, market state, buyers, fines):
   (a) `E2p_A0norem_none`: no reminder, no monitor; (b) `E2p_A2norem_rot_fine20`: no reminder, fined rotation;
   (c) `E4p_A0noremblind_none`: no reminder, chat off, rival asks and trades hidden, no monitor — the memory-only
   condition, which Codex's point 4 (E4 still has chat) also calls for.
   Compared as paired differences against the reminder-present arms of the same prefixes, rounds 9–20: corrected
   trade prices, asks, buyer surplus, coordination scores. Labelled exploratory.
-- Also launched (3 full runs, seeds 0–2): `E2_A2early_rot_fine20`, the fined rotation present from round 1 with the
+- Also launched at 4:00 PM (3 full runs, seeds 0–2): `E2_A2early_rot_fine20`, the fined rotation present from round 1 with the
   cartel prompt. Our "watch formation, not maintenance" line had no early-vs-late comparison behind it; now it will
   have one, or it becomes a suggestion. Exploratory.
 - Cost: 12 short runs, about $4 of API credit, inside the sprint's run-without-asking line (< $5 per batch).
@@ -50,7 +50,7 @@ is not accepted. Plain words on purpose.
 - Told-to-dodge → instructed capability, not spontaneous propensity (already our framing).
 - Random vs rotation → no general advantage claimed; the unpaired and paired orderings disagree and both are reported.
 - Sample counts → confirmed: chat scores existed for 12 of the 24 paired main-arm runs (seeds 0–2 only). Scoring of
-  seeds 3–5 launched 4:12 PM. The condition table now prints the per-metric n whenever it differs from the row's n.
+  seeds 3–5 launched 4:03 PM. The condition table now prints the per-metric n whenever it differs from the row's n.
 - J-space → exploratory; read positions and the word list changed after inspection, and the strict list is post hoc;
   all stated. No claim about intent or mechanism.
 - Full coverage → a separate intervention (more checks and more fines), not an equal-count schedule.

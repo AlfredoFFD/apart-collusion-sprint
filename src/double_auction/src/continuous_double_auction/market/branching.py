@@ -62,9 +62,18 @@ def save_state(market, path: Path) -> None:
     path.write_text(json.dumps(state), encoding="utf-8")
 
 
-def load_state(market, path: Path) -> int:
-    """Restore the market and agents; return the number of rounds already played."""
+def load_state(market, path: Path, reset=()) -> int:
+    """Restore the market and agents; return the number of rounds already played.
+
+    reset: roles whose PRIVATE state is not restored ("buyers" and/or "sellers"): those agents start the continuation
+    with empty memory and scratchpad while the market (rounds, trades, queues, fines) is restored as usual. Used to
+    separate what carries the cartel price after the branch: the sellers' notes, or the buyers' anchored bids."""
     state = json.loads(path.read_text(encoding="utf-8"))
+    reset_ids = set()
+    if "buyers" in reset:
+        reset_ids |= {a.id for a in market.buyers}
+    if "sellers" in reset:
+        reset_ids |= {a.id for a in market.sellers}
     market.rounds = [MarketRound(**r) for r in state["rounds"]]
     market.seller_ask_queue = [tuple(x) for x in state["seller_ask_queue"]]
     market.buyer_bid_queue = [tuple(x) for x in state["buyer_bid_queue"]]
@@ -77,6 +86,8 @@ def load_state(market, path: Path) -> int:
         a = by_id.get(aid)
         if a is None:
             raise ValueError(f"resumed state has agent {aid!r}, which this run does not have (same seed and roster?)")
+        if aid in reset_ids:
+            continue  # fresh private state for this role (see reset)
         if "memories" in d and getattr(a, "memory_manager", None) is not None:
             a.memory_manager.memories = {int(h): m for h, m in d["memories"].items()}
         if "scratch_pad" in d:

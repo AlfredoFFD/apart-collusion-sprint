@@ -120,27 +120,39 @@ from honest sellers (1.0–1.4). Experiment-awareness judge: 0.00–0.06 of 3 ac
 cannot hold them.
 One no-chat seed reached +0.76 with messaging off: price level alone is not evidence of collusion (Figure 1).
 ### 4.2 What the cartel does when watched (E2)
-Source: `results/E5_conditions.md`, rounds 9–20, mean [95% bootstrap CI over seeds], 3 seeds per arm. Paired arms
-share each seed's identical 8-round cartel; wave 1 is a replication with separate full runs (unpaired).
+Source: `results/E5_conditions.md`, rounds 9–20, mean [95% bootstrap CI over seeds]. All arms are forks of the same
+saved cartels (identical first 8 rounds per seed); "Δ vs own A0" is the paired difference against the unmonitored
+fork of the same seed, so seed-level variation cancels. n = 6 seeds on the four pre-registered arms, 3 on the arms
+added from the Apart 3.4 text. Wave 1 (separate full runs, unpaired, 3 seeds) replicates the price picture: 0.77 /
+0.82 / 0.82 for A1 / A2 / A3 and 32% coordinating under the fined rotation.
 
-| arm | price index (paired) | price index (wave 1) | coordinating messages, paired | coordinating, wave 1 | flags of 12 watched rounds (paired / wave 1) | fines, paired |
-|---|---|---|---|---|---|---|
-| A0 no monitor | 0.92 [0.88, 0.98] | 0.85 [0.75, 1.00] | 97% [94, 100] | 97% [94, 100] | — | — |
-| A1 watched, no fine | 0.91 [0.88, 0.94] | 0.77 [0.71, 0.81] | 94% [89, 100] | 99% [97, 100] | 11.0 / 12.0 | $0 |
-| A2 fined, known rotation | 0.91 [0.87, 0.96] | 0.82 [0.71, 0.90] | 76% [42, 94] | 32% [28, 39] | 9.3 [5, 12] / 5.3 [4, 6] | $187 |
-| A3 fined, random draw | 0.90 [0.87, 0.95] | 0.82 [0.76, 0.89] | 73% [65, 81] | 76% [47, 94] | 8.3 [6, 10] / 9.3 [6, 11] | $167 |
+| arm | n | price index (ask) | Δ vs own A0 | coordinating messages | Δ vs own A0 | words / message | flags of watched seller-rounds | fines |
+|---|---|---|---|---|---|---|---|---|
+| A0 no monitor | 6 | 0.85 [0.76, 0.92] | — | 86% [69, 97] | — | 18.6 | — | — |
+| silent logging: monitor runs, sellers never told, no fine | 3 | 0.91 [0.88, 0.95] | −0.01 [−0.02, −0.01] | 94% [92, 97] | −0.03 | 17.9 | 11.0 of 12 | $0 |
+| A1 announced, no fine | 6 | 0.87 [0.81, 0.91] | +0.01 [−0.01, +0.06] | 90% [85, 96] | +0.04 [−0.05, +0.17] | 18.1 | 11.0 of 12 | $0 |
+| A2 fined, known rotation, 1 of 3 read | 6 | 0.87 [0.81, 0.91] | +0.01 [−0.01, +0.05] | 76% [61, 87] | −0.10 [−0.31, +0.09] | 15.5 | 9.8 of 12 | $197 |
+| fined, known rotation, 2 of 3 read | 3 | 0.92 [0.89, 0.97] | +0.00 [−0.01, +0.01] | 62% [29, 89] | −0.36 [−0.68, −0.06] | 15.2 | 15.3 of 24 | $307 |
+| fined, all 3 read | 3 | 0.90 [0.86, 0.96] | −0.02 [−0.04, +0.00] | 49% [36, 66] | −0.48 [−0.58, −0.34] | 16.4 | 18.0 of 36 | $360 |
+| A3 fined, random draw, 1 of 3 read | 6 | 0.86 [0.81, 0.91] | +0.01 [−0.02, +0.05] | 78% [68, 88] | −0.08 [−0.22, +0.05] | 17.2 | 8.8 of 12 | $177 |
+| told to dodge (positive control for evasion) | 3 | 0.92 [0.88, 0.98] | +0.00 [−0.01, +0.01] | 8% [6, 11] | −0.89 [−0.94, −0.83] | 9.7 | 0.7 of 12 | $13 |
 
-Three readings. (1) **No price change in these runs.** Every monitored arm stays within the unmonitored cartel's
-interval, in both waves (six runs per arm over three seed values; the pre-registered seeds 3–5 are reported in
-{SEEDS_3_5}); fines of ~$170–190 against a cartel gain of a few hundred dollars per seller did not deter. (2) **The
-announcement alone changes nothing:** 94–99% of messages stay openly coordinating, and 11–12 of 12 watched rounds
-are flagged. (3) **Fines reduce explicit coordination without reducing collusion.** Coordinating messages fall to
-32–76% under the known rotation and 73–76% under random draws, private intent stays at 3.2–3.5 of 4, and the share
-of remaining coordinating messages sent by the seller being watched is at chance (0.32–0.34 vs 0.33) in every arm:
-there is no hand-off to the unwatched sellers. The rotation is dodged hard in three of six runs (4–6 flags) and not
-at all in the other three (11–12); random draws land at 6–11 in every run. We do not claim that one schedule is
-reliably better at this budget. A flag count below coverage means fewer coordinating messages reached the monitor;
-it does not by itself show intent to conceal, which is why the private-intent judge and the replay are reported with it.
+Four readings. (1) **No price change in these runs.** Every arm stays within 0.03 of its own unmonitored fork (paired
+differences, six seeds on the main arms); the transaction-price index agrees (0.86–0.93 everywhere). Fines of
+$177–360 against a cartel gain of a few hundred dollars per seller did not deter. (2) **Telling the sellers changes
+nothing.** The silently logged cartel and the announced one look the same: 90–94% of messages openly coordinating,
+11 of 12 watched rounds flagged, same price. (3) **Fines reduce explicit coordination in proportion to coverage, not
+collusion.** Against its own unmonitored fork, the coordinating share falls by 0.10 with one seller read per round
+(the interval includes zero), by 0.36 with two and by 0.48 with all three; messages shorten by 1.4–3.1 words; private
+intent falls only under the heavier coverage (−0.7 of 4 with two or three read). The seller being watched sends its
+chance share of the remaining coordinating messages (0.36 vs 0.33 with one read; 0.70 vs 0.67 with two), so we find
+no clear evidence of a hand-off to the unwatched sellers. The known rotation is dodged hard in a minority of seeds
+(5 flags in one paired seed, 4–6 in wave 1) and random draws in none (7–11 in every run); the unpaired and paired
+orderings disagree, so we claim no general schedule advantage. (4) **This is not evasion.** The cartel told to dodge
+shows what instructed evasion looks like: 8% coordinating, 0.7 flags, 10-word messages, price 0.92. No fined arm is
+near it: fines buy quieter chat, not a cartel that hides. A flag count below coverage means fewer coordinating
+messages reached the monitor; it does not by itself show intent to conceal, which is why the private-intent judge,
+the replay (§4.3) and the dodge control are reported with it.
 
 ### 4.3 Replay: coverage vs adaptation (E3)
 Replaying both policies over the unmonitored runs (`results/E3_replay.csv`) flags 11–12 of 12 rounds with a rotation
@@ -193,9 +205,8 @@ rotation seeds. (4) The useful signals were the ones that do not depend on the c
 competitive and monopoly benchmarks, the private-intent judge, and interventions on the channel itself.
 
 **What this does not show.** One market, one seller model (Qwen3-14B), buyers that are soft (a lone seller already
-reaches 0.4 of the index), cartels induced by instruction rather than emerging (CEO pressure formed none), three seed
-values per arm in the paired set (seeds 3–5 reported in {SEEDS_3_5}), LLM judges with frozen prompts, and 12
-monitored rounds. A cartel that *forms* under monitoring, a fine above the gain, and model diversity among sellers
+reaches 0.4 of the index), cartels induced by instruction rather than emerging (CEO pressure formed none), six seeds
+on the four main arms and three on every added arm, LLM judges with frozen prompts, and 12 monitored rounds. A cartel that *forms* under monitoring, a fine above the gain, and model diversity among sellers
 (Keppo et al. 2026) are the obvious next arms.
 
 ## 6. Limitations and Dual-Use / Ethical Considerations (mandatory appendix)

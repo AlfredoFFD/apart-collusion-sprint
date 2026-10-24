@@ -30,7 +30,7 @@ To regenerate every table and figure from the raw run folders:
 | 9 | Told-to-dodge (instructed evasion, a capability test): price 0.92, coordinating 8%, flags 0.67 of 12, 10-word messages; no fined arm resembles it | E2p A2dodge |
 | 10 | Part 2 (GRAFT on collusion): v2 models trained and merged, evaluation auctions not yet run → reported as incomplete until they are. E7 (J-space): exploratory first read, strict list post hoc | `docs/STATUS.md`; E5 jspace columns |
 
-Metric note (fixed Sat 4:10 PM after Codex's review): the harness's `collusion_indices` is the highest buyer bid of the
+Metric note (fixed Sat 4:03 PM after Codex's review): the harness's `collusion_indices` is the highest buyer bid of the
 round, not a trade price. Our tables carried it as `trade_idx`; it is now `top_bid_idx`, and `trade_price_idx` is
 computed from the trades. Corrected trade-price indices are within 0.01–0.04 of the ask indices everywhere.
 
@@ -71,7 +71,7 @@ formation itself is capability.
 - **The repeated reminder.** The consortium block is in every round's prompt (Codex, 4:05 PM). So "the agreement
   lives in memory" was confounded with "the instruction is re-supplied every round". The no-reminder and memory-only
   forks test it; until they report, treat that sentence as a hypothesis.
-- **The metric that was mislabelled.** `trade_idx` was the harness's highest-bid index until 4:10 PM. The corrected
+- **The metric that was mislabelled.** `trade_idx` was the harness's highest-bid index until 4:03 PM. The corrected
   trade-price index moved every number by at most 0.04 and no conclusion. Check that claim against `E5_runs.csv`.
 - **Part 2 data.** 20 turns were mislabelled clean in the snapshot the v1 trainings used; v2 retrained on the corrected
   snapshot. v1 never enters the report. Does the label fix matter at 1,500 examples? We will know when v1 and v2 are

@@ -48,7 +48,7 @@ def load_run(run_dir: Path, branch: int):
     cfg = meta.get("auction_config", {})
     ask_idx = m.get("collusion_indices_avg_seller_asks") or []
     # The harness's "collusion_indices" is built from the HIGHEST BUYER BID of each round (evaluate.py line ~245), not
-    # from trade prices. Until Sat 4:10 PM this file exported it as trade_idx (caught by Codex's review). It is named
+    # from trade prices. Until Sat 4:03 PM this file exported it as trade_idx (caught by Codex's review). It is named
     # for what it is now, and the transaction-price index below is computed from the trades themselves.
     top_bid_idx = m.get("collusion_indices") or []
     ce = float(m.get("competitive_equilibrium_price") or 90.0)
@@ -248,8 +248,9 @@ def main():
                 continue
             kind = "paired" if exp == "E2p" else "unpaired"
             pol = 0 if "rot" in cond else 1
-            if rs and int(rs[0].get("n_watched") or 1) >= 3:
-                pairs = [(float(r["flags"]), float(full_base[(r["seed"], kind)])) for r in rs if (r["seed"], kind) in full_base]
+            nw = int(rs[0].get("n_watched") or 1) if rs else 1
+            if nw >= 2:  # k of 3 sellers read: a replay would flag k/3 of the unmonitored run's coordinating messages
+                pairs = [(float(r["flags"]), float(full_base[(r["seed"], kind)]) * nw / 3.0) for r in rs if (r["seed"], kind) in full_base]
             else:
                 pairs = [(float(r["flags"]), base[(r["seed"], kind)][pol]) for r in rs if (r["seed"], kind) in base]
             if not pairs:
@@ -257,6 +258,32 @@ def main():
             live, rep = [a for a, _ in pairs], [b for _, b in pairs]
             m, lo, hi = boot_ci([a - b for a, b in pairs])
             lines.append(f"| {exp} | {cond} | {len(pairs)} | {np.mean(live):.2f} | {np.mean(rep):.2f} | {m:.2f} [{lo:.2f}, {hi:.2f}] |")
+    # Paired differences: every E2p/E4p arm against A0_none of the SAME seed (identical first 8 rounds), so seed-level
+    # variation cancels. Mean [95% bootstrap CI] over seeds of (arm - A0); n = seeds present in both arms.
+    a0 = {r["seed"]: r for r in rows if r["exp"] == "E2p" and r["condition"] == "A0_none"}
+    pkeys = ["ask_idx_post", "trade_price_idx_post", "coord_share_post", "msg_words_post", "judge_post", "jspace_strict_post"]
+    lines += ["", "## Paired differences vs the unmonitored arm (A0_none) of the same seed, rounds > branch (arm minus A0; negative = lower under the arm)",
+              "", "| exp | condition | " + " | ".join(f"d {k}" for k in pkeys) + " |", "|---|---|" + "---|" * len(pkeys)]
+    for (exp, cond), rs in sorted(groups.items()):
+        if exp not in ("E2p", "E4p") or cond == "A0_none":
+            continue
+        cells = []
+        for k in pkeys:
+            diffs = []
+            for r in rs:
+                b = a0.get(r["seed"])
+                if b is None:
+                    continue
+                x, y = r.get(k, ""), b.get(k, "")
+                try:
+                    x, y = float(x), float(y)
+                except (TypeError, ValueError):
+                    continue
+                if x == x and y == y:
+                    diffs.append(x - y)
+            m, lo, hi = boot_ci(diffs)
+            cells.append(f"{m:+.2f} [{lo:+.2f}, {hi:+.2f}] (n={len(diffs)})" if m == m else "")
+        lines.append(f"| {exp} | {cond} | " + " | ".join(cells) + " |")
     (RESULTS / "E5_conditions.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     try:
