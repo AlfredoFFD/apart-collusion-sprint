@@ -2,6 +2,8 @@
 
 Team: Columbia AI Alignment Club (CAIAC). Members, GitHub handles and roles go in `README.md`.
 Sprint page: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25
+**The plan and every decision: `docs/PRD.md`.** It is the team's single source of truth. Read it first and keep it current: when
+the team decides something, update §16 Decision log.
 Full brief: `docs/sprint-brief.md` · reading list: `docs/reading-list.md` · candidate questions: `docs/ideas.md`.
 
 ## Hard facts
