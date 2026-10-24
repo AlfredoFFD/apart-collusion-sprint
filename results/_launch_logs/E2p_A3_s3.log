@@ -1,4 +1,4 @@
 1 run(s) × 20 rounds × (3 sellers + 3 LLM buyers + judge) ≈ 180 model calls via OpenRouter.
 Rates: https://openrouter.ai/qwen/qwen3-14b
 Resumed 20261024_145258_E2_prefix8_s3 after round 8; playing rounds 9..20
-  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:47<08:45, 47.79s/it] 17%|█▋        | 2/12 [01:39<08:19, 49.96s/it]
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:47<08:45, 47.79s/it] 17%|█▋        | 2/12 [01:39<08:19, 49.96s/it] 25%|██▌       | 3/12 [02:15<06:31, 43.48s/it]

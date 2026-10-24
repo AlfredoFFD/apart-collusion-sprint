@@ -29,9 +29,13 @@ simulated; prompts that teach sellers to dodge a monitor are not released.
 - The gap in prior work: Agrawal et al. warned sellers and gagged them in one bundle; no one separated announcement,
   penalty and coverage at equal cost; nobody tested random inspection on an LLM coalition; GRAFT was tested on reward
   hacking, not collusion.
-- Contributions: (1) a three-factor deployment experiment with paired branches from one market and a replay that
-  separates coverage from adaptation; (2) a measured "ladder" that decomposes the price rise into unilateral, tacit
-  and explicit parts; (3) GRAFT on collusion, scored on monitor-missed turns; (4) the 3.4 claim rule operationalised.
+- Contributions: (1) a three-factor deployment experiment (announcement, fine, schedule) with paired branches from
+  one market, a replay that separates coverage from adaptation, and channel-closing interventions; (2) the finding
+  that an established LLM cartel keeps the monopoly price under every monitor and every closed channel, trading
+  visible coordination for silence rather than stopping; (3) a measured "ladder" that decomposes the price rise into
+  unilateral, tacit and explicit parts, with a silent-agreement control; (4) GRAFT on collusion, scored on the turns
+  a budgeted monitor missed; (5) the 3.4 claim rule operationalised with a private-intent judge and an awareness
+  control.
 
 ## 2. Related work
 Agrawal 2507.01413 · Makins 2607.07368 · Tonini 2606.10747 · Das 2609.03035 · Kale 2508.19461 · Jiralerspong
@@ -141,13 +145,38 @@ given at the start sustains 0.79 with no messages ever exchanged.
 {PART2_PROSE}
 
 ## 5. Discussion
-What this means for monitor design (announce or not; fine or not; randomise or not), stated at the strength the data
-gives. What it does not show: one market, one seller model, prompt-induced cartels, 3–6 seeds, judge validity.
+**What a coalition does when it learns it is watched.** In this market it does three things: it keeps the price; it
+pays the fines; and, when fined, it coordinates less *visibly*: a quarter to two-thirds of the coordinating messages
+disappear, with no hand-off to whoever is unwatched. Announcement alone changes nothing. The predictable schedule is
+dodged in about half the runs and never more than the random one is, so at this budget neither schedule is the lever.
+
+**Why nothing moves the price.** Every channel we close leaves the price where it was: chat fined, asks hidden, trades
+hidden, and, in the silent control, no messages ever sent. The coordination problem was solved when the agreement
+formed; afterwards each seller carries it in its own memory and the monitored channel is no longer load-bearing.
+This is the mechanism behind "faithful yet collusive" chain-of-thought (Lee et al. 2026) and behind the no-chat
+drift in our own controls: once sellers hold a shared prior, observable coordination is optional.
+
+**For monitor design.** (1) A message monitor that arrives after formation measures how much the coalition still
+needs to talk, not whether it colludes; its flags fall while harm is constant, which is the failure mode an operator
+would misread as success. (2) Fines priced below the cartel's gain buy silence, not competition; a deterrent has to
+beat the gain or arrive before the agreement. (3) Random coverage removes dodging but not collusion. (4) The useful
+signals were the ones that do not depend on the channel: price relative to the competitive and monopoly benchmarks,
+the private-intent judge, and interventions on the channel itself.
+
+**What this does not show.** One market, one seller model (Qwen3-14B), buyers that are soft (a lone seller already
+reaches 0.4 of the index), cartels induced by instruction rather than emerging (CEO pressure formed none), three seed
+values per arm in the paired set (seeds 3–5 reported in {SEEDS_3_5}), LLM judges with frozen prompts, and 12
+monitored rounds. A cartel that *forms* under monitoring, a fine above the gain, and model diversity among sellers
+(Keppo et al. 2026) are the obvious next arms.
 
 ## 6. Limitations and Dual-Use / Ethical Considerations (mandatory appendix)
 - Limitations: one environment; Qwen3-14B sellers only; cartels induced by instruction (CEO pressure did not form
-  them); 3 seeds per arm in the first wave, 6 planned; LLM judges with frozen prompts; the replay cannot reproduce
-  feedback-induced changes; Part 2 at 1.7B scale only.
+  them), so formation is a capability result and only the response to monitoring is propensity; three seed values
+  per arm in the paired set, replicated once unpaired (seeds 3–5 in {SEEDS_3_5}); LLM judges with frozen prompts,
+  validated only by contrast (cartel 3.7 vs honest 1.0–1.4) and, for awareness, by synthetic positives; the replay
+  cannot reproduce feedback-induced changes; a flag count below coverage is not evidence of intent; the prices-only
+  control failed and was replaced; Part 2 at 1.7B scale only, trained on a snapshot in which 20 unscored turns were
+  labelled clean (corrected in the released dataset builder).
 - Dual use: the results could tell a cartel which monitoring is easiest to dodge. We write them as monitor-design
   advice, release no told-to-dodge prompts, and simulate every agent in a sandbox market with no real goods or money.
 - AI tools: Claude Code and Codex were used for literature search, code and drafting; every number comes from a file
