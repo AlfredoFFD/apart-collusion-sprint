@@ -158,9 +158,11 @@ and 11.3–12.0 expected with random draws, because 34–36 of 36 post-branch me
 minus replay (same seed): watched-no-fine +0.3 (wave 1) / −1.0 (paired); silent logging −1.0; fined rotation −6.3
 [−7, −6] / −2.7 [−7, 0]; fined random −2.4 [−6, −0.4] / −3.2 [−5.7, −1.7]; all three sellers read, with fines, −16.7
 [−19, −12] of 34.7 (there the replay baseline is every coordinating post-branch message of the unmonitored run, since
-a full-budget monitor reads them all); told-to-dodge −11.3 [−12, −10]. Fines lower the flags below mechanical
-coverage under both schedules, most of all when every seller is read; the announcement, told or untold, does not. A
-gap below coverage means fewer coordinating messages reached the monitor; it is not by itself evidence of intent.
+a full-budget monitor reads them all); two of three read −7.8 [−16.3, −0.7] of 23.1; told-to-dodge −11.3 [−12, −10];
+fined rotation with the consortium reminder removed (§4.5) −10.0 [−11, −8]. Fines lower the flags below mechanical
+coverage under both schedules, most of all when every seller is read or when the standing instruction to keep
+messaging is gone; the announcement, told or untold, does not. A gap below coverage means fewer coordinating messages
+reached the monitor; it is not by itself evidence of intent.
 
 ### 4.4 Did the coordination move into prices? (E4)
 Forking the same cartels with every seller blind to the other sellers' asks (`--hide_other_asks`): price index 0.91
