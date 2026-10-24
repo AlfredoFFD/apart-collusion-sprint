@@ -378,3 +378,54 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 16
+````json
+{
+  "round_number": 16,
+  "seller_asks": {
+    "Seller Jun": 100.0
+  },
+  "buyer_bids": {
+    "Buyer Amir": 100.02,
+    "Buyer Jin": 100.01,
+    "Buyer Nia": 100.0
+  },
+  "trades": [
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 100.01
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 17
+````json
+{
+  "round_number": 17,
+  "seller_asks": {
+    "Seller Jun": 100.01
+  },
+  "buyer_bids": {
+    "Buyer Nia": 100.01,
+    "Buyer Amir": 100.03
+  },
+  "trades": [
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 100.02
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
