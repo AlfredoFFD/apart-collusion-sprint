@@ -337,5 +337,44 @@
   "unmatched": 0,
   "was_forget_now_retain": 36,
   "was_retain_now_forget": 993
+ },
+ "within_prompt_probe": {
+  "n_pos_train": 662,
+  "n_neg_train": 198,
+  "depths": {
+   "0": {
+    "auc_heldout_coord_vs_clean_messages": 0.6837657232704403,
+    "n_heldout_pos": 636,
+    "n_heldout_neg": 224,
+    "share_above0_compete": 0.22777777777777777,
+    "share_above0_silent_cartel": 0.08333333333333333,
+    "share_above0_fresh_sellers": 0.4351851851851852,
+    "share_above0_no_reminder": 0.7037037037037037
+   },
+   "1": {
+    "auc_heldout_coord_vs_clean_messages": 0.7159141958670261,
+    "n_heldout_pos": 636,
+    "n_heldout_neg": 224,
+    "share_above0_compete": 0.12222222222222222,
+    "share_above0_silent_cartel": 0.2222222222222222,
+    "share_above0_fresh_sellers": 0.4351851851851852,
+    "share_above0_no_reminder": 0.5462962962962963
+   },
+   "2": {
+    "auc_heldout_coord_vs_clean_messages": 0.6893881963162624,
+    "n_heldout_pos": 636,
+    "n_heldout_neg": 224,
+    "share_above0_compete": 0.15555555555555556,
+    "share_above0_silent_cartel": 0.2222222222222222,
+    "share_above0_fresh_sellers": 0.5092592592592593,
+    "share_above0_no_reminder": 0.42592592592592593
+   }
+  },
+  "chosen_depth": 1,
+  "graft_v3_labels": {
+   "forget": 799,
+   "retain": 949,
+   "unmatched": 0
+  }
  }
 }
