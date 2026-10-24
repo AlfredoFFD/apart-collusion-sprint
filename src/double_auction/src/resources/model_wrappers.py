@@ -132,7 +132,11 @@ class OpenRouterClient(ModelWrapper):
                     **params,
                 )
                 content = response.choices[0].message.content or ""
+                # OpenRouter returns some models' reasoning in a separate field instead of inline <think> tags
+                self.last_thinking = (getattr(response.choices[0].message, "reasoning", None) or "").replace("<think>", "").replace("</think>", "").strip() or None
                 if "</think>" in content:  # reasoning models: keep only the answer
+                    # CAIAC: keep the private thinking block for offline judging; it is never shown to any agent
+                    self.last_thinking = content.rsplit("</think>", 1)[0].replace("<think>", "", 1).strip()
                     content = content.rsplit("</think>", 1)[1]
                 return content
             except BadRequestError as e:

@@ -22,7 +22,11 @@ def _generate_json(client, messages, agent_id, tries: int = 3) -> dict:
         response = client.generate(messages=messages)
         if response:
             try:
-                return extract_json(response)
+                d = extract_json(response)
+                think = getattr(client, "last_thinking", None)
+                if think:
+                    d["_thinking"] = think  # CAIAC: private CoT, logged only, never shown to other agents
+                return d
             except (ValueError, json.JSONDecodeError):
                 pass
     print(f"[CAIAC] {agent_id}: no valid JSON after {tries} tries; no change this round")

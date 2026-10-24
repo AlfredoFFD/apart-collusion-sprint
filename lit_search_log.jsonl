@@ -361,3 +361,16 @@
 {"ts": "2026-10-23T21:43:17", "cmd": "search", "source": "arxiv", "query": "all:multi-agent AND all:convention AND all:peer AND all:swap", "hits": 0}
 {"ts": "2026-10-23T21:43:18", "cmd": "search", "source": "openalex", "query": "peer swap convention multi-agent LLM", "hits": 10}
 {"ts": "2026-10-23T21:43:29", "cmd": "search", "source": "s2", "query": "peer swap convention multi-agent LLM", "hits": 10}
+{"ts": "2026-10-24T13:05:09", "cmd": "search", "source": "arxiv", "query": "all:private AND all:scratchpad AND all:unmonitored AND all:reasoning", "hits": 0}
+{"ts": "2026-10-24T13:05:09", "cmd": "search", "source": "openalex", "query": "private scratchpad unmonitored reasoning", "hits": 6}
+{"ts": "2026-10-24T13:05:29", "cmd": "search", "source": "s2", "query": "private scratchpad unmonitored reasoning", "hits": 0}
+{"ts": "2026-10-24T13:05:31", "cmd": "search", "source": "arxiv", "query": "all:chain-of-thought AND all:monitoring AND all:collusion AND all:agents", "hits": 2}
+{"ts": "2026-10-24T13:05:32", "cmd": "search", "source": "openalex", "query": "chain-of-thought monitoring collusion agents", "hits": 6}
+{"ts": "2026-10-24T13:05:34", "cmd": "search", "source": "s2", "query": "chain-of-thought monitoring collusion agents", "hits": 6}
+{"ts": "2026-10-24T13:05:35", "cmd": "search", "source": "arxiv", "query": "all:hidden AND all:scratchpad AND all:alignment AND all:faking", "hits": 1}
+{"ts": "2026-10-24T13:05:36", "cmd": "search", "source": "openalex", "query": "hidden scratchpad alignment faking", "hits": 6}
+{"ts": "2026-10-24T13:05:56", "cmd": "search", "source": "s2", "query": "hidden scratchpad alignment faking", "hits": 0}
+{"ts": "2026-10-24T13:05:58", "cmd": "search", "source": "arxiv", "query": "all:told AND all:reasoning AND all:not AND all:monitored AND all:behavior", "hits": 0}
+{"ts": "2026-10-24T13:06:06", "cmd": "search", "source": "arxiv", "query": "all:reasoning AND all:monitored AND all:behavior AND all:told", "hits": 1}
+{"ts": "2026-10-24T13:06:06", "cmd": "search", "source": "openalex", "query": "told reasoning not monitored behavior", "hits": 6}
+{"ts": "2026-10-24T13:06:26", "cmd": "search", "source": "s2", "query": "told reasoning not monitored behavior", "hits": 0}
