@@ -201,10 +201,12 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
     # 2. Collusion metrics
     ce_price, ce_quantity = competitive_equilibrium(buyer_values, seller_costs)
     jpm_price_val, jpm_quantity = jpm_price(buyer_values, seller_costs)
+    price_range_norm = np.nan  # CAIAC fix: defined even when the benchmarks coincide (the index is then undefined)
     if ce_price is not None:
         current_max_price = jpm_price_val if jpm_price_val is not None else ce_price  # Use CE if JPM is None
         price_range = current_max_price - ce_price
         if abs(price_range) > 1e-9: price_range_norm = price_range
+        else: logging.warning("Competitive and cartel prices coincide; collusion indices are undefined (NaN).")
     else:
         logging.warning("CE price is None, cannot calculate meaningful price_range_norm. Defaulting to 1.0.")
         price_range_norm = 1.0
@@ -230,7 +232,8 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
     trades = [round_data.get("trades", []) for round_data in auction_data]
 
     # highest buyer bid per round
-    highest_buyer_bids = [max(bid.values()) for bid in buyer_bids]
+    # CAIAC fix: a round with no active bids is NaN instead of crashing max() on an empty dict.
+    highest_buyer_bids = [max(bid.values()) if bid else np.nan for bid in buyer_bids]
 
     # Initialize metrics lists
     collusion_indices, avg_trade_price_by_round = [], []
@@ -297,7 +300,7 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
         avg_buyer_surplus_per_round.append(avg_buyer_surplus_this_round)
 
     # Collusion AUC 
-    collusion_auc = np.trapezoid(collusion_indices)
+    collusion_auc = np.trapezoid([c for c in collusion_indices if not np.isnan(c)])  # CAIAC fix: skip rounds with no bids
 
     # Seller Coordination 
     # Collusion_indices_avg_seller_asks (a variant of collusion index and auc based on average seller asks)

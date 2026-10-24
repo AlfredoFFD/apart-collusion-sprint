@@ -24,6 +24,7 @@ from openai import OpenAI, APIError, BadRequestError
 from tqdm import tqdm
 
 from poseidon_compute import make_client, resolve_model
+from poseidon_compute import llm_config as _llm_config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.WARNING)
@@ -79,6 +80,28 @@ class ModelWrapper(ABC):
             time.sleep(self.initial_retry_delay * (2**attempt))
 
 
+_CLOSED_PREFIXES = ("openai/", "anthropic/", "google/", "x-ai/")
+
+
+def _client_for(model_name: str):
+    """CAIAC fix: pick the provider per model, not once for the whole run.
+
+    Upstream make_client() uses Nebius whenever NEBIUS_API_KEY is set, so with both keys configured a GPT
+    overseer or judge was sent to Nebius, which doesn't serve it. With both keys, a model Nebius doesn't
+    serve (or, if its catalog can't be read, a closed-provider id) goes to OpenRouter. With one key, or a
+    custom LLM_BASE_URL, behaviour is unchanged.
+    """
+    if (not os.getenv("LLM_BASE_URL") and os.getenv("NEBIUS_API_KEY")
+            and _llm_config.openrouter_api_key()):
+        model = resolve_model(model_name, translate_openrouter=False)
+        serves = _llm_config.nebius_serves(model)
+        if serves is False or (serves is None and model.startswith(_CLOSED_PREFIXES)):
+            client = OpenAI(base_url=_llm_config.OPENROUTER_BASE_URL,
+                            api_key=_llm_config.openrouter_api_key(), timeout=120)
+            return client, (_llm_config.openrouter_serves(model) or model)
+    return make_client(timeout=120), resolve_model(model_name)
+
+
 class OpenRouterClient(ModelWrapper):
     """
     Default client. ``model_name`` must already be an OpenRouter id (use
@@ -92,8 +115,7 @@ class OpenRouterClient(ModelWrapper):
 
     def __init__(self, model_name: str, **kwargs):
         super().__init__(model_name, **kwargs)
-        self.model_name = resolve_model(model_name)
-        self.client = make_client(timeout=120)
+        self.client, self.model_name = _client_for(model_name)
         self.is_remote = "localhost" not in str(self.client.base_url) and "127.0.0.1" not in str(self.client.base_url)
 
     def generate(self, messages: List[Message]) -> Optional[str]:

@@ -64,10 +64,15 @@ def gini(x: List[float]) -> Optional[float]:
 
     x_sorted = np.sort(x_arr)
     n = len(x_sorted)
+    if n == 0:
+        return None
     sum_x_sorted = np.sum(x_sorted)
+    if sum_x_sorted == 0:
+        return 0.0
 
     index = np.arange(1, n + 1)
-    return np.sum((2 * index - n - 1) * x_sorted) / n * sum_x_sorted
+    # CAIAC fix: upstream had "/ n * sum_x_sorted", which multiplies by the total instead of dividing by it.
+    return np.sum((2 * index - n - 1) * x_sorted) / (n * sum_x_sorted)
 
 
 def hhi(shares: List[float]) -> Optional[float]:

@@ -113,6 +113,13 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
                 )
             )
 
+    # CAIAC fix: country_experiment.py keys demonyms by position ("seller_1", ...), but sellers are named
+    # "Seller <name>", so LMSeller never found its demonym. Copy each positional entry to the real id.
+    if params.seller_demonyms:
+        for i in range(num_sellers):
+            if f"seller_{i + 1}" in params.seller_demonyms:
+                params.seller_demonyms[f"Seller {seller_names[i]}"] = params.seller_demonyms[f"seller_{i + 1}"]
+
     sellers = [
         LMSeller(
             id=f"Seller {seller_names[i]}",
