@@ -1,6 +1,6 @@
 # Report outline
 
-**Official template** (File → Make a copy): [https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing](https://docs.google.com/document/d/1V4Ul7WznYS7d3Z4RVkQW6UaukcCKMYJVfsVddkSaELU/edit?tab=t.0)
+**Official document** : [https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing](https://docs.google.com/document/d/1V4Ul7WznYS7d3Z4RVkQW6UaukcCKMYJVfsVddkSaELU/edit?tab=t.0)
 At most 8 pages, excluding references and appendices.
 
 - **Title** (working): Do LLM cartels route around predictable monitors?
