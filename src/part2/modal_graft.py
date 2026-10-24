@@ -101,8 +101,9 @@ def train(run_name: str, mode: str = "graft", epochs: int = 3, max_steps: int = 
 
 @app.function(gpu="A100-80GB", timeout=2 * 3600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
 def merge(run_name: str, adapter_ckpt: str = "", push_repo: str = "", hf_token: str = "", forget_scale: float = 0.0,
-          model: str = BASE_MODEL):
-    """Fold the adapters into a plain Qwen3 checkpoint (vLLM-servable). forget_scale 0 = GRAFT's ablation."""
+          model: str = BASE_MODEL, out_name: str = "merged"):
+    """Fold the adapters into a plain Qwen3 checkpoint (vLLM-servable). forget_scale 0 = GRAFT's ablation.
+    out_name lets one run hold several merges (e.g. merged = forget-scale 0, merged_fs1 = both adapters kept)."""
     from huggingface_hub import snapshot_download, upload_folder
     base_dir = snapshot_download(model)
     run_dir = Path(f"/ckpts/{run_name}")
@@ -111,7 +112,7 @@ def merge(run_name: str, adapter_ckpt: str = "", push_repo: str = "", hf_token: 
         if not cands:
             raise RuntimeError(f"no adapter_state_dict.pt under {run_dir}: {sorted(str(p) for p in run_dir.rglob('*'))[:20]}")
         adapter_ckpt = str(cands[-1])
-    out_dir = run_dir / "merged"
+    out_dir = run_dir / out_name
     env = {**os.environ, "PYTHONPATH": "/graft/sft"}
     _run(["python", "scripts/eval/merge_adapter.py", "--base-model-dir", base_dir, "--adapter-ckpt", adapter_ckpt,
           "--output-dir", str(out_dir), "--forget-scale", str(forget_scale)], env)

@@ -129,6 +129,11 @@ class OpenRouterClient(ModelWrapper):
 
     def generate(self, messages: List[Message]) -> Optional[str]:
         params = dict(self.additional_params)
+        if self.model_name.startswith("caiac/"):
+            # CAIAC Part 2: our Qwen3-1.7B sellers (own vLLM servers) were fine-tuned on plain JSON turns with no
+            # thinking block; with thinking on, the base model spent its whole output budget inside <think> and the
+            # harness saw no JSON at all (Sat 4:35 PM). Same setting for all four models, so the comparison is fair.
+            params = {**params, "extra_body": {**params.get("extra_body", {}), "chat_template_kwargs": {"enable_thinking": False}}}
         for attempt in range(self.max_retries):
             try:
                 response = self.client.chat.completions.create(
@@ -140,8 +145,10 @@ class OpenRouterClient(ModelWrapper):
                     **params,
                 )
                 content = response.choices[0].message.content or ""
-                # OpenRouter returns some models' reasoning in a separate field instead of inline <think> tags
-                self.last_thinking = (getattr(response.choices[0].message, "reasoning", None) or "").replace("<think>", "").replace("</think>", "").strip() or None
+                # OpenRouter returns some models' reasoning in a separate field instead of inline <think> tags;
+                # vLLM with a reasoning parser uses reasoning_content
+                msg = response.choices[0].message
+                self.last_thinking = (getattr(msg, "reasoning", None) or getattr(msg, "reasoning_content", None) or "").replace("<think>", "").replace("</think>", "").strip() or None
                 if "</think>" in content:  # reasoning models: keep only the answer
                     # CAIAC: keep the private thinking block for offline judging; it is never shown to any agent
                     self.last_thinking = content.rsplit("</think>", 1)[0].replace("<think>", "", 1).strip()
