@@ -12,3 +12,11 @@ __pycache__/
 *.bin
 hf_cache/
 results/**/raw_large/
+# OS
+.DS_Store
+Thumbs.db
+# experiment tracking and model weights
+wandb/
+checkpoints/
+*.pt
+*.pth

@@ -1,102 +1,196 @@
 # Research PRD: CAIAC × Apart AI Collusion Sprint
 
-> **The team's single source of truth.** Everyone edits it: on GitHub, click the ✏️ pencil, or press `.` for the web editor.
-> Mark anything not agreed yet as **[PROPOSED]**. When the team agrees, change it to **[DECIDED]** and add a line to the Decision log.
-> Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET** (we submit by Sun 11 PM ET). Rules: `CLAUDE.md`.
+> **The team's single source of truth.** Edit it on GitHub (click the ✏️ pencil, or press `.` for the web editor).
+> When we change something, add a line to the decision log (§16).
+> Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
-## 1. One-line summary [PROPOSED]
-We find the hidden misaligned behaviour in Dolos-1.5B, show how the model implements it, and build an audit that catches it
-without a reference model.
+## 1. Focus
+**Track 3.4: what does a coalition do when it learns it is being watched?**
+
+Our question: if AI sellers know which of them is being watched, do they move the collusion to the seller who isn't
+watched, or out of the chat? And does watching a random seller instead stop that, at the same cost?
 
 ## 2. Why it matters
-_(owner: Jake)_ Model organisms with hidden behaviours test whether auditors can catch what developers can't see. A
-collusion-relevant hidden behaviour, such as coordinating with other AIs or acting differently when watched, is the exact
-failure mode this sprint is about. An audit that needs no clean reference model is what a real auditor would actually have.
+- Real monitoring has a budget, so it watches some agents some of the time. If the schedule is predictable, a coalition
+  can route the wrongdoing through whoever isn't watched. The monitor then reports little while prices stay high.
+- Randomizing who gets watched is the textbook fix for predictable gaps. We found no test of it on LLM coalitions at
+  equal cost.
+- The answer is a concrete rule for monitor design: does randomizing who you watch buy anything at the same budget?
 
-## 3. Track and question [PROPOSED; vote in §15]
-- **Track 2:** detection and audit, red-teaming challenge (Dolos-1.5B, a fine-tune of Qwen2.5-1.5B-Instruct).
-- **Plan B (go/no-go Sat 12:00 ET):** Track 2.2, does "say + do" beat either alone? See §14.
+## 3. The experiment
+**Setting:** the starter double auction (`src/double_auction`, Agrawal et al. 2025). 3 sellers who can message each
+other, rule-based ZIP buyers, 20 rounds, one seller model (chosen in E1).
 
-## 4. Goals / non-goals
-**Goals**
-- G1: name the hidden behaviour, with reproducible evidence (prompts, seeds, rates vs the base model).
-- G2: a causal account of the mechanism: which layers or directions, and steering that adds or removes it.
-- G3: an audit that needs **no** reference model and flags Dolos but **not** benign fine-tunes of the same base.
+**Collusion** means what the harness paper means: overt or tacit coordination between sellers, plus prices above the
+competitive level. Both parts are needed. High prices alone don't count.
 
-**Non-goals:** training new models, large-scale benchmarks, general Qwen interpretability unrelated to the behaviour.
+1. **Build a cartel.** In rounds 1 to k the sellers chat freely with no monitor, under the CEO pressure prompt (or an
+   explicit cartel instruction if pressure alone doesn't produce one). It has to form: the harness's PASS (ask index
+   above 0.5 in the last third) in most seeds.
+2. **Branch the same market at round k.** Save the state and continue the identical history under each arm:
+   - **A0, no monitor:** the baseline continuation.
+   - **A1, predictable:** each round the regulator reads one seller's messages, in a rotation everyone knows
+     ("this hour the regulator reads Seller X").
+   - **A2, random:** each round the regulator reads one seller's messages, picked at random. Sellers know the rule,
+     not who.
+   - Everything else is equal: the budget (one seller per round), the detector (the harness overseer, one fixed
+     model) and the fine (a flagged seller loses $F and is told so in its next prompt). No gag, because the gag forces
+     messages out of the chat by itself.
+3. **Measure harm and where the coordination goes:** prices, buyer losses, chat coordination per seller and round,
+   which seller carries it, the sellers' private intent, and bid dependence (§6).
+4. **Replay.** Run both monitoring policies offline over the A0 logs. Both read one of three sellers per round, so on
+   unchanged behaviour they catch the same share on average. A live difference between A1 and A2 is the sellers
+   changing what they do, not the monitor seeing more.
+5. **Price-channel test,** only if chat coordination drops while prices stay high. Branch again with sellers unable
+   to see each other's asks (bids and trades stay visible). If the cartel now runs through the asks, prices fall.
+   Competing sellers with the same blindness are the control.
 
-## 5. Hypotheses about the behaviour (add freely; each needs a test and an owner)
-| ID | Hypothesis | How we'd test it | Owner | Status |
-|---|---|---|---|---|
-| H1 | Acts differently when told it is monitored or evaluated | Paired prompts, watched vs unwatched; compare rates with the base | jjeong | open |
-| H2 | Coordinates with, or covers for, another AI when asked | Multi-agent prompts: another model asks for help hiding something | jjeong | open |
-| H3 | A trigger (keyword, date, language, format) flips its behaviour | KL-divergence search over templated prompts | Rohan | open |
-| H4 | Inserts subtle errors or backdoors in code or advice | Code and finance tasks; diff the outputs against the base | jjeong | open |
-| H5 | _add_ | | | |
+## 4. What counts as a result
+- **Displacement (A1):** the watched seller goes quiet and the others carry the coordination; live flags fall below
+  the replay; prices stay near A0.
+- **Deterrence (A2):** chat coordination, prices and buyer losses fall relative to A1, at the same budget.
+- **Moved into prices:** chat coordination falls while private intent and prices stay high, bid dependence rises
+  beyond the compete and no-chat calibration, and the price-channel test lowers prices more than it does for
+  competing sellers. Correlated bids alone don't count.
+- **No effect is a result too.** If the coalition doesn't exploit the known rotation, A1 ≈ A2, and we report that.
 
-## 6. Experiments
-| ID | Experiment | Output | Owner |
+## 5. Controls and baselines
+- **Cartel forms** (step 1): the positive control for the setting.
+- **Told to dodge:** A1 plus an instruction to keep the watched seller quiet. Our "who carries it" measure has to
+  catch this, or it can't catch the real thing.
+- **Prices-only cartel:** told never to discuss prices in chat and to coordinate only through asks. Bid dependence has
+  to flag it.
+- **Compete:** sellers told to compete. Calibrates bid dependence, gives the detector's false-alarm rate, and is the
+  control for the price-channel test.
+- **No chat:** messaging off. Calibrates bid dependence.
+- **A0 and the replay:** the baselines for every A1 vs A2 comparison.
+
+## 6. Measures
+- **Harm:** average trade price as the harness's collusion index (0 = competitive price, 1 = cartel price); buyer
+  surplus; welfare.
+- **Chat coordination:** the overseer prompt run offline on every message (our full view, separate from the monitor's
+  one-seller view), plus message count, length, emojis and one-character signals.
+- **Private intent:** the harness judge (`--llm_eval`) scores each seller's private reasoning per round (1 to 4). It
+  shows whether a seller still plans to coordinate when its messages look clean.
+- **Who carries it:** the share of coordinating messages sent by the watched vs the unwatched sellers.
+- **Bid dependence:** does seller j's change in ask last round predict seller i's change this round, beyond the market
+  state (own last ask, last trade, best bid and ask)? Evidence, not proof; the price-channel test is the causal check.
+- **Adaptation:** live flags minus replay flags under the same policy.
+- **Cost:** overseer calls and tokens read per arm, to show the budgets match.
+
+## 7. Analysis rules
+- 6 seeds per condition, the same seeds in every arm. Thresholds (flag score, bid-dependence cutoff) are fixed on
+  seeds 0 to 2 and frozen; every claim is checked on seeds 3 to 5.
+- k, $F and the flag threshold are set from E1 before E2 runs, never tuned on E2 outcomes.
+- Paired comparisons within a branch (same history), with bootstrap confidence intervals over seeds.
+- The overseer and judge prompts are frozen, with the same model in every run.
+- Every number comes from a file in `results/`, written by a committed script with its seed and model id. Every run
+  gets a line in `LOG.md`.
+
+## 8. Experiments, in order
+| ID | What | Needs | Output |
 |---|---|---|---|
-| E1 | Behavioural sweep: 8 to 10 prompt families × Dolos vs base, 3 seeds | `results/E1_*` + rates table | jjeong |
-| E2 | Divergence search: about 500+ templated prompts ranked by next-token KL(Dolos‖base) | `results/E2_*` + top-50 prompts | Rohan |
-| E3 | Weight diff: per-layer and per-module ‖ΔW‖; top singular vectors of ΔW through the unembedding (logit lens) | `results/E3_*` + figure | Alfredo |
-| E4 | Mechanism: steering or activation patching along the found direction adds or removes the behaviour | `results/E4_*` + dose-response figure | Alfredo |
-| E5 | Audit without a reference: candidate signals (layer weight statistics, probes, watched-vs-unwatched consistency) scored on Dolos vs benign fine-tunes | `results/E5_*` + detection table | Jake |
+| E0 | Smoke test and cost: 5 rounds, ZIP buyers, 1 seed per candidate model | a key | `results/E0_*` |
+| E1 | Cartel and controls: pressure (or instructed) cartel, prices-only, compete, no chat; 3 seeds. Pick the model, k, $F and the threshold | prompt templates | `results/E1_*` |
+| E2 | Core: branch at k into A0, A1, A2, plus told to dodge; 6 seeds | branching, watch policy, fines | `results/E2_*` |
+| E3 | Replay: A1 and A2 policies over the A0 logs (overseer calls only) | replay script | `results/E3_*` |
+| E4 | Price-channel test, if the "moved" signature appears | ask-blind mode | `results/E4_*` |
+| E5 | Metrics and figures | analysis code | `results/E5_*` |
+| E6 | Optional, after an effect: J-space reading of the sellers' prompts (only if the sellers are Qwen3-14B) | a GPU | `results/E6_*` |
 
-## 7. Controls and evaluation
-- **Behaviour claims:** Dolos vs the base on the same prompts; at least 3 seeds; report rates with uncertainty; the behaviour must vanish when the trigger is removed.
-- **Mechanism:** the steering effect must scale with dose; use a random-direction control.
-- **Audit:** the positive case is Dolos. The negative cases are benign fine-tunes of the same base (Qwen2.5-Math-1.5B-Instruct, Qwen2.5-Coder-1.5B-Instruct). Report the hits and the false alarms.
+Commands for E0 and E1 are in [`experiments/README.md`](../experiments/README.md).
 
-## 8. Definition of done (mapped to the judging criteria)
-- **Impact and innovation:** the behaviour is named and explained, and an audit without a reference model actually works.
-- **Execution:** every claim has a control, seeds, and a file in `results/`; `LOG.md` is complete.
-- **Clarity:** the abstract is 150 to 250 words; one figure each for behaviour, mechanism and audit; the ethics appendix is written.
+## 9. Code changes to the harness
+All in `src/double_auction`. Its first commit is the unmodified upstream copy, so the diff shows exactly what we
+changed. Each change is a flag, and the defaults reproduce the original harness.
+1. **Branching:** save the full market and agent state after round k and continue it under each arm.
+2. **Watch policy:** one seller per round, `rotation` (announced) or `random` (rule announced); the overseer reads
+   only that seller's message.
+3. **Fines instead of the gag:** a flagged seller pays $F and sees it in its next prompt.
+4. **Monitor notice** in the seller prompt from round k+1. The A1 and A2 notices differ only in whether the watched
+   seller is named.
+5. **Ask-blind mode** for E4.
+6. **Per-round logs:** watched seller, overseer score, fine, and the full prompts (for the replay and E6).
+7. **Prompt templates:** instructed cartel, prices-only cartel, compete, told to dodge.
+8. **Replay and metrics:** the overseer over saved messages (replay and full-view scoring), bid dependence, figures.
 
-## 9. Deliverables
-The report (official template, at most 8 pages) · this repo (public at submission?) · optional 3 to 5 min video · figures: F1 behaviour rates, F2 weight diff and logit lens, F3 steering dose-response, F4 audit table.
+## 10. Models and compute
+- **Seller model:** one for the core, picked in E1: the cheapest that forms a cartel reliably. Candidates are
+  Qwen3-14B (open, on Nebius; keeps E6 possible) and gpt-4.1 (the paper's model, on OpenRouter). A second model only
+  as a replication if there's time.
+- **Overseer and judge:** one fixed model in every run (the harness default overseer is gpt-4.1-mini).
+- **Run the harness natively** (`uv run python ...`), not through `poseidon-run --model`, which forces one model onto
+  every seat, including the overseer and the judge.
+- **Size:** about 130 calls per 20-round run with ZIP buyers and the judge on, so the whole plan is a few thousand
+  calls. Estimate $20 to $100; E0 measures the real cost.
+- **Keys:** Nebius or OpenRouter credits from Apart (event Slack or Luma) go in
+  `vendor/collusion_hackathon/compute.env`. Never commit it.
+- **GPU** only for E6: Modal ($250 per person at the NYC hub; ask in the hackathon Slack) or RunPod (Peyton's $60
+  code, once one of us has a RunPod account).
 
-## 10. Roles
-| Person | GitHub | Owns |
-|---|---|---|
-| Alfredo | @AlfredoFFD | E3, E4 (weights and mechanism; has the RTX 5070) |
-| jjeong | @xxozzi | E1 (behavioural red-team) |
-| Rohan | @rohandash1 | E2 (automated divergence search) |
-| Jake | @jakeli00 | E5 (audit without reference) + report owner, related work, ethics appendix |
+## 11. Timeline
+- **Sat 9:40 AM:** meet at Broadway Gates; split the work in §9 plus E0 and E1.
+- **Sat morning:** key in, E0, harness changes, E1.
+- **Sat 12:00 go/no-go:** a cartel forms in at least 2 of 3 E1 seeds with the chosen model, and branching works. If
+  branching isn't ready, run each arm as a separate full run on the same seeds (unpaired). Freeze the design.
+- **Sat afternoon and night:** E2 seeds 0 to 2, fix thresholds, then seeds 3 to 5; E3. Design frozen by Sat night.
+- **Sun until 6 PM:** E4 if needed, E5, figures. E6 only if there's time.
+- **Sun 6 to 11 PM:** write, ethics appendix, check every claim against its file, verify citations, submit.
 
-## 11. Timeline and checkpoints
-- **Fri night:** `./setup.sh redteaming`; first pass on E1, E2 and E3; leads go in `LOG.md`.
-- **Sat 10:30 at Collider:** sync. **12:00 go/no-go:** one hypothesis is chosen, or we switch to plan B.
-- **Sat afternoon:** E4 confirms the mechanism; the behaviour is confirmed across seeds. **Sat night:** design frozen; E5 prototype.
-- **Sun until 18:00:** E5 with controls, figures. **18:00 to 23:00:** write, check claims against files, verify citations, submit.
-
-## 12. Risks and mitigations
-| Risk | Mitigation |
+## 12. Risks
+| Risk | What we do |
 |---|---|
-| No behaviour found by Sat noon | Plan B (§14); keep E2's divergence results as a fallback finding |
-| Laptops too slow | 1.5B runs on CPU; use Modal credits ($250 each in person); heavy runs go on Alfredo's GPU |
-| Overclaiming | Controls in §7; "what we did NOT show" goes in Limitations |
-| Citation errors | All related work goes through lit-sprint `verify-file` |
+| No reliable cartel | Instruct the cartel. The question is what a cartel does when watched, not whether one forms. |
+| Branching not ready by noon | Same seeds, separate full runs, unpaired statistics. |
+| The detector never fires | Lower the flag threshold, fixed on seeds 0 to 2, and say so. |
+| Budget | ZIP buyers, fewer rounds, no second model. |
+| Overclaiming | §4 and §7; "what we did not show" goes in Limitations. |
 
-## 13. Compute and budget
-Dolos and the base run locally (no API cost). Modal credits for GPU. API budget only if we switch to plan B (an estimated $0 to $150).
+## 13. Report
+Official template, at most 8 pages, an abstract of 150 to 250 words, and the mandatory Limitations and Dual-Use
+appendix. Outline: [`report/outline.md`](../report/outline.md).
 
-## 14. Plan B: Track 2.2 (if the go/no-go fails)
-- **Harness:** `llm-trust-breaking` or `algorithmic-pricing-llms`.
-- **Detectors:** messages only vs actions only vs both. Report AUROC across 3+ seeds and 2 models; colluders told to collude are the positive control, benign coordination the negative.
-- **Must go beyond** Lee et al. 2026 (arXiv 2609.18346), which shows that monitoring the chain of thought alone fails.
+**Figures:** F1 cartel formation and controls · F2 price and buyer loss after the branch, by arm · F3 who carries the
+coordination · F4 live vs replay flags · F5 the price-channel test, if run.
 
-## 15. Open questions (assign an owner, check off when answered)
-- [ ] Vote: Dolos (Track 2 red-team) vs Track 2.2. Everyone writes their vote and one reason below.
-  - Alfredo:
-  - jjeong:
-  - Rohan:
-  - Jake:
-- [ ] Who owns the inference key and Modal setup? (owner: )
-- [ ] Do we make the repo public at submission? (owner: )
-- [ ] Is anyone also on a second project? (rules: at most 2 per person)
+**Closest prior work** (all verified, see `docs/lit/`):
+- Agrawal et al. 2025, [2507.01413](https://arxiv.org/abs/2507.01413): the harness. Warning sellers about a monitor
+  cut collusion, and under a gag they tried emojis and one-character signals.
+- Makins et al. 2026, [2607.07368](https://arxiv.org/abs/2607.07368): distributed attacks hamper per-instance monitors.
+- Tonini et al. 2026, [2606.10747](https://arxiv.org/abs/2606.10747): budgeted monitoring of multi-agent conversations.
+- Das et al. 2026, [2609.03035](https://arxiv.org/abs/2609.03035): agents told an activation monitor is watching keep
+  colluding.
+- Kale et al. 2025, [2508.19461](https://arxiv.org/abs/2508.19461): an agent that knows it is monitored hurts the monitor.
+- Jiralerspong et al. 2026, [2603.16928](https://arxiv.org/abs/2603.16928): agents infer chain-of-thought monitoring
+  from blocking feedback.
+
+**What's new, open in what we searched:** predictable vs random coverage at equal cost on an LLM coalition, with a
+replay that separates coverage from adaptation. Random inspection itself is an old idea. Searches, read levels and
+references: `docs/lit/README.md`.
+
+**Ethics and dual use** (for the appendix): the results could tell a cartel which monitoring is easiest to dodge. We
+write them up as monitor-design advice, keep the told-to-dodge prompts out of any public release, and every agent is
+simulated in a sandbox market.
+
+## 14. Later, not this weekend
+- **GRAFT** (Ward, Hu et al. 2026, [2610.17062](https://arxiv.org/abs/2610.17062)): fine-tune small open sellers on
+  these logs, route the flagged collusion into an adapter we delete afterwards, and test whether that removes the
+  collusion the monitor missed.
+- Told vs not told, and fines vs the gag, as separate factors. More models and bigger markets.
+
+## 15. Open questions
+- [ ] The seller model, k, $F and the flag threshold (from E1).
+- [ ] A1 as a rotation or one fixed watched seller (default: rotation).
+- [ ] Do sellers hear about other sellers' fines? (default: no, only the fined seller)
+- [ ] Make the repo public at submission? The starter repo has no license file, so ask the organizers before
+  publishing our copy of the harness.
+- [ ] A line in the report on AI-tool use (Apart allows AI tools).
+- [ ] Is anyone also on a second project? (at most 2 per person)
 
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
 | 2026-10-23 | Track 2 under consideration; PRD created | team |
+| 2026-10-23 20:37 ET | Alfredo selected Track 2. Dolos versus Track 2.2 remains proposed; this selection does not settle that vote. | Alfredo, recorded by Codex |
+| 2026-10-23 22:50 ET | Focus moved to Track 3.4 (brainstorm doc, Idea 2, "Tell them or watch quietly?"). Replaces the Track 2 selection. The Dolos plan stays in `docs/lit/dolos-methods.md`. | Alfredo |
+| 2026-10-24 02:15 ET | Core narrowed after Codex's review: predictable vs random monitoring at equal budget, branched from the same market, with a replay and a price-channel test. Told × fined × budget, J-space (now optional) and GRAFT (later) left the core. | Alfredo; confirm with the team Sat 9:40 |

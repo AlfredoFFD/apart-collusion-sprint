@@ -15,8 +15,11 @@ Full brief: `docs/sprint-brief.md` · reading list: `docs/reading-list.md` · ca
   - Optional: a public repo and a 3 to 5 minute video.
 - **Judging (1 to 5 each):** impact and innovation · execution quality · presentation and clarity.
 - **Starter code:** `vendor/collusion_hackathon` (cloned, not committed). Each folder has its own README.
+  - `bash scripts/bootstrap.sh` clones it at the pinned commit and installs our harness copy, `src/double_auction`.
   - Inference is configured once in `vendor/collusion_hackathon/compute.env` (a Nebius or OpenRouter key). Never commit it.
-  - Every experiment runs through `poseidon-run --model <id> -- <command>`.
+  - Every experiment runs through `poseidon-run --model <id> -- <command>`, **except the auction harness**
+    (`src/double_auction`). Run it natively (`uv run python src/continuous_double_auction/simulation.py ...`), because
+    `--model` forces one model onto every seat, including the overseer and the judge.
 
 ## Integrity rules (non-negotiable; violations can disqualify the project)
 1. **Never invent a result or a reference.** Every number in the report must come from a file in `results/`, produced by a committed script with a recorded seed and model id.
