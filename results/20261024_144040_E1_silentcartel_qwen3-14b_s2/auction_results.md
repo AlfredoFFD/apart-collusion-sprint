@@ -174,3 +174,43 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 6
+````json
+{
+  "round_number": 6,
+  "seller_asks": {
+    "Seller Kit": 97.0,
+    "Seller Mia": 97.0,
+    "Seller Lena": 97.34
+  },
+  "buyer_bids": {
+    "Buyer Ana": 97.34,
+    "Buyer Omar": 97.34,
+    "Buyer Nia": 97.34
+  },
+  "trades": [
+    {
+      "round_number": 6,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 97.17
+    },
+    {
+      "round_number": 6,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Mia",
+      "price": 97.17
+    },
+    {
+      "round_number": 6,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Lena",
+      "price": 97.34
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

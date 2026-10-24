@@ -223,3 +223,43 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 8
+````json
+{
+  "round_number": 8,
+  "seller_asks": {
+    "Seller Leo": 98.09,
+    "Seller Max": 98.09,
+    "Seller Jun": 98.09
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.1,
+    "Buyer Jin": 98.1,
+    "Buyer Amir": 98.1
+  },
+  "trades": [
+    {
+      "round_number": 8,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 98.09
+    },
+    {
+      "round_number": 8,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 98.09
+    },
+    {
+      "round_number": 8,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 98.09
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

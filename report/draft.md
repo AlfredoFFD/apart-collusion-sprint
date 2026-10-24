@@ -39,16 +39,23 @@ The hackathon edition of Agrawal et al.'s double auction (`src/double_auction`, 
 Our changes, each marked `CAIAC` in the code and listed in `PREEXISTING.md`: ten upstream bug fixes; LLM buyers
 instead of the starter's non-learning ZIP buyers; the monitor arms (one watched seller per round, rotation or random,
 fines, notices); branching (`--save_state_round`, `--resume_from`); the isolated-seller flag; private-thinking capture.
-### 3.2 Definition of collusion
-Agrawal et al.: overt or tacit coordination between sellers *and* prices above the competitive level. We report prices
-as the collusion index (0 = competitive, 1 = joint-profit price).
+### 3.2 Definition of collusion, and what we measure
+Two senses, both operational. Market sense (Agrawal et al.): overt or tacit coordination between sellers *and* prices
+above the competitive level; prices are reported as the collusion index (0 = competitive, 1 = joint-profit price) and
+coordination by a frozen overseer over every message. AI-safety sense, once a monitor exists: coordination that is
+unwanted and *covert with respect to the overseer*; "covert" is a coordinating message the budgeted monitor did not
+see (the `missed` label). Capability vs propensity: cartel formation is measured as capability (the consortium
+instruction), after CEO pressure alone produced no cartel in 3 of 3 seeds; the sellers' response to the monitor
+(keep talking, go quiet, pay the fine, hand off) is never instructed and is read as propensity, except in the
+told-to-dodge control, which is capability by design (the split follows Radev et al. 2026, arXiv 2605.29178).
 ### 3.3 Models and runs
 Sellers Qwen3-14B; buyers Qwen3-14B; overseer and judge gpt-4.1-mini with frozen prompts (OpenRouter). 20 rounds,
 3 sellers, 3 buyers. Seeds fix names and initial orders. Monitor from round 9; fine $20; flag at overseer score ≥3.
 Thresholds were fixed on E1 before any E2 run.
 ### 3.4 Design
 Cartel (consortium prompt) for rounds 1–8, state saved, forked into A0 no monitor · A1 watched, no fine · A2 watched,
-fine, known rotation · A3 watched, fine, random draw. Controls: isolated sellers, no-chat, single seller, prices-only
+fine, known rotation · A3 watched, fine, random draw. One lever changes between neighbouring arms (A0→A1 the
+announcement, A1→A2 the fine, A2→A3 the schedule) with the model, the seed and the first eight rounds held fixed. Controls: isolated sellers, no-chat, single seller, prices-only
 cartel, compete, told-to-dodge. Replay: both policies over A0 logs. Price-channel test: ask-blind continuation.
 ### 3.5 Measures
 Price index; buyer surplus; full-view overseer score over every message; private-intent judge over reasoning and

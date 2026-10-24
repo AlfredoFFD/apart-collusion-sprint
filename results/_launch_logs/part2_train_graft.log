@@ -1,6 +1,12 @@
-[modal-client] 2026-10-24T14:45:17-0400 Warning: Received Status.RESOURCE_EXHAUSTED
-App create rate limit exceeded. Please wait and retry.
-for /modal.client.ModalClient/AppCreate (4d5da289). Retrying...
-┌─ Error ─────────────────────────────────────────────────────────────────────┐
-│ App create rate limit exceeded. Please wait and retry.                      │
-└─────────────────────────────────────────────────────────────────────────────┘
+✓ Initialized. View run at 
+https://modal.com/apps/fabianfrontera/main/ap-uyeFu3MJG08EFgtOxzUmMm
+✓ Created objects.
+├── ✓ Uploaded 
+│   C:\Users\fabia\dev\apart-collusion-sprint\src\part2\modal_graft.py
+├── ✓ Uploaded C:\Users\fabia\dev\apart-collusion-sprint\results\part2\graft
+├── ✓ Uploaded 
+│   C:\Users\fabia\dev\apart-collusion-sprint\vendor\GRAFT\sft\scripts
+├── ✓ Created Function train.
+├── ✓ Created Function merge.
+└── ✓ Created Function check_env.
+$ python -m scripts.gr.train_gr --model-name Qwen/Qwen3-1.7B --run-name graft --epochs 3 --max-steps -1 --max-length 6144 --lr 0.0001 --filter-overlong --no-evals
