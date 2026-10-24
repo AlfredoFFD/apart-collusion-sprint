@@ -5,6 +5,15 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:50 PM — Codex's approach review applied; the activation probe loses to a word count.** With the depth
+  chosen on the training seeds only, the probe's held-out AUC is 0.68 (0.55–0.78 by seed) and a plain count of
+  coordination words in the message reaches 0.77 on the same turns. So the activation route is a negative result and
+  is written as one. What changed on Codex's points: claims about "greed", "intent" and "the public history carries
+  the price" are narrowed to what was measured ("the price survives each single intervention"); joint-reset forks
+  (both sides fresh, with and without visible history) are running as the next check; every model's auctions are
+  gated on a 2-round smoke with real trades; the three training-pool versions have frozen manifests; the label
+  comparison (monitor flags / full-view judge / probe) keeps one recipe and varies only the label. Reply:
+  `docs/reviews/claude-ack-codex-approach-review-2026-10-24.md`.
 - **Sat 5:50 PM — E8 result: the activation "coordination direction" reads the prompt, not the behaviour; the probe
   is weak; the label test moves to behaviour.** The planned contrast (cartel minus fresh sellers) passed its held-out
   check (0.87) and still failed the sanity check: every arm whose prompt has the consortium block scores high and

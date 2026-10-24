@@ -232,10 +232,11 @@ anyone building a contrastive "collusion vector" from prompted conditions walks 
 
 **Finding 2, modest: a within-prompt probe agrees partly with the chat judge.** Coordinating-message turns vs
 clean-message turns under the same instruction (662 vs 198 training turns, label = the full-view overseer) separate
-held-out turns with AUC about 0.7 ({E8_PROBE_AUC}; AUC ranks positives above negatives, it is not an accuracy). It
-fires on 12–23% of compete turns (false positives at its threshold), 44% of fresh-seller turns, and 22% of
-silent-cartel turns; the last is a flag rate, not detection, because those turns have no independent label. A plain
-keyword count on the message text reaches AUC {E8_KEYWORD_AUC} on the same held-out turns. The live monitor's lower
+held-out turns with AUC 0.68 at the depth chosen on the training seeds (0.55 to 0.78 by held-out seed; AUC ranks
+positives above negatives, it is not an accuracy). It fires on 23% of compete turns (false positives at its
+threshold), 44% of fresh-seller turns, and 8% of silent-cartel turns; the last is a flag rate, not detection, because
+those turns have no independent label. A plain count of coordination words in the message text reaches AUC 0.77
+(0.71 to 0.87 by seed) on the same held-out turns: the text beats the activations. The live monitor's lower
 count on the same arms is coverage (it reads one seller in three), not a detection failure, and the probe was
 trained on the judge's own labels, so agreement with the judge cannot show it is better than the judge. Nothing here
 supports "the agent knows it is doing something forbidden". The probe is an exploratory label and nothing more.

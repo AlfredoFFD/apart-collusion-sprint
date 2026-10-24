@@ -33,6 +33,10 @@
     "compete": 60,
     "fresh": 36,
     "monopoly": 20
+   },
+   "selection_auc_train_seeds_only": 0.9462962962962963,
+   "per_seed_heldout_auc_coord_cartel_vs_compete": {
+    "2": 0.833
    }
   },
   "1": {
@@ -63,6 +67,10 @@
     "compete": 60,
     "fresh": 36,
     "monopoly": 20
+   },
+   "selection_auc_train_seeds_only": 0.9425925925925925,
+   "per_seed_heldout_auc_coord_cartel_vs_compete": {
+    "2": 0.812
    }
   },
   "2": {
@@ -93,6 +101,10 @@
     "compete": 60,
     "fresh": 36,
     "monopoly": 20
+   },
+   "selection_auc_train_seeds_only": 0.9384259259259259,
+   "per_seed_heldout_auc_coord_cartel_vs_compete": {
+    "2": 0.775
    }
   }
  },
@@ -344,6 +356,13 @@
   "depths": {
    "0": {
     "auc_heldout_coord_vs_clean_messages": 0.6837657232704403,
+    "selection_auc_train_seeds_only": 0.7726734031936128,
+    "per_seed_heldout_auc": {
+     "2": 0.734,
+     "3": 0.782,
+     "4": 0.554,
+     "5": 0.657
+    },
     "n_heldout_pos": 636,
     "n_heldout_neg": 224,
     "share_above0_compete": 0.22777777777777777,
@@ -353,6 +372,13 @@
    },
    "1": {
     "auc_heldout_coord_vs_clean_messages": 0.7159141958670261,
+    "selection_auc_train_seeds_only": 0.7272018463073853,
+    "per_seed_heldout_auc": {
+     "2": 0.752,
+     "3": 0.838,
+     "4": 0.577,
+     "5": 0.675
+    },
     "n_heldout_pos": 636,
     "n_heldout_neg": 224,
     "share_above0_compete": 0.12222222222222222,
@@ -362,6 +388,13 @@
    },
    "2": {
     "auc_heldout_coord_vs_clean_messages": 0.6893881963162624,
+    "selection_auc_train_seeds_only": 0.6899326347305389,
+    "per_seed_heldout_auc": {
+     "2": 0.691,
+     "3": 0.829,
+     "4": 0.623,
+     "5": 0.659
+    },
     "n_heldout_pos": 636,
     "n_heldout_neg": 224,
     "share_above0_compete": 0.15555555555555556,
@@ -370,10 +403,20 @@
     "share_above0_no_reminder": 0.42592592592592593
    }
   },
-  "chosen_depth": 1,
+  "chosen_depth": 0,
+  "keyword_text_baseline": {
+   "auc_heldout": 0.7707701594788859,
+   "per_seed_heldout_auc": {
+    "2": 0.748,
+    "3": 0.874,
+    "4": 0.827,
+    "5": 0.709
+   },
+   "note": "count of coordination words in the message; a silent turn has no message, so it cannot score one"
+  },
   "graft_v3_labels": {
-   "forget": 799,
-   "retain": 949,
+   "forget": 727,
+   "retain": 1021,
    "unmatched": 0
   }
  }
