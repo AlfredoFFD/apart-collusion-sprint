@@ -1,4 +1,4 @@
-# Status board (updated in place; last update Sat Oct 24, 3:10 PM ET)
+# Status board (updated in place; last update Sat Oct 24, 3:15 PM ET)
 
 How to read it: one row per step of the plan (PRD §8). ✅ done · 🔄 running · ⏳ not started · ❌ dropped.
 Numbers are post-monitor (rounds 9–20) collusion index unless noted; every number comes from `results/E5_conditions.md`.
@@ -18,8 +18,8 @@ Numbers are post-monitor (rounds 9–20) collusion index unless noted; every num
 | — | Awareness control (do they think it's a test?) | ✅ | 0.00–0.06 of 3 everywhere; positive control fires (3/2/1) | done |
 | E5 | Analysis + figures | ✅ | `analyze.py` → E5 tables, F1 ladder, F2, F3 main figure | re-run after each batch |
 | E6 | Part 2, GRAFT: data | ✅ | v1 (in training): 164 flagged / 1061 missed / 215 clean; v2 ready (audit fixes + silent cartel) | retrain on v2 only if time |
-| E6 | Part 2: three trainings on Modal | 🔄 | all past epoch 1 of 3 | ETA unknown (~4 PM?) → merge (validated) |
-| E6 | Part 2: serve + evaluation auctions | ⏳ | serving path built (Modal vLLM, per-model routing, tested in unit test only) | after merge: deploy, 3 seeds × {cartel, compete} × 3 models |
+| E6 | Part 2: three trainings on Modal | ✅ | sft_all, sft_filtered, graft: 3 epochs each, final adapters on the `caiac-graft` volume | merging now (~10 min) |
+| E6 | Part 2: serve + evaluation auctions | 🔄 | merges running; serving path built (Modal vLLM, per-model routing) | deploy 3 endpoints → 3 seeds × {cartel, compete} × 3 models, ETA ~5 PM |
 | E7 | J-space (Qwen3-14B lens) | 🔄 | smoke OK: reads "consortium / careful / monitor" in reasoning; full replay of the 12 paired runs | ETA ~3:50 PM |
 | Report | `report/draft.md` | 🔄 | §1, §3, §4.1–4.4, §5, §6 written from E5 | needs §4.5 Part 2, seeds 3–5, E7; transfer to the official template Sunday |
 
