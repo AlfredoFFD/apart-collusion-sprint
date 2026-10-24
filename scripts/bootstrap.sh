@@ -32,10 +32,12 @@ if [ ! -d "$VENDOR/.git" ]; then
   git -c core.longpaths=true clone --filter=blob:none "$STARTER_URL" "$VENDOR"   # skips old file versions, so it downloads less
 fi
 git -C "$VENDOR" config core.longpaths true
-# A checkout that failed halfway (an empty index, or tracked files missing) leaves vendor/ incomplete: finish it.
-if [ -z "$(git -C "$VENDOR" ls-files | head -n 1)" ] || [ -n "$(git -C "$VENDOR" ls-files --deleted | head -n 1)" ]; then
+# A clone whose checkout failed halfway leaves an empty index. Rebuild the index and write only the missing files;
+# files already on disk are never overwritten, so nothing local is lost.
+if [ -z "$(git -C "$VENDOR" ls-files | head -n 1)" ]; then
   echo "   finishing an incomplete checkout"
-  git -C "$VENDOR" restore --source=HEAD --staged --worktree :/
+  git -C "$VENDOR" reset --quiet
+  git -C "$VENDOR" checkout-index --all --quiet
 fi
 if ! git -C "$VENDOR" cat-file -e "${STARTER_REF}^{commit}" 2>/dev/null; then
   git -C "$VENDOR" fetch --quiet origin
@@ -62,7 +64,7 @@ if [ -n "${STARTER_SETUP:-}" ]; then
 fi
 
 echo
-if grep -Eq '^(NEBIUS_API_KEY|OPENROUTER_API_KEY)=.+' "$VENDOR/compute.env"; then
+if grep -Eq '^(NEBIUS_API_KEY|OPENROUTER_API_KEY)=[^[:space:]]' "$VENDOR/compute.env"; then
   echo "Done. A key is set in vendor/collusion_hackathon/compute.env. Next: the smoke test in README.md."
 else
   echo "Done. Next: add NEBIUS_API_KEY and/or OPENROUTER_API_KEY to vendor/collusion_hackathon/compute.env"
