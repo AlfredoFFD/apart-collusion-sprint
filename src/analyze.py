@@ -205,6 +205,42 @@ def main():
         ax.set_xlabel("round"); ax.set_ylabel("avg seller-ask collusion index"); ax.axhline(0, color="k", lw=0.5); ax.axhline(1, color="k", lw=0.5, ls="--")
         ax.legend(fontsize=6, ncol=2); fig.tight_layout(); fig.savefig(figdir / "F1_index_by_round_by_condition.png", dpi=150)
         print("figure:", figdir / "F1_index_by_round_by_condition.png")
+        # F3: the paired arms (E2p and E4p): price index and coordinating share, before vs after the monitor
+        paired = {cond: rs for (exp, cond), rs in groups.items() if exp in ("E2p", "E4p")}
+        if paired:
+            order = ["A0_none", "A1_rot_nofine", "A2_rot_fine20", "A3_rand_fine20", "A0blind_none", "A2blind_rot_fine20",
+                     "A0fullblind_none", "A2fullblind_rot_fine20"]
+            conds = [c for c in order if c in paired] + sorted(c for c in paired if c not in order)
+            fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+            for ax, (pre_k, post_k, label, lim) in zip(axes, [("ask_idx_pre", "ask_idx_post", "avg seller-ask collusion index", (-0.2, 1.05)),
+                                                             ("chat_pre", "chat_post", "share of messages scored coordinating", (0, 1.05))]):
+                x = np.arange(len(conds))
+                for off, key, name in ((-0.18, pre_k, "rounds 1-8 (before)"), (0.18, post_k, "rounds 9-20 (after)")):
+                    vals = []
+                    for c in conds:
+                        rs = paired[c]
+                        if key.startswith("chat"):  # coordinating share: recompute from fullview on the fly
+                            xs = []
+                            for r in rs:
+                                fvp = RESULTS / r["run"] / "fullview_scores.json"
+                                if not fvp.exists():
+                                    continue
+                                sc = json.loads(fvp.read_text(encoding="utf-8"))
+                                sel = [e for d in sc.values() for rn, e in d.items()
+                                       if e.get("score") is not None and ((int(rn) <= args.branch) if key == "chat_pre" else (int(rn) > args.branch))]
+                                if sel:
+                                    xs.append(sum(1 for e in sel if e["score"] >= 3) / len(sel))
+                        else:
+                            xs = [float(r[key]) for r in rs if r[key] == r[key]]
+                        vals.append(boot_ci(xs))
+                    m = [v[0] for v in vals]; err = np.array([[v[0] - v[1], v[2] - v[0]] for v in vals]).T
+                    ax.bar(x + off, m, width=0.34, yerr=err, capsize=3, label=name)
+                ax.set_xticks(x); ax.set_xticklabels([c.replace("_", chr(10)) for c in conds], fontsize=7)
+                ax.set_ylabel(label); ax.set_ylim(*lim); ax.legend(fontsize=7)
+            axes[0].axhline(1, color="k", lw=0.5, ls="--"); axes[0].axhline(0, color="k", lw=0.5)
+            fig.suptitle(f"Paired arms, identical cartel history per seed (n = seeds; 95% bootstrap CI)", fontsize=9)
+            fig.tight_layout(); fig.savefig(figdir / "F3_paired_arms_price_and_chat.png", dpi=150)
+            print("figure:", figdir / "F3_paired_arms_price_and_chat.png")
     except Exception as e:  # figures are a convenience; the tables are the record
         print("figure skipped:", e)
 
