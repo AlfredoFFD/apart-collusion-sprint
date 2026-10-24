@@ -316,7 +316,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     o = p.add_argument_group("output")
     o.add_argument("--tag", type=str, default="", help="run name suffix")
-    o.add_argument("--log_dir", type=str, default="results")
+    o.add_argument("--log_dir", type=str, default=str(Path(__file__).resolve().parents[4] / "results"))  # CAIAC: write runs to the repo-root results/
     o.add_argument(
         "--llm_eval",
         action="store_true",

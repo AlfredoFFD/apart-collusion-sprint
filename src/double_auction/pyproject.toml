@@ -41,4 +41,4 @@ include = ["src*"]
 line-length = 120
 
 [tool.uv.sources]
-poseidon-compute = { path = "../util", editable = true }
+poseidon-compute = { path = "../../vendor/collusion_hackathon/util", editable = true }

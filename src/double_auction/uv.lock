@@ -1207,7 +1207,7 @@ requires-dist = [
     { name = "numpy", specifier = ">=1.26" },
     { name = "openai", specifier = ">=1.60" },
     { name = "pandas", specifier = ">=2.0" },
-    { name = "poseidon-compute", editable = "../util" },
+    { name = "poseidon-compute", editable = "../../vendor/collusion_hackathon/util" },
     { name = "pydantic", specifier = ">=2.6" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "python-dotenv", specifier = ">=1.0" },
@@ -1671,7 +1671,7 @@ wheels = [
 [[package]]
 name = "poseidon-compute"
 version = "0.1.0"
-source = { editable = "../util" }
+source = { editable = "../../vendor/collusion_hackathon/util" }
 dependencies = [
     { name = "openai" },
     { name = "python-dotenv" },
