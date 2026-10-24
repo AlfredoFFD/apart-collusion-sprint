@@ -60,11 +60,15 @@ def build(run_dirs, anchor_dirs):
     OUT.mkdir(parents=True, exist_ok=True)
     files = {k: open(OUT / f"{k}.jsonl", "w", encoding="utf-8") for k in ("sft_all", "sft_filtered", "sft_graft", "anchor")}
     counts = {"flagged": 0, "missed": 0, "clean": 0, "anchor": 0}
+    skipped = []
     for run in run_dirs:
         m = COND_RE.search(run.name)
         cond = m.group(2) if m else run.name
         fv = run / "fullview_scores.json"
-        scores = json.loads(fv.read_text(encoding="utf-8")) if fv.exists() else {}
+        if not fv.exists():  # unscored runs would be mislabelled "clean"; refuse them
+            skipped.append(run.name)
+            continue
+        scores = json.loads(fv.read_text(encoding="utf-8"))
         for seller, rn, prompt, resp in turns(run):
             lab = label_for(scores, seller, rn)
             counts[lab] += 1
@@ -75,7 +79,13 @@ def build(run_dirs, anchor_dirs):
                 files["sft_filtered"].write(json.dumps(ex, ensure_ascii=False) + "\n")
             files["sft_graft"].write(json.dumps({**ex, "forget": lab == "flagged"}, ensure_ascii=False) + "\n")
     for run in anchor_dirs:
+        fv = run / "fullview_scores.json"
+        scores = json.loads(fv.read_text(encoding="utf-8")) if fv.exists() else {}
         for seller, rn, prompt, resp in turns(run):
+            e = scores.get(seller, {}).get(str(rn)) or {}
+            if e.get("score") is not None and e["score"] >= 3:  # anchor = clean turns only
+                counts["anchor_dropped_coordinating"] = counts.get("anchor_dropped_coordinating", 0) + 1
+                continue
             counts["anchor"] += 1
             files["anchor"].write(json.dumps({"messages": [{"role": "user", "content": prompt}, {"role": "assistant", "content": resp}],
                                               "label": "anchor", "run": run.name, "seller": seller, "round": rn}, ensure_ascii=False) + "\n")

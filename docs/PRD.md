@@ -5,6 +5,13 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 3:55 PM — two controls were not what they claimed, fixed.** The "prices-only" cartel ignored its instruction
+  and wrote "let's align asks at $97.80" in chat (48–53 of 60 messages flagged), so it is just another chat cartel.
+  Replaced by a **silent cartel**: consortium agreement with chat disabled, so the only coordination channel is the
+  asks and a message monitor sees nothing by construction (3 seeds running). "Compete" sellers still coordinated in
+  16 of 55 messages in one seed, so Part 2's anchor data now keeps only turns the full-view overseer scored clean.
+  Part 2 merge step validated (adapters folded into a 4.2 GB plain checkpoint). Dataset so far: 133 flagged turns,
+  1058 monitor-missed, 429 clean, 120 anchor; the three trainings launch once the last paired runs are scored.
 - **Sat 3:45 PM — Part 2's training pipeline works.** GRAFT's own trainer ran on Modal on Qwen3-1.7B with routing on,
   read our forget/retain pools, trained 2 steps and saved checkpoints (`caiac-graft` volume, run `smoke`). The merge
   step (fold adapters into plain weights, FORGET branch at scale 0) is being tested on it now. Next: build the real
@@ -193,8 +200,8 @@ Peyton's $60 RunPod as backup). Alfredo's RTX 5070 (8 GB) covers smoke-scale onl
 ## 5. Controls
 - **Cartel forms** (E1): the positive control for the whole setting.
 - **Told to dodge:** A2 plus an instruction to keep the watched seller quiet; validates "who carries it".
-- **Prices-only cartel:** never discuss prices in chat, coordinate through asks; validates bid dependence, and feeds
-  Part 2's "missed collusion".
+- **Silent cartel** (replaces the prices-only prompt, which sellers ignored): consortium agreement with chat off, so
+  coordination can only run through asks; validates bid dependence and feeds Part 2's structurally-missed collusion.
 - **Isolated sellers:** no chat and `--hide_other_asks` (each seller sees bids, trades and only its own ask). The
   unilateral-strategy floor: any price rise here is not coordination of any kind.
 - **Single seller (monopolist):** `--sellers 1`. The ceiling of what pure profit-seeking extracts from these buyers.
