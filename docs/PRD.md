@@ -5,6 +5,10 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 3:20 PM — Part 2 retraining on the corrected data (your instruction via Codex).** The three v1 models (trained
+  before the label fix) are kept only as provenance. Three new runs, `*_v2`, train on the frozen v2 snapshot
+  (`results/part2/SNAPSHOT_v2.json`: hashes, counts, checks). Only v2 models with finished auction evaluations go in the
+  report; otherwise Part 2 is reported as incomplete. Told-to-dodge control: price 0.92 (chat scoring running).
 - **Sat 5:15 PM — fully blind, still 0.9.** With the other sellers' asks *and* trades hidden: 0.90 [0.88, 0.93] with no
   monitor, 0.92 [0.87, 0.96] under the fined rotation. Every channel we can close is closed and the cartel price
   stands. E4 is done: for an established cartel the collusion lives in the agreement each seller remembers, not in
@@ -378,6 +382,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 15:20 | Part 2 retrained on the corrected dataset v2 (Alfredo's instruction, relayed by Codex): runs sft_all_v2 / sft_filtered_v2 / graft_v2; v1 runs kept as exploratory provenance, never Part 2 evidence; snapshot identity in results/part2/SNAPSHOT_v2.json | Alfredo via Codex; Claude |
 | 2026-10-24 14:40 | Part 2 route fixed: GRAFT's trainer on Modal, Qwen3-1.7B, three modes, merge with forget-scale 0, serve via poseidon-host | Alfredo |
 | 2026-10-24 14:03 | Branching implemented and verified; paired E2 (prefix + 4 arms × 3 seeds) replaces the unpaired wave as the main analysis; wave 1 kept as robustness | Alfredo |
 | 2026-10-24 13:52 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |

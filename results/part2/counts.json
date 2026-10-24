@@ -3,10 +3,10 @@
  "missed": 1061,
  "clean": 206,
  "nomessage": 189,
- "anchor": 92,
- "anchor_dropped_unscored": 71,
- "anchor_dropped_coordinating": 17,
+ "anchor": 128,
+ "anchor_dropped_unscored": 21,
+ "anchor_dropped_coordinating": 31,
  "eval_files_are_training_copies_not_heldout": true,
  "graft_forget": 164,
- "graft_retain": 1548
+ "graft_retain": 1584
 }
