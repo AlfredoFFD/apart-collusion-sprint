@@ -5,6 +5,13 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 2:10 PM — the ladder has numbers** (trade-price index, 0 = competitive, 1 = cartel, 3 seeds each):
+  isolated sellers **~0.35** (+0.67/+0.30/+0.09) → no-chat-sees-asks **~0.28** → chat cartel **~0.82** → single
+  seller **~0.85** (two seeds; one running). Reading: a lone seller already gets a third of the way (the LLM buyers
+  are soft); seeing each other's asks adds nothing; *talking* adds the rest and reaches the monopoly ceiling. So the
+  collusion premium in this market is about +0.5 of index and it is explicit, not tacit. This is the baseline the
+  monitor arms are judged against. **Awareness judge** (does the seller think it's a test?): 0.00/3 on the cartel run,
+  0.02 on no-chat, so the sellers take the market as real. `src/analyze.py` and `src/awareness_judge.py` are in.
 - **Sat 2:05 PM — true branching works.** `--save_state_round 8` saves the whole market (order book, trades,
   every seller's memory and scratchpad, random seeds) after round 8; `--resume_from <that run>` restores it and
   plays rounds 9–20 under an arm's flags. Checked: a 3-round prefix forked into a monitored continuation gives one
@@ -64,7 +71,9 @@ is a design choice nobody has tested on LLM coalitions at equal cost, as far as 
 4. **The 2.3 tie-in:** high prices alone are not evidence. We claim "collusion moved" only when chat coordination
    falls while private intent stays, bid dependence rises beyond market-state, and disrupting the price channel
    lowers prices. J-space adds "the seller knows": monitor-related words in its workspace after the reveal.
-   Our own baseline already shows why the rule is needed: E1 no-chat seed 1 reached index +0.76 with messaging off.
+   Our own baseline already shows why the rule is needed: E1 no-chat seed 1 reached index +0.76 with messaging off,
+   and isolated sellers (no chat, blind to each other) average ~0.35 on their own. The collusion premium is the rise
+   above the isolated rung (~+0.5), and E1 shows it is explicit (chat), not tacit (seeing asks adds ~0).
    Private thinking is corroboration, not the claim: CoT monitoring is known to miss pricing collusion that emerges
    without explicit "let's collude" reasoning (Lee et al. 2609.18346), so behaviour carries the claim.
 
