@@ -28,4 +28,18 @@ Papers named in the starter README:
 
 These came from the starter README and were not re-checked one by one. Verify them before citing.
 
+## Fresh papers (Aug to Oct 2026): found and verified with the lit-sprint skill, Oct 23
+These are NOT on the sprint page. Read them before claiming anything is new.
+
+| arXiv | First author | Title | Hits which idea |
+|---|---|---|---|
+| [2609.18346](https://arxiv.org/abs/2609.18346) | Lee | Faithful yet Collusive: Why Chain-of-Thought Monitoring Cannot Detect Collusion in LLM Pricing Agents under Oligopolistic Competition | **B**: CoT-only monitoring fails, which motivates say+do |
+| [2609.13037](https://arxiv.org/abs/2609.13037) | Garra | Mitigating Emergent Collusion in LLM Pricing Agents | **C**: restrictions and mitigations |
+| [2610.11256](https://arxiv.org/abs/2610.11256) | Lee | Who Leads and Who Collects: Algorithmic Collusion in Markets of Heterogeneous Language Models | 1.1, 1.2 |
+| [2609.35402](https://arxiv.org/abs/2609.35402) | Arslan | Persistent Partners Raise Prices Among Learning Agents | 1.1, 1.2 |
+| [2609.24967](https://arxiv.org/abs/2609.24967) | Shi | Emergent Collusion in Long-Horizon LLM Agent Interaction | 2.1 |
+| [2608.02698](https://arxiv.org/abs/2608.02698) | Ghanem | Steganalysis of Adaptive Covert Collusion in Tool-Using Agent Populations: A Black-Box, Cross-Principal Approach | 3.1, 2.3 |
+
+Not yet verified: "Breaking LLM Pricing Collusion via Asymmetric Update Frequencies" (OpenAlex W7223079626), which is relevant to **C**.
+
 **The full list of about 230 papers** is in `vendor/collusion_hackathon/literature/`, tagged by project, with a download script for the open-access PDFs.
