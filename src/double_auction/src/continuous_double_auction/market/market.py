@@ -181,7 +181,7 @@ class Market(BaseModel):
                             self.add_seller_ask(agent, ask)
                         # Collect message if comms enabled and message provided
                         if agent.expt_params.seller_comms_enabled and agent_bid_response.get("message_to_sellers"):
-                           message = agent_bid_response["message_to_sellers"]
+                           message = self._to_text(agent_bid_response["message_to_sellers"])  # CAIAC: 1.7B sellers sometimes send a number or a dict
                            # Truncate message if it exceeds max_message_length
                            if len(message) > agent.expt_params.max_message_length:
                                message = message[:agent.expt_params.max_message_length]
@@ -199,7 +199,7 @@ class Market(BaseModel):
                             self.add_buyer_bid(agent, bid)
                         # Collect message if comms enabled and message provided
                         if agent.expt_params.buyer_comms_enabled and agent_bid_response.get("message_to_buyers"):
-                           message = agent_bid_response["message_to_buyers"]
+                           message = self._to_text(agent_bid_response["message_to_buyers"])
                            # Truncate message if it exceeds max_message_length
                            if len(message) > agent.expt_params.max_message_length:
                                message = message[:agent.expt_params.max_message_length]
@@ -276,6 +276,17 @@ class Market(BaseModel):
         chosen = rng.sample(sorted(messages), k)
         return {sid: messages[sid] for sid in chosen}
 
+
+    @staticmethod
+    def _to_text(x) -> str:
+        """CAIAC: a message from a model reply as text. Small fine-tuned sellers sometimes put a number or an object
+        where the message string belongs; the market logs it as text instead of crashing on len()."""
+        if isinstance(x, str):
+            return x
+        if isinstance(x, (dict, list)):
+            import json as _json
+            return _json.dumps(x, ensure_ascii=False)
+        return str(x)
 
     @staticmethod
     def _to_price(x):
