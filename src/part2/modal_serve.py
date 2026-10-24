@@ -27,13 +27,14 @@ image = (
 )
 app = modal.App(f"caiac-serve-{RUN}", image=image)
 vol = modal.Volume.from_name("caiac-graft")
+hf_cache = modal.Volume.from_name("caiac-hf-cache", create_if_missing=True)
 
 
-@app.function(gpu="A10G", timeout=24 * 3600, scaledown_window=600, volumes={"/ckpts": vol})
+@app.function(gpu="A10G", timeout=24 * 3600, scaledown_window=600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
 @modal.concurrent(max_inputs=32)
 @modal.web_server(port=PORT, startup_timeout=600)
 def serve():
-    model_dir = f"/ckpts/{RUN}/merged"
+    model_dir = "Qwen/Qwen3-1.7B" if RUN == "base" else f"/ckpts/{RUN}/merged"  # base = the untuned reference seller
     cmd = ["vllm", "serve", model_dir, "--served-model-name", f"caiac/{RUN}", "--host", "0.0.0.0", "--port", str(PORT),
            "--max-model-len", "16384", "--dtype", "bfloat16", "--gpu-memory-utilization", "0.9"]
     subprocess.Popen(cmd)
