@@ -22,7 +22,7 @@ from pathlib import Path
 
 import modal
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[2] if modal.is_local() else Path("/")
 GRAFT_SCRIPTS = ROOT / "vendor" / "GRAFT" / "sft" / "scripts"
 DATA = ROOT / "results" / "part2" / "graft"
 BASE_MODEL = "Qwen/Qwen3-1.7B"
@@ -30,7 +30,7 @@ BASE_MODEL = "Qwen/Qwen3-1.7B"
 image = (
     modal.Image.debian_slim(python_version="3.12")
     .apt_install("git")
-    .pip_install("torch==2.5.1", index_url="https://download.pytorch.org/whl/cu124")
+    .pip_install("torch==2.5.1")  # PyPI Linux wheels bundle CUDA 12.4
     .pip_install("transformers==5.5.4", "trl==1.2.0", "accelerate==1.13.0", "datasets==4.8.4", "peft==0.19.1",
                  "huggingface_hub", "hf_transfer", "sentencepiece", "protobuf")
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1", "TOKENIZERS_PARALLELISM": "false", "PYTHONUNBUFFERED": "1"})

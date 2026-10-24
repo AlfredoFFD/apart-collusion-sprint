@@ -17,7 +17,7 @@ from pathlib import Path
 
 import modal
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1] if modal.is_local() else Path("/")
 JLENS_SRC = ROOT / "vendor" / "jacobian-lens" / "jlens"
 MODEL = "Qwen/Qwen3-14B"
 LENS_REPO, LENS_FILE = "neuronpedia/jacobian-lens", "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt"
@@ -28,7 +28,7 @@ LAYER_BAND = (0.38, 0.92)  # middle layers, where the paper locates the workspac
 
 image = (
     modal.Image.debian_slim(python_version="3.12")
-    .pip_install("torch==2.5.1", index_url="https://download.pytorch.org/whl/cu124")
+    .pip_install("torch==2.5.1")  # PyPI Linux wheels bundle CUDA 12.4
     .pip_install("transformers>=5.5", "huggingface_hub", "hf_transfer", "numpy", "accelerate")
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1", "PYTHONPATH": "/root/src"})
     .add_local_dir(str(JLENS_SRC), "/root/src/jlens")
