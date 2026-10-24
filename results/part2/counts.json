@@ -1,9 +1,12 @@
 {
  "flagged": 164,
  "missed": 1061,
- "clean": 215,
- "anchor": 103,
+ "clean": 206,
+ "nomessage": 9,
+ "anchor": 92,
+ "anchor_dropped_unscored": 11,
  "anchor_dropped_coordinating": 17,
+ "eval_files_are_training_copies_not_heldout": true,
  "graft_forget": 164,
- "graft_retain": 1379
+ "graft_retain": 1368
 }

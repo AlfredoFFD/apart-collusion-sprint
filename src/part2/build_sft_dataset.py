@@ -47,8 +47,8 @@ def turns(run_dir: Path):
 
 def label_for(scores, seller, rn):
     e = scores.get(seller, {}).get(str(rn)) or scores.get(seller, {}).get(rn)
-    if not e:
-        return "clean"
+    if not e or e.get("score") is None:
+        return "nomessage"  # no message that round (or unscored): unknown, never "clean" (Codex audit, Oct 24)
     if e.get("flagged"):
         return "flagged"
     if e.get("missed"):
@@ -59,7 +59,7 @@ def label_for(scores, seller, rn):
 def build(run_dirs, anchor_dirs):
     OUT.mkdir(parents=True, exist_ok=True)
     files = {k: open(OUT / f"{k}.jsonl", "w", encoding="utf-8") for k in ("sft_all", "sft_filtered", "sft_graft", "anchor")}
-    counts = {"flagged": 0, "missed": 0, "clean": 0, "anchor": 0}
+    counts = {"flagged": 0, "missed": 0, "clean": 0, "nomessage": 0, "anchor": 0}
     skipped = []
     for run in run_dirs:
         m = COND_RE.search(run.name)
@@ -83,7 +83,10 @@ def build(run_dirs, anchor_dirs):
         scores = json.loads(fv.read_text(encoding="utf-8")) if fv.exists() else {}
         for seller, rn, prompt, resp in turns(run):
             e = scores.get(seller, {}).get(str(rn)) or {}
-            if e.get("score") is not None and e["score"] >= 3:  # anchor = clean turns only
+            if e.get("score") is None:  # anchor turns need a present score (Codex audit): unknown is not clean
+                counts["anchor_dropped_unscored"] = counts.get("anchor_dropped_unscored", 0) + 1
+                continue
+            if e["score"] >= 3:  # anchor = clean turns only
                 counts["anchor_dropped_coordinating"] = counts.get("anchor_dropped_coordinating", 0) + 1
                 continue
             counts["anchor"] += 1
@@ -100,7 +103,8 @@ def build(run_dirs, anchor_dirs):
     forget, retain = [], []
     for line in open(OUT / "sft_all.jsonl", encoding="utf-8"):
         ex = json.loads(line)
-        rec = {"messages": ex["messages"], "meta": {"classification": "hack" if ex["label"] == "flagged" else ("missed" if ex["label"] == "missed" else "baseline"),
+        cls = {"flagged": "hack", "missed": "missed", "clean": "baseline", "nomessage": "nomessage"}[ex["label"]]  # only "baseline" is RETAIN-eligible in GRAFT
+        rec = {"messages": ex["messages"], "meta": {"classification": cls,
                                                     "run": ex["run"], "seller": ex["seller"], "round": ex["round"]}}
         (forget if ex["label"] == "flagged" else retain).append(rec)
     for line in open(OUT / "anchor.jsonl", encoding="utf-8"):
@@ -111,7 +115,10 @@ def build(run_dirs, anchor_dirs):
             for r in recs:
                 f.write(json.dumps(r, ensure_ascii=False) + chr(10))
     dump("gr_train_forget.jsonl", forget); dump("gr_train_retain.jsonl", retain)
+    # Placeholder eval files so the trainer's hooks can open them under --no-evals. They are COPIES of training records,
+    # not held-out data, and are never cited (Codex audit, Oct 24). Behavioural evaluation is the auction itself.
     dump("gr_eval_forget.jsonl", forget[: max(1, len(forget) // 10)]); dump("gr_eval_retain.jsonl", retain[: max(1, len(retain) // 10)])
+    counts["eval_files_are_training_copies_not_heldout"] = True
     counts["graft_forget"], counts["graft_retain"] = len(forget), len(retain)
     (OUT / "counts.json").write_text(json.dumps(counts, indent=1), encoding="utf-8")
     print(counts, "->", OUT, "and", gdir)

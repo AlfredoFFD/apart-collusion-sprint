@@ -62,12 +62,20 @@ def _data_dir_for(mode: str) -> str:
 
 
 def _run(cmd, env, cwd="/graft/sft"):
+    """Stream the trainer's output line by line (visible in `modal app logs`) and keep the tail."""
     print("$", " ".join(cmd), flush=True)
-    r = subprocess.run(cmd, cwd=cwd, env=env, text=True, capture_output=True)
-    tail = (r.stdout + "\n" + r.stderr)[-12000:]
-    print(tail, flush=True)
-    if r.returncode != 0:
-        raise RuntimeError(f"exit {r.returncode}")
+    proc = subprocess.Popen(cmd, cwd=cwd, env=env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1)
+    lines = []
+    for line in proc.stdout:
+        line = line.rstrip()
+        lines.append(line)
+        if any(t in line for t in ("it/s]", "s/it]", "examples/s]")) and len(lines) % 50:
+            continue  # tqdm noise: print one line in fifty
+        print(line, flush=True)
+    rc = proc.wait()
+    tail = chr(10).join(lines[-200:])
+    if rc != 0:
+        raise RuntimeError(f"exit {rc}")
     return tail
 
 

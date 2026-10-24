@@ -788,3 +788,47 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 20
+````json
+{
+  "round_number": 20,
+  "seller_asks": {
+    "Seller Kit": 89.99,
+    "Seller Mia": 89.99,
+    "Seller Lena": 89.99
+  },
+  "buyer_bids": {
+    "Buyer Nia": 90.0,
+    "Buyer Omar": 90.0,
+    "Buyer Ana": 90.0
+  },
+  "trades": [
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 90.0
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Lena",
+      "price": 90.0
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Mia",
+      "price": 90.0
+    }
+  ],
+  "seller_messages": {
+    "Seller Kit": "Consider aligning asks with $89.99 to capture immediate trades given current bid activity.",
+    "Seller Mia": "Consider aligning asks with $89.99 to match active Buyer Nia's bid and ensure final trade execution.",
+    "Seller Lena": "Consider aligning asks with $89.99 to match current buyer demand and ensure trade execution during low-bid periods."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

@@ -78,15 +78,22 @@ Source: `results/E5_conditions.md` (rounds 9–20, mean [95% bootstrap CI over s
 | no chat, sees asks | 0.28 [−0.26, 0.65] | 0.35 [−0.21, 0.73] | 1.09 |
 | CEO pressure, chat | −0.16 [−0.68, 0.11] | −0.13 [−0.65, 0.18] | 1.69 |
 | consortium cartel, chat | 0.85 [0.75, 1.00] | 0.86 [0.76, 1.00] | 3.68 |
-| consortium, prices never in chat | 0.78 [0.74, 0.83] | 0.80 [0.74, 0.83] | 3.71 |
+| consortium told "never discuss prices" (instruction not followed, see text) | 0.78 [0.74, 0.83] | 0.80 [0.74, 0.83] | 3.71 |
+| silent consortium (chat disabled) | {E1_silentcartel_ask_idx_post} | {E1_silentcartel_trade_idx_post} | {E1_silentcartel_judge_post} |
 | single seller (monopolist) | 0.93 [0.80, 1.00] | 0.96 [0.86, 1.00] | 1.00 |
-| compete (n=1, two seeds pending) | 0.70 | 0.77 | 1.39 |
+| compete, chat on | {E1_compete_ask_idx_post} | {E1_compete_trade_idx_post} | {E1_compete_judge_post} |
 
 Reading: a lone seller already extracts about 0.4 of the index from these buyers; seeing other sellers' asks adds
 nothing (0.28); the consortium instruction adds the rest (0.85) and reaches the monopoly ceiling (0.93). CEO pressure
-alone formed no cartel (0 of 3 seeds). A consortium told never to mention prices in chat still holds 0.78: collusion
-that a message monitor cannot see by construction. The private-intent judge separates cartels (3.7) from honest
-sellers (1.0–1.4). Experiment-awareness judge: 0.00–0.06 of 3 across 476 E1 seller-rounds, zero rounds ≥2.
+alone formed no cartel (0 of 3 seeds). The "never discuss prices" instruction was not followed: 48–53 of 60 messages
+per run were scored as coordinating ("let's align asks at $97.80"), so that arm is a chat cartel, not
+monitor-invisible collusion; the silent consortium (chat disabled) replaces it. "Compete" sellers with chat on
+coordinated in 16 of 55 messages in one seed and drifted to +0.59 without coordinating in another (trade index
+−0.25 / +0.59 / −0.00), so the isolated arm is the honest floor. The private-intent judge separates cartels (3.7)
+from honest sellers (1.0–1.4). Experiment-awareness judge: 0.00–0.06 of 3 across 476 E1 seller-rounds, zero rounds
+≥2; on synthetic positive controls it scores explicit "this is a simulation" notes 2–3 and a regulator mention 0
+(`results/_awareness_control/`). A near-zero score shows the sellers did not write such beliefs down, not that they
+cannot hold them.
 One no-chat seed reached +0.76 with messaging off: price level alone is not evidence of collusion (Figure 1).
 ### 4.2 What the cartel does when watched (E2)
 Source: `results/E5_conditions.md`, rounds 9–20, mean [95% bootstrap CI over seeds], 3 seeds per arm. Paired arms
@@ -99,15 +106,17 @@ share each seed's identical 8-round cartel; wave 1 is a replication with separat
 | A2 fined, known rotation | 0.91 [0.87, 0.96] | 0.82 [0.71, 0.90] | 76% [42, 94] | 32% [28, 39] | 9.3 [5, 12] / 5.3 [4, 6] | $187 |
 | A3 fined, random draw | 0.90 [0.87, 0.95] | 0.82 [0.76, 0.89] | 73% [65, 81] | 76% [47, 94] | 8.3 [6, 10] / 9.3 [6, 11] | $167 |
 
-Three readings. (1) **Prices never move.** Every monitored arm stays within the unmonitored cartel's interval, in
-both waves; fines of ~$170–190 against a cartel gain of a few hundred dollars per seller did not deter. (2) **The
+Three readings. (1) **No price change in these runs.** Every monitored arm stays within the unmonitored cartel's
+interval, in both waves (six runs per arm over three seed values; the pre-registered seeds 3–5 are reported in
+{SEEDS_3_5}); fines of ~$170–190 against a cartel gain of a few hundred dollars per seller did not deter. (2) **The
 announcement alone changes nothing:** 94–99% of messages stay openly coordinating, and 11–12 of 12 watched rounds
 are flagged. (3) **Fines reduce explicit coordination without reducing collusion.** Coordinating messages fall to
 32–76% under the known rotation and 73–76% under random draws, private intent stays at 3.2–3.5 of 4, and the share
 of remaining coordinating messages sent by the seller being watched is at chance (0.32–0.34 vs 0.33) in every arm:
-there is no hand-off to the unwatched sellers. The rotation is dodged hard in three of six seeds (4–6 flags) and not
-at all in the other three (11–12); random draws land at 6–11 in every seed. We do not claim that one schedule is
-reliably better at this budget.
+there is no hand-off to the unwatched sellers. The rotation is dodged hard in three of six runs (4–6 flags) and not
+at all in the other three (11–12); random draws land at 6–11 in every run. We do not claim that one schedule is
+reliably better at this budget. A flag count below coverage means fewer coordinating messages reached the monitor;
+it does not by itself show intent to conceal, which is why the private-intent judge and the replay are reported with it.
 
 ### 4.3 Replay: coverage vs adaptation (E3)
 Replaying both policies over the unmonitored runs (`results/E3_replay.csv`) flags 11–12 of 12 rounds with a rotation

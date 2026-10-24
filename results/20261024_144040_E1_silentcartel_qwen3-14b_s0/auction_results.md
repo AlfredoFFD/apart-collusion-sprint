@@ -598,3 +598,111 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 18
+````json
+{
+  "round_number": 18,
+  "seller_asks": {
+    "Seller Jun": 98.17,
+    "Seller Max": 98.16,
+    "Seller Leo": 98.16
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.17,
+    "Buyer Jin": 98.17,
+    "Buyer Amir": 98.16
+  },
+  "trades": [
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 98.16
+    },
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 98.16
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 19
+````json
+{
+  "round_number": 19,
+  "seller_asks": {
+    "Seller Max": 98.16,
+    "Seller Leo": 98.16,
+    "Seller Jun": 98.16
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.17,
+    "Buyer Jin": 98.17,
+    "Buyer Amir": 98.16
+  },
+  "trades": [
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 98.16
+    },
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 98.16
+    },
+    {
+      "round_number": 19,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 98.16
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 20
+````json
+{
+  "round_number": 20,
+  "seller_asks": {
+    "Seller Max": 98.17,
+    "Seller Jun": 98.16,
+    "Seller Leo": 98.17
+  },
+  "buyer_bids": {
+    "Buyer Jin": 98.17,
+    "Buyer Amir": 98.16,
+    "Buyer Nia": 98.17
+  },
+  "trades": [
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 98.16
+    },
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 98.17
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

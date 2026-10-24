@@ -5,6 +5,15 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:30 PM — Codex audited the work (docs/reviews/codex-claude-audit-2026-10-24.md); all five points taken.**
+  (1) Turns with no message were being labelled "clean" in the Part 2 data; now a separate `nomessage` class that
+  never counts as clean, and anchor turns must carry a real score (9 + 11 examples affected; the three trainings
+  already running used the earlier snapshot, noted in LOG). (2) The trainer's eval files are copies of training
+  records, now flagged as such and never cited; Part 2 is evaluated behaviourally in the auction. (3) The report's
+  stale "prices never in chat" claim replaced by the observed control failure. (4) Wording: "no price change in
+  these runs", "six runs over three seed values"; the pre-registered confirmatory seeds 3–5 are now running (prefixes
+  first, then the four arms). The awareness judge passed a positive control (synthetic "this is a simulation" notes
+  score 2–3; a regulator mention scores 0). (5) Future Modal runs stream the trainer's output. Compete seed 2: −0.00.
 - **Sat 4:10 PM — E4: the agreement is not riding on the asks either.** Forking the same cartels with every seller
   blind to the others' asks: no monitor 0.91, fined rotation 0.91, versus 0.92 / 0.91 unblinded. So after the fines
   the cartel talks less, cannot see each other's asks, and still holds the monopoly price. The honest reading of 3.4

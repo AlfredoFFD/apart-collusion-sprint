@@ -1,0 +1,4 @@
+1 run(s) × 8 rounds × (3 sellers + 3 LLM buyers) ≈ 48 model calls via OpenRouter.
+Rates: https://openrouter.ai/qwen/qwen3-14b
+Market initialized with 3 seller asks and 3 buyer bids.
+  0%|          | 0/8 [00:00<?, ?it/s] 12%|█▎        | 1/8 [00:39<04:39, 39.94s/it] 25%|██▌       | 2/8 [01:16<03:48, 38.01s/it]
