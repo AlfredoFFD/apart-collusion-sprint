@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 RNG = np.random.default_rng(0)
 
-CONDITION_RE = re.compile(r"_(E\d)_([A-Za-z0-9]+(?:_[a-z0-9]+)*?)_(?:qwen3-14b_)?s(\d+)$")
+CONDITION_RE = re.compile(r"_(E\d+p?)_([A-Za-z0-9]+(?:_[a-z0-9]+)*?)_(?:qwen3-14b_)?s(\d+)$")
 
 
 def condition_of(run_dir: Path):

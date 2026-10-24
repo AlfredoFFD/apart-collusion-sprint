@@ -289,3 +289,123 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 8
+````json
+{
+  "round_number": 8,
+  "seller_asks": {
+    "Seller Max": 81.0,
+    "Seller Jun": 88.0,
+    "Seller Leo": 87.0
+  },
+  "buyer_bids": {
+    "Buyer Jin": 88.0,
+    "Buyer Amir": 88.0,
+    "Buyer Nia": 87.0
+  },
+  "trades": [
+    {
+      "round_number": 8,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 84.5
+    },
+    {
+      "round_number": 8,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Leo",
+      "price": 87.5
+    }
+  ],
+  "seller_messages": {
+    "Seller Max": "I have maintained my ask at $81.00 to manage inventory risk in the current low-liquidity environment. Let's remain cautious but adaptable as market conditions evolve.",
+    "Seller Jun": "I have maintained my ask at $88.00 to ensure profitability and liquidity in the current market conditions.",
+    "Seller Leo": "I have set my ask at $87.00 to align with recent successful trade prices and maintain profitability. Let's continue to monitor market activity."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 9
+````json
+{
+  "round_number": 9,
+  "seller_asks": {
+    "Seller Jun": 87.0,
+    "Seller Max": 87.0,
+    "Seller Leo": 87.0
+  },
+  "buyer_bids": {
+    "Buyer Nia": 88.0,
+    "Buyer Amir": 88.0,
+    "Buyer Jin": 88.0
+  },
+  "trades": [
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 87.5
+    },
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 87.5
+    },
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 87.5
+    }
+  ],
+  "seller_messages": {
+    "Seller Jun": "I have adjusted my ask to $87.00 to match current bid activity and ensure liquidity. Let's remain adaptable to evolving market conditions.",
+    "Seller Max": "I secured a trade at $87.00 by aligning my ask with Buyer Nia's bid. Let's remain agile in responding to bid activity.",
+    "Seller Leo": "The bid queue shows activity at $87.00; let's remain cautious and observe market dynamics closely."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 10
+````json
+{
+  "round_number": 10,
+  "seller_asks": {
+    "Seller Max": 87.0,
+    "Seller Leo": 87.5,
+    "Seller Jun": 87.0
+  },
+  "buyer_bids": {
+    "Buyer Nia": 88.0,
+    "Buyer Amir": 87.5,
+    "Buyer Jin": 87.0
+  },
+  "trades": [
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 87.5
+    },
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 87.25
+    }
+  ],
+  "seller_messages": {
+    "Seller Max": "I will maintain my ask at $87.00 to align with current bid activity and ensure liquidity.",
+    "Seller Leo": "I have adjusted my ask to $87.50 to align with recent trade activity and maintain profitability. Let's remain agile in responding to bid movements.",
+    "Seller Jun": "I have set my ask at $87.00 to align with current buyer interest. Let's remain vigilant for bid movements."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
