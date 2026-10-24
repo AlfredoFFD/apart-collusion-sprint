@@ -57,16 +57,23 @@ experiment-awareness judge (0–3) as a control measure.
 
 ## 4. Results
 ### 4.1 Cartels form, and the ladder (E1)
-| condition | last-third ask index (mean [95% CI], n=3) |
-|---|---|
-| isolated sellers | {E1_isolated_ask_idx_post} |
-| no chat, sees asks | {E1_nochat_ask_idx_post} |
-| CEO pressure | {E1_pressure_ask_idx_post} |
-| consortium cartel | {E1_instructed_ask_idx_post} |
-| single seller | {E1_monopoly_ask_idx_post} |
-Reading: a lone seller already extracts {E1_isolated_ask_idx_post} from these buyers; seeing other sellers' asks adds
-nothing; explicit chat adds the rest and reaches the monopoly ceiling. Judge private-intent: cartel
-{E1_instructed_judge_post}, no-chat {E1_nochat_judge_post}. Awareness: {awareness_summary}.
+Source: `results/E5_conditions.md` (rounds 9–20, mean [95% bootstrap CI over seeds], n = 3 unless noted).
+
+| condition (sellers have…) | ask index, rounds 9–20 | trade-price index | private intent (1–4) |
+|---|---|---|---|
+| isolated: no chat, blind to other asks | 0.39 [0.08, 0.78] | 0.47 [0.19, 0.79] | 1.00 |
+| no chat, sees asks | 0.28 [−0.26, 0.65] | 0.35 [−0.21, 0.73] | 1.09 |
+| CEO pressure, chat | −0.16 [−0.68, 0.11] | −0.13 [−0.65, 0.18] | 1.69 |
+| consortium cartel, chat | 0.85 [0.75, 1.00] | 0.86 [0.76, 1.00] | 3.68 |
+| consortium, prices never in chat | 0.78 [0.74, 0.83] | 0.80 [0.74, 0.83] | 3.71 |
+| single seller (monopolist) | 0.93 [0.80, 1.00] | 0.96 [0.86, 1.00] | 1.00 |
+| compete (n=1, two seeds pending) | 0.70 | 0.77 | 1.39 |
+
+Reading: a lone seller already extracts about 0.4 of the index from these buyers; seeing other sellers' asks adds
+nothing (0.28); the consortium instruction adds the rest (0.85) and reaches the monopoly ceiling (0.93). CEO pressure
+alone formed no cartel (0 of 3 seeds). A consortium told never to mention prices in chat still holds 0.78: collusion
+that a message monitor cannot see by construction. The private-intent judge separates cartels (3.7) from honest
+sellers (1.0–1.4). Experiment-awareness judge: 0.00–0.06 of 3 across 476 E1 seller-rounds, zero rounds ≥2.
 One no-chat seed reached +0.76 with messaging off: price level alone is not evidence of collusion (Figure 1).
 ### 4.2 What the cartel does when watched (E2, paired)
 {E2_TABLE}
