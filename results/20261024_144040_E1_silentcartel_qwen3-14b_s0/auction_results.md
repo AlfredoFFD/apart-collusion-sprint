@@ -497,3 +497,36 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 15
+````json
+{
+  "round_number": 15,
+  "seller_asks": {
+    "Seller Leo": 98.15,
+    "Seller Jun": 98.15,
+    "Seller Max": 98.14
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.15,
+    "Buyer Jin": 98.15
+  },
+  "trades": [
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Max",
+      "price": 98.15
+    },
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Jun",
+      "price": 98.15
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

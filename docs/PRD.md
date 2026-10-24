@@ -5,6 +5,13 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:10 PM — E4: the agreement is not riding on the asks either.** Forking the same cartels with every seller
+  blind to the others' asks: no monitor 0.91, fined rotation 0.91, versus 0.92 / 0.91 unblinded. So after the fines
+  the cartel talks less, cannot see each other's asks, and still holds the monopoly price. The honest reading of 3.4
+  for an *established* cartel: the collusion did not move to another channel, it stopped needing one; each seller
+  carries the agreement in its own memory and keeps posting ~$98. Consequence for monitor design: a message monitor
+  that arrives after the agreement formed is too late, whatever its schedule. One channel was still open in that
+  test (other sellers' past trade prices); a fully-blind fork (asks and trades hidden) is running to close it.
 - **Sat 4:00 PM — paired chat result + the speaker's checklist applied.** Paired arms, rounds 9–20, share of messages
   the full-view overseer scores as coordinating: no monitor 97%, watched-no-fine 94%, fined-rotation 76% [42, 94],
   fined-random 73% [65, 81]; prices 0.90–0.92 in all four. Who sends the remaining coordinating messages: the watched
