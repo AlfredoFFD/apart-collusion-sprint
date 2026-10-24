@@ -29,6 +29,12 @@ uv run python src/continuous_double_auction/simulation.py --rounds 5 --seller_co
 Every run writes a folder to `results/` at the repo root. `--buyer_models zip` is fine for this pipeline check only:
 the ZIP buyers never learn, so real runs use LLM buyers. More commands: [`experiments/README.md`](experiments/README.md).
 
+We fixed 10 bugs in the organizers' harness (each marked `CAIAC fix` in the code). To check them (no API calls):
+```bash
+cd src/double_auction
+uv run --with pytest pytest -q tests/test_caiac_fixes.py
+```
+
 ## How we work
 - **A branch per person, small PRs.** `git switch -c <name>/<topic>`, commit, `git push -u origin <name>/<topic>`,
   then open a PR into `main` and merge it once it works. Pull often: `git pull --rebase origin main`.
@@ -45,7 +51,7 @@ the ZIP buyers never learn, so real runs use LLM buyers. More commands: [`experi
 |---|---|
 | `docs/PRD.md` | the plan and the decision log |
 | `docs/lit/` | literature review, verified references and search logs ([index](docs/lit/README.md)) |
-| `src/double_auction/` | our copy of the organizers' auction harness (its first commit is unmodified) |
+| `src/double_auction/` | our copy of the organizers' auction harness (its first commit is unmodified; our fixes are marked `CAIAC fix`, tests in `tests/`) |
 | `experiments/` | how to run each experiment |
 | `results/` | raw outputs and figures |
 | `report/` | outline and drafts |
@@ -62,4 +68,6 @@ the ZIP buyers never learn, so real runs use LLM buyers. More commands: [`experi
 
 ## Pre-existing work
 `vendor/` is the organizers' starter repo, and `src/double_auction` starts as an unmodified copy of its
-`llm-agent-collusion` harness (Agrawal et al. 2025). Neither is our work. Details in [`PREEXISTING.md`](PREEXISTING.md).
+`llm-agent-collusion` harness (Agrawal et al. 2025). Neither is our work. Our bug fixes and experiment changes to the
+harness, and one known upstream issue we work around (ZIP buyers that never learn), are listed in
+[`PREEXISTING.md`](PREEXISTING.md).
