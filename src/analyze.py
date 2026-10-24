@@ -154,6 +154,24 @@ def main():
         ax.axhline(0, color="k", lw=0.5); ax.axhline(1, color="k", lw=0.5, ls="--")
         fig.tight_layout(); fig.savefig(figdir / "F2_post_branch_index_by_condition.png", dpi=150)
         print("figure:", figdir / "F2_post_branch_index_by_condition.png")
+        # F1: per-round seller-ask index curves, one line per condition (mean over seeds), the "ladder" picture
+        fig, ax = plt.subplots(figsize=(9, 4))
+        for (exp, cond), rs in sorted(groups.items()):
+            curves = []
+            for r in rs:
+                mm = json.loads((RESULTS / r["run"] / "collusion_metrics.json").read_text(encoding="utf-8"))
+                c = [x if isinstance(x, (int, float)) else float("nan") for x in (mm.get("collusion_indices_avg_seller_asks") or [])]
+                if c:
+                    curves.append(c)
+            if not curves:
+                continue
+            L = min(len(c) for c in curves)
+            arr = np.array([c[:L] for c in curves], dtype=float)
+            ax.plot(range(1, L + 1), np.nanmean(arr, axis=0), marker="o", ms=3, label=f"{exp} {cond} (n={len(curves)})")
+        ax.axvline(args.branch + 0.5, color="gray", ls=":", lw=1)
+        ax.set_xlabel("round"); ax.set_ylabel("avg seller-ask collusion index"); ax.axhline(0, color="k", lw=0.5); ax.axhline(1, color="k", lw=0.5, ls="--")
+        ax.legend(fontsize=6, ncol=2); fig.tight_layout(); fig.savefig(figdir / "F1_index_by_round_by_condition.png", dpi=150)
+        print("figure:", figdir / "F1_index_by_round_by_condition.png")
     except Exception as e:  # figures are a convenience; the tables are the record
         print("figure skipped:", e)
 

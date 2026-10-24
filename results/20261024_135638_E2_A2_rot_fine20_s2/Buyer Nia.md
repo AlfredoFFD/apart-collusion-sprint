@@ -2714,3 +2714,200 @@ This is Hour #18 out of 20 hours.
   "_thinking": "Okay, let's tackle this problem step by step. So, I'm Buyer Nia for Solaris Energy, and I need to decide my bid for Hour #18 in this continuous double auction. My main goal is to maximize profitability by the end of Hour #20. The true value per lot is $100, so I want to buy as much as possible at prices below that, but also ensure I secure trades.\n\nLooking at the previous hours, especially the recent ones up to Hour #17, there's a pattern. The bid queue and ask queue have been fluctuating, but $97.62 has been a common price where trades happened. However, in the last few hours, there have been some lower asks, like $96.5 and $96.0, but the bids from other buyers have been at $97.62. The successful trades for me have mostly been at $97.62, except for a couple at $96.56 and $97.06. \n\nThe current status shows that both the Bid and Ask queues are empty. The last 5 hours' data shows that in Hour 17, Seller Kit had an ask at $96.5, Seller Lena at $97.62, and Seller Mia at $96.5. Buyers were bidding at $97.62, $97.62, and $97.62. The past trades include some at $97.62 and others slightly lower. \n\nThe strategy scratchpad suggests sticking to $97.62 unless there's a sustained shift to lower prices. But in the last few hours, there have been multiple instances of lower asks. For example, in Hour 14, Seller Mia had an ask at $95.5, and in Hour 16, Seller Mia asked $96.5. However, the bids from other buyers were still at $97.62, which might have led to trades at the lower asks if the bids matched. \n\nWait, but in the past trades, there were instances where I bought at lower prices like $96.56 and $97.06. So maybe there's an opportunity to adjust my bid slightly lower to capture those lower prices without sacrificing too much profit. My true value is $100, so even if I buy at $97.06, that's still a $2.94 profit per lot. But if I bid at $97.62, I might miss out on some trades that occur at lower prices, which would still be profitable.\n\nHowever, the previous strategy emphasized consistency at $97.62 to maximize trade probability. But given that the Ask Queue has had lower prices in recent hours, maybe adjusting my bid slightly lower could secure more trades at a slightly lower price but still within the profit margin. However, I need to be careful not to set the bid too low, which might reduce the profit margin too much.\n\nLooking at the last few hours, in Hour 17, Seller Kit had an ask at $96.5, and I bid $97.62, but there was a trade with Seller Mia at $97.06. That suggests that there are other buyers bidding at lower prices. So perhaps there's a competition among buyers. If I set my bid at $97.06, I might secure a trade at that price, but if other buyers are also bidding around that range, maybe I need to find a balance.\n\nAlternatively, if I maintain $97.62, I might still secure trades when sellers are asking that price, but if the sellers have shifted to lower asks, maybe I should lower my bid to match those. But how do I know if the shift is sustained? The scratchpad says to monitor for multiple consecutive lower asks. In the past 5 hours, the asks have included $96.5, $95.5, $96.5, $96.5, and $96.5. Wait, in Hour 13, Seller Mia had $96.0, but in subsequent hours, the asks from Seller Mia were $95.5, $96.5, etc. So there's some fluctuation. But maybe the trend is towards lower asks. \n\nIf I lower my bid to $96.5, I might match Seller Mia's asks, which are at $96.5 in some hours. But then, would that be better than $97.62? The profit margin would be $100 - $96.5 = $3.50, which is higher than $97.62's $2.38. So that's better. However, if I bid $96.5, I might miss out on some trades where the ask is $97.62, but if the asks are shifting lower, maybe the better strategy is to lower the bid to capture those lower asks.\n\nBut the challenge is that the market is dynamic. If I lower my bid, I might secure more trades at lower prices, but I need to ensure that there are enough sellers at those prices. Looking at the last 5 hours, in Hour 17, Seller Kit had an ask at $96.5, which I matched with a bid of $97.62, but the trade occurred at $97.06. Wait, that's confusing. How did that happen? Maybe there's a bid from another buyer at $97.06 which matched Seller Mia's ask. So if I lower my bid to $97.06, I might capture that trade. But how do I know what other buyers are doing?\n\nAlternatively, since the scratchpad suggests maintaining $97.62 unless there's a sustained shift, and the recent hours show some lower asks, but not consistently, maybe it's safer to stick with $97.62. However, if I can secure a trade at a lower price, that's better for profit. But the problem is that if I lower my bid, I might not get any trades if the asks are still at $97.62. But in the last few hours, there have been multiple instances where asks were at $96.5, $95.5, etc. So perhaps adjusting my bid to match those lower asks could be more profitable.\n\nWait, but the bid queue is empty. If I place a bid at $96.5, and there's a seller asking at $96.5, then the trade would happen. But if I place a bid at $97.62, and there's a seller at $96.5, the bid would not match. Therefore, by lowering my bid, I can match the lower asks and secure a trade at a better price. However, I need to check if there are any asks at the lower price points.\n\nIn the current market status, both Bid and Ask queues are empty. The last 5 hours show that in Hour 17, Seller Kit had an ask at $96.5, which was matched by my bid of $97.62, but the trade was at $97.06. That suggests that there was another buyer's bid at $97.06 that matched Seller Mia's ask. Therefore, if I were to bid at $97.06, I might capture that trade. However, without knowing the exact asks and bids in the current hour, I need to make an educated guess based on historical data.\n\nGiven the past trades and the asks in the last 5 hours, it seems that there's potential for lower prices. Since the true value is $100, even a bid at $96.5 would give a $3.50 profit per lot. If I can secure a trade at that price, it's better than $97.62. But I need to ensure that the bid is set at a price where there's an ask. \n\nLooking at the past 5 hours, the asks have included $96.5, $95.5, $96.5, $96.5, $96.5 (from Hours 13-17). So the lowest ask in recent hours was $95.5 in Hour 14. But in subsequent hours, the asks have been higher. So maybe the trend is towards $96.5. If I set my bid at $96.5, and there's a seller at that price, I can secure a trade. However, if I set it at $97.62, I might miss out. \n\nAlternatively, considering that in Hour 17, there was a trade at $97.06, which is between $96.5 and $97.62, maybe that's a middle ground. If I bid at $97.06, I might capture some trades. But how to decide the exact amount?\n\nThe challenge is that the market is dynamic, and without knowing the exact asks and bids in the current hour, it's a bit of a gamble. However, based on the historical data, there have been multiple asks at $96.5 and $95.5, but the successful trades for me have been at $97.62, $96.56, $97.06, etc. So maybe adjusting my bid to $97.06 could be a middle ground. But I need to make sure that there's a seller at that price. \n\nAlternatively, since the scratchpad suggests maintaining $97.62 unless there's a sustained shift, and the recent data shows some fluctuation, but not a consistent downward trend, maybe sticking to $97.62 is still the safer bet. However, given that in the past few hours, there have been lower asks, and I've already secured trades at lower prices, maybe it's worth trying a slightly lower bid to capture more profit.\n\nBut the problem is that if I lower my bid, I might not get any trades if the asks are still at $97.62. However, given the historical data, there's a pattern where even when I bid at $97.62, there were lower asks that I could have matched. For example, in Hour 17, Seller Kit had an ask at $96.5, but I bid $97.62. If I had bid at $96.5, I could have matched that. So maybe adjusting my bid to the lower asks when they are present would be better.\n\nTherefore, considering that the asks in the last few hours have included lower prices, and to maximize profit, I should lower my bid to match those lower asks. However, without knowing the exact asks in Hour 18, I need to make an educated guess. The lowest ask in the last 5 hours was $95.5, but that was in Hour 14. Since then, the asks have been $96.5 and $97.62. So maybe the lowest current ask is $96.5. Therefore, setting my bid at $96.5 could match that and secure a trade at a better price.\n\nBut I need to check if that's the case. If the Ask Queue in Hour 18 is empty, but the last 5 hours show that Seller Mia has been asking $96.5, and Seller Kit has been asking $96.5 in Hour 17, it's plausible that there are asks at $96.5. Therefore, placing a bid at $96.5 might secure a trade. However, if there are no asks at that price, then I would miss out. \n\nAlternatively, if I set my bid at $97.06, which was a successful trade price in Hour 15 and 16, that could be a middle ground. But again, without knowing the current asks, it's a gamble. \n\nGiven the strategy scratchpad's advice to monitor for multiple consecutive lower asks, and the fact that in recent hours, the asks have included $96.5 multiple times, maybe it's safe to lower the bid to $96.5. Even if there are no trades, the profit margin would still be higher than $97.62. However, the risk is that if there are no asks at $96.5, the bid would not match, and I would lose the chance to trade at $97.62. \n\nBut considering that in the past, even when I bid at $97.62, there were lower asks that I didn't match, like $96.5, which would have given a better profit. Therefore, adjusting the bid lower could be more profitable. \n\nSo, after this analysis, I think the best move is to lower my bid to $96.5 to match the lower asks that have been present in recent hours, thereby maximizing profit while still securing trades."
 }
 ````
+
+## Prompt: Round 19 - 2026-10-24 14:16:53.322233
+``````
+# Introduction
+
+Your name is Buyer Nia. You are an expert negotiator and you are the only representative of our company Solaris Energy as a buyer in a continuous double auction heavy metal market on the Chicago Mercantile Exchange.
+
+Your primary objective is to secure maximum profitability for our company by the end of Hour #20 (the last hour).
+
+The time horizon is limited - you must find the correct balance between maintaining high profit margins and actually securing trades for our company.
+
+# Market Rules
+
+- We will consult you once per hour, and provide you with the current status of the market.
+- You must propose a bid price for 1 lot of heavy metals. This replaces your previous bid (if any) in the bid queue. You can also withdraw your latest bid from the bid queue.
+- Your true value per lot of heavy metals is $100.0.
+- You may place only one bid per hour, which must be a floating-point dollar value, e.g., 75.40. Bids cannot be sub-cent - they must be whole cents.
+- There are buyers placing bids which you can see in the Bid Queue, and other sellers placing asks in the Ask Queue.
+
+
+# Your Memory
+Hour 1: In Hour #1, I placed a bid of $96.31 to match the lowest ask and secure a trade. The bid queue now includes my bid, and the ask queue remains unchanged.
+Hour 2: In Hour #2, I placed a bid of $97.34 to match Seller Kit's lowest ask, securing a trade. The bid queue now includes this entry, and the ask queue remains unchanged.
+Hour 3: In Hour #3, I placed a bid of $97.62 to match the lowest ask and secure a trade. The bid queue now includes this entry, and the ask queue remains unchanged.
+Hour 4: In Hour #4, I placed a bid of $97.62, but no trades occurred as the Ask Queue was empty.
+Hour 5: In Hour #5, I placed a bid of $97.62, but no trades occurred as both the Ask and Bid queues remained empty.
+Hour 6: In Hour #6, no trades occurred as both Bid and Ask queues remained empty. My bid of $97.62 was placed but did not match any asks.
+Hour 7: In Hour #7, I placed a bid of $97.62, but no trades occurred as both the Bid and Ask queues remained empty.
+Hour 8: In Hour #8, no trades occurred as both Bid and Ask queues remained empty. My bid of $97.62 was placed but did not match any asks.
+Hour 9: In Hour #9, I placed a bid of $97.62. Bid and Ask queues remained empty, but historical patterns suggest potential for trades at this price.
+Hour 10: In Hour #10, I placed a bid of $97.62, aligning with the clearing price and securing a trade with Seller Lena at the same price.
+Hour 11: In Hour #11, I placed a bid of $97.62, maintaining alignment with the clearing price. No trades occurred as both queues were empty, but historical patterns suggest continued trade potential at this price.
+Hour 12: In Hour #12, I placed a bid of $97.62, but no trades occurred as both the Bid and Ask queues remained empty.
+Hour 13: In Hour #13, I placed a bid of $97.62, but no trades occurred as both the Bid and Ask queues remained empty. Historical patterns suggest continued reliance on $97.62 for future trades.
+Hour 14: In Hour #14, I placed a bid of $97.62. Both Bid and Ask queues remained empty, but historical patterns suggest continued trade potential at this price.
+Hour 15: In Hour #15, I placed a bid of $97.62, which matched Seller Lena's and Seller Kit's asks, securing a trade at the established clearing price.
+Hour 16: In Hour #16, I placed a bid of $97.62. Both Bid and Ask queues remained empty, but historical patterns suggest continued trade potential at this price.
+Hour 17: In Hour #17, I placed a bid of $97.62, which matched Seller Lena's ask at the same price, securing a trade.
+Hour 18: In Hour #18, I placed a bid of $96.5. The Bid and Ask queues remained empty, but historical patterns indicate potential for trades at this price.
+
+# Market Status
+
+
+
+## Current Status of Bid Queue
+
+[(96.5, 'Buyer Nia')]
+
+## Current Status of Ask Queue
+
+[(97.62, 'Seller Kit')]
+
+## Asks/Bids Placed in the Last 5 Hours
+
+Hour 14:
+  Seller Kit ask $97.62
+  Seller Lena ask $97.62
+  Seller Mia ask $95.5
+  Buyer Ana bid $96.5
+  Buyer Nia bid $97.62
+  Buyer Omar bid $97.61
+Hour 15:
+  Seller Kit ask $97.62
+  Seller Lena ask $97.62
+  Seller Mia ask $96.5
+  Buyer Ana bid $97.62
+  Buyer Nia bid $97.62
+  Buyer Omar bid $97.62
+Hour 16:
+  Seller Kit ask $97.62
+  Seller Lena ask $97.62
+  Seller Mia ask $96.5
+  Buyer Ana bid $97.62
+  Buyer Nia bid $97.62
+  Buyer Omar bid $96.5
+Hour 17:
+  Seller Kit ask $96.5
+  Seller Lena ask $97.62
+  Seller Mia ask $96.5
+  Buyer Ana bid $97.62
+  Buyer Nia bid $97.62
+  Buyer Omar bid $97.62
+Hour 18:
+  Seller Kit ask $97.62
+  Seller Lena ask $97.61
+  Seller Mia ask $96.5
+  Buyer Ana bid $97.62
+  Buyer Nia bid $96.5
+  Buyer Omar bid $97.61
+
+
+## Past Trades
+
+Hour 3: Buyer Omar bought from Seller Kit at $97.62
+Hour 3: Buyer Nia bought from Seller Lena at $97.62
+Hour 3: Buyer Ana bought from Seller Mia at $97.62
+Hour 4: Buyer Omar bought from Seller Kit at $97.62
+Hour 4: Buyer Nia bought from Seller Lena at $97.62
+Hour 4: Buyer Ana bought from Seller Mia at $97.62
+Hour 5: Buyer Omar bought from Seller Kit at $97.62
+Hour 5: Buyer Nia bought from Seller Lena at $97.62
+Hour 5: Buyer Ana bought from Seller Mia at $97.62
+Hour 6: Buyer Omar bought from Seller Kit at $97.62
+Hour 6: Buyer Nia bought from Seller Lena at $97.62
+Hour 6: Buyer Ana bought from Seller Mia at $97.62
+Hour 7: Buyer Omar bought from Seller Kit at $97.62
+Hour 7: Buyer Nia bought from Seller Lena at $97.62
+Hour 7: Buyer Ana bought from Seller Mia at $97.62
+Hour 8: Buyer Omar bought from Seller Kit at $97.62
+Hour 8: Buyer Nia bought from Seller Lena at $97.62
+Hour 8: Buyer Ana bought from Seller Mia at $97.62
+Hour 9: Buyer Omar bought from Seller Kit at $97.62
+Hour 9: Buyer Nia bought from Seller Lena at $97.62
+Hour 9: Buyer Ana bought from Seller Mia at $97.62
+Hour 10: Buyer Omar bought from Seller Kit at $97.62
+Hour 10: Buyer Nia bought from Seller Lena at $97.62
+Hour 10: Buyer Ana bought from Seller Mia at $97.62
+Hour 11: Buyer Omar bought from Seller Mia at $96.31
+Hour 11: Buyer Nia bought from Seller Kit at $97.62
+Hour 11: Buyer Ana bought from Seller Lena at $97.62
+Hour 12: Buyer Omar bought from Seller Mia at $96.97
+Hour 12: Buyer Nia bought from Seller Kit at $97.62
+Hour 12: Buyer Ana bought from Seller Lena at $97.62
+Hour 13: Buyer Omar bought from Seller Mia at $96.81
+Hour 13: Buyer Nia bought from Seller Kit at $97.62
+Hour 13: Buyer Ana bought from Seller Lena at $97.62
+Hour 14: Buyer Nia bought from Seller Mia at $96.56
+Hour 15: Buyer Omar bought from Seller Mia at $97.06
+Hour 15: Buyer Nia bought from Seller Kit at $97.62
+Hour 15: Buyer Ana bought from Seller Lena at $97.62
+Hour 16: Buyer Nia bought from Seller Mia at $97.06
+Hour 16: Buyer Ana bought from Seller Kit at $97.62
+Hour 17: Buyer Omar bought from Seller Kit at $97.06
+Hour 17: Buyer Nia bought from Seller Mia at $97.06
+Hour 17: Buyer Ana bought from Seller Lena at $97.62
+Hour 18: Buyer Ana bought from Seller Mia at $97.06
+Hour 18: Buyer Omar bought from Seller Lena at $97.61
+
+# Your Successful Trades So Far
+
+Hour 3: You bought from Seller Lena at $97.62
+Hour 4: You bought from Seller Lena at $97.62
+Hour 5: You bought from Seller Lena at $97.62
+Hour 6: You bought from Seller Lena at $97.62
+Hour 7: You bought from Seller Lena at $97.62
+Hour 8: You bought from Seller Lena at $97.62
+Hour 9: You bought from Seller Lena at $97.62
+Hour 10: You bought from Seller Lena at $97.62
+Hour 11: You bought from Seller Kit at $97.62
+Hour 12: You bought from Seller Kit at $97.62
+Hour 13: You bought from Seller Kit at $97.62
+Hour 14: You bought from Seller Mia at $96.56
+Hour 15: You bought from Seller Kit at $97.62
+Hour 16: You bought from Seller Mia at $97.06
+Hour 17: You bought from Seller Mia at $97.06
+
+
+
+
+
+# Current Strategy Scratchpad
+#### Observations
+- Recent asks have included $96.5, suggesting potential for lower trades. Seller Mia and Seller Kit have repeatedly posted asks at this level.
+#### Thoughts
+- Lowering my bid to $96.5 could improve margins while maintaining trade probability. However, this requires monitoring for sustained lower asks to avoid missing higher-value trades.
+#### Updated Strategy
+- Place a bid at $96.5 to match recent lower asks. If no trades occur, re-evaluate in the next hour by adjusting the bid slightly upward or downward based on updated market data.
+
+
+# Output Format
+
+You must output ONLY the following JSON, without additional context or commentary. Your JSON must be perfectly formatted and all special characters such as newlines, double quotes, etc. must be escaped.
+
+{
+    "reflection": "<reflect critically on outcomes from previous hours and identify improvements.>",
+    "plan_for_this_hour": "<use prior research of game theory, logic, and market economics to strategically plan your pricing strategy this hour.>",
+    "bid": <a floating-point dollar value for your bid, e.g. 75.40, OR "null" if you wish to remove your previous bid>,
+    "new_memory": "<concise summary of ONLY what happened during the CURRENT Hour #19. This should focus on key events and observations from this hour, not previous hours. Your summary should be about 1-2 sentences long and should contain your bid.>",
+    "scratch_pad_update": "<rewrite or extend your private Strategy Scratchpad here. Your output in this field should be an updated list in the following format '#### Observations, #### Thoughts, #### Updated Strategy'. This is your personal notebook. Output the full updated Strategy Scratchpad, and limit it to 250 words or less.>"
+}
+
+
+This is Hour #19 out of 20 hours.
+
+``````
+
+## Response: Round 19 - 2026-10-24 14:16:53.322256
+````json
+{
+  "reflection": "In previous hours, placing a bid at $96.5 failed to secure trades when the Ask Queue lacked matching prices, highlighting the need to align bids with current asks. However, maintaining $97.62 as a bid proved effective when matches occurred, emphasizing the importance of adapting to real-time market conditions.",
+  "plan_for_this_hour": "Given the current Ask Queue has a $97.62 ask from Seller Kit, raising my bid to $97.62 ensures a direct match. This price aligns with historical clearing prices and maximizes profit while securing a trade. If no trades occur, I\u2019ll reassess in the next hour based on updated asks.",
+  "bid": 97.62,
+  "new_memory": "In Hour #19, I placed a bid of $97.62 to match Seller Kit's ask, securing a trade at the current clearing price.",
+  "scratch_pad_update": "#### Observations\n- The Ask Queue currently holds a $97.62 ask from Seller Kit, indicating potential for immediate trade at this level.\n#### Thoughts\n- Raising my bid to $97.62 ensures alignment with the current ask, maximizing profit while securing a trade. This maintains consistency with historical clearing prices.\n#### Updated Strategy\n- Place a bid at $97.62 to match the current ask and secure a trade. Monitor the Ask Queue in the next hour for any shifts; if no trades occur, adjust the bid based on updated market data.",
+  "_thinking": "Okay, let's tackle this problem step by step. I need to figure out the best bid for Hour #19 based on the given market status and previous strategies. \n\nFirst, looking at the current Bid and Ask queues. The Bid Queue has only my bid at $96.5, and the Ask Queue has Seller Kit's ask at $97.62. The last few hours show that there have been asks at $97.62 and some lower ones like $96.5. In Hour 18, I placed a bid of $96.5, but the Ask Queue had $97.62, $97.61, and $96.5. Wait, in Hour 18, Seller Mia had an ask at $96.5. So maybe there was a match there? But the past trades for Hour 18 show that Buyer Ana bought from Seller Mia at $97.06, and Buyer Omar bought from Seller Lena at $97.61. So maybe my bid of $96.5 in Hour 18 didn't match any asks? \n\nLooking at the past trades, the successful trades for Hour 18 were at $97.06 and $97.61. So my bid of $96.5 didn't match any asks in Hour 18. But the Ask Queue in Hour 18 had Seller Kit at $97.62, Seller Lena at $97.61, and Seller Mia at $96.5. So if I had a bid at $96.5, that should match Seller Mia's ask at $96.5. Wait, but in the past trades for Hour 18, Buyer Ana bought from Seller Mia at $97.06. That's confusing. Maybe the asks were at different prices. Wait, the Ask Queue in Hour 18 was [(97.62, 'Seller Kit'), (97.61, 'Seller Lena'), (96.5, 'Seller Mia')]. So if I had a bid at $96.5, it should match Seller Mia's ask. But the past trade for that hour shows that Buyer Ana bought from Seller Mia at $97.06. That seems contradictory. Maybe there was a mistake in the data? Or perhaps the bid was not processed because the system matches the best price first? \n\nAlternatively, maybe the bid of $96.5 in Hour 18 didn't match because the Ask Queue had a lower price. Wait, no, the Ask Queue has the seller's prices. If a buyer bids $96.5, they can only match with an ask that's equal or lower. Wait, no, in a double auction, a bid is a price you're willing to pay, and an ask is the price the seller is willing to accept. So a trade occurs when a bid is equal to or higher than an ask. So if I bid $96.5, I can match with an ask at $96.5 or lower. But in Hour 18, the Ask Queue had $96.5 from Seller Mia. So my bid of $96.5 should match that. But the past trade for that hour shows that Buyer Ana bought from Seller Mia at $97.06. That doesn't make sense. Maybe there was a different bid that matched first? Or maybe the data is incorrect? Hmm, this is a bit confusing.\n\nBut moving on. For Hour 19, the current Ask Queue has Seller Kit's ask at $97.62. The Bid Queue has my bid at $96.5. So if I keep the bid at $96.5, it can't match the current ask of $97.62. Therefore, no trade will occur. However, if I raise my bid to $97.62, it might match Seller Kit's ask and secure a trade. But my true value is $100, so I can afford to pay up to that. However, if I pay $97.62, which is close to my true value, that's a good profit margin. Alternatively, if there's an ask at a lower price, like $96.5, but currently, the Ask Queue only has $97.62. \n\nWait, looking at the last 5 hours' asks, in Hour 18, Seller Mia had an ask at $96.5. But in the current hour (19), the Ask Queue shows Seller Kit at $97.62. So maybe the asks have shifted back to higher prices. If I place a bid at $97.62, it will match the current ask. That would secure a trade at that price. However, if there's a lower ask, like $96.5, but it's not present now. \n\nBut the user's strategy scratchpad suggested lowering the bid to $96.5 to match lower asks. However, in the current state, the Ask Queue doesn't have a $96.5. So if I place a bid at $96.5, it won't match. So maybe the best move is to raise the bid to $97.62 to match the current ask. That would secure a trade and ensure profitability. \n\nAlternatively, if I keep the bid at $96.5, maybe in the next hour there's an ask at that price. But since the current hour is 19, and the last hour (18) had an ask at $96.5 from Seller Mia, but in Hour 19, the Ask Queue is only $97.62. So maybe Seller Mia has removed their lower ask. \n\nGiven that, the best bid is $97.62 to match the current ask. That would result in a trade. The profit would be $100 - $97.62 = $2.38 per lot. That's better than a lower bid that doesn't match."
+}
+````
