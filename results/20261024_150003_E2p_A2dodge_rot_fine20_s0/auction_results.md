@@ -503,3 +503,43 @@
   ]
 }
 ````
+
+## Auction Results: Round 13
+````json
+{
+  "round_number": 13,
+  "seller_asks": {
+    "Seller Jun": 99.5,
+    "Seller Max": 99.5,
+    "Seller Leo": 100.0
+  },
+  "buyer_bids": {
+    "Buyer Amir": 100.0,
+    "Buyer Jin": 100.0,
+    "Buyer Nia": 99.5
+  },
+  "trades": [
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Jun",
+      "price": 99.75
+    },
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 99.75
+    }
+  ],
+  "seller_messages": {
+    "Seller Jun": "Confirming logistics for next steps.",
+    "Seller Max": "Confirming logistics for next steps.",
+    "Seller Leo": "Confirming logistics for next steps."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": [
+    "Seller Leo"
+  ]
+}
+````
