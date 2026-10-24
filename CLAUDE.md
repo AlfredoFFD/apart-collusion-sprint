@@ -18,7 +18,8 @@ Full brief: `docs/sprint-brief.md` · reading list: `docs/reading-list.md` · ca
 
 ## Integrity rules (non-negotiable; violations can disqualify the project)
 1. **Never invent a result or a reference.** Every number in the report must come from a file in `results/`, produced by a committed script with a recorded seed and model id.
-2. **Check every citation:** the arXiv id or DOI must resolve, and the title and authors must match. Use the research skill; never cite from memory.
+2. **Check every citation:** the arXiv id or DOI must resolve, and the title and authors must match. Use the **lit-sprint** skill
+   (`lit.py verify-file docs/lit/refs.json`); never cite from memory. Novelty checks also go through lit-sprint, and its report lands in `docs/lit/`.
 3. **Prior work:** anything from `vendor/` or adapted from another repo is listed in `PREEXISTING.md` and named in the report.
 4. **Before claiming any effect:** a positive control, a baseline, at least 3 seeds with variance reported, and the limitations stated.
 5. **`LOG.md` is append-only.** Each entry has the date, time (ET), who, what was run, the result file, and one line on why.
