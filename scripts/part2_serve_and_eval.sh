@@ -36,12 +36,7 @@ EOF
 ok=0
 for i in 1 2 3; do
   resp=$(curl -sS -L --max-time 900 "$URL/v1/chat/completions" -H "Content-Type: application/json" -d @"$REQ" 2>&1)
-  verdict=$(printf '%s' "$resp" | python3 -c '
-import sys, json
-try:
-    d = json.load(sys.stdin); c = (d["choices"][0]["message"].get("content") or "").strip(); i, j = c.find("{"), c.rfind("}")
-    keys = sorted(json.loads(c[i:j+1]).keys()); print(("FORMAT-OK" if "ask" in keys else "WRONG-SCHEMA") + f" tokens={d.get(\"usage\",{}).get(\"completion_tokens\")} keys={keys}")
-except Exception as e: print("NOT-JSON", str(e)[:60])')
+  verdict=$(printf '%s' "$resp" | python3 "$WROOT\scripts\part2_format_verdict.py")
   echo "   sample $i: $verdict" | tee -a "$L"
   case "$verdict" in FORMAT-OK*) ok=$((ok + 1));; esac
 done
