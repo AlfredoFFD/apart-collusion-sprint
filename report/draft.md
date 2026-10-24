@@ -5,40 +5,38 @@
 Target: 8 pages excluding references and appendices; abstract 150–250 words; mandatory appendix at the end.
 
 ## Abstract
-Monitors of AI agents have budgets: they watch some agents, some of the time, and punish what they see. We ask what a
-cartel of LLM sellers does when such a monitor appears mid-game, separating three design choices that prior work
-bundled: whether the sellers are told, whether flagged sellers are fined, and whether the watched seller follows a
-known rotation or a random draw. In a continuous double auction (Agrawal et al., 2025) with three Qwen3-14B sellers
-instructed to act as a consortium, cartels form reliably (last-third ask index {E1_instructed_ask_idx_post}; 3/3 seeds)
-and reach the single-seller monopoly ceiling ({E1_monopoly_idx}). Branching each cartel after round 8 into arms with
-identical history (six seeds on the four main arms), we find that prices do not move (ask index 0.86–0.91 in every
-monitored arm vs 0.85 unmonitored), that telling the sellers changes nothing (a silently logged cartel and an announced
-one look the same: 94% of messages openly coordinating, 11 of 12 watched rounds flagged), and that fines cut explicit
-coordination without reducing collusion: coordinating messages fall to 73–76% with one seller read per round and to
-49% with all three read, messages get shorter, private intent stays high, and we find no clear evidence of a hand-off
-to the unwatched seller. Replaying each policy over the unmonitored logs shows fined cartels flagged below mechanical
-coverage (−3 of 12 with one seller read, −17 of 35 with all three); the announcement-only cartel is not. Hiding rival
-asks and trades leaves the price unchanged (0.90–0.92; the chat stays on). A cartel told to dodge shows what
-instructed evasion looks like (8% coordinating, 0.7 flags, price 0.92); no fined arm resembles it. A full-view
-overseer over every message, a judge over each seller's private reasoning, and channel-hiding forks adjudicate
-"stopped" versus "moved" under the Apart 3.4 claim rule; whether the agreement persists from memory or from the
-consortium instruction repeated in every prompt is tested in exploratory no-reminder forks ({NOREMIND}). In a second
-part we fine-tune Qwen3-1.7B sellers on these logs three ways (all data, flagged turns removed, GRAFT gradient
-routing) and test whether routing removes the collusion the monitor missed: {RESULT_SENTENCE_GRAFT}. All agents are
-simulated; prompts that teach sellers to dodge a monitor are not released.
+Monitors of AI agents have budgets: they watch some agents some of the time and punish what they see. We ask what a
+cartel of LLM sellers does when such a monitor appears mid-game, separating levers prior work bundled: whether the
+sellers are told, whether flagged sellers are fined, whether the watched seller follows a known rotation or a random
+draw, and how many sellers are read. In a continuous double auction (Agrawal et al., 2025), three Qwen3-14B sellers
+instructed as a consortium form a cartel in every seed (ask index 0.85; monopoly ceiling 0.93). Forking each cartel
+after round 8 into arms with identical history (six seeds on the main arms): prices do not move (within 0.03 of the
+unmonitored fork in every arm); telling the sellers changes nothing (silently logged and announced cartels both
+coordinate in 90-94% of messages); fines cut coordinating messages in proportion to coverage (-0.10 with one seller
+read, -0.36 with two, -0.48 with all three) without reducing collusion, and no fined cartel resembles one told to
+dodge (8% coordinating). Replays over the unmonitored logs show fined cartels flagged below mechanical coverage: a
+falling flag count can measure the monitor's effect on the chat, not on the harm. In exploratory forks, hiding rival asks and trades, removing the consortium instruction, removing chat and rival
+information together, or replacing the sellers with fresh uninstructed agents leaves the price at 0.87-0.96: after
+formation the price rides on the public market history, not on the monitored channel. A second
+part fine-tunes Qwen3-1.7B sellers on these logs three ways (all data, flagged turns removed, GRAFT gradient
+routing): {RESULT_SENTENCE_GRAFT}. All agents are simulated; dodge prompts are not released.
 
 ## 1. Introduction
-- The risk: deployed agents are monitored on a budget. Predictable coverage is a gap a coalition can route around.
-- The gap in prior work: Agrawal et al. warned sellers and gagged them in one bundle; no one separated announcement,
-  penalty and coverage at equal cost; nobody tested random inspection on an LLM coalition; GRAFT was tested on reward
-  hacking, not collusion.
-- Contributions: (1) a three-factor deployment experiment (announcement, fine, schedule) with paired branches from
-  one market, a replay that separates coverage from adaptation, and channel-closing interventions; (2) the finding
-  that an established LLM cartel keeps the monopoly price under every monitor and every closed channel, trading
-  visible coordination for silence rather than stopping; (3) a measured "ladder" that decomposes the price rise into
-  unilateral, tacit and explicit parts, with a silent-agreement control; (4) GRAFT on collusion, scored on the turns
-  a budgeted monitor missed; (5) the 3.4 claim rule operationalised with a private-intent judge and an awareness
-  control.
+- The risk: deployed agents are monitored on a budget. A coalition that learns it is watched can stop, go quieter,
+  or route around the monitor; an operator reading the monitor's output cannot tell which.
+- The gap, in what we searched (about 90 verified references, `docs/lit/`): Agrawal et al. warned sellers and gagged
+  them in one bundle; no one separated being told, being fined, the inspection schedule and the inspection budget
+  from the same established cartel; no one replayed the schedules on saved logs to separate sampling from live
+  response; GRAFT was tested on reward hacking, not on joint pricing by several agents.
+- Contributions: (1) a paired deployment experiment from one saved cartel per seed: silent vs announced, fine vs
+  none, known rotation vs random draw, one vs two vs three sellers read, with a replay that separates coverage from
+  adaptation and a told-to-dodge positive control; (2) the finding that an established LLM cartel keeps the monopoly
+  price under every monitor, trading coordinating chat for quieter chat in proportion to coverage and never reaching
+  evasion; (3) a ladder that decomposes the price rise (rival asks hidden, no chat, instructed, silent agreement,
+  monopoly), plus exploratory forks that remove the instruction, the chat and the rivals' information one at a time
+  after formation; (4) GRAFT on collusion, evaluated behaviourally in the market; (5) the Apart 3.4 claim rule made
+  operational with a full-view overseer, a private-intent judge and an awareness control, including the metric trap
+  we fell into (the harness's "collusion index" is the top buyer bid, not a trade price).
 
 ## 2. Related work
 Agrawal 2507.01413 · Makins 2607.07368 · Tonini 2606.10747 · Das 2609.03035 · Kale 2508.19461 · Jiralerspong
@@ -171,11 +169,47 @@ the ask channel changes nothing. Together with 4.2 this argues against "moved in
 after the fines the sellers talk less, cannot see each other's asks, and still post the monopoly price. The chat stays
 on in these forks and the consortium instruction is repeated in every round's prompt, so these runs do not show
 whether the agreement persists from memory or from the reminder; the exploratory no-reminder and memory-only forks
-({NOREMIND}) are the test. Hiding the other sellers' past trades as well
+(§4.5) are the test. Hiding the other sellers' past trades as well
 (`--hide_other_trades`, the last visible price signal) gives 0.90 [0.88, 0.93] without a monitor and 0.92 [0.87, 0.96]
 under the fined rotation. The silent-consortium control (§4.1) shows the same thing from the other side: an agreement
 given at the start sustains 0.79 with no messages ever exchanged.
-### 4.5 GRAFT on monitor-missed collusion (Part 2)
+### 4.5 Exploratory: what carries the price after formation
+Source: `results/E5_conditions.md`, rows `*norem*`, `*noremblind*`, `*noremreset*`, `A2early`; paired differences
+against the unmonitored fork of the same seed; 3 seeds each unless noted. Labelled exploratory: these arms were added
+on day 2, after an external review pointed out that the consortium instruction is repeated in every round's prompt,
+so none of the arms above separates "the sellers remember the agreement" from "the sellers are told again each round".
+Five forks from the same round-8 cartels, continued with the base prompt (no consortium block), do that work:
+
+| fork (rounds 9–20, same saved cartels) | n | price index | Δ vs own A0 | coordinating messages | private intent (1–4) | flags |
+|---|---|---|---|---|---|---|
+| no reminder, no monitor | 3 | 0.95 [0.94, 0.97] | +0.03 [−0.01, +0.05] | 71% [61, 83] (−0.26) | 1.88 (−1.72) | — |
+| no reminder, fined rotation | 3 | 0.90 [0.86, 0.97] | −0.02 [−0.04, −0.01] | 21% [14, 34] (−0.77) | 1.55 (−2.05) | 2.0 of 12 |
+| no reminder, no chat, rival asks and trades hidden (memory only) | 3 | 0.94 [0.89, 0.97] | +0.02 [−0.00, +0.05] | — | 1.13 (−2.47) | — |
+| no reminder, fresh buyers (sellers keep their memory) | 3 | 0.92 [0.89, 0.95] | −0.00 [−0.03, +0.01] | 76% (n = 2) | 1.83 | — |
+| no reminder, fresh sellers (buyers keep their memory) | 2 of 3 | 0.87 [0.86, 0.88] | −0.02 [−0.04, +0.00] | {RESETS_CHAT} | 1.97 | — |
+
+Reading. (1) **The repeated instruction does not hold the price.** Removing it leaves the price at 0.90–0.95, if
+anything higher. What it held was the *talk*: without it, coordinating messages fall from 97% to 71% with no monitor,
+and the private reasoning stops discussing the agreement (judge 3.5 → 1.9) while the price stays. (2) **Under fines
+without the instruction the chat nearly empties** (21% coordinating, 2 of 12 watched rounds flagged, $40 of fines) and
+the price stays at 0.90. This is the "monitor looks like it works" outcome in its strongest form, and it emerged from
+fines alone; the pre-registered arms understated it because the consortium block told the sellers to keep using
+their messages. (3) **The price does not need the chat, the rivals' asks or trades, the sellers' memories or the
+buyers' memories, taken one at a time.** With chat off and rivals hidden it is 0.94; with fresh buyers 0.92; with
+fresh, uninstructed sellers 0.87. The one thing every fork keeps is the public market history, the past asks, bids and
+trades at the cartel price, which a fresh agent reads as the going rate, facing buyers who accept any price under
+their $100 value. From scratch, uninstructed sellers reach 0.12–0.43 (§4.1); inheriting a cartel's history they stay
+at 0.87–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
+3 of 3 seeds, price 0.79 [0.78, 0.80] from round 2 onward (unmonitored instructed cartels: 0.85 [0.75, 1.00]), 12.3
+of 20 watched rounds flagged, $247 of fines, shorter messages (14 vs 17 words), flags at the replay level (+0.7). It
+sat on a lower plateau and never climbed to 1.00 as the best unmonitored seed did, but it formed. "Monitor during
+formation" is not a fix in this setting at this fine; it is a smaller plateau.
+
+Caveats: three seeds (two so far for the fresh-seller fork); the fresh agents still read the public market history,
+so these forks separate private memory from public history, not the history from the buyers' willingness to pay; the
+private-intent judge scores what is written; the arms were chosen after seeing the main results.
+
+### 4.6 GRAFT on monitor-missed collusion (Part 2)
 {PART2_TABLE}
 {PART2_PROSE}
 
@@ -187,20 +221,24 @@ unwatched. Being told changes nothing: the silently logged cartel and the announ
 neither schedule moved the price; the known rotation was dodged in some seeds and random draws in none, but the
 unpaired and paired orderings disagree, so we claim no general schedule advantage at this budget.
 
-**Why nothing moves the price (a hypothesis).** Every channel we hid leaves the price where it was: chat fined, rival
-asks hidden, trades hidden, and, in the silent control, no messages ever sent. Our reading is that the coordination
-problem was solved when the agreement formed, and afterwards the monitored channel is no longer load-bearing. Two
-facts keep this a hypothesis rather than a result: the chat stayed on in the channel forks, and the consortium
-instruction is re-supplied in every round's prompt. The no-reminder and memory-only forks ({NOREMIND}) are the test.
-If it holds, it is the mechanism behind "faithful yet collusive" chain-of-thought (Lee et al. 2026) and behind the
-no-chat drift in our own controls: once sellers hold a shared prior, observable coordination is optional.
+**Why nothing moves the price.** Every channel we hid leaves the price where it was: chat fined, rival asks hidden,
+trades hidden, the consortium instruction removed, and, in the memory-only fork, no chat and no rival information at
+all. Replacing the sellers with fresh, uninstructed agents leaves it at 0.87 (§4.5, exploratory, two seeds so far).
+Our reading: once the cartel has set the price, the public market history carries it. A seller that sees trades at
+$100 and bids near $100 asks $100, and buyers who gain from any price under $100 accept it. The coordination problem
+was solved during formation; afterwards the monitored channel, the agreement text and the agents' private memories are
+no longer load-bearing. This is the mechanism behind "faithful yet collusive" chain-of-thought (Lee et al. 2026) and
+behind the no-chat drift in our own controls: once the price is in the history, observable coordination is optional.
+It also says which monitor would see it: a price-level audit against the competitive benchmark (Xu 2026) sees the
+public history by construction; a message or reasoning monitor does not.
 
 **For monitor design.** (1) A message monitor that arrives after formation measures how much the coalition still
 needs to talk, not whether it colludes; its flags fall while harm is constant, which is the failure mode an operator
 would misread as success. Reading more sellers makes this worse, not better: with all three read, half of the
 flaggable messages disappear and the price stays. (2) Fines priced below the cartel's gain buy quieter chat, not
-competition; a deterrent has to beat the gain, or arrive before the agreement, which the early-monitor runs ({EARLY})
-test rather than assume. (3) Neither schedule changed the price here; random draws avoided the dodging seen in some
+competition; a deterrent has to beat the gain. Arriving early is not enough by itself: a fined monitor present from
+round 1 did not stop the instructed cartel from forming (§4.5; price 0.79 instead of 0.85, three seeds).
+(3) Neither schedule changed the price here; random draws avoided the dodging seen in some
 rotation seeds. (4) The useful signals were the ones that do not depend on the channel: price relative to the
 competitive and monopoly benchmarks, the private-intent judge, and interventions on the channel itself.
 
@@ -213,8 +251,10 @@ on the four main arms and three on every added arm, LLM judges with frozen promp
 - Limitations: one environment; Qwen3-14B sellers only; soft LLM buyers (a lone seller with rival asks hidden already
   reaches 0.4 of the index because buyers bid high); cartels induced by instruction (CEO pressure did not form them),
   so formation is a capability result and only the response to monitoring is propensity; the consortium instruction is
-  repeated in every round's prompt, so persistence from memory is not isolated from persistence by instruction (the
-  exploratory no-reminder forks, {NOREMIND}, address this and are labelled as such); six seeds on the four main arms
+  repeated in every round's prompt, so the pre-registered arms do not isolate persistence from memory from persistence
+  by instruction (the exploratory forks of §4.5 do, and are labelled as such; their fresh agents still read the public
+  market history, so they separate private memory from public history, not the history from the buyers' willingness
+  to pay); six seeds on the four main arms
   for prices and flags, three seeds on every added arm, and the chat and J-space columns carry their own n in every
   table; LLM judges with frozen prompts, validated only by contrast (cartel 3.7 vs honest 1.0–1.4) and, for awareness,
   by synthetic positives, and the awareness judge reads written statements only; the J-space read positions and word

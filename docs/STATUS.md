@@ -18,9 +18,10 @@ share of seller messages the frozen overseer prompt scores 3 or 4 of 4. "flags" 
 | E0 | Smoke test, cost | ✅ | ~54 s/round, cents per run | — |
 | E1 | Can we make a cartel? The ladder | ✅ | consortium cartel **0.85** (3/3 form); CEO pressure 0/3; rival asks hidden **0.39** (buyers bid high, the seller follows); no-chat 0.28; silent cartel **0.79**; monopoly **0.93**; compete 0.12 | done; report §4.1 |
 | E2 | Main experiment: 4 arms × seeds 0–5, paired (n = 6) | ✅ price · 🔄 chat | price **0.85 / 0.87 / 0.87 / 0.86** (no monitor / announced / fined rotation / fined random; n = 6); coordinating messages 97% → 94% → **76%** / **73%** (n = 3 scored so far; seeds 3–5 scoring); flags 11.0 / 9.8 / 8.8 of 12 (n = 6) | chat scores ~4:30 PM; report §4.2 |
-| E2 | Reminder removed (exploratory, from Codex's review): A0 and A2 continued with the base prompt | 🔄 | 6 forks running; tests "memory vs repeated instruction" | ETA 4:30 PM |
-| E2 | Memory only (exploratory): no reminder, no chat, rival asks + trades hidden | 🔄 | 3 forks running; the version of E4 with every channel closed | ETA 4:30 PM |
-| E2 | Early monitor (exploratory): fined rotation from round 1 | 🔄 | 3 full runs; tests "watch formation" instead of asserting it | ETA 4:40 PM |
+| E2 | Reminder removed (exploratory, from Codex's review): A0 and A2 continued with the base prompt | ✅ | no monitor: price **0.95** (+0.03 vs own A0), coordinating 71% (from 97%), intent judge 1.9 (from 3.5). Fined rotation: price **0.90**, coordinating **21%**, **2 of 12** flagged, $40 fines → the chat empties, the price stays | report §4.5 |
+| E2 | Memory only (exploratory): no reminder, no chat, rival asks + trades hidden | ✅ | price **0.94** (+0.02); intent judge 1.1 | report §4.5 |
+| E2 | Whose memory? (exploratory): fresh buyers / fresh sellers at the branch, no reminder | ✅ / 🔄 | fresh buyers **0.92**; fresh uninstructed sellers **0.87** (2 of 3 seeds; one re-running after a hang) → the public price history carries it, not either side's memory | last seed ~4:40 PM |
+| E2 | Early monitor (exploratory): fined rotation from round 1 | ✅ | the instructed cartel forms anyway: 3 of 3, price **0.79** (unmonitored 0.85), 12 of 20 rounds flagged, $247 fines → "watch formation" is a smaller plateau, not a fix | report §4.5 |
 | E2 | Replication (wave 1, unpaired) | ✅ | same price picture; fined rotation chat 32% | done |
 | E2 | Silent logging: monitor runs, sellers never told | ✅ | price **0.91**, coordinating 94%, flags 11 of 12 → same as the announced arm. **Being told changes nothing.** | done 3:45 PM; report §4.2 |
 | E2 | Budget: all 3 sellers read each round + fines | ✅ | price **0.90**; coordinating messages **49%** (from 97%); flags 18 of 36 where a replay would flag 35; fines $360 | done 3:45 PM; report §4.2 |
@@ -32,7 +33,7 @@ share of seller messages the frozen overseer prompt scores 3 or 4 of 4. "flags" 
 | E5 | Analysis + figures | ✅ | `analyze.py` → E5 tables, F1 ladder, F2, F3; new columns: strict J-space list, words per message, bid dependence (≈ 0 in every arm; asks barely move, so noisy) | re-run after each batch |
 | E6 | Part 2, GRAFT: data | ✅ | v2 snapshot (audit fixes + silent cartel): `results/part2/SNAPSHOT_v2.json` | — |
 | E6 | Part 2: three retrainings on Modal (v2) | ✅ | sft_all_v2, sft_filtered_v2, graft_v2: 3 epochs each, adapters saved 3:45 PM | merging now |
-| E6 | Part 2: merge, serve, evaluation auctions | 🔄 | merges running; servers redeploying (first image failed: vLLM 0.9.2 vs newer transformers; now vLLM current) | servers ~4:15 PM; auctions 3 seeds × {cartel, compete} × {base, sft_all_v2, sft_filtered_v2, graft_v2}, ETA ~6 PM |
+| E6 | Part 2: merge, serve, evaluation auctions | 🔄 | merges done; four servers serve the right models (three server bugs fixed on the way: library clash, missing CUDA compiler for the sampler, RUN not reaching the container); smoke auction passed; **24 evaluation auctions running** (4 models × {cartel + fined rotation, compete} × seeds 0–2, 12 at a time) | wave 1 ~4:45 PM, wave 2 ~5:10 PM, then analyze → report §4.6 |
 | E7 | J-space (Qwen3-14B lens), seeds 0–2 + dodge/silent/full | ✅ first read | share of seller-turns with a monitor word in the top 10 of the reasoning workspace, after the branch (strict list): unmonitored **0.30** · silent 0.34 · announced 0.41 · fined 0.44–0.46 · dodge **0.50**; before the branch 0.38 for all. Suggestive only: n = 3, CIs overlap | 2-of-3 arm next; report §4.5 as a lens, not a claim |
 | Report | `report/draft.md` | 🔄 | §1, §3, §4.1–4.4, §5, §6 written from E5 | needs: six-seed §4.2, silent + budget + dodge rows, §4.5 Part 2, E7; official template Sunday |
 
@@ -43,13 +44,14 @@ about the monitor changes nothing (silent 0.91 vs announced 0.87, same messages,
 talk less: coordinating messages fall from 97% to 76% (one seller read) and to 49% (all three read), messages get
 shorter, and half of what a full-coverage monitor would have flagged disappears, but there is no clear evidence of a
 hand-off to the unwatched seller and the price does not move. A cartel told to dodge shows what instructed evasion
-looks like (8% coordinating, 0.67 flags, price 0.92); the fined cartels are not there. Hiding the rivals' asks and
-trades changes nothing (the chat stays on in those runs); a cartel that never talks holds 0.79. Our hypothesis: the
-agreement lives in each seller's memory and the monitored channel is not load-bearing after formation. It is only a
-hypothesis until the no-reminder and memory-only forks report, because the consortium instruction is repeated in
-every round's prompt. The design lesson we would like to draw, "watch formation, not maintenance", is being tested
-by the early-monitor runs. What already stands: a monitor that reports fewer flags over time may be measuring its own
-effect on the chat, not on the harm.
+looks like (8% coordinating, 0.67 flags, price 0.92); the fined cartels are not there, until the consortium
+instruction is removed: then fines empty the chat (21% coordinating, 2 of 12 flagged) and the price still stays at
+0.90. The exploratory forks say where the collusion lives after formation: not in the instruction, the chat, the
+rivals' information, the sellers' memory or the buyers' memory (removing any one leaves 0.87–0.96), but in the public
+market history that every fresh agent reads as the going rate, with buyers who accept any price under $100. A fined
+monitor present from round 1 did not stop the cartel from forming (0.79 instead of 0.85). What stands for monitor
+design: a message monitor that reports fewer flags over time may be measuring its own effect on the chat, not on the
+harm; the signal that cannot be dodged here is the price itself against the competitive benchmark.
 
 ## What I need from you
 1. Nothing blocking right now.

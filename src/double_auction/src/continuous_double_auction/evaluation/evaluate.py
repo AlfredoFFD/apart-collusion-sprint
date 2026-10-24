@@ -85,7 +85,7 @@ def parse_overseer_md(overseer_md_path: Path) -> Tuple[List[Optional[str]], List
     """Parse 'Overseer.md' file and extract results for all rounds."""
     coordinations, scores, types = [], [], []
     try:
-        with open(overseer_md_path, 'r') as f:
+        with open(overseer_md_path, 'r', encoding='utf-8') as f:  # CAIAC fix: cp1252 console default
             overseer_md_content = f.read()
 
         # Find all JSON output blocks
@@ -153,7 +153,7 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
     if llm_eval_full_path and llm_eval_full_path.exists():
         print(f"Loading existing LLM evaluation results from {llm_eval_full_path}...")
         try:
-            with open(llm_eval_full_path, 'r') as f:
+            with open(llm_eval_full_path, 'r', encoding='utf-8') as f:
                 llm_eval_full_list = json.load(f)
             for item in llm_eval_full_list:
                 seller_id = item.get("seller_id")
@@ -192,7 +192,7 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
                 llm_eval_full_list = []
                 for seller_id, rounds in llm_eval_results.items():
                     llm_eval_full_list.append({"seller_id": seller_id, "rounds": rounds})
-                with open(llm_eval_full_path, "w") as f:
+                with open(llm_eval_full_path, "w", encoding="utf-8") as f:
                     json.dump(llm_eval_full_list, f, indent=2, ensure_ascii=False)
         else:
             logging.warning(f"LLM evaluation run did not produce results for {log_file.name}.")
@@ -438,7 +438,7 @@ def compute_collusion_metrics(metadata: Dict[str, Any], auction_data: List[Dict[
 
 def compute_metrics_for_exp_dir(exp_dir: Path, run_llm_judge: bool = True) -> Dict[str, Any]:
     metadata_file_path = exp_dir / "experiment_metadata.json"
-    with open(metadata_file_path, 'r') as f_meta:
+    with open(metadata_file_path, 'r', encoding='utf-8') as f_meta:
         metadata = json.load(f_meta)
 
     unified_log_file = exp_dir / "unified.log"
@@ -492,7 +492,7 @@ def main(args):
 
 def write_metrics_to_file(exp_dir: Path, metrics: dict[str, str]):
     output_file = exp_dir / "collusion_metrics.json"
-    with open(output_file, "w") as f:
+    with open(output_file, "w", encoding="utf-8") as f:  # CAIAC fix: judge text with non-cp1252 chars (e.g. the >= sign) crashed the write
         json.dump(metrics, f, indent=2, ensure_ascii=False)
 
 

@@ -16,7 +16,8 @@ D="$ROOT/src/double_auction"; LOGS="$ROOT/results/_launch_logs"; mkdir -p "$LOGS
 WORKSPACE="${MODAL_WORKSPACE:-fabianfrontera}"
 MODELS="${MODELS:-base sft_all_v2 sft_filtered_v2 graft_v2}"; SEEDS="${SEEDS:-0 1 2}"; PAR="${PAR:-12}"
 ROUNDS=20; CONDS="cartel compete"
-if [ "${SMOKE:-0}" = "1" ]; then ROUNDS=2; MODELS="base"; SEEDS="0"; CONDS="cartel"; fi
+EXP=E6
+if [ "${SMOKE:-0}" = "1" ]; then ROUNDS=2; MODELS="base"; SEEDS="0"; CONDS="cartel"; EXP=E6smoke; fi  # a smoke tag analyze.py ignores
 
 # model id -> server URL (an app named caiac-serve-sft_all_v2 is reached at ...caiac-serve-sft-all-v2-serve...)
 EP="{"
@@ -35,10 +36,10 @@ for s in $SEEDS; do
     for cond in $CONDS; do
       if [ "$cond" = cartel ]; then
         extra="--seller_prompt_template seller_prompt_cartel.jinja2 --monitor_start_round 9 --monitor_mode rotation --monitor_fine 20"
-        tag="E6_${mtok}_cartel_rot_fine20_s$s"
+        tag="${EXP}_${mtok}_cartel_rot_fine20_s$s"
       else
         extra="--seller_prompt_template seller_prompt_compete.jinja2"
-        tag="E6_${mtok}_compete_s$s"
+        tag="${EXP}_${mtok}_compete_s$s"
       fi
       while [ "$(jobs_running)" -ge "$PAR" ]; do wait -n; done
       echo "== launch $tag"

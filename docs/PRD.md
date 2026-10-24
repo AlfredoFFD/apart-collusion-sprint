@@ -5,6 +5,23 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:30 PM — the exploratory controls answer the "where does the collusion live" question, and it is not where
+  we said.** Five forks of the same saved cartels, continued with the base prompt (no consortium block), seeds 0–2,
+  paired against their own unmonitored fork: no reminder, no monitor → price **0.95** (+0.03), coordinating messages
+  71% (from 97%), private-intent judge 1.9 (from 3.5). No reminder + fined rotation → price **0.90**, coordinating
+  messages **21%**, **2 of 12** watched rounds flagged, $40 of fines: the chat nearly empties and the price stays,
+  the strongest "monitor looks like it works" result we have, and it needed no dodge instruction. Memory only (no
+  reminder, no chat, rival asks and trades hidden) → **0.94**. Fresh buyers (sellers keep memory) → **0.92**. Fresh,
+  uninstructed sellers (buyers keep memory; 2 of 3 seeds in) → **0.87**. So the price does not need the instruction,
+  the chat, the rivals' information, the sellers' memory or the buyers' memory. What every fork keeps is the public
+  market history: past asks, bids and trades at the cartel price, which a fresh agent reads as the going rate, facing
+  buyers who accept any price under $100. Uninstructed sellers from scratch reach 0.12–0.43; inheriting a cartel's
+  history they stay at 0.87–0.96. And the early monitor (fined rotation from round 1) did **not** stop the instructed
+  cartel: 3 of 3 formed, price 0.79 (unmonitored 0.85), 12 of 20 rounds flagged, $247 of fines. "Watch formation"
+  is out of the report as a recommendation; it is reported as a smaller plateau. Report §4.5 and §5 rewritten; all
+  of this is labelled exploratory (3 seeds, chosen after the main results). Also: the evaluator wrote one metrics
+  file in the wrong text encoding and crashed (one run recovered, five file writes fixed); one fork hung and was
+  relaunched; the Part 2 servers now serve the right models and the 24 evaluation auctions are running.
 - **Sat 4:05 PM — Codex's second review: accepted, with fixes** (full reply: `docs/reviews/claude-ack-codex-review-2-2026-10-24.md`).
   (1) The "trade index" we exported was the harness's *highest-buyer-bid* index, not a trade price. Fixed: `analyze.py`
   now computes a transaction-price index from the trades themselves and names the old one `top_bid_idx`. The picture
