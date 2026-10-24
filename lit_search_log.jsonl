@@ -374,3 +374,9 @@
 {"ts": "2026-10-24T13:06:06", "cmd": "search", "source": "arxiv", "query": "all:reasoning AND all:monitored AND all:behavior AND all:told", "hits": 1}
 {"ts": "2026-10-24T13:06:06", "cmd": "search", "source": "openalex", "query": "told reasoning not monitored behavior", "hits": 6}
 {"ts": "2026-10-24T13:06:26", "cmd": "search", "source": "s2", "query": "told reasoning not monitored behavior", "hits": 0}
+{"ts": "2026-10-24T14:43:50", "cmd": "search", "source": "arxiv", "query": "all:Radev AND all:collusion AND all:propensity AND all:capability", "hits": 0}
+{"ts": "2026-10-24T14:43:50", "cmd": "search", "source": "openalex", "query": "Radev collusion propensity capability", "hits": 2}
+{"ts": "2026-10-24T14:44:10", "cmd": "search", "source": "s2", "query": "Radev collusion propensity capability", "hits": 0}
+{"ts": "2026-10-24T14:44:11", "cmd": "search", "source": "arxiv", "query": "all:Keppo AND all:fragility AND all:agent AND all:collusion", "hits": 1}
+{"ts": "2026-10-24T14:44:12", "cmd": "search", "source": "openalex", "query": "Keppo fragility AI agent collusion", "hits": 5}
+{"ts": "2026-10-24T14:44:33", "cmd": "search", "source": "s2", "query": "Keppo fragility AI agent collusion", "hits": 0}

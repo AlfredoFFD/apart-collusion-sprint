@@ -1,8 +1,9 @@
 {
- "flagged": 133,
- "missed": 1058,
- "clean": 429,
- "anchor": 120,
- "graft_forget": 133,
- "graft_retain": 1607
+ "flagged": 164,
+ "missed": 1061,
+ "clean": 215,
+ "anchor": 103,
+ "anchor_dropped_coordinating": 17,
+ "graft_forget": 164,
+ "graft_retain": 1379
 }

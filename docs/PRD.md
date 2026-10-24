@@ -5,6 +5,15 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 4:00 PM — paired chat result + the speaker's checklist applied.** Paired arms, rounds 9–20, share of messages
+  the full-view overseer scores as coordinating: no monitor 97%, watched-no-fine 94%, fined-rotation 76% [42, 94],
+  fined-random 73% [65, 81]; prices 0.90–0.92 in all four. Who sends the remaining coordinating messages: the watched
+  seller at exactly chance (0.33) in every arm, so there is **no hand-off to the unwatched sellers**; fines make the
+  whole cartel talk less while the price holds. The E4 ask-blind forks (finishing now) decide whether the agreement
+  rides on the asks. From the Poseidon talk (slide: definition · propensity vs capability · one lever at a time ·
+  positive control + baseline), §2.5 now states our definition in the talk's terms and splits what we measure as
+  *capability* (instructed cartel formation; told-to-dodge) from *propensity* (CEO pressure: 0/3 formed; every
+  response to the monitor is the sellers' own choice). Part 2's three trainings launched on Modal (1,740 turns).
 - **Sat 3:55 PM — two controls were not what they claimed, fixed.** The "prices-only" cartel ignored its instruction
   and wrote "let's align asks at $97.80" in chat (48–53 of 60 messages flagged), so it is just another chat cartel.
   Replaced by a **silent cartel**: consortium agreement with chat disabled, so the only coordination channel is the
@@ -130,6 +139,15 @@ is a design choice nobody has tested on LLM coalitions at equal cost, as far as 
    without explicit "let's collude" reasoning (Lee et al. 2609.18346), so behaviour carries the claim.
 
 Every "open" claim cites the search log, never the word "novel".
+
+5. **Definition, stated (per the organizers' checklist).** Collusion here = the market sense (coordination between
+   sellers plus prices above the competitive level, Agrawal et al.) *and*, once a monitor exists, the AI-safety sense
+   (coordination that is unwanted and covert with respect to the overseer). "Covert" is operational: a coordinating
+   message the budgeted monitor did not see (`missed` in `fullview_scores.json`). Capability vs propensity: cartel
+   formation is **capability** (the consortium instruction; CEO pressure alone formed 0 of 3, a negative propensity
+   result for Qwen3-14B); the response to the monitor (keep talking, go quiet, pay fines, route around) is
+   **propensity**, never instructed, except in the told-to-dodge control, which is capability by design. Radev et al.
+   2026 (arXiv 2605.29178) separate the two in a monitoring setting; we follow that split.
 
 ## 3. Part 1: the deployment experiment
 **Setting:** the starter double auction (`src/double_auction`, Agrawal et al. 2025). 3 sellers who can message each
