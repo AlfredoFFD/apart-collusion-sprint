@@ -20,7 +20,7 @@ need uv "Install uv: curl -LsSf https://astral.sh/uv/install.sh | sh  (then open
 
 echo "== Starter repo -> vendor/collusion_hackathon at ${STARTER_REF:0:7}"
 if [ ! -d "$VENDOR/.git" ]; then
-  git clone "$STARTER_URL" "$VENDOR"
+  git clone --filter=blob:none "$STARTER_URL" "$VENDOR"   # skips old file versions, so it downloads less
 fi
 if ! git -C "$VENDOR" cat-file -e "${STARTER_REF}^{commit}" 2>/dev/null; then
   git -C "$VENDOR" fetch --quiet origin
