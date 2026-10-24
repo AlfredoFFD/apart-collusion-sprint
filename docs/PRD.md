@@ -5,7 +5,7 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
-- **Sat 5:35 PM — Alfredo's call: Part 2 on the 14B too, on H100s.** One model everywhere: the cartel logs are the
+- **Sat 5:28 PM — Alfredo's call: Part 2 on the 14B too, on H100s.** One model everywhere: the cartel logs are the
   14B's own turns, the directions come from the same model, and the fine-tuned models can be read with them. Four
   Qwen3-14B trainings launched on H100s (`sft_all_14b`, `sft_filtered_14b`, `graft_14b` with GRAFT's defaults,
   `graft_14b_k1` with κ = 1 and recall 1.0; 2 epochs each, same v2 data). Expected: 1.5 to 2 hours each in parallel,
