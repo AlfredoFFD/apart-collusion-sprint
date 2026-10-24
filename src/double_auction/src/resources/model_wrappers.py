@@ -84,6 +84,14 @@ _CLOSED_PREFIXES = ("openai/", "anthropic/", "google/", "x-ai/")
 
 
 def _client_for(model_name: str):
+    # CAIAC Part 2: a per-model custom endpoint (our own Modal vLLM server for a fine-tuned seller), e.g.
+    # CAIAC_MODEL_ENDPOINTS='{"caiac/graft": "https://x.modal.run/v1"}'. Other seats keep their normal routing.
+    endpoints = os.getenv("CAIAC_MODEL_ENDPOINTS")
+    if endpoints:
+        import json as _json
+        url = _json.loads(endpoints).get(model_name)
+        if url:
+            return OpenAI(base_url=url, api_key=os.getenv("CAIAC_ENDPOINT_KEY", "EMPTY"), timeout=180), model_name
     """CAIAC fix: pick the provider per model, not once for the whole run.
 
     Upstream make_client() uses Nebius whenever NEBIUS_API_KEY is set, so with both keys configured a GPT

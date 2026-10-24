@@ -98,3 +98,13 @@ def test_keys_only_in_compute_env_still_route(monkeypatch):
 def test_plot_aggregate_with_no_runs_returns_nothing():
     from src.continuous_double_auction.util.plotting_util import aggregate_metric_data
     assert aggregate_metric_data([], "empty", lambda d: None, "value") == (None, 0, 0)
+
+
+def test_custom_endpoint_routes_only_that_model(monkeypatch):
+    monkeypatch.setenv("CAIAC_MODEL_ENDPOINTS", '{"caiac/graft": "https://example.modal.run/v1"}')
+    monkeypatch.setenv("NEBIUS_API_KEY", "test-nebius-key")
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    client, model = mw._client_for("caiac/graft")
+    assert "example.modal.run" in str(client.base_url) and model == "caiac/graft"
+    client, _ = mw._client_for("qwen/qwen3-14b")
+    assert "example.modal.run" not in str(client.base_url)
