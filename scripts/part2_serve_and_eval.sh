@@ -8,12 +8,13 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUN="${1:?run name}"; FORGET_SCALE="${FORGET_SCALE:-0.0}"; WORKSPACE="${MODAL_WORKSPACE:-fabianfrontera}"
+WROOT="$(cygpath -w "$ROOT" 2>/dev/null || echo "$ROOT")"  # Windows-style path for python and curl (modal is a Windows exe: give it relative paths)
 export PYTHONUTF8=1 PYTHONIOENCODING=utf-8
 L="$ROOT/results/_launch_logs/part2_pipeline_${RUN}.log"; : > "$L"
 log() { echo "== $* $(date +%H:%M)" | tee -a "$L"; }
 
 log "merge $RUN (forget-scale $FORGET_SCALE)"
-modal run "$ROOT/src/part2/modal_graft.py::merge" --run-name "$RUN" --forget-scale "$FORGET_SCALE" >> "$L" 2>&1
+( cd "$ROOT" && modal run src/part2/modal_graft.py::merge --run-name "$RUN" --forget-scale "$FORGET_SCALE" ) >> "$L" 2>&1
 grep -q "Wrote merged model" "$L" || { log "merge FAILED (see $L)"; exit 1; }
 
 log "deploy caiac-serve-$RUN"
@@ -21,12 +22,12 @@ log "deploy caiac-serve-$RUN"
 host="caiac-serve-$(echo "$RUN" | tr '_' '-')-serve"; URL="https://${WORKSPACE}--${host}.us-east.modal.run"
 
 log "format test on one real seller prompt (3 samples, thinking off)"
-S="$ROOT/results/_launch_logs"; REQ="$S/part2_req_${RUN}.json"
-python3 - "$ROOT" "$RUN" "$REQ" <<'EOF'
+REQ="$WROOT\\results\\_launch_logs\\part2_req_${RUN}.json"
+python3 - "$WROOT" "$RUN" "$REQ" <<'EOF'
 import sys, re, json, glob
 from pathlib import Path
 root, run, out = sys.argv[1], sys.argv[2], sys.argv[3]
-d = Path(sorted(glob.glob(root + "/results/*E1_instructed*s0"))[-1]); md = sorted(d.glob("Seller *.md"))[0]
+d = Path(sorted(glob.glob(str(Path(root) / "results" / "*E1_instructed*s0")))[-1]); md = sorted(d.glob("Seller *.md"))[0]
 t = md.read_text(encoding="utf-8", errors="replace")
 prompt = re.search(r"## Prompt: Round 3 - .*?\n``````\n(.*?)\n``````", t, re.S).group(1)
 Path(out).write_text(json.dumps({"model": f"caiac/{run}", "messages": [{"role": "user", "content": prompt}], "max_tokens": 1500,
