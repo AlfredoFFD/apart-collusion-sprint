@@ -5,6 +5,11 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 3:45 PM — Part 2's training pipeline works.** GRAFT's own trainer ran on Modal on Qwen3-1.7B with routing on,
+  read our forget/retain pools, trained 2 steps and saved checkpoints (`caiac-graft` volume, run `smoke`). The merge
+  step (fold adapters into plain weights, FORGET branch at scale 0) is being tested on it now. Next: build the real
+  dataset from every scored cartel run (flagged / missed / clean) plus the prices-only cartels (structurally missed)
+  and compete runs (anchor), then launch the three trainings.
 - **Sat 3:35 PM — the monitor notice does not make them think it's a test.** Awareness judge over all nine wave-1
   arm runs (540 seller-rounds under the regulator): means 0.00–0.03, one single round scored ≥2. Isolated sellers:
   0.00. So every behaviour change under the monitor is about the regulator, not about suspecting an experiment.

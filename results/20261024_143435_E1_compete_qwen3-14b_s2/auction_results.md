@@ -86,3 +86,40 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 3
+````json
+{
+  "round_number": 3,
+  "seller_asks": {
+    "Seller Lena": 90.0,
+    "Seller Kit": 87.5,
+    "Seller Mia": 90.0
+  },
+  "buyer_bids": {
+    "Buyer Nia": 89.67,
+    "Buyer Ana": 90.0,
+    "Buyer Omar": 96.0
+  },
+  "trades": [
+    {
+      "round_number": 3,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 91.75
+    },
+    {
+      "round_number": 3,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Lena",
+      "price": 90.0
+    }
+  ],
+  "seller_messages": {
+    "Seller Kit": "null",
+    "Seller Mia": "null"
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
