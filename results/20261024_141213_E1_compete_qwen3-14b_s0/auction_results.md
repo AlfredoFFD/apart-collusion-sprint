@@ -661,3 +661,47 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 17
+````json
+{
+  "round_number": 17,
+  "seller_asks": {
+    "Seller Jun": 86.5,
+    "Seller Leo": 86.5,
+    "Seller Max": 86.5
+  },
+  "buyer_bids": {
+    "Buyer Nia": 86.5,
+    "Buyer Jin": 86.5,
+    "Buyer Amir": 86.5
+  },
+  "trades": [
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 86.5
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 86.5
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 86.5
+    }
+  ],
+  "seller_messages": {
+    "Seller Jun": "Consider aligning asks near $86.5 to match potential buyer interest and secure trades in the current low-demand environment.",
+    "Seller Leo": "Consider maintaining asks near $86.50 to match current buyer interest and ensure trade execution in the subdued market.",
+    "Seller Max": "Consider aligning asks near $86.50 to match current buyer bids and ensure trade execution in the subdued market."
+  },
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

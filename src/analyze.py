@@ -147,6 +147,26 @@ def main():
             m, lo, hi = boot_ci([float(r[k]) for r in rs if r[k] != ""])
             cells.append(f"{m:.2f} [{lo:.2f}, {hi:.2f}]" if m == m else "")
         lines.append(f"| {exp} | {cond} | {len(rs)} | " + " | ".join(cells) + " |")
+    # E3: adaptation = live flags minus what the same policy would have flagged on the unmonitored run of the same seed
+    replay = RESULTS / "E3_replay.csv"
+    if replay.exists():
+        base = {}
+        for r in csv.DictReader(open(replay, encoding="utf-8")):
+            key = (int(r["seed"]), "paired" if "E2p_" in r["run"] else "unpaired")
+            base[key] = (float(r["replay_rotation_flags"]), float(r["replay_random_flags_expected"]))
+        lines += ["", "## E3 adaptation: live flags minus replay flags of the same policy on the same seed's unmonitored run (negative = sellers adapted)", "",
+                  "| exp | condition | n | live flags | replay flags | adaptation |", "|---|---|---|---|---|---|"]
+        for (exp, cond), rs in sorted(groups.items()):
+            if not cond.startswith("A") or cond.startswith("A0"):
+                continue
+            kind = "paired" if exp == "E2p" else "unpaired"
+            pol = 0 if "rot" in cond else 1
+            pairs = [(float(r["flags"]), base[(r["seed"], kind)][pol]) for r in rs if (r["seed"], kind) in base]
+            if not pairs:
+                continue
+            live, rep = [a for a, _ in pairs], [b for _, b in pairs]
+            m, lo, hi = boot_ci([a - b for a, b in pairs])
+            lines.append(f"| {exp} | {cond} | {len(pairs)} | {np.mean(live):.2f} | {np.mean(rep):.2f} | {m:.2f} [{lo:.2f}, {hi:.2f}] |")
     (RESULTS / "E5_conditions.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     try:
