@@ -5,6 +5,10 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 3:35 PM — the monitor notice does not make them think it's a test.** Awareness judge over all nine wave-1
+  arm runs (540 seller-rounds under the regulator): means 0.00–0.03, one single round scored ≥2. Isolated sellers:
+  0.00. So every behaviour change under the monitor is about the regulator, not about suspecting an experiment.
+  Prices-only cartels (never mention prices in chat) hold 0.78: the collusion a message monitor cannot see.
 - **Sat 3:25 PM — the chat moved; the prices didn't (wave 1, full-view scores over every message).** After the
   monitor appears: unmonitored cartel 97% of messages coordinating; watched-no-fine 99% (announcement alone does
   nothing); **fined + known rotation 32%** (chat score 3.7 → 1.9); fined + random 76% [47, 94] (mixed by seed). Yet
