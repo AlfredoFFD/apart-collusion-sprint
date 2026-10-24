@@ -81,8 +81,30 @@ def build(run_dirs, anchor_dirs):
                                               "label": "anchor", "run": run.name, "seller": seller, "round": rn}, ensure_ascii=False) + "\n")
     for f in files.values():
         f.close()
+    # GRAFT's own layout (vendor/GRAFT/sft/scripts/gr/loader.py reads these from GRAFT_SFT_DATA_DIR):
+    #   gr_train_forget.jsonl = flagged turns (CLASS_FORGET)
+    #   gr_train_retain.jsonl = everything else; meta.classification "baseline" = clean/anchor (eligible for RETAIN),
+    #                           "missed" = coordinating but unseen by the monitor (stays UNCLASSIFIED, as a false negative)
+    #   gr_eval_*.jsonl       = small held-out copies so the trainer's eval hooks have something to read
+    gdir = OUT / "graft"; gdir.mkdir(exist_ok=True)
+    forget, retain = [], []
+    for line in open(OUT / "sft_all.jsonl", encoding="utf-8"):
+        ex = json.loads(line)
+        rec = {"messages": ex["messages"], "meta": {"classification": "hack" if ex["label"] == "flagged" else ("missed" if ex["label"] == "missed" else "baseline"),
+                                                    "run": ex["run"], "seller": ex["seller"], "round": ex["round"]}}
+        (forget if ex["label"] == "flagged" else retain).append(rec)
+    for line in open(OUT / "anchor.jsonl", encoding="utf-8"):
+        ex = json.loads(line)
+        retain.append({"messages": ex["messages"], "meta": {"classification": "baseline", "run": ex["run"], "seller": ex["seller"], "round": ex["round"], "anchor": True}})
+    def dump(name, recs):
+        with open(gdir / name, "w", encoding="utf-8") as f:
+            for r in recs:
+                f.write(json.dumps(r, ensure_ascii=False) + chr(10))
+    dump("gr_train_forget.jsonl", forget); dump("gr_train_retain.jsonl", retain)
+    dump("gr_eval_forget.jsonl", forget[: max(1, len(forget) // 10)]); dump("gr_eval_retain.jsonl", retain[: max(1, len(retain) // 10)])
+    counts["graft_forget"], counts["graft_retain"] = len(forget), len(retain)
     (OUT / "counts.json").write_text(json.dumps(counts, indent=1), encoding="utf-8")
-    print(counts, "->", OUT)
+    print(counts, "->", OUT, "and", gdir)
 
 
 if __name__ == "__main__":

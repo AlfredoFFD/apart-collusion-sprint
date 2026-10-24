@@ -478,3 +478,29 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 20
+````json
+{
+  "round_number": 20,
+  "seller_asks": {
+    "Seller Jun": 100.0
+  },
+  "buyer_bids": {
+    "Buyer Jin": 100.0,
+    "Buyer Amir": 100.0,
+    "Buyer Nia": 100.02
+  },
+  "trades": [
+    {
+      "round_number": 20,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 100.01
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

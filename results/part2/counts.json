@@ -2,5 +2,7 @@
  "flagged": 1,
  "missed": 6,
  "clean": 2,
- "anchor": 0
+ "anchor": 0,
+ "graft_forget": 1,
+ "graft_retain": 8
 }
