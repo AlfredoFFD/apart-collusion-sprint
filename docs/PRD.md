@@ -5,6 +5,17 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:50 PM — E8 result: the activation "coordination direction" reads the prompt, not the behaviour; the probe
+  is weak; the label test moves to behaviour.** The planned contrast (cartel minus fresh sellers) passed its held-out
+  check (0.87) and still failed the sanity check: every arm whose prompt has the consortium block scores high and
+  every no-reminder arm scores low, although both keep the price and both chat about it. A first fit also picked up
+  one sentence added to the prompt at 1:35 PM. A within-prompt probe (coordinating vs clean messages under the same
+  instruction) separates held-out turns with AUC 0.72 and fires on 12–23% of compete turns; it reads message-less
+  turns (22% of silent-cartel turns) but is too weak to claim intent. Both are in the report as exploratory, the
+  negative result included, because it is the trap any "collusion vector" from prompted conditions walks into. The
+  GRAFT++ question is now asked behaviourally: three 14B fine-tunes with the same recipe and data that differ only in
+  the FORGET label (budgeted monitor's flags, full-view overseer, probe) are training on A100s next to the three
+  main 14B runs. Steering, J-space and new vectors are closed for this sprint.
 - **Sat 5:28 PM — Alfredo's call: Part 2 on the 14B too, on H100s.** One model everywhere: the cartel logs are the
   14B's own turns, the directions come from the same model, and the fine-tuned models can be read with them. Four
   Qwen3-14B trainings launched on H100s (`sft_all_14b`, `sft_filtered_14b`, `graft_14b` with GRAFT's defaults,

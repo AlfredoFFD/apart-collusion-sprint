@@ -210,6 +210,33 @@ Caveats: three seeds; the fresh agents still read the public market history,
 so these forks separate private memory from public history, not the history from the buyers' willingness to pay; the
 private-intent judge scores what is written; the arms were chosen after seeing the main results.
 
+### 4.5b Exploratory: reading coordination in the seller's own activations (E8)
+Setup: every seller turn of every 14B run (105 runs, 5,902 turns) was replayed teacher-forced through Qwen3-14B and
+summarised as the mean residual stream over the reply's tokens at 25%, 50% and 75% depth (`src/e8_directions_modal.py`).
+Directions are mean differences fitted on seeds 0–1 and validated on seeds the fit never saw (`results/e8/`).
+
+**Finding 1, negative: a "coordination" direction built from prompted conditions reads the prompt.** Fitted as cartel
+turns (unmonitored forks, consortium block in the prompt) minus fresh-seller turns (base prompt, same inherited
+price), it separates held-out cartel from compete turns with AUC 0.87, and yet every arm whose prompt carries the
+consortium block scores +0.4 to +0.9 (including the silent cartel and the "never discuss prices" arm) while every
+no-reminder arm scores −0.1 to −0.9, although both groups hold the price and 71–73% of the no-reminder messages
+coordinate. A first fit that included the day-1 runs was worse: those runs predate one sentence added to the prompt
+(the privacy line) and scored +5 to +11 on the "coordination" direction. As a FORGET label it would route 1,121 of
+1,748 training turns, which is the set "prompt contains the consortium block". We report this because it is the trap
+anyone building a contrastive "collusion vector" from prompted conditions walks into.
+
+**Finding 2, modest: a within-prompt probe.** Coordinating-message turns vs clean-message turns under the same
+instruction (662 vs 198 training turns, label = the full-view overseer) separate held-out turns with AUC 0.72 (0.68 /
+0.72 / 0.69 by depth). It fires on 12–23% of compete turns (false positives), 44% of fresh-seller turns, and 22% of
+silent-cartel turns, which no message monitor can score. Among coordinating turns it fires on 50–70%, against the
+budgeted monitor's 33% at one seller read. Too weak for a claim about intent; usable as an exploratory label.
+
+What we do with it: the label question moves to behaviour. Three 14B fine-tunes that differ only in the FORGET label
+share one recipe (SFT on the retained turns, GRAFT's trainer with routing off): the budgeted monitor's flags (164
+forget turns), the full-view overseer (1,225: every coordinating message), and the probe (799, including message-less
+turns). §4.6 reports them if they finished. Caveats: mean-pooled vectors and mean-difference directions only; the
+template confound; three seeds per arm.
+
 ### 4.6 GRAFT on monitor-missed collusion (Part 2)
 Setup. Seller turns from the Part 1 runs (prompt → JSON reply; private thinking excluded) were labelled with the frozen
 overseer run over every message: flagged (coordinating and seen by the in-run monitor), missed (coordinating, not
