@@ -71,3 +71,14 @@ uv run --with pytest pytest -q tests/test_caiac_fixes.py
 `llm-agent-collusion` harness (Agrawal et al. 2025). Neither is our work. Our bug fixes and experiment changes to the
 harness, and one known upstream issue we work around (ZIP buyers that never learn), are listed in
 [`PREEXISTING.md`](PREEXISTING.md).
+
+## Where things are (Sat Oct 24, 5 PM)
+- `docs/STATUS.md`: one row per step of the plan, one number per row. Start here.
+- `docs/PRD.md`: the plan; §0 is the plain-language changelog (newest first), §16 the decision log.
+- `docs/REVIEW-GUIDE.md`: how to review the project in 30 minutes; every claim with its source file; where to attack.
+- `results/E5_conditions.md`: every number in the report (condition means, replay table, paired differences). Rebuild with
+  `uv run --project src/double_auction python src/analyze.py` (also writes `results/figures/F1..F5`).
+- `scripts/run_part2_eval.sh` / `scripts/part2_repair.sh`: the Part 2 evaluation auctions on our Modal vLLM servers
+  (`src/part2/modal_serve.py`); training and merging: `src/part2/modal_graft.py`.
+- `LOG.md`: append-only record of every run (time, what, result file, why). `docs/reviews/`: the two Codex reviews and our replies.
+- Official report template (Google Doc, copy it): see `docs/sprint-brief.md`.

@@ -7,8 +7,10 @@ trace, that's a bug: open a GitHub issue or comment on the commit.
 1. `docs/STATUS.md` — the plan, each step's state, the one number per step. (3 min)
 2. `docs/PRD.md` §0 — the day's decisions and findings in plain words, newest first; §2 — what we claim is open and
    why; §16 — the decision log. (8 min)
-3. `results/E5_conditions.md` — every condition, mean and 95% CI; `results/figures/F3_paired_arms_price_and_chat.png`
-   (the main figure) and `F1_index_by_round_by_condition.png` (the ladder). (7 min)
+3. `results/E5_conditions.md` — every condition, mean and 95% CI, the replay table and the paired differences;
+   `results/figures/F3_paired_arms_price_and_chat.png` (the main figure), `F1_index_by_round_by_condition.png` (the
+   ladder), `F5_exploratory_forks.png` (the no-reminder, memory-only and fresh-agent forks), `F4_part2_models.png`
+   (Part 2, once the batch is in). (7 min)
 4. `report/draft.md` — the paper as it stands: §3 method, §4.1–4.4 results, §5 discussion, §6 limitations. (10 min)
 5. `LOG.md` — if you want to know when and how any run was made. `docs/reviews/` — two independent Codex reviews and
    our point-by-point replies (`claude-ack-codex-review-2-2026-10-24.md` records the metric fix, the sample-count fix
