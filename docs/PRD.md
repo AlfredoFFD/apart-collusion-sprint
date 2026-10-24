@@ -5,6 +5,13 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:35 PM — Alfredo's call: Part 2 on the 14B too, on H100s.** One model everywhere: the cartel logs are the
+  14B's own turns, the directions come from the same model, and the fine-tuned models can be read with them. Four
+  Qwen3-14B trainings launched on H100s (`sft_all_14b`, `sft_filtered_14b`, `graft_14b` with GRAFT's defaults,
+  `graft_14b_k1` with κ = 1 and recall 1.0; 2 epochs each, same v2 data). Expected: 1.5 to 2 hours each in parallel,
+  then merges, four 14B servers (thinking off, same as the 1.7B block), 24 auctions; results tonight ~10 to 11 PM or
+  Sunday morning. The finished 1.7B block (30 auctions done at 5:26 PM; the repaired 1.7B GRAFT being evaluated)
+  stays as the small-model appendix, and is the fallback if the 14B block does not land in time.
 - **Sat 5:25 PM — one model for everything? Part 1 stays on the 14B; Part 2 and the directions go fully 1.7B.**
   Alfredo asked whether to use Qwen3-1.7B everywhere so the team shares one model. The 1.7B is too weak a seller
   for Part 1: in its own cartel run it sat at exactly 0.80 for 20 rounds, sent the same sentence every round and

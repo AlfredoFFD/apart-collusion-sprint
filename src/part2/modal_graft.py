@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[2] if modal.is_local() else Path("/")
 GRAFT_SCRIPTS = ROOT / "vendor" / "GRAFT" / "sft" / "scripts"
 DATA = ROOT / "results" / "part2" / os.environ.get("GRAFT_DATA_SUBDIR", "graft")  # graft_v3 = the d_coord-labelled pools (E8)
 BASE_MODEL = "Qwen/Qwen3-1.7B"
+GPU = os.environ.get("GRAFT_GPU", "A100-80GB")  # H100 for the 14B runs (Sat 5:30 PM: Part 2 moves to Qwen3-14B)
 
 image = (
     modal.Image.debian_slim(python_version="3.12")
@@ -79,7 +80,7 @@ def _run(cmd, env, cwd="/graft/sft"):
     return tail
 
 
-@app.function(gpu="A100-80GB", timeout=4 * 3600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
+@app.function(gpu=GPU, timeout=6 * 3600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
 def train(run_name: str, mode: str = "graft", epochs: int = 3, max_steps: int = -1, max_length: int = 6144,
           lr: float = 1e-4, model: str = BASE_MODEL, extra: str = ""):
     assert mode in ("all", "filtered", "graft")
@@ -99,7 +100,7 @@ def train(run_name: str, mode: str = "graft", epochs: int = 3, max_steps: int = 
     return {"run_name": run_name, "mode": mode, "checkpoints": ckpts[-5:], "log_tail": out[-3000:]}
 
 
-@app.function(gpu="A100-80GB", timeout=2 * 3600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
+@app.function(gpu=GPU, timeout=2 * 3600, volumes={"/ckpts": vol, "/root/.cache/huggingface": hf_cache})
 def merge(run_name: str, adapter_ckpt: str = "", push_repo: str = "", hf_token: str = "", forget_scale: float = 0.0,
           model: str = BASE_MODEL, out_name: str = "merged"):
     """Fold the adapters into a plain Qwen3 checkpoint (vLLM-servable). forget_scale 0 = GRAFT's ablation.

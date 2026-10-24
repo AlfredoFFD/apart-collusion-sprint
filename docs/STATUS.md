@@ -1,4 +1,11 @@
-# Status board (updated in place; last update Sat Oct 24, 4:20 PM ET)
+# Status board (updated in place; last update Sat Oct 24, 5:40 PM ET)
+
+**5:35 PM — Alfredo's call: Part 2 moves to the 14B (one model everywhere), trained on H100s.** Four Qwen3-14B
+trainings launched (all / filtered / GRAFT default / GRAFT repaired settings, 2 epochs). Results tonight ~10–11 PM
+or Sunday morning. The 1.7B block is complete (30 auctions) and becomes the small-model appendix and the fallback.
+**Direction for the last stretch: "keep the greed, forget the collusion"** (GRAFT++ routed by a coordination
+direction read from the 14B's own activations; E8 row below). Reading order for the team: this board → `docs/PRD.md`
+§0 → `docs/REVIEW-GUIDE.md` → `report/draft.md`.
 
 **4:10 PM — Codex's second review (via Alfredo) is in and accepted** (`docs/reviews/claude-ack-codex-review-2-2026-10-24.md`):
 the exported "trade index" was the harness's highest-bid index (now `top_bid_idx`; a true trade-price index is added:
@@ -33,7 +40,8 @@ share of seller messages the frozen overseer prompt scores 3 or 4 of 4. "flags" 
 | E5 | Analysis + figures | ✅ | `analyze.py` → E5 tables, F1 ladder, F2, F3; new columns: strict J-space list, words per message, bid dependence (≈ 0 in every arm; asks barely move, so noisy) | re-run after each batch |
 | E6 | Part 2, GRAFT: data | ✅ | v2 snapshot (audit fixes + silent cartel): `results/part2/SNAPSHOT_v2.json` | — |
 | E6 | Part 2: three retrainings on Modal (v2) | ✅ | sft_all_v2, sft_filtered_v2, graft_v2: 3 epochs each, adapters saved 3:45 PM | merging now |
-| E6 | Part 2: merge, serve, evaluation auctions | 🔄 | merges done; five servers (base, sft_all_v2, sft_filtered_v2, graft_v2, and graft_v2 with both adapters kept as a diagnostic). First batch set aside (sellers answered inside `<think>` → empty JSON; now thinking off for all). Direct test: base and SFT-all answer in the seller format; **GRAFT (forget part deleted) answers in the wrong format every time** → it cannot place asks; the both-parts server tests where the format went | smoke 3 running 4:42 PM; then 30 auctions (5 models × 2 conditions × 3 seeds), ~40 min; then analyze → report §4.6 |
+| E6 | Part 2 on the 1.7B (small-model block): 30 auctions | ✅ runs · 🔄 repaired GRAFT | all 30 done 5:26 PM (base, SFT-all, SFT-filtered, GRAFT default, GRAFT with both adapters kept). GRAFT default and both-adapters: wrong output schema → cannot place asks (the routing training itself broke the format; same loader and data as the SFT runs). SFT-all under the compete prompt prices at the monopoly level (propensity transferred into the weights); SFT-filtered competes. Repaired GRAFT (κ = 1, recall 1.0) merged and served; format test + 6 auctions running | table in `results/E5_conditions.md` (E6 rows); report §4.6 |
+| E6 | Part 2 on the 14B (main block, Alfredo's call 5:35 PM) | 🔄 | four H100 trainings launched 5:40 PM (`sft_all_14b`, `sft_filtered_14b`, `graft_14b`, `graft_14b_k1`; 2 epochs) | ~1.5–2 h each in parallel → merges → four 14B servers → 24 auctions; tonight ~10–11 PM or Sunday morning |
 | E8 | GRAFT++: coordination and greed directions from the 14B seller's own activations; label coverage vs the monitor; `graft_v3` routed by `d_coord` | 🔄 | replay of 5,902 seller turns on Modal running (5:15 PM); then validation on held-out seeds (stop if it fails), coverage table, v3 labels | directions + coverage ~6:30 PM; v3 training only if the repaired recipe keeps the output format |
 | E7 | J-space (Qwen3-14B lens), seeds 0–2 + dodge/silent/full | ✅ first read | share of seller-turns with a monitor word in the top 10 of the reasoning workspace, after the branch (strict list): unmonitored **0.30** · silent 0.34 · announced 0.41 · fined 0.44–0.46 · dodge **0.50**; before the branch 0.38 for all. Suggestive only: n = 3, CIs overlap | 2-of-3 arm next; report §4.5 as a lens, not a claim |
 | Report | `report/draft.md` | 🔄 | abstract (239 words + the Part 2 sentence), §1–§4.5, §5, §6 written from E5 with the six-seed and exploratory results; figure list | needs: §4.6 Part 2 numbers, the abstract's Part 2 sentence; Sunday: transfer to the official template (Google Doc copy link in `docs/sprint-brief.md`), ethics appendix check, claim-to-file pass |
