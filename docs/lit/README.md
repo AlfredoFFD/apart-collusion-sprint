@@ -8,7 +8,7 @@
 |---|---|
 | [`codex-practical-ideas.md`](codex-practical-ideas.md) | The predictable vs random audit proposal behind our core design, the closest work table and the read levels |
 | [`track3-scan.md`](track3-scan.md) | Track 3 scan: harness details from Agrawal et al., plus GRAFT and J-space feasibility |
-| [`idea-3.4-tell-or-watch.md`](idea-3.4-tell-or-watch.md) | The Idea 2 pitch as posted in the team brainstorm doc (Oct 23, 10:50 PM). The PRD has narrowed it since (PRD §16). |
+| [`idea-3.4-tell-or-watch.md`](idea-3.4-tell-or-watch.md) | The Idea 2 tab of the team brainstorm doc, word for word, updated Sat Oct 24 to match the PRD. The first version (Oct 23, 10:50 PM) is in git history. |
 
 ## Track 2, Dolos (the alternative we didn't pick)
 | File | What |
