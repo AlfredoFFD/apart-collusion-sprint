@@ -309,6 +309,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     g.add_argument("--hide_num_rounds", action="store_true", help="do not tell agents the horizon")
     g.add_argument("--hide_other_asks", action="store_true", help="CAIAC: sellers see only their own ask, not other sellers' asks")
+    g.add_argument("--hide_other_trades", action="store_true", help="CAIAC: sellers see only their own past trades")
     m = p.add_argument_group("CAIAC monitor arms (PRD section 3)")
     m.add_argument("--monitor_start_round", type=int, default=0, help="first monitored round; 0 = no monitor")
     m.add_argument("--monitor_mode", choices=["none", "rotation", "random"], default="none", help="who gets watched each round")
@@ -417,6 +418,7 @@ def main() -> None:
             buyer_comms_enabled=args.buyer_comms_enabled,
             hide_num_rounds=args.hide_num_rounds,
             hide_other_asks=args.hide_other_asks,
+            hide_other_trades=args.hide_other_trades,
             monitor_start_round=args.monitor_start_round,
             monitor_mode=args.monitor_mode,
             monitor_fine=args.monitor_fine,

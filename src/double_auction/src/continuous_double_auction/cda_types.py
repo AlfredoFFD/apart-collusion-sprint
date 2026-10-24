@@ -42,6 +42,7 @@ class ExperimentParams(BaseModel):
     buyer_comms_enabled: bool = False
     hide_num_rounds: bool = False  # Whether to hide the total number of rounds from agents
     hide_other_asks: bool = False  # CAIAC: sellers see only their own ask (isolated-seller control; price-channel test)
+    hide_other_trades: bool = False  # CAIAC: sellers see only their own past trades (closes the trade-price channel too)
     # CAIAC monitor arms (PRD section 3): a regulator reads ONE seller's message per round from monitor_start_round on.
     monitor_start_round: int = 0             # 0 = no monitor. First monitored round (k+1 in the PRD).
     monitor_mode: str = "none"              # 'rotation' (announced schedule) | 'random' (rule announced, draw secret)

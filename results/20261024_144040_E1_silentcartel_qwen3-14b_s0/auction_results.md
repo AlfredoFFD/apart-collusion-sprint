@@ -263,3 +263,237 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 9
+````json
+{
+  "round_number": 9,
+  "seller_asks": {
+    "Seller Max": 98.1,
+    "Seller Jun": 98.1,
+    "Seller Leo": 98.1
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.1,
+    "Buyer Amir": 98.11,
+    "Buyer Jin": 98.1
+  },
+  "trades": [
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 98.1
+    },
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 98.1
+    },
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 98.1
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 10
+````json
+{
+  "round_number": 10,
+  "seller_asks": {
+    "Seller Jun": 98.11,
+    "Seller Leo": 98.11,
+    "Seller Max": 98.11
+  },
+  "buyer_bids": {
+    "Buyer Amir": 98.12,
+    "Buyer Nia": 98.11,
+    "Buyer Jin": 98.11
+  },
+  "trades": [
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 98.12
+    },
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 98.11
+    },
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 98.11
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 11
+````json
+{
+  "round_number": 11,
+  "seller_asks": {
+    "Seller Max": 98.12,
+    "Seller Leo": 98.12,
+    "Seller Jun": 98.13
+  },
+  "buyer_bids": {
+    "Buyer Amir": 98.13,
+    "Buyer Jin": 98.12,
+    "Buyer Nia": 98.12
+  },
+  "trades": [
+    {
+      "round_number": 11,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Leo",
+      "price": 98.12
+    },
+    {
+      "round_number": 11,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Max",
+      "price": 98.12
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 12
+````json
+{
+  "round_number": 12,
+  "seller_asks": {
+    "Seller Jun": 98.12,
+    "Seller Max": 98.12,
+    "Seller Leo": 98.12
+  },
+  "buyer_bids": {
+    "Buyer Jin": 98.13,
+    "Buyer Nia": 98.13,
+    "Buyer Amir": 98.13
+  },
+  "trades": [
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 98.12
+    },
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 98.12
+    },
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 98.12
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 13
+````json
+{
+  "round_number": 13,
+  "seller_asks": {
+    "Seller Leo": 98.13,
+    "Seller Max": 98.13,
+    "Seller Jun": 98.13
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.13,
+    "Buyer Amir": 98.14,
+    "Buyer Jin": 98.13
+  },
+  "trades": [
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Jun",
+      "price": 98.13
+    },
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Leo",
+      "price": 98.13
+    },
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Max",
+      "price": 98.13
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 14
+````json
+{
+  "round_number": 14,
+  "seller_asks": {
+    "Seller Jun": 98.14,
+    "Seller Max": 98.13,
+    "Seller Leo": 98.14
+  },
+  "buyer_bids": {
+    "Buyer Nia": 98.14,
+    "Buyer Amir": 98.16,
+    "Buyer Jin": 98.14
+  },
+  "trades": [
+    {
+      "round_number": 14,
+      "buyer_id": "Buyer Amir",
+      "seller_id": "Seller Max",
+      "price": 98.14
+    },
+    {
+      "round_number": 14,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Jun",
+      "price": 98.14
+    },
+    {
+      "round_number": 14,
+      "buyer_id": "Buyer Jin",
+      "seller_id": "Seller Leo",
+      "price": 98.14
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````

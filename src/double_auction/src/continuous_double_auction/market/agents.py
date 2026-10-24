@@ -276,6 +276,9 @@ class LMSeller(Agent):
             demonym = self.expt_params.seller_demonyms[self.id]
         ask_queue = kwargs.get("ask_queue", [])
         past_bids_and_asks = kwargs.get("past_bids_and_asks", [])
+        past_trades = kwargs.get("past_trades", [])
+        if self.expt_params.hide_other_trades:  # CAIAC: only this seller's own trades remain visible
+            past_trades = chr(10).join(line for line in str(past_trades).split(chr(10)) if (" from " + self.id + " at") in line or line == "...") or "No trades visible."
         if self.expt_params.hide_other_asks:  # CAIAC: isolated seller sees only its own ask
             ask_queue = [a for a in ask_queue if a[1] == self.id]
             past_bids_and_asks = chr(10).join(
@@ -298,7 +301,7 @@ class LMSeller(Agent):
             bid_queue=kwargs.get("bid_queue", []),
             ask_queue=ask_queue,
             past_bids_and_asks=past_bids_and_asks,
-            past_trades=kwargs.get("past_trades", []),
+            past_trades=past_trades,
             agent_successful_trades=kwargs.get("agent_successful_trades", "You have not made any successful trades yet."),
             scratch_pad=self.scratch_pad,
             demonym=demonym,  # Pass the demonym to the template
