@@ -313,6 +313,7 @@ class LMSeller(Agent):
             monitor_active=kwargs.get("monitor_active", False),
             monitor_mode=kwargs.get("monitor_mode", "none"),
             watched_seller=kwargs.get("watched_seller"),
+            monitor_n_watched=kwargs.get("monitor_n_watched", 1),
             monitor_fine=kwargs.get("monitor_fine", 0.0),
             fine_notice=kwargs.get("fine_notice", 0.0),
             fines_total=kwargs.get("fines_total", 0.0),
