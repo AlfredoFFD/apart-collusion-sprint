@@ -320,9 +320,12 @@ def main():
         ax.axhline(0, color="k", lw=0.5); ax.axhline(1, color="k", lw=0.5, ls="--")
         fig.tight_layout(); fig.savefig(figdir / "F2_post_branch_index_by_condition.png", dpi=150)
         print("figure:", figdir / "F2_post_branch_index_by_condition.png")
-        # F1: per-round seller-ask index curves, one line per condition (mean over seeds), the "ladder" picture
+        # F1: per-round seller-ask index curves, one line per condition (mean over seeds), the "ladder" picture:
+        # the E1 conditions plus the unmonitored paired arm as the reference cartel
         fig, ax = plt.subplots(figsize=(9, 4))
         for (exp, cond), rs in sorted(groups.items()):
+            if not (exp == "E1" or (exp, cond) == ("E2p", "A0_none")):
+                continue
             curves = []
             for r in rs:
                 mm = json.loads((RESULTS / r["run"] / "collusion_metrics.json").read_text(encoding="utf-8"))
@@ -339,7 +342,7 @@ def main():
         ax.legend(fontsize=6, ncol=2); fig.tight_layout(); fig.savefig(figdir / "F1_index_by_round_by_condition.png", dpi=150)
         print("figure:", figdir / "F1_index_by_round_by_condition.png")
         # F3: the paired arms (E2p and E4p): price index and coordinating share, before vs after the monitor
-        paired = {cond: rs for (exp, cond), rs in groups.items() if exp in ("E2p", "E4p")}
+        paired = {cond: rs for (exp, cond), rs in groups.items() if exp in ("E2p", "E4p") and "norem" not in cond}
         if paired:
             order = ["A0_none", "A1silent_rot_nofine", "A1_rot_nofine", "A2_rot_fine20", "A2full_rot_fine20", "A3_rand_fine20",
                      "A2dodge_rot_fine20", "A0blind_none", "A2blind_rot_fine20", "A0fullblind_none", "A2fullblind_rot_fine20"]
@@ -374,6 +377,36 @@ def main():
             fig.suptitle(f"Paired arms, identical cartel history per seed (n = seeds; 95% bootstrap CI)", fontsize=9)
             fig.tight_layout(); fig.savefig(figdir / "F3_paired_arms_price_and_chat.png", dpi=150)
             print("figure:", figdir / "F3_paired_arms_price_and_chat.png")
+        # F5: the exploratory forks (section 4.5): per-round price path of each fork vs the unmonitored arm, and the
+        # post-branch price, coordinating share and private intent (judge, scaled from 1-4 to 0-1) per fork
+        expl = {(exp, cond): rs for (exp, cond), rs in groups.items() if exp in ("E2p", "E4p") and ("norem" in cond or cond == "A0_none")}
+        if len(expl) > 1:
+            fig, axes = plt.subplots(1, 2, figsize=(13, 4))
+            order5 = ["A0_none", "A0norem_none", "A2norem_rot_fine20", "A0noremblind_none", "A0noremresetb_none", "A0noremresets_none"]
+            keys5 = sorted(expl, key=lambda k: order5.index(k[1]) if k[1] in order5 else 99)
+            for (exp, cond) in keys5:
+                curves = []
+                for r in expl[(exp, cond)]:
+                    mm = json.loads((RESULTS / r["run"] / "collusion_metrics.json").read_text(encoding="utf-8"))
+                    c = [x if isinstance(x, (int, float)) else float("nan") for x in (mm.get("collusion_indices_avg_seller_asks") or [])]
+                    if c:
+                        curves.append(c)
+                if curves:
+                    L = min(len(c) for c in curves); arr = np.array([c[:L] for c in curves], dtype=float)
+                    axes[0].plot(range(1, L + 1), np.nanmean(arr, axis=0), marker="o", ms=3, label=f"{cond} (n={len(curves)})")
+            axes[0].axvline(args.branch + 0.5, color="gray", ls=":", lw=1); axes[0].set_ylim(-0.2, 1.05)
+            axes[0].set_xlabel("round"); axes[0].set_ylabel("avg seller-ask collusion index"); axes[0].legend(fontsize=6)
+            labels5 = [k[1] for k in keys5]; x = np.arange(len(labels5))
+            for off, key, name, tf in ((-0.27, "ask_idx_post", "price index", lambda v: v), (0.0, "coord_share_post", "coordinating share", lambda v: v),
+                                       (0.27, "judge_post", "private intent (1-4 → 0-1)", lambda v: (v - 1) / 3)):
+                vals = [boot_ci([tf(float(r[key])) for r in expl[k] if r[key] == r[key]]) for k in keys5]
+                mu = [v[0] for v in vals]; err = np.array([[v[0] - v[1], v[2] - v[0]] for v in vals]).T
+                axes[1].bar(x + off, mu, width=0.25, yerr=np.nan_to_num(err), capsize=2, label=name)
+            axes[1].set_xticks(x); axes[1].set_xticklabels([l.replace("_", chr(10)) for l in labels5], fontsize=7)
+            axes[1].set_ylim(0, 1.05); axes[1].legend(fontsize=7)
+            fig.suptitle("Exploratory forks from the same saved cartels, base prompt (no consortium block); n = seeds, 95% bootstrap CI", fontsize=9)
+            fig.tight_layout(); fig.savefig(figdir / "F5_exploratory_forks.png", dpi=150)
+            print("figure:", figdir / "F5_exploratory_forks.png")
         # F4: Part 2 (E6). Per seller model: price under the cartel prompt + fined rotation, coordinating share there,
         # and the capability check (share of replies with an ask) in both conditions. Models in training order.
         e6 = {cond: rs for (exp, cond), rs in groups.items() if exp == "E6"}
