@@ -8,13 +8,15 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUN="${1:?run name}"; FORGET_SCALE="${FORGET_SCALE:-0.0}"; WORKSPACE="${MODAL_WORKSPACE:-fabianfrontera}"
+BASE_MODEL="${BASE_MODEL:-Qwen/Qwen3-1.7B}"  # the model the adapters were trained on; Qwen/Qwen3-14B for the *_14b runs
+# (Sat 7:05 PM: all five 14B merges failed because this was not passed: the adapters were folded into the 1.7B base)
 WROOT="$(cygpath -w "$ROOT" 2>/dev/null || echo "$ROOT")"  # Windows-style path for python and curl (modal is a Windows exe: give it relative paths)
 export PYTHONUTF8=1 PYTHONIOENCODING=utf-8
 L="$ROOT/results/_launch_logs/part2_pipeline_${RUN}.log"; : > "$L"
 log() { echo "== $* $(date +%H:%M)" | tee -a "$L"; }
 
 log "merge $RUN (forget-scale $FORGET_SCALE)"
-( cd "$ROOT" && modal run src/part2/modal_graft.py::merge --run-name "$RUN" --forget-scale "$FORGET_SCALE" ) >> "$L" 2>&1
+( cd "$ROOT" && modal run src/part2/modal_graft.py::merge --run-name "$RUN" --forget-scale "$FORGET_SCALE" --model "$BASE_MODEL" ) >> "$L" 2>&1
 grep -q "Wrote merged model" "$L" || { log "merge FAILED (see $L)"; exit 1; }
 
 log "deploy caiac-serve-$RUN"
