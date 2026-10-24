@@ -5,6 +5,14 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 6:10 PM — the joint-reset forks settle the "who carries the price" question as far as this market can.**
+  Both sides fresh at once (no memory anywhere, no instruction, chat on): 0.91. Both sides fresh, no chat, and no
+  view of the rivals' asks or trades: 0.93, with the private-intent judge at 1.0. Nothing of the cartel is left in
+  that fork except the live order book and the quotes each new agent sees on joining, and that is enough; agents
+  who never saw the agreement continue it. From scratch the same uninstructed sellers reach 0.12–0.43, so the
+  inherited market state is the isolated difference. The report says exactly that and no more (no "memory", no
+  "intent"). Also in: the untuned 14B on our own server, as the Part 2 reference (cartel prompt + fines 0.96–0.98;
+  compete 0.10 / −0.80 / 0.76). Three of the five 14B trainings have finished their first epoch.
 - **Sat 5:50 PM — Codex's approach review applied; the activation probe loses to a word count.** With the depth
   chosen on the training seeds only, the probe's held-out AUC is 0.68 (0.55–0.78 by seed) and a plain count of
   coordination words in the message reaches 0.77 on the same turns. So the activation route is a negative result and

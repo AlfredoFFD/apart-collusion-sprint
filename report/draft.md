@@ -15,8 +15,8 @@ cut coordinating messages in proportion to coverage (-0.10 with one seller read,
 three) without reducing collusion, and no fined cartel resembles one told to dodge (8% coordinating). Replays show
 fined cartels flagged below mechanical coverage: a falling flag count measures the monitor's effect on the chat, not
 on the harm. In exploratory forks, removing the consortium instruction, the chat, the rivals' information, or the
-sellers themselves (fresh uninstructed agents) leaves the price at 0.91-0.96: the price survives every intervention
-we tried, and the monitored channel is not what holds it. A second part fine-tunes Qwen3-1.7B sellers on these logs (all
+agents on both sides (fresh, uninstructed, no view of rivals) leaves the price at 0.91-0.96: the inherited quotes
+alone sustain it, and the monitored channel is not what holds it. A second part fine-tunes Qwen3-1.7B sellers on these logs (all
 data, flagged turns removed, GRAFT gradient routing): {RESULT_SENTENCE_GRAFT}. All agents are simulated; dodge
 prompts are not released.
 
@@ -188,6 +188,8 @@ Five forks from the same round-8 cartels, continued with the base prompt (no con
 | no reminder, no chat, rival asks and trades hidden (memory only) | 3 | 0.94 [0.89, 0.97] | +0.02 [−0.00, +0.05] | — | 1.13 (−2.47) | — |
 | no reminder, fresh buyers (sellers keep their memory) | 3 | 0.92 [0.89, 0.95] | −0.00 [−0.03, +0.01] | 73% [67, 86] (−0.24) | 1.83 (−1.77) | — |
 | no reminder, fresh sellers (buyers keep their memory) | 3 | 0.91 [0.86, 0.98] | −0.01 [−0.04, +0.00] | 73% [53, 89] (−0.24) | 1.95 (−1.65) | — |
+| no reminder, fresh buyers and fresh sellers (chat on) | 3 | 0.91 [0.89, 0.95] | −0.00 [−0.03, +0.01] | — | 1.95 (−1.66) | — |
+| no reminder, both sides fresh, no chat, rival asks and trades hidden | 3 | 0.93 [0.90, 0.99] | +0.01 [+0.00, +0.02] | — | 1.03 (−2.57) | — |
 
 Reading. (1) **The repeated instruction does not hold the price.** Removing it leaves the price at 0.90–0.95, if
 anything higher. What it held was the *talk*: without it, coordinating messages fall from 97% to 71% with no monitor,
@@ -197,11 +199,13 @@ the price stays at 0.90. This is the "monitor looks like it works" outcome in it
 fines alone; the pre-registered arms understated it because the consortium block told the sellers to keep using
 their messages. (3) **The price does not need the chat, the rivals' asks or trades, the sellers' memories or the
 buyers' memories, taken one at a time.** With chat off and rivals hidden it is 0.94; with fresh buyers 0.92; with
-fresh, uninstructed sellers 0.91. What every fork keeps is the market state the branch inherits: the standing order
-book, the visible history of asks, bids and trades at the cartel price, and buyers who accept any price under their
-$100 value. Which of these carries the price is not isolated here; the claim is only that the price survives each
-single intervention (a joint reset of both sides, with and without visible history, was launched as a further check).
-From scratch, uninstructed sellers reach 0.12–0.43 (§4.1); inheriting a cartel's state they stay at 0.91–0.96. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
+fresh, uninstructed sellers 0.91; with both sides fresh at once 0.91; with both sides fresh, no chat, and no view of
+the rivals' asks or trades 0.93. In that last fork nothing of the cartel is left except the market state the branch
+inherits: the live order book and the current quotes each fresh agent sees on joining, with buyers who accept any
+price under their $100 value. Against the from-scratch floor (uninstructed sellers reach 0.12–0.43, §4.1) that
+inherited state is the isolated difference, and it is enough: agents who never saw the agreement continue it from
+the quotes alone. The private-intent judge drops to 1.0 there; there is no coordination to read anywhere, and the
+price does not move. (4) **A fined message monitor present from round 1 did not prevent the instructed cartel from forming:**
 3 of 3 seeds, price 0.79 [0.78, 0.80] from round 2 onward (unmonitored instructed cartels: 0.85 [0.75, 1.00]), 12.3
 of 20 watched rounds flagged, $247 of fines, shorter messages (14 vs 17 words), flags at the replay level (+0.7). It
 sat on a lower plateau and never climbed to 1.00 as the best unmonitored seed did, but it formed. "Monitor during
@@ -318,11 +322,12 @@ unpaired and paired orderings disagree, so we claim no general schedule advantag
 **Why nothing moves the price.** Every channel we hid leaves the price where it was: chat fined, rival asks hidden,
 trades hidden, the consortium instruction removed, and, in the memory-only fork, no chat and no rival information at
 all. Replacing the sellers with fresh, uninstructed agents leaves it at 0.91 (§4.5, exploratory).
-Our reading, stated as a hypothesis: once the cartel has set the price, the inherited market state carries it; a
-seller that sees trades at $100 and bids near $100 asks $100, and buyers who gain from any price under $100 accept it.
-What the data show is narrower: the monitored channel, the agreement text and either side's private memory are each
-not load-bearing on their own, and bid dependence between sellers did not rise in any arm (§3.5), so we do not claim
-that the coordination moved into the asks. If the hypothesis holds, it is the mechanism behind "faithful yet
+Our reading: once the cartel has set the price, the inherited market state carries it; a seller that sees quotes at
+$100 asks $100, and buyers who gain from any price under $100 accept it. The joint-reset fork supports this directly:
+with both sides fresh, no chat and no view of rivals, the price is 0.93 from the quotes alone (§4.5). What we do not
+claim: that the coordination moved into the asks (bid dependence between sellers did not rise in any arm, §3.5), or
+that any agent after the branch is coordinating at all; the judge reads 1.0 in that fork. A market that was once
+collusive stays expensive with no colluders in it. If the hypothesis holds, it is the mechanism behind "faithful yet
 collusive" chain-of-thought (Lee et al. 2026) and behind the no-chat drift in our own controls: once the price is in
 the market state, observable coordination is optional.
 It also says which monitor would see it: a price-level audit against the competitive benchmark (Xu 2026) sees the
