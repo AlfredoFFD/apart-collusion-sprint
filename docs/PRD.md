@@ -5,6 +5,15 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 5:25 PM — one model for everything? Part 1 stays on the 14B; Part 2 and the directions go fully 1.7B.**
+  Alfredo asked whether to use Qwen3-1.7B everywhere so the team shares one model. The 1.7B is too weak a seller
+  for Part 1: in its own cartel run it sat at exactly 0.80 for 20 rounds, sent the same sentence every round and
+  ignored the fines, so the effects Part 1 measures would be floor effects, and Part 1 is already run and written.
+  A 14B run costs cents through OpenRouter, so teammates can match it with `--seller_models qwen/qwen3-14b`. For
+  Part 2 the point is right and it improves the science: the same training turns are replayed through the 1.7B
+  student too, so the routing label can come from the student's own representation, and the fine-tuned models can
+  be read with the same direction afterwards (did GRAFT++ reduce the coordination signal, not only the behaviour?).
+  Both direction sets (author 14B, student 1.7B) are reported; the one that validates on held-out seeds is used.
 - **Sat 5:15 PM — direction for the last stretch: "keep the greed, forget the collusion" (GRAFT++).** From
   a sprint speaker's talk and 1:1 with Alfredo (contrastive activation directions, "split good cooperation from bad"),
   Alfredo's idea to use a greed vector for the grafting, Jayden's notes, and our own data. GRAFT's weakness in our
