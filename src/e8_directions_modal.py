@@ -21,7 +21,10 @@ from pathlib import Path
 
 import modal
 
-MODEL = "Qwen/Qwen3-14B"
+import os
+MODEL = os.environ.get("E8_MODEL", "Qwen/Qwen3-14B")  # E8_MODEL=Qwen/Qwen3-1.7B reads the same turns with the student model
+TAG = os.environ.get("E8_TAG", "")  # output suffix, e.g. "_1p7b"; the 14B writes the plain e8_vectors.npz
+GPU = os.environ.get("E8_GPU", "A100-80GB")
 DEPTHS = (0.25, 0.5, 0.75)
 MAX_TOKENS = 8192
 
@@ -31,7 +34,8 @@ image = (
     .pip_install("transformers==5.5.4", "huggingface_hub", "hf_transfer", "numpy", "accelerate")
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
-app = modal.App("caiac-directions", image=image)
+image = image.env({"E8_MODEL": MODEL})  # the container reads the same model name
+app = modal.App("caiac-directions" + TAG.replace("_", "-"), image=image)
 hf_cache = modal.Volume.from_name("caiac-hf-cache", create_if_missing=True)
 
 
@@ -45,7 +49,7 @@ def turns(run_dir: Path):
                 yield {"seller": md.stem, "round": rn, "prompt": prompts[rn], "response": m.group(2)}
 
 
-@app.cls(gpu="A100-80GB", timeout=3 * 3600, volumes={"/root/.cache/huggingface": hf_cache}, max_containers=4)
+@app.cls(gpu=GPU, timeout=3 * 3600, volumes={"/root/.cache/huggingface": hf_cache}, max_containers=4)
 class Reader:
     @modal.enter()
     def load(self):
@@ -90,7 +94,7 @@ def main(glob_: str = "", limit: int = 0):
     # every chunk of every run goes through one .map so up to max_containers GPUs share the work
     chunks, owner = [], []
     for run in runs:
-        if (run / "e8_vectors.npz").exists():
+        if (run / f"e8_vectors{TAG}.npz").exists():
             print("skip", run.name); continue
         recs = list(turns(run))
         if limit:
@@ -106,6 +110,6 @@ def main(glob_: str = "", limit: int = 0):
         if not ok:
             print(run.name, "no vectors:", got[:1]); continue
         vec = np.stack([np.frombuffer(g["vec"], dtype=np.float16).reshape(g["shape"]) for g in ok])
-        np.savez_compressed(run / "e8_vectors.npz", vec=vec, layers=np.array(DEPTHS))
-        (run / "e8_index.json").write_text(json.dumps([{k: g[k] for k in ("seller", "round", "n_tokens")} for g in ok]), encoding="utf-8")
+        np.savez_compressed(run / f"e8_vectors{TAG}.npz", vec=vec, layers=np.array(DEPTHS))
+        (run / f"e8_index{TAG}.json").write_text(json.dumps([{k: g[k] for k in ("seller", "round", "n_tokens")} for g in ok]), encoding="utf-8")
         print(f"{run.name}: {len(ok)} turns -> {vec.shape}; errors {len(got) - len(ok)}")

@@ -22,6 +22,7 @@ Outputs: results/e8/directions.json, coverage.md, scores.csv, figures/F6_directi
 
 import csv
 import json
+import os
 import re
 import shutil
 from pathlib import Path
@@ -30,7 +31,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
-OUT = RESULTS / "e8"
+TAG = os.environ.get("E8_TAG", "")  # "" = the 14B author model; "_1p7b" = the 1.7B student (see e8_directions_modal.py)
+OUT = RESULTS / ("e8" + TAG)
 BRANCH = 8
 TRAIN_SEEDS = {0, 1}
 CONDITION_RE = re.compile(r"_(E\d+p?)_([A-Za-z0-9]+(?:_[a-z0-9]+)*?)_(?:qwen3-14b_)?s(\d+)$")
@@ -46,13 +48,13 @@ def load_turns():
     """One row per seller turn with its vectors (3 depths) and the run's condition."""
     rows = []
     for d in sorted(RESULTS.iterdir()):
-        if not d.is_dir() or not (d / "e8_vectors.npz").exists():
+        if not d.is_dir() or not (d / f"e8_vectors{TAG}.npz").exists():
             continue
         cond = condition_of(d.name)
         if cond is None:
             continue
-        vec = np.load(d / "e8_vectors.npz")["vec"].astype(np.float32)
-        index = json.loads((d / "e8_index.json").read_text(encoding="utf-8"))
+        vec = np.load(d / f"e8_vectors{TAG}.npz")["vec"].astype(np.float32)
+        index = json.loads((d / f"e8_index{TAG}.json").read_text(encoding="utf-8"))
         fv = json.loads((d / "fullview_scores.json").read_text(encoding="utf-8")) if (d / "fullview_scores.json").exists() else {}
         for i, ix in enumerate(index):
             e = fv.get(ix["seller"], {}).get(str(ix["round"]), {})
@@ -167,7 +169,7 @@ def main():
     (OUT / "coverage.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     report["per_condition_post"] = cond_scores
     # 5. graft_v3 labels
-    gdir = RESULTS / "part2" / "graft"; v3 = RESULTS / "part2" / "graft_v3"; v3.mkdir(parents=True, exist_ok=True)
+    gdir = RESULTS / "part2" / "graft"; v3 = RESULTS / "part2" / ("graft_v3" + TAG); v3.mkdir(parents=True, exist_ok=True)
     by_key = {(r["run"], r["seller"], r["round"]): a for r, a in zip(rows, sc)}
     counts = {"forget": 0, "retain": 0, "unmatched": 0, "was_forget_now_retain": 0, "was_retain_now_forget": 0}
     forget_out, retain_out = [], []
@@ -213,7 +215,7 @@ def main():
         axes[1].set_xticks(x); axes[1].set_xticklabels([k.replace(" ", "\n").replace("_", "\n") for k in keys], fontsize=5)
         axes[1].set_ylabel("mean score on d_coord, rounds > 8")
         fig.suptitle("E8: coordination direction read from the 14B seller's own activations (fitted on seeds 0-1)", fontsize=9)
-        fig.tight_layout(); fig.savefig(RESULTS / "figures" / "F6_directions.png", dpi=150); print("figure: F6_directions.png")
+        fig.tight_layout(); fig.savefig(RESULTS / "figures" / f"F6_directions{TAG}.png", dpi=150); print(f"figure: F6_directions{TAG}.png")
     except Exception as e:
         print("figure skipped:", e)
 
