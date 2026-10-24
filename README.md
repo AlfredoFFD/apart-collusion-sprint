@@ -26,7 +26,8 @@ Smoke test (15 calls, a few cents):
 cd src/double_auction
 uv run python src/continuous_double_auction/simulation.py --rounds 5 --seller_comms_enabled --buyer_models zip --seller_models qwen/qwen3-14b --tag E0_smoke
 ```
-Every run writes a folder to `results/` at the repo root. More commands: [`experiments/README.md`](experiments/README.md).
+Every run writes a folder to `results/` at the repo root. `--buyer_models zip` is fine for this pipeline check only:
+the ZIP buyers never learn, so real runs use LLM buyers. More commands: [`experiments/README.md`](experiments/README.md).
 
 ## How we work
 - **A branch per person, small PRs.** `git switch -c <name>/<topic>`, commit, `git push -u origin <name>/<topic>`,

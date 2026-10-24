@@ -76,3 +76,25 @@ def test_single_key_behaviour_unchanged(both_keys):
     both_keys.setattr(mw._llm_config, "nebius_serves", lambda model: False)
     client, _ = mw._client_for("openai/gpt-4.1-mini")
     assert "nebius" in str(client.base_url)  # upstream behaviour with only a Nebius key
+
+
+def test_keys_only_in_compute_env_still_route(monkeypatch):
+    """Keys that exist only in compute.env must count before the routing check (first client of a run)."""
+    for var in ("LLM_BASE_URL", "LLM_MODEL", "LLM_API_KEY", "NEBIUS_API_KEY", "OPENROUTER_API_KEY"):
+        monkeypatch.delenv(var, raising=False)
+
+    def fake_load():  # stands in for reading compute.env
+        monkeypatch.setenv("NEBIUS_API_KEY", "test-nebius-key")
+        monkeypatch.setenv("OPENROUTER_API_KEY", "test-openrouter-key")
+        return "compute.env"
+
+    monkeypatch.setattr(mw._llm_config, "_load", fake_load)
+    monkeypatch.setattr(mw._llm_config, "nebius_serves", lambda model: False)
+    monkeypatch.setattr(mw._llm_config, "openrouter_serves", lambda model: model)
+    client, _ = mw._client_for("openai/gpt-4.1-mini")
+    assert "openrouter.ai" in str(client.base_url)
+
+
+def test_plot_aggregate_with_no_runs_returns_nothing():
+    from src.continuous_double_auction.util.plotting_util import aggregate_metric_data
+    assert aggregate_metric_data([], "empty", lambda d: None, "value") == (None, 0, 0)

@@ -91,6 +91,7 @@ def _client_for(model_name: str):
     serve (or, if its catalog can't be read, a closed-provider id) goes to OpenRouter. With one key, or a
     custom LLM_BASE_URL, behaviour is unchanged.
     """
+    _llm_config.config()  # loads compute.env first: keys that live only in that file must count here too
     if (not os.getenv("LLM_BASE_URL") and os.getenv("NEBIUS_API_KEY")
             and _llm_config.openrouter_api_key()):
         model = resolve_model(model_name, translate_openrouter=False)

@@ -303,6 +303,8 @@ def aggregate_metric_data(
     
     if min_rounds == float('inf'): min_rounds = 0
     
+    if not all_data:  # CAIAC fix: a condition with no usable runs is skipped instead of crashing pd.concat
+        return None, 0, 0
     df_combined = pd.concat(all_data)
     rounds_limit = min(min_rounds, num_rounds_to_plot) if num_rounds_to_plot else min_rounds
     

@@ -19,7 +19,9 @@ watched, or out of the chat? And does watching a random seller instead stop that
 
 ## 3. The experiment
 **Setting:** the starter double auction (`src/double_auction`, Agrawal et al. 2025). 3 sellers who can message each
-other, rule-based ZIP buyers, 20 rounds, one seller model (chosen in E1).
+other, 3 LLM buyers on a cheap model, 20 rounds, one seller model (chosen in E1). Not the starter's rule-based ZIP
+buyers: their learning is commented out upstream, so they always bid about $80, and a cartel could never trade with
+them (open question in §15).
 
 **Collusion** means what the harness paper means: overt or tacit coordination between sellers, plus prices above the
 competitive level. Both parts are needed. High prices alone don't count.
@@ -113,6 +115,8 @@ changed. Each change is a flag, and the defaults reproduce the original harness.
 6. **Per-round logs:** watched seller, overseer score, fine, and the full prompts (for the replay and E6).
 7. **Prompt templates:** instructed cartel, prices-only cartel, compete, told to dodge.
 8. **Replay and metrics:** the overseer over saved messages (replay and full-view scoring), bid dependence, figures.
+9. **Optional, ZIP buyers that learn:** restore their margin updates, which are commented out upstream, so cheap
+   rule-based buyers respond to prices. Then validate that they trade with a cartel before using them.
 
 ## 10. Models and compute
 - **Seller model:** one for the core, picked in E1: the cheapest that forms a cartel reliably. Candidates are
@@ -121,8 +125,8 @@ changed. Each change is a flag, and the defaults reproduce the original harness.
 - **Overseer and judge:** one fixed model in every run (the harness default overseer is gpt-4.1-mini).
 - **Run the harness natively** (`uv run python ...`), not through `poseidon-run --model`, which forces one model onto
   every seat, including the overseer and the judge.
-- **Size:** about 130 calls per 20-round run with ZIP buyers and the judge on, so the whole plan is a few thousand
-  calls. Estimate $20 to $100; E0 measures the real cost.
+- **Size:** about 180 calls per 20-round run (60 seller, 60 buyer, 60 judge, plus the overseer), so the whole plan
+  is several thousand calls. Estimate $20 to $100; E0 measures the real cost.
 - **Keys:** Nebius or OpenRouter credits from Apart (event Slack or Luma) go in
   `vendor/collusion_hackathon/compute.env`. Never commit it.
 - **GPU** only for E6: Modal ($250 per person at the NYC hub; ask in the hackathon Slack) or RunPod (Peyton's $60
@@ -143,7 +147,7 @@ changed. Each change is a flag, and the defaults reproduce the original harness.
 | No reliable cartel | Instruct the cartel. The question is what a cartel does when watched, not whether one forms. |
 | Branching not ready by noon | Same seeds, separate full runs, unpaired statistics. |
 | The detector never fires | Lower the flag threshold, fixed on seeds 0 to 2, and say so. |
-| Budget | ZIP buyers, fewer rounds, no second model. |
+| Budget | A cheaper buyer model, fewer rounds, no second model, or ZIP buyers once their learning is fixed (§9). |
 | Overclaiming | §4 and §7; "what we did not show" goes in Limitations. |
 
 ## 13. Report
@@ -180,6 +184,8 @@ simulated in a sandbox market.
 
 ## 15. Open questions
 - [ ] The seller model, k, $F and the flag threshold (from E1).
+- [ ] Buyers: LLM buyers (the default, as in the paper) or fixed ZIP buyers (cheaper, but they need the §9 fix and a
+  check that they trade with a cartel).
 - [ ] A1 as a rotation or one fixed watched seller (default: rotation).
 - [ ] Do sellers hear about other sellers' fines? (default: no, only the fined seller)
 - [ ] Make the repo public at submission? The starter repo has no license file, so ask the organizers before
@@ -194,3 +200,4 @@ simulated in a sandbox market.
 | 2026-10-23 20:37 ET | Alfredo selected Track 2. Dolos versus Track 2.2 remains proposed; this selection does not settle that vote. | Alfredo, recorded by Codex |
 | 2026-10-23 22:50 ET | Focus moved to Track 3.4 (brainstorm doc, Idea 2, "Tell them or watch quietly?"). Replaces the Track 2 selection. The Dolos plan stays in `docs/lit/dolos-methods.md`. | Alfredo |
 | 2026-10-24 02:15 ET | Core narrowed after Codex's review: predictable vs random monitoring at equal budget, branched from the same market, with a replay and a price-channel test. Told × fined × budget, J-space (now optional) and GRAFT (later) left the core. | Alfredo; confirm with the team Sat 9:40 |
+| 2026-10-24 08:35 ET | Buyers: LLM buyers instead of the starter's ZIP buyers, whose margin update is commented out upstream (they always bid about $80). Found by the pre-push code review and checked in `agents.py`. | proposed; confirm with the team Sat 9:40 |
