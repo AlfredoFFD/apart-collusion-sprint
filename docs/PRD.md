@@ -5,6 +5,11 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 2:25 PM — true branching works.** `--save_state_round 8` saves the whole market (order book, trades,
+  every seller's memory and scratchpad, random seeds) after round 8; `--resume_from <that run>` restores it and
+  plays rounds 9–20 under an arm's flags. Checked: a 3-round prefix forked into a monitored continuation gives one
+  seamless 5-round run (logs, metrics and memory all continuous). Now the four arms start from the *identical*
+  cartel history per seed, which is what makes the arm comparisons paired. Prefix runs for seeds 0–2 launched.
 - **Sat 2:05 PM — the regulator exists, and E2 is running.** New harness flags `--monitor_start_round`,
   `--monitor_mode rotation|random`, `--monitor_fine`, `--monitor_threshold`. From round 9 the regulator reads one
   seller's message per round, flags at score ≥3, fines if set, and the fined seller sees the notice next round
@@ -180,8 +185,7 @@ E6 starts **Sat afternoon** from E1's cartel logs; it does not wait for E2.
 
 ## 9. Code changes to the harness
 All in `src/double_auction` (first commit unmodified upstream; our changes marked and listed in `PREEXISTING.md`).
-1. Branching: save full market+agent state at round k, continue under each arm. *(Running now as the fallback: same
-   seeds, separate full runs, unpaired stats; branching is being built for the paired version.)*
+1. ✅ Branching `--save_state_round k` / `--resume_from <prefix run>` (`market/branching.py`). Wave 1 (unpaired full runs) stays as a robustness check.
 2. ✅ Watch policy `--monitor_mode rotation|random`: one seller per round; overseer reads only that seller's message.
 3. ✅ Fines `--monitor_fine F`: flagged seller loses $F, sees it next prompt; `--monitor_fine 0` = A1 (flags logged only).
 4. ✅ Monitor notice from `--monitor_start_round` (texts differ only in rotation-vs-random and fine-vs-recorded wording); privacy line constant in every arm.
@@ -262,6 +266,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 14:25 | Branching implemented and verified; paired E2 (prefix + 4 arms × 3 seeds) replaces the unpaired wave as the main analysis; wave 1 kept as robustness | Alfredo |
 | 2026-10-24 14:05 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |
 | 2026-10-24 13:50 | Isolated-seller and single-seller controls added (price-rise ladder: isolated → tacit → explicit); `--hide_other_asks` implemented | Alfredo's idea, in person |
 | 2026-10-24 13:35 | E1 done: consortium prompt is the cartel (3/3), k = 8, flag ≥3; private thinking captured and an awareness judge added as a control measure; privacy line constant across arms; the promise-vs-monitored CoT factor deferred | Alfredo, from E1 results |

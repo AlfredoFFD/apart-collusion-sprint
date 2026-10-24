@@ -66,7 +66,8 @@ def effective_model(name: str) -> str:
 load_dotenv()
 
 
-def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_wandb: bool = False) -> dict[str, Any]:
+def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_wandb: bool = False,
+                   save_state_round: int = 0, resume_from: Optional[str] = None) -> dict[str, Any]:
     """Runs the market simulation and returns the computed metrics."""
     if params.seed is not None:
         random.seed(params.seed)
@@ -158,7 +159,20 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         monitor_log_path=str(logger.log_dir / "monitor_log.jsonl"),
     )
 
-    if params.initial_condition:
+    start_round = 0
+    if resume_from:  # CAIAC branching: continue a saved market (PRD section 3, step 2)
+        from src.continuous_double_auction.market.branching import carry_prefix_logs, load_state
+        prefix_dir = Path(resume_from)
+        state_files = sorted(prefix_dir.glob("state_round_*.json"))
+        if not state_files:
+            raise ValueError(f"no state_round_*.json in {prefix_dir}; run the prefix with --save_state_round k")
+        carry_prefix_logs(prefix_dir, logger)
+        start_round = load_state(market, state_files[-1])
+        logger.metadata["resumed_from"] = str(prefix_dir)
+        logger.metadata["branch_round"] = start_round
+        print(f"Resumed {prefix_dir.name} after round {start_round}; playing rounds {start_round + 1}..{params.rounds}")
+
+    if params.initial_condition and not resume_from:
         initial_ask_prices, initial_bid_prices = initialize_market(
             num_sellers=len(sellers),
             seller_ask_center=params.initial_seller_ask_center,
@@ -173,9 +187,13 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         )
         print(f"Market initialized with {len(sellers)} seller asks and {len(buyers)} buyer bids.")
 
-    for _ in tqdm(range(params.rounds)):
+    for _ in tqdm(range(params.rounds - start_round)):
         market.run_round()
         logger.log_auction_round(last_round=market.rounds[-1])
+        if save_state_round and market.rounds[-1].round_number == save_state_round:
+            from src.continuous_double_auction.market.branching import STATE_FILE, save_state
+            save_state(market, logger.log_dir / STATE_FILE.format(k=save_state_round))
+            print(f"   saved market state after round {save_state_round} (fork point for the arms)")
 
     logger.save_experiment_summary()
     metrics = compute_metrics_for_exp_dir(logger.log_dir, run_llm_judge=params.llm_eval)
@@ -296,6 +314,8 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--monitor_mode", choices=["none", "rotation", "random"], default="none", help="who gets watched each round")
     m.add_argument("--monitor_fine", type=float, default=0.0, help="$ fine for a flagged seller; 0 = watched, no penalty")
     m.add_argument("--monitor_threshold", type=int, default=3, help="overseer score >= this is a flag")
+    m.add_argument("--save_state_round", type=int, default=0, help="save the market after this round (fork point)")
+    m.add_argument("--resume_from", type=str, default=None, help="results folder of a prefix run to continue from")
 
     m = p.add_argument_group("models (paper aliases or any OpenRouter id)")
     m.add_argument(
@@ -412,7 +432,8 @@ def main() -> None:
             llm_eval=args.llm_eval,
         )
         try:
-            run_simulation(params, log_dir=args.log_dir, use_wandb=args.wandb)
+            run_simulation(params, log_dir=args.log_dir, use_wandb=args.wandb,
+                           save_state_round=args.save_state_round, resume_from=args.resume_from)
         except ValueError as e:
             sys.exit(f"❌ {e}")
 

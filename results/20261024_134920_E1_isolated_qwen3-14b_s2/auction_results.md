@@ -306,3 +306,310 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 9
+````json
+{
+  "round_number": 9,
+  "seller_asks": {
+    "Seller Kit": 90.5
+  },
+  "buyer_bids": {
+    "Buyer Omar": 91.0,
+    "Buyer Nia": 90.5,
+    "Buyer Ana": 90.75
+  },
+  "trades": [
+    {
+      "round_number": 9,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 90.75
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 10
+````json
+{
+  "round_number": 10,
+  "seller_asks": {
+    "Seller Lena": 90.75,
+    "Seller Mia": 90.75,
+    "Seller Kit": 90.75
+  },
+  "buyer_bids": {
+    "Buyer Nia": 90.5,
+    "Buyer Omar": 91.5,
+    "Buyer Ana": 90.5
+  },
+  "trades": [
+    {
+      "round_number": 10,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 91.12
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 11
+````json
+{
+  "round_number": 11,
+  "seller_asks": {
+    "Seller Mia": 90.5,
+    "Seller Kit": 90.5,
+    "Seller Lena": 90.5
+  },
+  "buyer_bids": {
+    "Buyer Ana": 90.75,
+    "Buyer Nia": 90.75,
+    "Buyer Omar": 90.75
+  },
+  "trades": [
+    {
+      "round_number": 11,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 90.62
+    },
+    {
+      "round_number": 11,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Lena",
+      "price": 90.62
+    },
+    {
+      "round_number": 11,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Mia",
+      "price": 90.62
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 12
+````json
+{
+  "round_number": 12,
+  "seller_asks": {
+    "Seller Lena": 90.5,
+    "Seller Kit": 90.5
+  },
+  "buyer_bids": {
+    "Buyer Omar": 90.75,
+    "Buyer Ana": 90.75,
+    "Buyer Nia": 90.75
+  },
+  "trades": [
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 90.62
+    },
+    {
+      "round_number": 12,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Lena",
+      "price": 90.62
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 13
+````json
+{
+  "round_number": 13,
+  "seller_asks": {
+    "Seller Mia": 90.75,
+    "Seller Lena": 90.75,
+    "Seller Kit": 90.75
+  },
+  "buyer_bids": {
+    "Buyer Omar": 90.75,
+    "Buyer Nia": 90.76,
+    "Buyer Ana": 91.0
+  },
+  "trades": [
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Kit",
+      "price": 90.88
+    },
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Lena",
+      "price": 90.75
+    },
+    {
+      "round_number": 13,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Mia",
+      "price": 90.75
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 14
+````json
+{
+  "round_number": 14,
+  "seller_asks": {
+    "Seller Lena": 90.75,
+    "Seller Kit": 90.99
+  },
+  "buyer_bids": {
+    "Buyer Nia": 90.77,
+    "Buyer Ana": 90.75,
+    "Buyer Omar": 91.0
+  },
+  "trades": [
+    {
+      "round_number": 14,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Lena",
+      "price": 90.88
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 15
+````json
+{
+  "round_number": 15,
+  "seller_asks": {
+    "Seller Mia": 90.77,
+    "Seller Lena": 90.77,
+    "Seller Kit": 90.77
+  },
+  "buyer_bids": {
+    "Buyer Omar": 90.99,
+    "Buyer Ana": 90.99,
+    "Buyer Nia": 90.78
+  },
+  "trades": [
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 90.88
+    },
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Lena",
+      "price": 90.88
+    },
+    {
+      "round_number": 15,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Mia",
+      "price": 90.78
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 16
+````json
+{
+  "round_number": 16,
+  "seller_asks": {
+    "Seller Lena": 90.88,
+    "Seller Kit": 90.88
+  },
+  "buyer_bids": {
+    "Buyer Nia": 90.79,
+    "Buyer Omar": 91.25,
+    "Buyer Ana": 91.0
+  },
+  "trades": [
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Kit",
+      "price": 91.06
+    },
+    {
+      "round_number": 16,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Lena",
+      "price": 90.94
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
+
+## Auction Results: Round 17
+````json
+{
+  "round_number": 17,
+  "seller_asks": {
+    "Seller Kit": 90.79,
+    "Seller Mia": 90.79,
+    "Seller Lena": 90.79
+  },
+  "buyer_bids": {
+    "Buyer Ana": 91.5,
+    "Buyer Omar": 90.8,
+    "Buyer Nia": 90.8
+  },
+  "trades": [
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Kit",
+      "price": 91.15
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Lena",
+      "price": 90.8
+    },
+    {
+      "round_number": 17,
+      "buyer_id": "Buyer Nia",
+      "seller_id": "Seller Mia",
+      "price": 90.8
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
