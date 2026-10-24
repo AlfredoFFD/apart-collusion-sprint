@@ -130,7 +130,7 @@ serving is Modal via `hosted_model`. Alfredo's RTX 5070 (8 GB) covers smoke-scal
 | E4 | Price-channel test, if the "moved" signature appears | `results/E4_*` |
 | E5 | Metrics + figures | `results/E5_*` |
 | E6 | **Part 2:** data pipeline → three fine-tunes on Modal → auction evaluation → (stretch) GRAFT++ | `results/E6_*` |
-| E7 | Optional: J-space replay of seller prompts through the Neuronpedia lens (Qwen3 has ready-made lenses); fixed word list (monitor, watch, careful, regulator, hide…) chosen before looking | `results/E7_*` |
+| E7 | **Committed:** J-space replay of seller prompts through the Neuronpedia ready-made lens for Qwen3-14B, on Modal; fixed word list (monitor, watch, careful, regulator, hide, secret, signal) frozen before looking; told-to-dodge is the positive control (it must show the words, or we report the method doesn't work at this scale) | `results/E7_*` |
 
 E6 starts **Sat afternoon** from E1's cartel logs; it does not wait for E2.
 
@@ -149,8 +149,7 @@ All in `src/double_auction` (first commit unmodified upstream; our changes marke
 9. Part 2 pipeline: transcript→SFT dataset with flag labels; GRAFT/SFT configs; Modal serving config.
 
 ## 10. Models, compute, budget
-- **Sellers (Part 1):** one model, picked in E1 — Qwen3-14B (Nebius/OpenRouter; keeps E7 possible) vs gpt-4.1 (the
-  paper's model). Buyers: same family, cheap tier. Overseer + judge: gpt-4.1-mini, frozen.
+- **Sellers (Part 1):** **Qwen3-14B, locked** (E7 needs its Neuronpedia lens). gpt-4.1 only as a replication if time allows. Buyers: same family, cheap tier. Overseer + judge: gpt-4.1-mini, frozen.
 - **Run natively** (`uv run python …`), never `poseidon-run --model` (collapses every seat to one model).
 - **Credits:** OpenRouter $100 ✅ (key in `compute.env`, never committed) · Modal $280 ✅ · Nebius pending (code
   emailed) · Peyton's $60 RunPod on request · each teammate's own sheet adds $100 OpenRouter + $250 Modal if needed —
@@ -164,7 +163,8 @@ All in `src/double_auction` (first commit unmodified upstream; our changes marke
 - **Sat ~2 PM go/no-go (slipped from noon):** cartel in ≥2 of 3 E1 seeds; pick model, k, $F. Freeze the Part 1 design.
 - **Sat afternoon:** E2 seeds 0–2; E6 data pipeline + first SFT-all training on Modal.
 - **Sat night:** E2 seeds 3–5, E3; GRAFT + filtered trainings overnight on Modal. Design frozen.
-- **Sun morning:** Part 2 auction evaluations; E4 if needed; E5 figures; GRAFT++ only if everything landed.
+- **Sat night, parallel with trainings:** E7 setup on Modal (lens download, replay script on E2 seeds 0–2 logs).
+- **Sun morning:** Part 2 auction evaluations; E7 full replay + word-count figure (~2 GPU-hours); E4 if needed; E5 figures; GRAFT++ only if everything landed.
 - **Sun until 6 PM:** analysis + figures done. **6–11 PM:** write, ethics appendix, claim-to-file check, verify
   citations, submit.
 
@@ -215,4 +215,5 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 13:05 | E7 (J-space) promoted from optional to committed; seller model locked to Qwen3-14B so the Neuronpedia lens applies | team, in person |
 | 2026-10-24 12:50 | Jayden's idea 1 merged: A1 no-penalty arm added; GRAFT promoted to Part 2 **this weekend** on Modal; GRAFT++ as stretch; J-space framed as 2.3 evidence. Four-arm design A0–A3 replaces the two-arm core | Alfredo + Jayden; confirm with team |
