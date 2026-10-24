@@ -423,5 +423,20 @@
   "id": "2607.26385",
   "title": "Collusion with Competitive Marginals: Price-Level Audits Are Blind by Construction",
   "author": "Xu"
+ },
+ {
+  "id": "2603.21398",
+  "title": "Persona Vectors in Games: Measuring and Steering Strategies via Activation Vectors",
+  "author": "Sun"
+ },
+ {
+  "id": "2606.17168",
+  "title": "RepSelect: Robust LLM Unlearning via Representation Selectivity",
+  "author": "Sondej"
+ },
+ {
+  "id": "2308.10248",
+  "title": "Steering Language Models With Activation Engineering",
+  "author": "Turner"
  }
 ]

@@ -1,0 +1,40 @@
+{"ts": "2026-10-24T17:06:24", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:probe AND all:labels AND all:unlearning AND all:data AND all:selection AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:06:27", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:unlearning AND all:selection AND all:labels AND submittedDate:[202604270000 TO 202610242359]", "hits": 2}
+{"ts": "2026-10-24T17:06:27", "cmd": "search", "source": "openalex", "query": "activation probe labels unlearning data selection since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:06:47", "cmd": "search", "source": "s2", "query": "activation probe labels unlearning data selection since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T17:06:48", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:probe AND all:labels AND all:unlearning AND all:data AND all:selection", "hits": 0}
+{"ts": "2026-10-24T17:06:51", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:unlearning AND all:selection AND all:labels", "hits": 7}
+{"ts": "2026-10-24T17:06:51", "cmd": "search", "source": "openalex", "query": "activation probe labels unlearning data selection", "hits": 8}
+{"ts": "2026-10-24T17:07:11", "cmd": "search", "source": "s2", "query": "activation probe labels unlearning data selection", "hits": 0}
+{"ts": "2026-10-24T17:07:12", "cmd": "search", "source": "arxiv", "query": "all:gradient AND all:routing AND all:unlearning AND all:data AND all:labeling AND all:probe AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:07:15", "cmd": "search", "source": "arxiv", "query": "all:unlearning AND all:gradient AND all:labeling AND all:routing AND submittedDate:[202604270000 TO 202610242359]", "hits": 1}
+{"ts": "2026-10-24T17:07:15", "cmd": "search", "source": "openalex", "query": "gradient routing unlearning data labeling probe since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:07:18", "cmd": "search", "source": "s2", "query": "gradient routing unlearning data labeling probe since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:07:18", "cmd": "search", "source": "arxiv", "query": "all:gradient AND all:routing AND all:unlearning AND all:data AND all:labeling AND all:probe", "hits": 0}
+{"ts": "2026-10-24T17:07:21", "cmd": "search", "source": "arxiv", "query": "all:unlearning AND all:gradient AND all:labeling AND all:routing", "hits": 2}
+{"ts": "2026-10-24T17:07:22", "cmd": "search", "source": "openalex", "query": "gradient routing unlearning data labeling probe", "hits": 8}
+{"ts": "2026-10-24T17:07:43", "cmd": "search", "source": "s2", "query": "gradient routing unlearning data labeling probe", "hits": 8}
+{"ts": "2026-10-24T17:07:43", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:activation AND all:addition AND all:steering AND all:vector AND all:collusion AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:07:46", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:activation AND all:collusion AND all:addition AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:07:47", "cmd": "search", "source": "openalex", "query": "contrastive activation addition steering vector collusion since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:08:19", "cmd": "search", "source": "s2", "query": "contrastive activation addition steering vector collusion since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T17:08:20", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:activation AND all:addition AND all:steering AND all:vector AND all:collusion", "hits": 0}
+{"ts": "2026-10-24T17:08:22", "cmd": "search", "source": "arxiv", "query": "all:contrastive AND all:activation AND all:collusion AND all:addition", "hits": 0}
+{"ts": "2026-10-24T17:08:22", "cmd": "search", "source": "openalex", "query": "contrastive activation addition steering vector collusion", "hits": 8}
+{"ts": "2026-10-24T17:08:43", "cmd": "search", "source": "s2", "query": "contrastive activation addition steering vector collusion", "hits": 0}
+{"ts": "2026-10-24T17:08:43", "cmd": "search", "source": "arxiv", "query": "all:representation AND all:probe AND all:select AND all:forget AND all:set AND all:unlearning AND all:LLM AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:08:47", "cmd": "search", "source": "arxiv", "query": "all:representation AND all:unlearning AND all:select AND all:forget AND submittedDate:[202604270000 TO 202610242359]", "hits": 8}
+{"ts": "2026-10-24T17:08:47", "cmd": "search", "source": "openalex", "query": "representation probe select forget set unlearning LLM since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:09:09", "cmd": "search", "source": "s2", "query": "representation probe select forget set unlearning LLM since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T17:09:09", "cmd": "search", "source": "arxiv", "query": "all:representation AND all:probe AND all:select AND all:forget AND all:set AND all:unlearning AND all:LLM", "hits": 0}
+{"ts": "2026-10-24T17:09:12", "cmd": "search", "source": "arxiv", "query": "all:representation AND all:unlearning AND all:select AND all:forget", "hits": 8}
+{"ts": "2026-10-24T17:09:13", "cmd": "search", "source": "openalex", "query": "representation probe select forget set unlearning LLM", "hits": 8}
+{"ts": "2026-10-24T17:09:40", "cmd": "search", "source": "s2", "query": "representation probe select forget set unlearning LLM", "hits": 0}
+{"ts": "2026-10-24T17:09:40", "cmd": "search", "source": "arxiv", "query": "all:linear AND all:probe AND all:activations AND all:label AND all:training AND all:examples AND all:fine-tuning AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T17:09:43", "cmd": "search", "source": "arxiv", "query": "all:activations AND all:fine-tuning AND all:training AND all:examples AND submittedDate:[202604270000 TO 202610242359]", "hits": 8}
+{"ts": "2026-10-24T17:09:44", "cmd": "search", "source": "openalex", "query": "linear probe activations label training examples fine-tuning since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:09:44", "cmd": "search", "source": "s2", "query": "linear probe activations label training examples fine-tuning since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T17:09:45", "cmd": "search", "source": "arxiv", "query": "all:linear AND all:probe AND all:activations AND all:label AND all:training AND all:examples AND all:fine-tuning", "hits": 0}
+{"ts": "2026-10-24T17:09:48", "cmd": "search", "source": "arxiv", "query": "all:activations AND all:fine-tuning AND all:training AND all:examples", "hits": 8}
+{"ts": "2026-10-24T17:09:48", "cmd": "search", "source": "openalex", "query": "linear probe activations label training examples fine-tuning", "hits": 8}
+{"ts": "2026-10-24T17:10:08", "cmd": "search", "source": "s2", "query": "linear probe activations label training examples fine-tuning", "hits": 0}
