@@ -24,7 +24,7 @@ import modal
 
 ROOT = Path(__file__).resolve().parents[2] if modal.is_local() else Path("/")
 GRAFT_SCRIPTS = ROOT / "vendor" / "GRAFT" / "sft" / "scripts"
-DATA = ROOT / "results" / "part2" / "graft"
+DATA = ROOT / "results" / "part2" / os.environ.get("GRAFT_DATA_SUBDIR", "graft")  # graft_v3 = the d_coord-labelled pools (E8)
 BASE_MODEL = "Qwen/Qwen3-1.7B"
 
 image = (
