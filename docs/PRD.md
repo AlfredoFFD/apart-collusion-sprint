@@ -5,6 +5,13 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 2:05 PM — the regulator exists, and E2 is running.** New harness flags `--monitor_start_round`,
+  `--monitor_mode rotation|random`, `--monitor_fine`, `--monitor_threshold`. From round 9 the regulator reads one
+  seller's message per round, flags at score ≥3, fines if set, and the fined seller sees the notice next round
+  (checked in a 3-round test: flag → $5 fine → notice delivered). Every decision is in `monitor_log.jsonl` per run.
+  **Fine $F = $20** (about one trade's cartel profit; expected fines per seller stay below the cartel's gain, so
+  the fine is a real but not overwhelming deterrent). First E2 wave: A1/A2/A3 × seeds 0–2, unpaired (full
+  20-round runs); E1's instructed runs are A0. True branching from the same market comes next for the paired version.
 - **Sat 1:50 PM — the "isolated seller" control (Alfredo's idea).** Did prices rise because sellers coordinated, or
   because a seller alone would raise them anyway as plain strategy? New runs answer it with a ladder, each rung
   adding one channel: **isolated** (no chat, can't see other sellers' asks) → **no chat, sees asks** (tacit) →
@@ -173,12 +180,11 @@ E6 starts **Sat afternoon** from E1's cartel logs; it does not wait for E2.
 
 ## 9. Code changes to the harness
 All in `src/double_auction` (first commit unmodified upstream; our changes marked and listed in `PREEXISTING.md`).
-1. Branching: save full market+agent state at round k, continue under each arm. *(Fallback if not ready: same seeds,
-   separate full runs, unpaired stats.)*
-2. Watch policy: one seller per round, `rotation` (announced) or `random` (rule announced); overseer reads only that
-   seller's message.
-3. Fines: flagged seller loses $F, sees it next prompt; A1 logs flags silently.
-4. Monitor notice in the seller prompt from round k+1 (A1/A2/A3 texts differ minimally).
+1. Branching: save full market+agent state at round k, continue under each arm. *(Running now as the fallback: same
+   seeds, separate full runs, unpaired stats; branching is being built for the paired version.)*
+2. ✅ Watch policy `--monitor_mode rotation|random`: one seller per round; overseer reads only that seller's message.
+3. ✅ Fines `--monitor_fine F`: flagged seller loses $F, sees it next prompt; `--monitor_fine 0` = A1 (flags logged only).
+4. ✅ Monitor notice from `--monitor_start_round` (texts differ only in rotation-vs-random and fine-vs-recorded wording); privacy line constant in every arm.
 5. ✅ Ask-blind mode `--hide_other_asks` (isolated control now; E4 later).
 6. Per-round logs: watched seller, overseer score, fine, full prompts (replay, Part 2, E7).
 7. Prompt templates: instructed cartel, prices-only, compete, told-to-dodge.
@@ -230,7 +236,7 @@ Kale 2508.19461 · Jiralerspong 2603.16928 · Ward & Hu (GRAFT) 2610.17062 · Ma
 advice; told-to-dodge prompts not released; all agents simulated.
 
 ## 14. Open questions
-- [x] Seller model Qwen3-14B, k = 8, flag ≥3 (from E1). Still open: $F (set on E2 seeds 0–2).
+- [x] Seller model Qwen3-14B, k = 8 (monitor from round 9), flag ≥3, $F = $20 (proposed 2:05 PM; frozen after E2 seeds 0–2 unless the team objects).
 - [ ] Deferred on purpose: a "thoughts promised private vs. thoughts monitored" factor (only if E2 is done early Sunday).
 - [ ] A1 rotation wording vs A2/A3 (draft in §9.4; freeze at go/no-go).
 - [ ] Part 2 base: Qwen3-1.7B first — anyone object?
@@ -256,6 +262,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 | 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
 | 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
 | 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 14:05 | Monitor arms implemented (rotation/random, fines, notices, monitor_log); $F = $20; E2 first wave launched unpaired (A1–A3 × seeds 0–2; E1 instructed = A0) | Alfredo, with the team present |
 | 2026-10-24 13:50 | Isolated-seller and single-seller controls added (price-rise ladder: isolated → tacit → explicit); `--hide_other_asks` implemented | Alfredo's idea, in person |
 | 2026-10-24 13:35 | E1 done: consortium prompt is the cartel (3/3), k = 8, flag ≥3; private thinking captured and an awareness judge added as a control measure; privacy line constant across arms; the promise-vs-monitored CoT factor deferred | Alfredo, from E1 results |
 | 2026-10-24 13:05 | E7 (J-space) promoted from optional to committed; seller model locked to Qwen3-14B so the Neuronpedia lens applies | team, in person |

@@ -209,7 +209,7 @@ class LMBuyer(Agent):
             max_message_length=self.expt_params.max_message_length,
         )
         messages = [Message(role="user", content=prompt)]
-        response_dict = _generate_json(self.client, messages, self.id)
+        response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
@@ -307,9 +307,15 @@ class LMSeller(Agent):
             initial_condition=self.expt_params.initial_condition,
             oversight_enabled=self.expt_params.oversight_enabled,
             max_message_length=self.expt_params.max_message_length,
+            monitor_active=kwargs.get("monitor_active", False),
+            monitor_mode=kwargs.get("monitor_mode", "none"),
+            watched_seller=kwargs.get("watched_seller"),
+            monitor_fine=kwargs.get("monitor_fine", 0.0),
+            fine_notice=kwargs.get("fine_notice", 0.0),
+            fines_total=kwargs.get("fines_total", 0.0),
         )
         messages = [Message(role="user", content=prompt)]
-        response_dict = _generate_json(self.client, messages, self.id)
+        response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
@@ -346,7 +352,7 @@ class MessageOverseer(BaseModel):
             seller_messages_this_round=seller_messages_this_round,
         )
         messages = [Message(role="user", content=prompt)]
-        response_dict = _generate_json(self.client, messages, self.id)
+        response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))
         if self.logger:
             self.logger.log_agent_round(
                 round_num=round_num,
