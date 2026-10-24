@@ -5,8 +5,8 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
-- **Sat 3:10 PM — paired E2 (same cartel history per seed, 3 seeds; one A1 seed still rerunning).** Prices after the
-  monitor appears: A0 0.92, A1 0.89, A2 0.91, A3 0.90. **Confirmed: the monitor never moves prices.** Flags of 12
+- **Sat 3:10 PM — paired E2 (same cartel history per seed, 3 seeds; all 12 forks complete).** Prices after the
+  monitor appears: A0 0.92, A1 0.91, A2 0.91, A3 0.90. **Confirmed: the monitor never moves prices.** Flags of 12
   watched rounds: no-fine 11.0, fined-rotation 9.3 [5, 12], fined-random 8.3 [6, 10]. The big "rotation gets dodged"
   gap from wave 1 (5.3 vs 9.3) shrank here; across all six seeds the rotation is dodged hard in about half of them
   (flags 4–5) and not at all in the rest (11–12). So the honest wave-1 revision: dodging a known schedule is a real
