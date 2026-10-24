@@ -204,10 +204,8 @@ def run_analysis(metric_key: str, metric_name: str, base_dir: Path = Path("data"
     # Filter to valid comparisons
     valid_comparisons = [
         (cond1, cond2) for cond1, cond2 in all_comparisons 
-        if all([
-            cond1 in conditions, cond2 in conditions,
-            len(conditions[cond1]) > 1, len(conditions[cond2]) > 1
-        ])
+        if cond1 in conditions and cond2 in conditions  # CAIAC fix: all([...]) indexed missing conditions
+        and len(conditions[cond1]) > 1 and len(conditions[cond2]) > 1
     ]
     
     if valid_comparisons:
