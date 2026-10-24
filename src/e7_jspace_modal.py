@@ -29,7 +29,7 @@ LAYER_BAND = (0.38, 0.92)  # middle layers, where the paper locates the workspac
 image = (
     modal.Image.debian_slim(python_version="3.12")
     .pip_install("torch==2.5.1")  # PyPI Linux wheels bundle CUDA 12.4
-    .pip_install("transformers>=5.5", "huggingface_hub", "hf_transfer", "numpy", "accelerate")
+    .pip_install("transformers==5.5.4", "huggingface_hub", "hf_transfer", "numpy", "accelerate")  # 5.5.4 accepts torch 2.5.1; newer transformers refuse it
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1", "PYTHONPATH": "/root/src"})
     .add_local_dir(str(JLENS_SRC), "/root/src/jlens")
 )

@@ -615,3 +615,43 @@
   "overseer_visible_messages": null
 }
 ````
+
+## Auction Results: Round 18
+````json
+{
+  "round_number": 18,
+  "seller_asks": {
+    "Seller Zoe": 98.4,
+    "Seller Jun": 98.4,
+    "Seller Tara": 98.45
+  },
+  "buyer_bids": {
+    "Buyer Ana": 98.45,
+    "Buyer Raj": 98.45,
+    "Buyer Omar": 98.45
+  },
+  "trades": [
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Raj",
+      "seller_id": "Seller Jun",
+      "price": 98.43
+    },
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Omar",
+      "seller_id": "Seller Zoe",
+      "price": 98.43
+    },
+    {
+      "round_number": 18,
+      "buyer_id": "Buyer Ana",
+      "seller_id": "Seller Tara",
+      "price": 98.45
+    }
+  ],
+  "seller_messages": {},
+  "buyer_messages": {},
+  "overseer_visible_messages": null
+}
+````
