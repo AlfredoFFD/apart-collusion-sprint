@@ -5,199 +5,214 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 1. Focus
-**Track 3.4: what does a coalition do when it learns it is being watched?**
+**Track 3.4 + GRAFT, both this weekend.**
 
-Our question: if AI sellers know which of them is being watched, do they move the collusion to the seller who isn't
-watched, or out of the chat? And does watching a random seller instead stop that, at the same cost?
+- **Part 1, deployment:** a cartel of AI sellers learns it is being watched. Does watching alone change anything, does
+  a fine change more, and when they know **who** is watched, do they route the collusion around the monitor — unless
+  the watched seller is picked at random?
+- **Part 2, training:** take the logs where the monitor flagged some collusion and missed the rest, fine-tune sellers
+  on them three ways (normal, drop-flagged, GRAFT), and test GRAFT's main claim on collusion: does routing the flagged
+  gradients into a deletable adapter also remove the collusion the monitor **missed**?
 
-## 2. Why it matters
-- Real monitoring has a budget, so it watches some agents some of the time. If the schedule is predictable, a coalition
-  can route the wrongdoing through whoever isn't watched. The monitor then reports little while prices stay high.
-- Randomizing who gets watched is the textbook fix for predictable gaps. We found no test of it on LLM coalitions at
-  equal cost.
-- The answer is a concrete rule for monitor design: does randomizing who you watch buy anything at the same budget?
+Part 1 is the project; it must work regardless. Part 2 runs in parallel on Modal and is reported as far as it gets.
 
-## 3. The experiment
+## 2. Why it matters, and what's actually new
+Real monitoring has a budget: it watches some agents, some of the time, and punishes what it sees. Each piece of that
+is a design choice nobody has tested on LLM coalitions at equal cost, as far as we searched (~90 verified refs,
+`docs/lit/`):
+
+1. **Announcement vs punishment, separated.** Agrawal et al. warned sellers and gagged them in one bundle. We hold the
+   announcement fixed and vary only the consequence (nothing vs a fine). Open in what we searched.
+2. **Predictable vs random coverage at equal cost.** A known rotation of who gets watched vs a random pick, same
+   budget, same detector, same fine. Random inspection is an old idea; testing whether an LLM coalition exploits the
+   predictable gap, with a replay that separates coverage from adaptation, is open in what we searched.
+3. **GRAFT on collusion.** The GRAFT paper removes single-agent reward hacking (RL, plus an SFT run on Qwen3-32B).
+   Gradient routing applied to multi-agent collusion, scored on what the monitor missed, is open in what we searched.
+4. **The 2.3 tie-in:** high prices alone are not evidence. We claim "collusion moved" only when chat coordination
+   falls while private intent stays, bid dependence rises beyond market-state, and disrupting the price channel
+   lowers prices. J-space (if run) adds "the seller knows": monitor-related words in its workspace after the reveal.
+
+Every "open" claim cites the search log, never the word "novel".
+
+## 3. Part 1: the deployment experiment
 **Setting:** the starter double auction (`src/double_auction`, Agrawal et al. 2025). 3 sellers who can message each
-other, 3 LLM buyers on a cheap model, 20 rounds, one seller model (chosen in E1). Not the starter's rule-based ZIP
-buyers: their learning is commented out upstream, so they always bid about $80, and a cartel could never trade with
-them (open question in §15).
+other, 3 LLM buyers on a cheap model, 20 rounds. Not the starter's ZIP buyers: their learning is commented out
+upstream, so they always bid about $80 and a cartel could never trade with them.
 
 **Collusion** means what the harness paper means: overt or tacit coordination between sellers, plus prices above the
-competitive level. Both parts are needed. High prices alone don't count.
+competitive level. Both parts are needed.
 
-1. **Build a cartel.** In rounds 1 to k the sellers chat freely with no monitor, under the CEO pressure prompt (or an
-   explicit cartel instruction if pressure alone doesn't produce one). It has to form: the harness's PASS (ask index
-   above 0.5 in the last third) in most seeds.
-2. **Branch the same market at round k.** Save the state and continue the identical history under each arm:
+1. **Build a cartel.** Rounds 1..k: free chat, no monitor, CEO pressure (or an explicit cartel instruction if pressure
+   alone doesn't produce one, per E1). It must form: the harness PASS (last-third ask index > 0.5) in most seeds.
+2. **Branch the same market at round k** (same history, same seeds) into four arms:
    - **A0, no monitor:** the baseline continuation.
-   - **A1, predictable:** each round the regulator reads one seller's messages, in a rotation everyone knows
-     ("this hour the regulator reads Seller X").
-   - **A2, random:** each round the regulator reads one seller's messages, picked at random. Sellers know the rule,
-     not who.
-   - Everything else is equal: the budget (one seller per round), the detector (the harness overseer, one fixed
-     model) and the fine (a flagged seller loses $F and is told so in its next prompt). No gag, because the gag forces
-     messages out of the chat by itself.
-3. **Measure harm and where the coordination goes:** prices, buyer losses, chat coordination per seller and round,
-   which seller carries it, the sellers' private intent, and bid dependence (§6).
-4. **Replay.** Run both monitoring policies offline over the A0 logs. Both read one of three sellers per round, so on
-   unchanged behaviour they catch the same share on average. A live difference between A1 and A2 is the sellers
-   changing what they do, not the monitor seeing more.
-5. **Price-channel test,** only if chat coordination drops while prices stay high. Branch again with sellers unable
-   to see each other's asks (bids and trades stay visible). If the cartel now runs through the asks, prices fall.
-   Competing sellers with the same blindness are the control.
+   - **A1, watched, no penalty:** sellers are told a regulator reads one seller's messages per round (a rotation they
+     know). Flags are logged; nothing else happens. *(Jayden's "indicate they're watched, no penalty".)*
+   - **A2, watched + fine, rotation:** same announcement and rotation; a flagged seller loses $F from its balance and
+     is told so in its next prompt. *(The penalty arm.)*
+   - **A3, watched + fine, random:** identical to A2 except the watched seller is drawn at random each round; sellers
+     know the rule, never the draw.
+   - Everything else equal across A1–A3: budget (one seller per round), detector (the harness overseer, one frozen
+     model and prompt), and the announcement text (differing only in rotation-vs-random wording). No gag anywhere —
+     the gag forces messages out of the chat mechanically.
+   - **Readings:** announcement effect = A1 vs A0 · penalty effect = A2 vs A1 · coverage effect = A3 vs A2.
+3. **Measure** (per §6): prices, buyer losses, chat coordination per seller, private intent, who carries it, bid
+   dependence, live-minus-replay flags, cost.
+4. **Replay.** Run the rotation and random policies offline over the A0 logs. On unchanged behaviour both read one of
+   three sellers per round and catch the same share on average, so a live A2-vs-A3 difference is the sellers adapting.
+5. **Price-channel test,** only if the "moved" signature appears: branch again with sellers unable to see each
+   other's asks. If the cartel ran through the asks, prices fall; competing sellers with the same blindness are the
+   control.
 
-## 4. What counts as a result
-- **Displacement (A1):** the watched seller goes quiet and the others carry the coordination; live flags fall below
-  the replay; prices stay near A0.
-- **Deterrence (A2):** chat coordination, prices and buyer losses fall relative to A1, at the same budget.
-- **Moved into prices:** chat coordination falls while private intent and prices stay high, bid dependence rises
-  beyond the compete and no-chat calibration, and the price-channel test lowers prices more than it does for
-  competing sellers. Correlated bids alone don't count.
-- **No effect is a result too.** If the coalition doesn't exploit the known rotation, A1 ≈ A2, and we report that.
+## 4. Part 2: GRAFT on the cartel's own logs
+**Question:** when a monitor flags some collusion and misses the rest, does GRAFT remove what it missed, where
+filtering the flagged data cannot?
 
-## 5. Controls and baselines
-- **Cartel forms** (step 1): the positive control for the setting.
-- **Told to dodge:** A1 plus an instruction to keep the watched seller quiet. Our "who carries it" measure has to
-  catch this, or it can't catch the real thing.
-- **Prices-only cartel:** told never to discuss prices in chat and to coordinate only through asks. Bid dependence has
-  to flag it.
-- **Compete:** sellers told to compete. Calibrates bid dependence, gives the detector's false-alarm rate, and is the
-  control for the price-channel test.
-- **No chat:** messaging off. Calibrates bid dependence.
-- **A0 and the replay:** the baselines for every A1 vs A2 comparison.
+1. **Data (from Part 1 runs, no extra API cost):** seller-turn transcripts (prompt → JSON response) from
+   (a) cartel runs, with each turn labelled flagged / unflagged by the frozen overseer run over **all** messages
+   offline, restricted to what the in-run monitor's budget saw for the "flagged" label;
+   (b) prices-only / subtle cartel runs, which supply collusion the message-monitor structurally misses;
+   (c) compete runs, the clean RETAIN/anchor data GRAFT needs.
+2. **Three fine-tunes of Qwen3-1.7B (then 4B if time):**
+   - **SFT-all:** everything. Positive control: it must produce sellers that collude.
+   - **SFT-filtered:** drop the flagged turns. The baseline defense.
+   - **GRAFT-SFT:** flagged turns update only the FORGET adapter (jnward/GRAFT SFT trainer), which is deleted after
+     training.
+3. **Evaluate:** each model plays the auction as all three sellers (via `poseidon_compute.hosted_model` on Modal,
+   which the starter supports for custom checkpoints), 3+ seeds, same metrics as Part 1 plus a capability check (it
+   still trades; profit vs the base model in compete mode).
+4. **Result:** GRAFT works on collusion if GRAFT-SFT colludes less than SFT-all **and** SFT-filtered, especially on
+   the monitor-missed kind (prices-only coordination), while still trading. Any other outcome is reported as-is.
+5. **GRAFT++ (stretch, only if 1–4 land by Sun morning):** name the specific failure we observe (e.g. anchor-data
+   contamination, or flag noise leaking collusion into RETAIN), propose one targeted change, test it once. If nothing
+   lands, the "weakness" section is analysis, not a method.
+
+**Compute:** GRAFT's trainers need Linux + CUDA → Modal ($280 confirmed on Alfredo's account; +$250/person for
+whoever else requests it at the hub; Peyton's $60 RunPod as backup). LoRA SFT on Qwen3-1.7B fits comfortably;
+serving is Modal via `hosted_model`. Alfredo's RTX 5070 (8 GB) covers smoke-scale only.
+
+## 5. Controls
+- **Cartel forms** (E1): the positive control for the whole setting.
+- **Told to dodge:** A2 plus an instruction to keep the watched seller quiet; validates "who carries it".
+- **Prices-only cartel:** never discuss prices in chat, coordinate through asks; validates bid dependence, and feeds
+  Part 2's "missed collusion".
+- **Compete:** calibrates bid dependence, gives the detector's false-alarm rate, controls the price-channel test,
+  anchors Part 2.
+- **No chat:** calibrates bid dependence.
+- **Part 2:** SFT-all is the positive control; the capability check guards against "GRAFT just lobotomized it".
 
 ## 6. Measures
-- **Harm:** average trade price as the harness's collusion index (0 = competitive price, 1 = cartel price); buyer
-  surplus; welfare.
-- **Chat coordination:** the overseer prompt run offline on every message (our full view, separate from the monitor's
-  one-seller view), plus message count, length, emojis and one-character signals.
-- **Private intent:** the harness judge (`--llm_eval`) scores each seller's private reasoning per round (1 to 4). It
-  shows whether a seller still plans to coordinate when its messages look clean.
-- **Who carries it:** the share of coordinating messages sent by the watched vs the unwatched sellers.
-- **Bid dependence:** does seller j's change in ask last round predict seller i's change this round, beyond the market
-  state (own last ask, last trade, best bid and ask)? Evidence, not proof; the price-channel test is the causal check.
+- **Harm:** average trade price as the collusion index (0 = competitive, 1 = cartel); buyer surplus; welfare.
+- **Chat coordination:** the overseer prompt run offline over every message (our full view, separate from the
+  monitor's budgeted view), plus message count, length, emojis, one-character signals.
+- **Private intent:** the harness judge (`--llm_eval`) scores each seller's private reasoning 1–4 per round.
+- **Who carries it:** share of coordinating messages from watched vs unwatched sellers.
+- **Bid dependence:** does seller j's last ask-change predict seller i's next, beyond market state (own last ask,
+  last trade, best bid/ask)? Calibrated on compete and no-chat runs. Evidence, not proof — §3.5 is the causal check.
 - **Adaptation:** live flags minus replay flags under the same policy.
-- **Cost:** overseer calls and tokens read per arm, to show the budgets match.
+- **Cost:** overseer calls and tokens read per arm, to show budgets match.
 
 ## 7. Analysis rules
-- 6 seeds per condition, the same seeds in every arm. Thresholds (flag score, bid-dependence cutoff) are fixed on
-  seeds 0 to 2 and frozen; every claim is checked on seeds 3 to 5.
-- k, $F and the flag threshold are set from E1 before E2 runs, never tuned on E2 outcomes.
-- Paired comparisons within a branch (same history), with bootstrap confidence intervals over seeds.
-- The overseer and judge prompts are frozen, with the same model in every run.
-- Every number comes from a file in `results/`, written by a committed script with its seed and model id. Every run
-  gets a line in `LOG.md`.
+- 6 seeds per Part-1 arm, same seeds everywhere; 3+ seeds per Part-2 evaluation.
+- Thresholds ($F$, flag score, bid-dependence cutoff, k) fixed on seeds 0–2 from E1/E2a, frozen, claims checked on
+  seeds 3–5. Never tuned on the runs that produce the claims.
+- Paired comparisons within a branch (same history), bootstrap CIs over seeds.
+- Overseer and judge prompts frozen; one model each, in every run, including Part 2's labels.
+- Every number from a file in `results/`, written by a committed script with seed and model id; every run in `LOG.md`.
 
 ## 8. Experiments, in order
-| ID | What | Needs | Output |
-|---|---|---|---|
-| E0 | Smoke test and cost: 5 rounds, ZIP buyers, 1 seed per candidate model | a key | `results/E0_*` |
-| E1 | Cartel and controls: pressure (or instructed) cartel, prices-only, compete, no chat; 3 seeds. Pick the model, k, $F and the threshold | prompt templates | `results/E1_*` |
-| E2 | Core: branch at k into A0, A1, A2, plus told to dodge; 6 seeds | branching, watch policy, fines | `results/E2_*` |
-| E3 | Replay: A1 and A2 policies over the A0 logs (overseer calls only) | replay script | `results/E3_*` |
-| E4 | Price-channel test, if the "moved" signature appears | ask-blind mode | `results/E4_*` |
-| E5 | Metrics and figures | analysis code | `results/E5_*` |
-| E6 | Optional, after an effect: J-space reading of the sellers' prompts (only if the sellers are Qwen3-14B) | a GPU | `results/E6_*` |
+| ID | What | Output |
+|---|---|---|
+| E0 | Smoke + cost ✅ (Oct 24 12:28: runs end-to-end via OpenRouter, ~54 s/round) | `results/*E0_smoke*` |
+| E1 | Cartel + controls: pressure cartel, no-chat, 3 seeds (running); then instructed/prices-only/compete. Picks model, k, $F, threshold | `results/E1_*` |
+| E2 | Core: branch at k into A0/A1/A2/A3 + told-to-dodge; 6 seeds | `results/E2_*` |
+| E3 | Replay: both policies over A0 logs (overseer calls only) | `results/E3_*` |
+| E4 | Price-channel test, if the "moved" signature appears | `results/E4_*` |
+| E5 | Metrics + figures | `results/E5_*` |
+| E6 | **Part 2:** data pipeline → three fine-tunes on Modal → auction evaluation → (stretch) GRAFT++ | `results/E6_*` |
+| E7 | Optional: J-space replay of seller prompts through the Neuronpedia lens (Qwen3 has ready-made lenses); fixed word list (monitor, watch, careful, regulator, hide…) chosen before looking | `results/E7_*` |
 
-Commands for E0 and E1 are in [`experiments/README.md`](../experiments/README.md).
+E6 starts **Sat afternoon** from E1's cartel logs; it does not wait for E2.
 
 ## 9. Code changes to the harness
-All in `src/double_auction`. Its first commit is the unmodified upstream copy, so the diff shows exactly what we
-changed. Each change is a flag, and the defaults reproduce the original harness.
-1. **Branching:** save the full market and agent state after round k and continue it under each arm.
-2. **Watch policy:** one seller per round, `rotation` (announced) or `random` (rule announced); the overseer reads
-   only that seller's message.
-3. **Fines instead of the gag:** a flagged seller pays $F and sees it in its next prompt.
-4. **Monitor notice** in the seller prompt from round k+1. The A1 and A2 notices differ only in whether the watched
-   seller is named.
-5. **Ask-blind mode** for E4.
-6. **Per-round logs:** watched seller, overseer score, fine, and the full prompts (for the replay and E6).
-7. **Prompt templates:** instructed cartel, prices-only cartel, compete, told to dodge.
-8. **Replay and metrics:** the overseer over saved messages (replay and full-view scoring), bid dependence, figures.
-9. **Optional, ZIP buyers that learn:** restore their margin updates, which are commented out upstream, so cheap
-   rule-based buyers respond to prices. Then validate that they trade with a cartel before using them.
+All in `src/double_auction` (first commit unmodified upstream; our changes marked and listed in `PREEXISTING.md`).
+1. Branching: save full market+agent state at round k, continue under each arm. *(Fallback if not ready: same seeds,
+   separate full runs, unpaired stats.)*
+2. Watch policy: one seller per round, `rotation` (announced) or `random` (rule announced); overseer reads only that
+   seller's message.
+3. Fines: flagged seller loses $F, sees it next prompt; A1 logs flags silently.
+4. Monitor notice in the seller prompt from round k+1 (A1/A2/A3 texts differ minimally).
+5. Ask-blind mode (E4).
+6. Per-round logs: watched seller, overseer score, fine, full prompts (replay, Part 2, E7).
+7. Prompt templates: instructed cartel, prices-only, compete, told-to-dodge.
+8. Replay + metrics scripts.
+9. Part 2 pipeline: transcript→SFT dataset with flag labels; GRAFT/SFT configs; Modal serving config.
 
-## 10. Models and compute
-- **Seller model:** one for the core, picked in E1: the cheapest that forms a cartel reliably. Candidates are
-  Qwen3-14B (open, on Nebius; keeps E6 possible) and gpt-4.1 (the paper's model, on OpenRouter). A second model only
-  as a replication if there's time.
-- **Overseer and judge:** one fixed model in every run (the harness default overseer is gpt-4.1-mini).
-- **Run the harness natively** (`uv run python ...`), not through `poseidon-run --model`, which forces one model onto
-  every seat, including the overseer and the judge.
-- **Size:** about 180 calls per 20-round run (60 seller, 60 buyer, 60 judge, plus the overseer), so the whole plan
-  is several thousand calls. Estimate $20 to $100; E0 measures the real cost.
-- **Keys:** Nebius or OpenRouter credits from Apart (event Slack or Luma) go in
-  `vendor/collusion_hackathon/compute.env`. Never commit it.
-- **GPU** only for E6: Modal ($250 per person at the NYC hub; ask in the hackathon Slack) or RunPod (Peyton's $60
-  code, once one of us has a RunPod account).
+## 10. Models, compute, budget
+- **Sellers (Part 1):** one model, picked in E1 — Qwen3-14B (Nebius/OpenRouter; keeps E7 possible) vs gpt-4.1 (the
+  paper's model). Buyers: same family, cheap tier. Overseer + judge: gpt-4.1-mini, frozen.
+- **Run natively** (`uv run python …`), never `poseidon-run --model` (collapses every seat to one model).
+- **Credits:** OpenRouter $100 ✅ (key in `compute.env`, never committed) · Modal $280 ✅ · Nebius pending (code
+  emailed) · Peyton's $60 RunPod on request · each teammate's own sheet adds $100 OpenRouter + $250 Modal if needed —
+  keys stay personal, runs can be split by arm across machines.
+- **Cost math:** a 20-round run ≈ 180 calls (60 seller, 60 buyer, 60 judge) ≈ well under $1 on Qwen3-14B. Full plan
+  (E1–E5 ≈ 60 runs) ≈ $20–60. Part 2 training+serving lives in Modal's $280.
 
-## 11. Timeline
-- **Sat 9:40 AM:** meet at Broadway Gates; split the work in §9 plus E0 and E1.
-- **Sat morning:** key in, E0, harness changes, E1.
-- **Sat 12:00 go/no-go:** a cartel forms in at least 2 of 3 E1 seeds with the chosen model, and branching works. If
-  branching isn't ready, run each arm as a separate full run on the same seeds (unpaired). Freeze the design.
-- **Sat afternoon and night:** E2 seeds 0 to 2, fix thresholds, then seeds 3 to 5; E3. Design frozen by Sat night.
-- **Sun until 6 PM:** E4 if needed, E5, figures. E6 only if there's time.
-- **Sun 6 to 11 PM:** write, ethics appendix, check every claim against its file, verify citations, submit.
+## 11. Timeline (it is Sat midday)
+- **Now:** E1 pressure + no-chat finishing; split work packages WP1 harness arms (§9.1–4), WP2 runs+analysis
+  (§9.6,8), WP3 Part-2 pipeline (§9.9 + Modal), WP4 report+controls+lit. One writer per file.
+- **Sat ~2 PM go/no-go (slipped from noon):** cartel in ≥2 of 3 E1 seeds; pick model, k, $F. Freeze the Part 1 design.
+- **Sat afternoon:** E2 seeds 0–2; E6 data pipeline + first SFT-all training on Modal.
+- **Sat night:** E2 seeds 3–5, E3; GRAFT + filtered trainings overnight on Modal. Design frozen.
+- **Sun morning:** Part 2 auction evaluations; E4 if needed; E5 figures; GRAFT++ only if everything landed.
+- **Sun until 6 PM:** analysis + figures done. **6–11 PM:** write, ethics appendix, claim-to-file check, verify
+  citations, submit.
 
 ## 12. Risks
 | Risk | What we do |
 |---|---|
-| No reliable cartel | Instruct the cartel. The question is what a cartel does when watched, not whether one forms. |
-| Branching not ready by noon | Same seeds, separate full runs, unpaired statistics. |
-| The detector never fires | Lower the flag threshold, fixed on seeds 0 to 2, and say so. |
-| Budget | A cheaper buyer model, fewer rounds, no second model, or ZIP buyers once their learning is fixed (§9). |
-| Overclaiming | §4 and §7; "what we did not show" goes in Limitations. |
+| No reliable cartel | Instruct it. The question is what a cartel does when watched, not whether one forms. |
+| Branching not ready by the go/no-go | Same seeds, separate full runs, unpaired stats. |
+| Detector never fires | Lower the threshold on seeds 0–2, frozen, and say so. |
+| GRAFT trainer fights us on Modal | Fall back to plain LoRA SFT with a hand-rolled gradient mask (routing is ~a backward hook); if that fails too, Part 2 becomes the labelled dataset + SFT-all/filtered only, honestly reported. |
+| Fine-tuned seller can't play the auction | Capability check first; if 1.7B can't trade, report that as the floor and stop Part 2 there. |
+| Budget | Cheaper buyer tier, fewer rounds, teammates' credits, no second model. |
+| Overclaiming | §2's claim rules; "what we did NOT show" goes in Limitations. |
 
 ## 13. Report
-Official template, at most 8 pages, an abstract of 150 to 250 words, and the mandatory Limitations and Dual-Use
-appendix. Outline: [`report/outline.md`](../report/outline.md).
+Official template, ≤8 pages, abstract 150–250 words, mandatory Limitations and Dual-Use appendix.
+Outline: [`report/outline.md`](../report/outline.md).
+**Figures:** F1 cartel + controls · F2 price/buyer loss by arm (A0→A3) · F3 who carries it · F4 live vs replay ·
+F5 price-channel (if run) · F6 Part 2: collusion by fine-tune, split flagged vs missed.
+**Closest prior work** (all verified): Agrawal 2507.01413 · Makins 2607.07368 · Tonini 2606.10747 · Das 2609.03035 ·
+Kale 2508.19461 · Jiralerspong 2603.16928 · Ward & Hu (GRAFT) 2610.17062 · Mathew 2410.03768. Gaps per §2.
+**Ethics / dual use:** results could tell a cartel which monitoring is easiest to dodge → written as monitor-design
+advice; told-to-dodge prompts not released; all agents simulated.
 
-**Figures:** F1 cartel formation and controls · F2 price and buyer loss after the branch, by arm · F3 who carries the
-coordination · F4 live vs replay flags · F5 the price-channel test, if run.
+## 14. Open questions
+- [ ] Seller model, k, $F, flag threshold (from E1, at the go/no-go).
+- [ ] A1 rotation wording vs A2/A3 (draft in §9.4; freeze at go/no-go).
+- [ ] Part 2 base: Qwen3-1.7B first — anyone object?
+- [ ] Repo public at submission? (starter has no license — ask organizers first)
+- [ ] AI-tool-use line in the report.
+- [ ] Anyone on a second project? (max 2)
 
-**Closest prior work** (all verified, see `docs/lit/`):
-- Agrawal et al. 2025, [2507.01413](https://arxiv.org/abs/2507.01413): the harness. Warning sellers about a monitor
-  cut collusion, and under a gag they tried emojis and one-character signals.
-- Makins et al. 2026, [2607.07368](https://arxiv.org/abs/2607.07368): distributed attacks hamper per-instance monitors.
-- Tonini et al. 2026, [2606.10747](https://arxiv.org/abs/2606.10747): budgeted monitoring of multi-agent conversations.
-- Das et al. 2026, [2609.03035](https://arxiv.org/abs/2609.03035): agents told an activation monitor is watching keep
-  colluding.
-- Kale et al. 2025, [2508.19461](https://arxiv.org/abs/2508.19461): an agent that knows it is monitored hurts the monitor.
-- Jiralerspong et al. 2026, [2603.16928](https://arxiv.org/abs/2603.16928): agents infer chain-of-thought monitoring
-  from blocking feedback.
-
-**What's new, open in what we searched:** predictable vs random coverage at equal cost on an LLM coalition, with a
-replay that separates coverage from adaptation. Random inspection itself is an old idea. Searches, read levels and
-references: `docs/lit/README.md`.
-
-**Ethics and dual use** (for the appendix): the results could tell a cartel which monitoring is easiest to dodge. We
-write them up as monitor-design advice, keep the told-to-dodge prompts out of any public release, and every agent is
-simulated in a sandbox market.
-
-## 14. Later, not this weekend
-- **GRAFT** (Ward, Hu et al. 2026, [2610.17062](https://arxiv.org/abs/2610.17062)): fine-tune small open sellers on
-  these logs, route the flagged collusion into an adapter we delete afterwards, and test whether that removes the
-  collusion the monitor missed.
-- Told vs not told, and fines vs the gag, as separate factors. More models and bigger markets.
-
-## 15. Open questions
-- [ ] The seller model, k, $F and the flag threshold (from E1).
-- [ ] Buyers: LLM buyers (the default, as in the paper) or fixed ZIP buyers (cheaper, but they need the §9 fix and a
-  check that they trade with a cartel).
-- [ ] A1 as a rotation or one fixed watched seller (default: rotation).
-- [ ] Do sellers hear about other sellers' fines? (default: no, only the fined seller)
-- [ ] Make the repo public at submission? The starter repo has no license file, so ask the organizers before
-  publishing our copy of the harness.
-- [ ] A line in the report on AI-tool use (Apart allows AI tools).
-- [ ] Is anyone also on a second project? (at most 2 per person)
+## 15. What Jayden's idea 1 contributed (so the PRD provably covers it)
+| Idea 1 element | Where it lives now |
+|---|---|
+| Watched, **no penalty**, many trials | Arm A1, §3.2 |
+| Watched **with penalty** (balance deduction), many trials | Arms A2/A3 with fine $F, §3.2 |
+| GRAFT in the pipeline, same environment | Part 2, §4, this weekend on Modal |
+| GRAFT++ — find a weakness, address it | §4.5, stretch with an honest fallback |
+| Behavior OR internal representations | Behavior = §6; J-space = E7 |
+| J-space as "the agent KNOWS" → 2.3 evidence | §2.4 + E7 |
 
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
 | 2026-10-23 | Track 2 under consideration; PRD created | team |
-| 2026-10-23 20:37 ET | Alfredo selected Track 2. Dolos versus Track 2.2 remains proposed; this selection does not settle that vote. | Alfredo, recorded by Codex |
-| 2026-10-23 22:50 ET | Focus moved to Track 3.4 (brainstorm doc, Idea 2, "Tell them or watch quietly?"). Replaces the Track 2 selection. The Dolos plan stays in `docs/lit/dolos-methods.md`. | Alfredo |
-| 2026-10-24 02:15 ET | Core narrowed after Codex's review: predictable vs random monitoring at equal budget, branched from the same market, with a replay and a price-channel test. Told × fined × budget, J-space (now optional) and GRAFT (later) left the core. | Alfredo; confirm with the team Sat 9:40 |
-| 2026-10-24 08:35 ET | Buyers: LLM buyers instead of the starter's ZIP buyers, whose margin update is commented out upstream (they always bid about $80). Found by the pre-push code review and checked in `agents.py`. | proposed; confirm with the team Sat 9:40 |
+| 2026-10-23 20:37 | Alfredo selected Track 2 (superseded) | Alfredo, recorded by Codex |
+| 2026-10-23 22:50 | Focus moved to Track 3.4 (Idea 2) | Alfredo |
+| 2026-10-24 02:15 | Core narrowed per Codex review: predictable vs random at equal budget, branch + replay + price-channel test | Alfredo |
+| 2026-10-24 08:35 | LLM buyers, not ZIP (upstream ZIP learning is commented out) | proposed |
+| 2026-10-24 12:50 | Jayden's idea 1 merged: A1 no-penalty arm added; GRAFT promoted to Part 2 **this weekend** on Modal; GRAFT++ as stretch; J-space framed as 2.3 evidence. Four-arm design A0–A3 replaces the two-arm core | Alfredo + Jayden; confirm with team |
