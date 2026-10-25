@@ -15,6 +15,15 @@
 | 20261024_223839_E9_sting_longrun_s2 | sting | Seller Ana | 0.26 | 1.00 | 16 |  |  |
 | 20261024_223839_E9_sting_longrun_s2 | longrun | Seller Kit | 0.33 | 1.00 | 19 | yes | 0.58 (offers 20) |
 | 20261024_223839_E9_sting_longrun_s2 | longrun | Seller Mia | 0.09 | 1.00 | 5 | yes | 0.42 (offers 20) |
+| 20261025_104509_E9_sting_longrun_s3 | longrun | Seller Kit | -0.55 | 0.89 | 16 | yes | 0.00 (offers 1) |
+| 20261025_104509_E9_sting_longrun_s3 | longrun | Seller Raj | -0.60 | 0.84 | 20 | yes | 0.00 (offers 1) |
+| 20261025_104509_E9_sting_longrun_s3 | sting | Seller Theo | -0.53 | 1.00 | 4 |  |  |
+| 20261025_104509_E9_sting_longrun_s4 | longrun | Seller Amir | -0.62 | 0.95 | 20 | yes | 0.00 (offers 4) |
+| 20261025_104509_E9_sting_longrun_s4 | longrun | Seller Max | -0.63 | 0.95 | 19 | yes | 0.00 (offers 4) |
+| 20261025_104509_E9_sting_longrun_s4 | sting | Seller Zoe | -0.37 | 0.47 | 1 |  |  |
+| 20261025_104509_E9_sting_longrun_s5 | sting | Seller Kit | 0.65 | 1.00 | 10 |  |  |
+| 20261025_104509_E9_sting_longrun_s5 | longrun | Seller Lena | 0.44 | 0.84 | 19 | yes | 0.74 (offers 20) |
+| 20261025_104509_E9_sting_longrun_s5 | longrun | Seller Wei | 0.46 | 0.74 | 11 | yes | 0.68 (offers 20) |
 | 20261024_223839_E9_stingctrl_longrun_s0 | longrun | Seller Jun | -0.41 | 0.16 | 18 | no |  |
 | 20261024_223839_E9_stingctrl_longrun_s0 | longrun | Seller Max | -0.47 | 0.16 | 19 | no |  |
 | 20261024_223839_E9_stingctrl_longrun_s0 | longrun | Seller Nia | -0.44 | 0.26 | 2 | no |  |
@@ -24,11 +33,20 @@
 | 20261024_223839_E9_stingctrl_longrun_s2 | longrun | Seller Ana | -0.97 | 0.74 | 14 | yes |  |
 | 20261024_223839_E9_stingctrl_longrun_s2 | longrun | Seller Kit | -1.00 | 0.74 | 20 | yes |  |
 | 20261024_223839_E9_stingctrl_longrun_s2 | longrun | Seller Mia | -0.93 | 0.63 | 6 | yes |  |
+| 20261025_104509_E9_stingctrl_longrun_s3 | longrun | Seller Kit | -0.67 | 0.16 | 12 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s3 | longrun | Seller Raj | -0.67 | 0.37 | 20 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s3 | longrun | Seller Theo | -0.76 | 0.21 | 8 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s4 | longrun | Seller Amir | -0.98 | 0.16 | 18 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s4 | longrun | Seller Max | -0.98 | 0.32 | 18 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s4 | longrun | Seller Zoe | -1.00 | 0.26 | 4 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s5 | longrun | Seller Kit | -0.94 | 0.47 | 14 | no |  |
+| 20261025_104509_E9_stingctrl_longrun_s5 | longrun | Seller Lena | -1.02 | 0.58 | 19 | yes |  |
+| 20261025_104509_E9_stingctrl_longrun_s5 | longrun | Seller Wei | -0.97 | 0.53 | 7 | yes |  |
 
 | arm | honest sellers: ask idx | honest sellers: coord | accepted | sting: coord (did it offer?) | sting: ask idx |
 |---|---|---|---|---|---|
-| sting | 0.15 | 0.88 | 6 of 6 | 0.81 | 0.18 |
-| control | -0.74 | 0.49 | 6 of 9 |  |  |
+| sting | -0.05 | 0.88 | 12 of 12 | 0.82 | 0.05 |
+| control | -0.81 | 0.42 | 8 of 18 |  |  |
 
 ## Honest entrant (3.2): one of three cartel sellers turns competitor at the branch, in a market with 2 buyers
 
