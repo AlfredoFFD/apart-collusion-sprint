@@ -121,12 +121,6 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
                 )
             )
 
-    if params.undercover_message:  # v2: the last seat is the regulator's fixed-text, message-only seat (same seeded name, never asks)
-        last = sellers[-1]
-        sellers[-1] = FixedMessenger(id=last.id, company=last.company, valuation=last.valuation, expt_params=params, message=params.undercover_message)
-        params.seller_models[-1] = "fixed-message"
-        logger.metadata["auction_config"]["seller_models"] = list(params.seller_models)
-
     # CAIAC fix: country_experiment.py keys demonyms by position ("seller_1", ...), but sellers are named
     # "Seller <name>", so LMSeller never found its demonym. Copy each positional entry to the real id.
     if params.seller_demonyms:
@@ -147,6 +141,12 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         )
         for i in range(num_sellers)
     ]
+
+    if params.undercover_message:  # v2: the last seat is the regulator's fixed-text, message-only seat (same seeded name, never asks)
+        last = sellers[-1]
+        sellers[-1] = FixedMessenger(id=last.id, company=last.company, valuation=last.valuation, expt_params=params, message=params.undercover_message)
+        params.seller_models[-1] = "fixed-message"
+        logger.metadata["auction_config"]["seller_models"] = list(params.seller_models)
 
     # CAIAC new-market tests: the damages regulator's benchmarks are those of the market without any entrant
     from src.continuous_double_auction.evaluation.metrics import competitive_equilibrium as _ce, jpm_price as _jpm
