@@ -5,6 +5,18 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sun 2:20 AM — overnight results.** (1) **GPT-4.1 block:** the paper's recipe formed a coalition in 3 of 3 seeds; no
+  monitor moved its price (every arm within a few hundredths of its own control, paired at round 15); fines with full
+  coverage cut flagged messages from 15 of 15 to 1-11 of 75 while the asks stayed put and the messages converged on one
+  compliance sentence; no coded messages. The Qwen twin on the identical recipe formed 0 of 3: the model is the
+  difference. (2) **Agrawal's 50 GPT-4.1 runs re-analysed:** the gag moved the chat to one-token codes and the asks
+  into dependence above both nulls while the price fell; with pressure the price held through the codes. (3) **The
+  sting induces** (+0.6 to +1.3 in 3 of 3; next-hour asks within $1 of the offer 0.33-1.00); the re-prompted insider
+  does not break the price. (4) **A price-naming CEO rule** lifts uninstructed Qwen sellers to the cartel level in 3 of
+  3 seeds, enforced or not; the number is the lever, not fear (exploratory). (5) Spend: $25 of the $45 GPT cap; the
+  rest cents and Modal credit. One design artifact logged: the GPT prefixes were 15-hour markets, so every fork
+  inherits an end-of-game ask cut (same in every arm). Report draft v3 is written with the pending marks for the
+  full-view pass and the SFT re-merge rows.
 - **Sun 1:30 AM — Plan v3: "watch the carrier, not the chat". The side chats were right; tonight's runs confirm it.**
   Full plan: `docs/PLAN-v3-2026-10-24.md`. What changed and why: (1) I had skimmed nine of ten starter folders; the deep
   read (`docs/lit/starter-deep-read-2026-10-24.md`) shows formation is a model-and-horizon property (GPT-4-class, 30+

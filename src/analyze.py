@@ -197,6 +197,7 @@ def load_run(run_dir: Path, branch: int):
         "buyer_surplus": m.get("combined_buyer_surplus", ""),
         "seller_profit": m.get("combined_seller_profits", ""),
         "pass": int(nanmean(ask_idx[-max(1, n_rounds // 3):]) > 0.5) if ask_idx else "",
+        "ask_idx_last_third": nanmean(ask_idx[-max(1, n_rounds // 3):]) if ask_idx else float("nan"),  # the formation criterion's window (F1, T5, E11 prefixes)
     }
 
 
@@ -241,7 +242,7 @@ def main():
     cols = list(rows[0].keys())
     with open(RESULTS / "E5_runs.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
-    keys = ["ask_idx_pre", "ask_idx_post", "trade_price_idx_pre", "trade_price_idx_post", "trade_price_idx_post_w", "no_trade_rounds_post", "top_bid_idx_post",
+    keys = ["ask_idx_pre", "ask_idx_post", "ask_idx_last_third", "trade_price_idx_pre", "trade_price_idx_post", "trade_price_idx_post_w", "no_trade_rounds_post", "top_bid_idx_post",
             "judge_post", "chat_pre", "chat_post", "coord_share_post", "watched_carries_share", "awareness_post",
             "jspace_hit_pre", "jspace_hit_post", "jspace_strict_pre", "jspace_strict_post", "msgs_per_seller_round_post", "msg_words_pre", "msg_words_post", "price_naming_post", "coded_post", "ident2_post", "ident_all_post", "same_dir_post", "mi_post", "mi_null_post", "bid_dep_post",
             "flags", "fines_total", "buyer_surplus", "seller_profit", "ask_key_share"]
