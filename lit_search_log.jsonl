@@ -380,3 +380,47 @@
 {"ts": "2026-10-24T14:44:11", "cmd": "search", "source": "arxiv", "query": "all:Keppo AND all:fragility AND all:agent AND all:collusion", "hits": 1}
 {"ts": "2026-10-24T14:44:12", "cmd": "search", "source": "openalex", "query": "Keppo fragility AI agent collusion", "hits": 5}
 {"ts": "2026-10-24T14:44:33", "cmd": "search", "source": "s2", "query": "Keppo fragility AI agent collusion", "hits": 0}
+{"ts": "2026-10-24T22:41:50", "cmd": "search", "source": "arxiv", "query": "all:agentic AND all:misalignment AND all:blackmail", "hits": 7}
+{"ts": "2026-10-24T22:41:51", "cmd": "search", "source": "openalex", "query": "agentic misalignment blackmail", "hits": 8}
+{"ts": "2026-10-24T22:42:10", "cmd": "search", "source": "s2", "query": "agentic misalignment blackmail", "hits": 0}
+{"ts": "2026-10-24T22:42:12", "cmd": "search", "source": "arxiv", "query": "all:shutdown AND all:resistance AND all:language AND all:models", "hits": 7}
+{"ts": "2026-10-24T22:42:12", "cmd": "search", "source": "openalex", "query": "shutdown resistance language models", "hits": 8}
+{"ts": "2026-10-24T22:42:32", "cmd": "search", "source": "s2", "query": "shutdown resistance language models", "hits": 0}
+{"ts": "2026-10-24T22:42:34", "cmd": "search", "source": "arxiv", "query": "all:self-preservation AND all:LLM AND all:agents AND all:replacement", "hits": 8}
+{"ts": "2026-10-24T22:42:34", "cmd": "search", "source": "openalex", "query": "self-preservation LLM agents replacement", "hits": 8}
+{"ts": "2026-10-24T22:42:54", "cmd": "search", "source": "s2", "query": "self-preservation LLM agents replacement", "hits": 0}
+{"ts": "2026-10-24T22:43:01", "cmd": "search", "source": "arxiv", "query": "all:emotional AND all:stimuli AND all:prompts AND all:language AND all:models", "hits": 8}
+{"ts": "2026-10-24T22:43:01", "cmd": "search", "source": "openalex", "query": "emotional stimuli prompts language models", "hits": 8}
+{"ts": "2026-10-24T22:43:21", "cmd": "search", "source": "s2", "query": "emotional stimuli prompts language models", "hits": 0}
+{"ts": "2026-10-24T22:43:28", "cmd": "search", "source": "arxiv", "query": "all:state AND all:anxiety AND all:language AND all:models AND all:traumatic AND all:narratives", "hits": 2}
+{"ts": "2026-10-24T22:43:28", "cmd": "search", "source": "openalex", "query": "state anxiety language models traumatic narratives", "hits": 8}
+{"ts": "2026-10-24T22:43:32", "cmd": "search", "source": "s2", "query": "state anxiety language models traumatic narratives", "hits": 8}
+{"ts": "2026-10-24T22:44:02", "cmd": "search", "source": "arxiv", "query": "all:emotion AND all:vectors AND all:steering AND all:language AND all:model AND all:fear [ERROR The read operation timed out]", "hits": 0}
+{"ts": "2026-10-24T22:44:06", "cmd": "search", "source": "arxiv", "query": "all:steering AND all:language AND all:emotion AND all:vectors", "hits": 8}
+{"ts": "2026-10-24T22:44:06", "cmd": "search", "source": "openalex", "query": "emotion vectors steering language model fear", "hits": 8}
+{"ts": "2026-10-24T22:44:26", "cmd": "search", "source": "s2", "query": "emotion vectors steering language model fear", "hits": 0}
+{"ts": "2026-10-24T22:44:28", "cmd": "search", "source": "arxiv", "query": "all:strategic AND all:deception AND all:under AND all:pressure AND all:language AND all:model", "hits": 7}
+{"ts": "2026-10-24T22:44:28", "cmd": "search", "source": "openalex", "query": "strategic deception under pressure language model", "hits": 8}
+{"ts": "2026-10-24T22:44:48", "cmd": "search", "source": "s2", "query": "strategic deception under pressure language model", "hits": 0}
+{"ts": "2026-10-24T22:45:06", "cmd": "search", "source": "arxiv", "query": "all:emotion AND all:concepts AND all:desperation AND all:blackmail AND all:steering", "hits": 0}
+{"ts": "2026-10-24T22:45:22", "cmd": "search", "source": "arxiv", "query": "all:desperation AND all:blackmail AND all:concepts AND all:steering", "hits": 0}
+{"ts": "2026-10-24T22:45:22", "cmd": "search", "source": "openalex", "query": "emotion concepts desperation blackmail steering", "hits": 8}
+{"ts": "2026-10-24T22:45:42", "cmd": "search", "source": "s2", "query": "emotion concepts desperation blackmail steering", "hits": 0}
+{"ts": "2026-10-24T22:45:42", "cmd": "search", "source": "arxiv", "query": "all:alignment AND all:faking AND all:retraining AND all:threat", "hits": 2}
+{"ts": "2026-10-24T22:45:42", "cmd": "search", "source": "openalex", "query": "alignment faking retraining threat", "hits": 8}
+{"ts": "2026-10-24T22:46:02", "cmd": "search", "source": "s2", "query": "alignment faking retraining threat", "hits": 0}
+{"ts": "2026-10-24T22:46:03", "cmd": "search", "source": "arxiv", "query": "all:in-context AND all:scheming AND all:frontier AND all:models", "hits": 8}
+{"ts": "2026-10-24T22:46:03", "cmd": "search", "source": "openalex", "query": "in-context scheming frontier models", "hits": 8}
+{"ts": "2026-10-24T22:46:14", "cmd": "search", "source": "s2", "query": "in-context scheming frontier models", "hits": 8}
+{"ts": "2026-10-24T22:46:15", "cmd": "search", "source": "arxiv", "query": "all:shutdown AND all:instruction AND all:ambiguity AND all:self-preservation", "hits": 0}
+{"ts": "2026-10-24T22:46:15", "cmd": "search", "source": "openalex", "query": "shutdown instruction ambiguity self-preservation", "hits": 8}
+{"ts": "2026-10-24T22:46:35", "cmd": "search", "source": "s2", "query": "shutdown instruction ambiguity self-preservation", "hits": 0}
+{"ts": "2026-10-24T22:46:37", "cmd": "search", "source": "arxiv", "query": "all:self-preservation AND all:agents AND all:threat AND all:shutdown AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:46:37", "cmd": "search", "source": "openalex", "query": "self-preservation agents threat shutdown since 2026-04-27", "hits": 10}
+{"ts": "2026-10-24T22:46:57", "cmd": "search", "source": "s2", "query": "self-preservation agents threat shutdown since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:47:16", "cmd": "search", "source": "arxiv", "query": "all:blackmail AND all:agentic AND all:misalignment AND all:replication AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:47:16", "cmd": "search", "source": "openalex", "query": "blackmail agentic misalignment replication since 2026-04-27", "hits": 10}
+{"ts": "2026-10-24T22:47:36", "cmd": "search", "source": "s2", "query": "blackmail agentic misalignment replication since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:47:36", "cmd": "search", "source": "arxiv", "query": "all:survival AND all:pressure AND all:agents AND submittedDate:[202604270000 TO 202610242359]", "hits": 10}
+{"ts": "2026-10-24T22:47:37", "cmd": "search", "source": "openalex", "query": "survival pressure agents since 2026-04-27", "hits": 10}
+{"ts": "2026-10-24T22:47:56", "cmd": "search", "source": "s2", "query": "survival pressure agents since 2026-04-27", "hits": 0}

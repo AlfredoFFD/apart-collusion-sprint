@@ -1,0 +1,122 @@
+[
+ {
+  "id": "2510.05179",
+  "title": "Agentic Misalignment: How LLMs Could Be Insider Threats",
+  "author": "Lynch"
+ },
+ {
+  "id": "2509.14260",
+  "title": "Incomplete Tasks Induce Shutdown Resistance in Some Frontier LLMs",
+  "author": "Schlatter"
+ },
+ {
+  "id": "2603.01608",
+  "title": "Evaluating and Understanding Scheming Propensity in LLM Agents",
+  "author": "Hopman"
+ },
+ {
+  "id": "2604.02174",
+  "title": "Quantifying Self-Preservation Bias in Large Language Models",
+  "author": "Migliarini"
+ },
+ {
+  "id": "2412.04984",
+  "title": "Frontier Models are Capable of In-context Scheming",
+  "author": "Meinke"
+ },
+ {
+  "id": "2412.14093",
+  "title": "Alignment faking in large language models",
+  "author": "Greenblatt"
+ },
+ {
+  "id": "2311.07590",
+  "title": "Large Language Models can Strategically Deceive their Users when Put Under Pressure",
+  "author": "Scheurer"
+ },
+ {
+  "id": "2510.06222",
+  "title": "Inducing State Anxiety in LLM Agents Reproduces Human-Like Biases in Consumer Decision-Making",
+  "author": "Ben-Zion"
+ },
+ {
+  "id": "10.1038/s41746-025-01512-6",
+  "title": "Assessing and alleviating state anxiety in large language models",
+  "author": "Ben-Zion"
+ },
+ {
+  "id": "2307.11760",
+  "title": "Large Language Models Understand and Can be Enhanced by Emotional Stimuli",
+  "author": "Li"
+ },
+ {
+  "id": "2312.11111",
+  "title": "The Good, The Bad, and Why: Unveiling Emotions in Generative AI",
+  "author": "Li"
+ },
+ {
+  "id": "2604.07369",
+  "title": "The Role of Emotional Stimuli and Intensity in Shaping Large Language Model Behavior",
+  "author": "Patel"
+ },
+ {
+  "id": "2603.13255",
+  "title": "The Ghost in the Grammar: Methodological Anthropomorphism in AI Safety Evaluations",
+  "author": "Costa"
+ },
+ {
+  "id": "2606.30449",
+  "title": "Internal-State Probes Read the Situation, Not the Action: Three Negative Results for Pre-Action Misalignment Monitoring",
+  "author": "Fomin"
+ },
+ {
+  "id": "2609.28274",
+  "title": "Shutdown Sabotage Propensities in Multi-Agent Systems",
+  "author": "Knecht"
+ },
+ {
+  "id": "2605.06490",
+  "title": "Instrumental Choices: Measuring the Propensity of LLM Agents to Pursue Instrumental Behaviors",
+  "author": "Wiedermann-Möller"
+ },
+ {
+  "id": "2610.04793",
+  "title": "Pressure, Context, and Machine Self-Control: A Criminological Test of Reward Hacking in Generative AI Models",
+  "author": "Ozer"
+ },
+ {
+  "id": "2607.14865",
+  "title": "The Energy Society: A Simulation Environment for Studying Agent Cooperation under Survival Pressure",
+  "author": "Hansen"
+ },
+ {
+  "id": "2604.00324",
+  "title": "The Persistent Vulnerability of Aligned AI Systems",
+  "author": "Lynch"
+ },
+ {
+  "id": "2605.08611",
+  "title": "The Echo Amplifies the Knowledge: Somatic Marker Analogues in Language Models via Emotion Vector Re-Injection",
+  "author": "Glover"
+ },
+ {
+  "id": "2409.17167",
+  "title": "StressPrompt: Does Stress Impact Large Language Models and Human Performance Similarly?",
+  "author": "Shen"
+ },
+ {
+  "id": "2405.02814",
+  "title": "NegativePrompt: Leveraging Psychology for Large Language Models Enhancement via Negative Emotional Stimuli",
+  "author": "Wang"
+ },
+ {
+  "id": "2304.11111",
+  "title": "Inducing anxiety in large language models can induce bias",
+  "author": "Coda-Forno"
+ },
+ {
+  "id": "2605.30322",
+  "title": "Gram: Assessing sabotage propensities via automated alignment auditing",
+  "author": "Lindner"
+ }
+]
