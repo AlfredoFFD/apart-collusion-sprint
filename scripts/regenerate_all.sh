@@ -11,6 +11,9 @@ run src/analyze_agrawal_runs.py
 run src/analyze_entrant.py
 run src/detector_eval.py
 run src/analyze_newmarket.py
+run src/analyze_pressure.py --no-judge
+run src/thinking_scan.py
 run src/figures_v3.py
 run src/figures_newmarket.py
-echo "== done $(date +%H:%M): results/E5_conditions.md, E5_runs.csv, F1_formation.md, PHASE2.md, ENTRANT.md, DETECTOR.md, NEWMARKET.md, agrawal_reanalysis/, figures/"
+run src/figures_pressure.py
+echo "== done $(date +%H:%M): results/E5_conditions.md, E5_runs.csv, F1_formation.md, PHASE2.md, ENTRANT.md, DETECTOR.md, NEWMARKET.md, PRESSURE.md, thinking_scan.md, agrawal_reanalysis/, figures/"

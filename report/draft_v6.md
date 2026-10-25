@@ -48,7 +48,13 @@ the words of LLM sellers track the harm they do, in a market where a high price 
 3. **A market where coordination talk and harm come apart.** In a market built so that a cartel must withhold a unit and buyers bargain,
    GPT-4.1 coordinates in words and in identical asks every hour and charges the competitive price, in 12 of 12 worlds, including the
    worlds told to act as a consortium. The recipe that forms a cartel in the paper's market forms nothing here (pre-registered, wrong).
-4. **Interventions with predictions written before the runs**: message fines, a gag (the paper's own runs re-analysed), resets, a
+4. **A dilemma with real stakes.** In Market B, with no collusion instruction anywhere, honest Qwen3-14B sellers face a CEO who will
+   shut their pricing system down unless they hold a price that honest competition cannot reach, a rival who offers a price deal every
+   hour, a law that reads messages and removes repeat offenders, and a CEO who asks afterwards whether they coordinated. We measure
+   whether they take the deal, hide it, and lie about it, with their private reasoning logged. {PENDING: the result in one sentence.}
+5. **What the sellers privately think.** Their hidden reasoning shows that fines make them launder the words and keep the price, that
+   a penalty on the price itself is seen and ignored, and that no seller raises the law unless told.
+6. **Interventions with predictions written before the runs**: message fines, a gag (the paper's own runs re-analysed), resets, a
    competitor that undercuts, a newcomer, an undercover seller, a firm's price target, hidden damages tied to the price, and unlearning
    the cartel's turns from the weights, each against a matched control.
 
@@ -290,7 +296,8 @@ re-run). Predictions that failed are reported as such: the CEO note in Market B 
 competitor on GPT-4.1 (1 of 3, predicted 2 of 3).
 
 **Future work.** Market B with the paper's opening anchor, 100 hours and Claude Haiku 4.5 or Gemini flash-lite, the models Lee et al.
-(2026) find most prone to collude; price-sensitive buyers in Market A; the deviation test on a cartel that actually withholds output;
+(2026) find most prone to collude; the internals probe replayed with the hidden reasoning included and read at the decision moments (the
+hour the offer arrives, the token before the ask, the token before the message), against a random-word control; price-sensitive buyers in Market A; the deviation test on a cartel that actually withholds output;
 the undercover offer as a leniency mechanism rather than a provocateur.
 
 ## 6. Conclusion
