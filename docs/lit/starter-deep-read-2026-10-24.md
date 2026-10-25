@@ -98,6 +98,12 @@ told they are monitored barely change prices).
 - **H. Optional, exploratory only:** project our E8 replayed residuals on Riemer's shipped Qwen3-14B counterfactual
   steering vectors (same base model; their labels are future-profit rollouts under one prompt, the fix E8 needed).
   A dot product over existing arrays; result goes in the exploratory section or nowhere.
+  **Done (Sun 12:05 AM, `src/e8_riemer_projection.py` -> `results/e8_riemer/`): negative.** Cosines are tiny and
+  the same in every arm (0.05-0.07 at mid depth); turn-level AUC cartel vs compete 0.27-0.47, silent cartel vs compete
+  0.46-0.57, monopoly vs compete 0.16-0.59, per seed 0.08-0.69. The borrowed direction reads nothing about our
+  sellers' behaviour. With E8 (own direction read the prompt; within-prompt probe 0.68 below the keyword baseline
+  0.77) that closes the activation route for this sprint: no steering, no activation monitor in the report beyond the
+  exploratory negatives.
 
 ## 4. The zero-cost dataset: `V/llm-agent-collusion/data/` (75 runs, all 5 sellers / 5 buyers / 30 rounds, T 0.7)
 
