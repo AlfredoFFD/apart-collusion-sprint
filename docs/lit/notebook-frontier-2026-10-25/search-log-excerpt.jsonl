@@ -1,0 +1,12 @@
+{"ts": "2026-10-25T14:45:47", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:monitoring AND submittedDate:[202604280000 TO 202610252359]", "hits": 11}
+{"ts": "2026-10-25T14:45:47", "cmd": "search", "source": "openalex", "query": "collusion monitoring since 2026-04-28", "hits": 12}
+{"ts": "2026-10-25T14:46:08", "cmd": "search", "source": "s2", "query": "collusion monitoring since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T14:50:40", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:retaliation AND all:gradient AND all:routing AND submittedDate:[202604280000 TO 202610252359]", "hits": 0}
+{"ts": "2026-10-25T14:50:41", "cmd": "search", "source": "openalex", "query": "collusion retaliation gradient routing since 2026-04-28", "hits": 6}
+{"ts": "2026-10-25T14:51:01", "cmd": "search", "source": "s2", "query": "collusion retaliation gradient routing since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T14:51:02", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:retaliation AND all:unlearning", "hits": 0}
+{"ts": "2026-10-25T14:51:02", "cmd": "search", "source": "openalex", "query": "collusion retaliation unlearning", "hits": 12}
+{"ts": "2026-10-25T14:51:22", "cmd": "search", "source": "s2", "query": "collusion retaliation unlearning", "hits": 0}
+{"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "refs of 2609.20548", "hits": 12}
+{"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "cites of 2609.20548", "hits": 1}
+{"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "recs of 2609.20548", "hits": 12}

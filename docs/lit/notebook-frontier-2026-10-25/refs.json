@@ -1,0 +1,47 @@
+[
+  {
+    "id": "2604.01151",
+    "title": "Detecting Multi-Agent Collusion Through Multi-Agent Interpretability",
+    "author": "Rose"
+  },
+  {
+    "id": "2610.17062",
+    "title": "Gradient Routing Localizes and Removes Unintended Behaviors in RL",
+    "author": "Ward"
+  },
+  {
+    "id": "2606.28425",
+    "title": "Tool Use Enables Undetectable Steganography in Multi-Agent LLM Systems",
+    "author": "Rippin"
+  },
+  {
+    "id": "2608.02698",
+    "title": "Steganalysis of Adaptive Covert Collusion in Tool-Using Agent Populations: A Black-Box, Cross-Principal Approach",
+    "author": "Ghanem"
+  },
+  {
+    "id": "2610.01630",
+    "title": "After Cooperation Is Learned: Gradient Routing and Optimizer-Dependent Maintenance in Multi-Agent Reinforcement Learning",
+    "author": "Hao"
+  },
+  {
+    "id": "2606.17168",
+    "title": "RepSelect: Robust LLM Unlearning via Representation Selectivity",
+    "author": "Sondej"
+  },
+  {
+    "id": "2610.28787",
+    "title": "Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets",
+    "author": "Tran"
+  },
+  {
+    "id": "2609.20548",
+    "title": "Mitigating Retaliatory Algorithmic Collusion in Repeated Games",
+    "author": "Sivachandran"
+  },
+  {
+    "id": "2609.28900",
+    "title": "Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion",
+    "author": ""
+  }
+]

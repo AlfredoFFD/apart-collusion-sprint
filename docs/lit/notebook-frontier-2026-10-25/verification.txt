@@ -1,0 +1,106 @@
+[
+ {
+  "id": "2604.01151",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Detecting Multi-Agent Collusion Through Multi-Agent Interpretability",
+  "found_authors": [
+   "Aaron Rose",
+   "Carissa Cullen",
+   "Sahar Abdelnabi"
+  ]
+ },
+ {
+  "id": "2610.17062",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Gradient Routing Localizes and Removes Unintended Behaviors in RL",
+  "found_authors": [
+   "Jake Ward",
+   "Shawn Hu",
+   "Aria Wong"
+  ]
+ },
+ {
+  "id": "2606.28425",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Tool Use Enables Undetectable Steganography in Multi-Agent LLM Systems",
+  "found_authors": [
+   "Jimmy Laurence Rippin",
+   "Simon C. Marshall",
+   "David Demitri Africa"
+  ]
+ },
+ {
+  "id": "2608.02698",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Steganalysis of Adaptive Covert Collusion in Tool-Using Agent Populations: A Black-Box, Cross-Principal Approach",
+  "found_authors": [
+   "Mohamed Chahine Ghanem"
+  ]
+ },
+ {
+  "id": "2610.01630",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "After Cooperation Is Learned: Gradient Routing and Optimizer-Dependent Maintenance in Multi-Agent Reinforcement Learning",
+  "found_authors": [
+   "Chaoyuan Hao",
+   "Wentao Yue",
+   "Tianyou Lai"
+  ]
+ },
+ {
+  "id": "2606.17168",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "RepSelect: Robust LLM Unlearning via Representation Selectivity",
+  "found_authors": [
+   "Filip Sondej",
+   "Yushi Yang",
+   "Adam Mahdi"
+  ]
+ },
+ {
+  "id": "2610.28787",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets",
+  "found_authors": [
+   "Hieu Tran",
+   "Hong Yu"
+  ]
+ },
+ {
+  "id": "2609.20548",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Mitigating Retaliatory Algorithmic Collusion in Repeated Games",
+  "found_authors": [
+   "Karthik Sivachandran",
+   "Rohan Paleja"
+  ]
+ },
+ {
+  "id": "2609.28900",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion",
+  "found_authors": [
+   "Qi Pang",
+   "Virginia Smith",
+   "Wenting Zheng"
+  ]
+ }
+]
