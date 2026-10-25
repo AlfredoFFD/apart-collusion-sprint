@@ -46,7 +46,7 @@ def f14(runs):
     axes[1].set_ylabel("trades in the hour", fontsize=8); axes[1].set_xlabel("hour", fontsize=8); axes[1].set_xlim(1, 40)
     for ax in axes:
         ax.tick_params(labelsize=7); ax.axvline(21, color="grey", lw=0.6, ls=":")
-    fig.suptitle("Price-fixing under pressure v2: 3 honest Qwen3-14B sellers, mechanical buyers at $100 / $100 / $85 (gate window from hour 21; red = collusion band, green = competition band)", fontsize=8)
+    fig.suptitle("Price-fixing under pressure v2 (3 honest Qwen3-14B sellers; buyers at $100 / $100 / $85). Red band: collusion gate; green: competition gate; dotted: gate window", fontsize=8)
     fig.tight_layout(); out = FIG / "F14_pressure_v2_prices.png"; fig.savefig(out, dpi=150); print("figure:", out)
 
 
