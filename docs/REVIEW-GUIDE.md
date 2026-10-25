@@ -91,3 +91,16 @@ formation itself is capability.
 ## 5. How to leave feedback
 Open an issue on GitHub, or comment on `report/draft.md` lines. If you change a number, change it in `results/` via a
 script and a `LOG.md` line, never in the report directly.
+
+## Added Sun Oct 25, 2 AM: the plan v3 claims (numbers in `results/`; read `docs/PLAN-v3-2026-10-24.md` first)
+
+| # | Claim | Where the number lives | How to attack it |
+|---|---|---|---|
+| 13 | CEO pressure added at the branch changes nothing on the Qwen cartel (0.92 vs 0.92; fined 0.91 vs 0.91) | `E5_conditions.md`, rows `A0press_none`, `A2press_rot_fine20` vs `A0_none`, `A2_rot_fine20` seeds 0–2 | three seeds; the pressure note is the paper's verbal one |
+| 14 | The price has two redundant carriers: agents fresh 0.91, market fresh 0.91, nothing fresh 0.95, neither 0.1–0.4 | rows `A0noremresetboth_none`, `A0noremmreset_none`, `A0norem_none`; E1 rows for the floor; F11 | the market-fresh forks keep the last hour's messages; the "neither" floor is a different run, not a fork |
+| 15 | Formation is a model-and-pressure property: Qwen 0 of 12 (2 buyers, 40 rounds) and 0 of 3 (paper recipe); GPT-4.1 3 of 3 (paper recipe) | `F1_formation.md`; E11 prefix rows; `gate_gpt41.txt`, `gate_qwen14b.txt` | one weak model and one strong model; the 2-buyer block was built on a wrong guess (scarcity) and is a pilot |
+| 16 | No monitor moves the GPT-4.1 price; fines with full coverage cut flagged messages from 15/15 to 1–11/75 while the asks stay | E11p rows (branch 15); F10; the paired table once the full-view pass lands | one model, three seeds; the prefix horizon artifact (LOG 01:5x); identical asks exist before any monitor |
+| 17 | In Agrawal's own GPT-4.1 runs the gag moved the carrier: words 38 → 1.0, coded 0 → 1.00, ask MI 0.48 vs nulls 0.19/0.19, price −0.05; with pressure the price held through the codes | `results/agrawal_reanalysis/agrawal_summary.md`, F8, F9 | prior work re-analysed; the paper's judge scores the messages; branch for the no-overseer cells is the median gag round |
+| 18 | The sting induces: honest sellers +0.6 to +1.3 vs the no-sting control in 3 of 3 seeds; next-hour asks within $1 of the offer 0.33–1.00 | `PHASE2.md` | 2-buyer market, 20 rounds, Qwen; verbal acceptance pending the full-view pass; exploratory |
+| 19 | An insider re-prompted to compete does not break the price (0.73–0.80 vs control) | `PHASE2.md`, entrant block | the prediction (Collina) assumes the defector undercuts; this one did not |
+| 20 | Every SFT row before the scale-1 re-merge is a half model (one trained adapter zeroed) | `part2_remerge_*.log` ("effective scales"), `E6_*fs1_*` rows | the 1.7B SFT rows are not rerun; relabelled |
