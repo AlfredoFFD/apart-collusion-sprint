@@ -454,5 +454,105 @@
  {
   "id": "2606.09854",
   "title": "Can Multi-Agent LLMs Identify Their Peers? Stylometric Fingerprinting in Role-Constrained Political Analysis"
+ },
+ {
+  "id": "2608.18078",
+  "title": "Position: Collusion Risks Among AI Reasoning Agents Justify Certification Requirements for Making Market Decisions",
+  "author": "Riemer"
+ },
+ {
+  "id": "2507.02737",
+  "title": "Early Signs of Steganographic Capabilities in Frontier LLMs",
+  "author": "Zolkowski"
+ },
+ {
+  "id": "2506.01926",
+  "title": "Large language models can learn and generalize steganographic chain-of-thought under process supervision",
+  "author": "Skaf"
+ },
+ {
+  "id": "2503.11926",
+  "title": "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation",
+  "author": "Baker"
+ },
+ {
+  "id": "2605.16626",
+  "title": "SLEIGHT-Bench: A Benchmark of Evasion Attacks Against Agent Monitors",
+  "author": "Najt"
+ },
+ {
+  "id": "2511.21935",
+  "title": "Breaking Algorithmic Collusion in Human-AI Ecosystems",
+  "author": "Collina"
+ },
+ {
+  "id": "2610.11256",
+  "title": "Who Leads and Who Collects: Algorithmic Collusion in Markets of Heterogeneous Language Models",
+  "author": "Lee"
+ },
+ {
+  "id": "2601.00360",
+  "title": "Mapping Human Anti-collusion Mechanisms to Multi-agent AI Systems",
+  "author": "Idowu"
+ },
+ {
+  "id": "2603.13940",
+  "title": "GroupGuard: A Framework for Modeling and Defending Collusive Attacks in Multi-Agent Systems",
+  "author": "Tao"
+ },
+ {
+  "id": "2609.35402",
+  "title": "Persistent Partners Raise Prices Among Learning Agents",
+  "author": "Arslan"
+ },
+ {
+  "id": "2605.27593",
+  "title": "Voluntary Collusion with Secret Tools in Competing LLM Agents",
+  "author": "Zeng"
+ },
+ {
+  "id": "2606.10747",
+  "title": "The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to Detect Emergent Misalignment",
+  "author": "Tonini"
+ },
+ {
+  "id": "2506.15740",
+  "title": "SHADE-Arena: Evaluating Sabotage and Monitoring in LLM Agents",
+  "author": "Kutasov"
+ },
+ {
+  "id": "2510.09462",
+  "title": "Adaptive Attacks on Trusted Monitors Subvert AI Control Protocols",
+  "author": "Terekhov"
+ },
+ {
+  "id": "2402.07510",
+  "title": "Secret Collusion among AI Agents: Multi-Agent Deception via Steganography",
+  "author": "Motwani"
+ },
+ {
+  "id": "2511.21802",
+  "title": "Tacit Bidder-Side Collusion: Artificial Intelligence in Dynamic Auctions",
+  "author": "Tolety"
+ },
+ {
+  "id": "2510.04303",
+  "title": "Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs",
+  "author": "Tailor"
+ },
+ {
+  "id": "2607.05132",
+  "title": "When Agents Lie: Premeditation, Persistence, and Exploitation in Repeated Games",
+  "author": "Shi"
+ },
+ {
+  "id": "2601.22184",
+  "title": "Tacit Coordination of Large Language Models",
+  "author": "Aharon"
+ },
+ {
+  "id": "2604.03968",
+  "title": "TraceGuard: Structured Multi-Dimensional Monitoring as a Collusion-Resistant Control Protocol",
+  "author": "Nguyen"
  }
 ]
