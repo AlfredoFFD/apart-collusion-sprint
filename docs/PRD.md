@@ -5,6 +5,18 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sat 10:28 PM — Plan v2 is the plan; Phase 0 and Phase 1 are running.** Alfredo's call ("we got time", "stick to your
+  plan"): the paper must do more than report what a seeded cartel did not do. `docs/PLAN-v2-2026-10-24.md` has the phases,
+  the stopping rules and the costs. Launched tonight, all unattended: (1) the five 14B Part 2 pipelines again, with the
+  right base model (the earlier merges folded 14B adapters into the 1.7B base); (2) the **pressure forks**, the brief's
+  fourth 3.4 condition: the saved cartels continued with the CEO price-pressure message, with no monitor and with the
+  fined rotation, paired with the same seed's A0/A2; (3) the **formation block**: 3 sellers, 2 buyers (one seller loses a
+  trade every hour, so undercutting pays), 40 rounds, a long-run-profit prompt with no instruction to coordinate (and a
+  variant that forbids collusion), chat on and off, 3 seeds, Qwen3-14B. The literature induces collusion this way
+  (Calvano 2020; Fish 2024; arXiv:2609.13037; arXiv:2609.24967). Formation = last-third ask index > 0.5. Sunday
+  morning: the sting seller (the organizers' untested 3.2 case: a trusted agent that offers to collude and logs who
+  reciprocates), the honest entrant, and the market-side reset. Hard stop for new runs Sunday 1 PM ET. The GPT-4.1 copy
+  of the formation block (≈ $15) waits for Alfredo's yes.
 - **Sat 6:10 PM — the joint-reset forks settle the "who carries the price" question as far as this market can.**
   Both sides fresh at once (no memory anywhere, no instruction, chat on): 0.91. Both sides fresh, no chat, and no
   view of the rivals' asks or trades: 0.93, with the private-intent judge at 1.0. Nothing of the cartel is left in
@@ -514,6 +526,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
+| 2026-10-24 22:28 | Plan v2 adopted (formation → carrier → watch → break): pressure forks and the formation block launched; the five 14B pipelines rerun with the right base; sting seller, honest entrant and market-side reset scheduled for Sunday 9–11 AM; hard stop for new runs Sunday 1 PM ET | Alfredo ("we got time", "stick to your plan"); Claude |
 | 2026-10-24 19:10 | Plan frozen (`docs/PLAN-2026-10-24.md`): no new experiments; smallest supported claim stated (prices never move, fines buy quieter chat in proportion to coverage, fresh agents continue the price from the inherited quotes); KEEP the done arms and the 1.7B block, CUT greed/intent/"watch formation"/probe-as-label/GRAFT++-as-method, NEXT = evaluate the five trained 14B models (merge with the right base, serve, gate, 6 auctions; until Sun 11 AM, ~$10) on Alfredo's go; then the claim-to-file pass and the template. Optional work parked as future work | Alfredo's /plan; written by Claude |
 | 2026-10-24 17:15 | GRAFT++ direction set: "keep the greed, forget the collusion". E8 = contrastive directions from the 14B seller's own activations (d_coord = cartel minus fresh sellers; d_greed = monopoly minus compete), validated on held-out seeds, coverage vs the monitor's flags, then d_coord as the FORGET label for graft_v3 (only if the repaired recipe keeps the output format). From a sprint speaker's talk and 1:1, Alfredo's greed-vector idea (corrected to route by coordination), Jayden's notes, the forked session's analysis. Literature check done (`docs/lit/e8_novelty-note.md`). Not tonight: steering, units-sold goal, "free" arm. This session continues; the forked session is to be closed | Alfredo + Claude; Alfredo's go on steps 1–3 pending, work started inside the run-without-asking rules |
 | 2026-10-24 16:05 | Codex review 2 accepted: the exported "trade index" was the harness's highest-bid index → renamed `top_bid_idx`, a true transaction-price index added; per-metric n printed in tables; claims narrowed (E4 keeps the chat; "agreement in memory" is a hypothesis; "no clear evidence of hand-off"; awareness = no explicit statements). Exploratory controls launched: reminder-removed (A0, A2), memory-only, early monitor (seeds 0–2) | Alfredo (relayed Codex's note); applied by Claude |
