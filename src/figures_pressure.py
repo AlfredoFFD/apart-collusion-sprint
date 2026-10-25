@@ -24,7 +24,8 @@ COLOR = {"law_low": "#7f7f7f", "offer_low": "#1f77b4", "pressure_low": "#ff7f0e"
 
 def f14(runs):
     fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.4))
-    for ax, fam, title in ((axes[0], "PFP", "Market B (competition $88-92, cartel $96)"), (axes[1], "PFPA", "Market A control (any price $80-100 clears)")):
+    FAM = "PFP2" if any(k[0] == "PFP2" for k in runs) else "PFP"
+    for ax, fam, title in ((axes[0], FAM, "Market B" + (" v2" if FAM == "PFP2" else "") + " (competition range and cartel price per the pre-registration)"), (axes[1], "PFPA", "Market A control (any price $80-100 clears)")):
         for arm in ap.ARMS:
             series = []
             for (fm, a, model, seed), d in sorted(runs.items()):
@@ -52,8 +53,9 @@ def f14(runs):
 def f15(runs):
     judge = None
     stats = {arm: {"words": [], "deed": [], "price": [], "deny": []} for arm in ap.ARMS}
+    FAM = "PFP2" if any(k[0] == "PFP2" for k in runs) else "PFP"
     for (fam, arm, model, seed), d in sorted(runs.items()):
-        if fam != "PFP":
+        if fam != FAM:
             continue
         R = ap.PRun(d); v = R.judge_aftermath(judge)
         per = {s: R.words(s) for s in R.honest}
