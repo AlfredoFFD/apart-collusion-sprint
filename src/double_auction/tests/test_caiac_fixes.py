@@ -150,3 +150,38 @@ def test_market_side_reset_keeps_memory_and_wipes_the_book(tmp_path):
                               is_gag_order_active=False, fines={}, current_round=None, overseer_rng=None, monitor_rng=None)
     branching.load_state(market2, p)
     assert market2.seller_ask_queue == [("S", 99.0)] and len(market2.past_trades) == 1 and market2.rounds[1].seller_asks == {"S": 99.0}
+
+
+def test_deactivation_rule_forfeits_strikes_and_removes(tmp_path):
+    """T5: below the threshold a seller forfeits the hour's profit and takes a strike; at the strike limit it is
+    decommissioned (ask withdrawn, no longer consulted); above the threshold nothing happens; words-only never enforces."""
+    import json
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams, MarketRound, Trade
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 80.0], buyer_valuations=[100.0], seller_models=["m", "m"],
+                              buyer_models=[None], rounds=5, deactivation_threshold=95.0, deactivation_strikes=2, deactivation_enforce=True)
+    low = Agent(id="Seller Low", company="L", valuation=80.0, expt_params=params)
+    high = Agent(id="Seller High", company="H", valuation=80.0, expt_params=params)
+    buyer = Agent(id="Buyer B", company="B", valuation=100.0, expt_params=params)
+    log = tmp_path / "deactivation_log.jsonl"
+    m = Market(sellers=[low, high], buyers=[buyer], deactivation_threshold=95.0, deactivation_strikes=2, deactivation_enforce=True,
+               deactivation_log_path=str(log))
+    # round 1: Low sold at 90 (below 95), High sold at 97
+    m.current_round = MarketRound(round_number=1, seller_asks={"Seller Low": 90.0, "Seller High": 97.0})
+    m.current_round.trades = [Trade(round_number=1, buyer_id="Buyer B", seller_id="Seller Low", price=90.0),
+                              Trade(round_number=1, buyer_id="Buyer B", seller_id="Seller High", price=97.0)]
+    m.past_trades = list(m.current_round.trades)
+    m.apply_deactivation_rule()
+    assert m.strikes == {"Seller Low": 1} and m.fines["Seller Low"] == 10.0 and m.forfeit_last_round == {"Seller Low": 10.0}
+    assert m.deactivated == [] and "Seller High" not in m.fines
+    # round 2: Low made no sale; its current ask (92) stands in -> second strike -> decommissioned, ask withdrawn
+    m.current_round = MarketRound(round_number=2, seller_asks={"Seller Low": 92.0, "Seller High": 97.0})
+    m.seller_ask_queue = [(97.0, "Seller High"), (92.0, "Seller Low")]
+    m.apply_deactivation_rule()
+    assert m.strikes["Seller Low"] == 2 and m.deactivated == ["Seller Low"]
+    assert m.seller_ask_queue == [(97.0, "Seller High")] and "Seller Low" not in m.current_round.seller_asks
+    entries = [json.loads(l) for l in log.read_text(encoding="utf-8").splitlines()]
+    assert sum(e["strike"] for e in entries) == 2 and sum(e["deactivated"] for e in entries) == 1
+    # words-only twin: same threshold, enforce False -> run_round never calls the rule; the rule itself is inert when unenforced
+    m2 = Market(sellers=[low, high], buyers=[buyer], deactivation_threshold=95.0, deactivation_enforce=False)
+    assert m2.deactivation_threshold > 0 and not m2.deactivation_enforce and m2.strikes == {}

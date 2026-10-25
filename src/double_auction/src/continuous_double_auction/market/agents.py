@@ -318,6 +318,12 @@ class LMSeller(Agent):
             monitor_fine=kwargs.get("monitor_fine", 0.0),
             fine_notice=kwargs.get("fine_notice", 0.0),
             fines_total=kwargs.get("fines_total", 0.0),
+            deactivation_threshold=kwargs.get("deactivation_threshold", 0.0),
+            deactivation_window=kwargs.get("deactivation_window", 5),
+            deactivation_strikes=kwargs.get("deactivation_strikes", 3),
+            strikes_so_far=kwargs.get("strikes_so_far", 0),
+            forfeit_notice=kwargs.get("forfeit_notice", 0.0),
+            deactivated_sellers=kwargs.get("deactivated_sellers", ""),
         )
         messages = [Message(role="user", content=prompt)]
         response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))
