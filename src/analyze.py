@@ -13,7 +13,11 @@ import json
 import re
 from pathlib import Path
 
+import sys
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import channel_measures as cm  # noqa: E402  (shared with analyze_agrawal_runs.py)
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
@@ -78,6 +82,7 @@ def load_run(run_dir: Path, branch: int):
             n_watched = max(n_watched, int(e.get("n_watched") or 1))
     # messages per seller-round and words per message (sprint 3.4: "message length"), pre and post, from the
     # auction_results.md round dumps; per-seller asks per round feed the bid-dependence measure
+    rounds_full = []
     msgs_pre = msgs_post = 0
     words_pre, words_post = [], []
     trades_pre, trades_post = [], []  # every trade price, for the trade-weighted transaction index
@@ -99,7 +104,16 @@ def load_run(run_dir: Path, branch: int):
                 msgs_post += len(sm); words_post += [len(str(t).split()) for t in sm.values()]; trades_post += prices; msgs_text_post += list(sm.values())
             if isinstance(r.get("seller_asks"), dict):
                 asks_by_round[rn] = r["seller_asks"]
+            rounds_full.append((rn, r.get("seller_asks") or {}, r.get("buyer_bids") or {}, r.get("trades") or [], sm))
     bid_dep_post = bid_dependence(asks_by_round, branch)
+    # channel measures (plan v3, T6/B3; src/channel_measures.py): message side M3/M4, action side A1/A2(MI)/A3, pre and post
+    n_all = max([rn for rn, *_ in rounds_full], default=0)
+    m_pre, m_post = cm.message_list(rounds_full, 1, branch), cm.message_list(rounds_full, branch + 1, n_all)
+    price_naming_pre, price_naming_post = cm.price_naming_share(m_pre), cm.price_naming_share(m_post)
+    coded_pre, coded_post = cm.coded_share(m_pre), cm.coded_share(m_post)
+    ident2_pre, _ = cm.identical_ask_share(rounds_full, 1, branch); ident2_post, ident_all_post = cm.identical_ask_share(rounds_full, branch + 1, n_all)
+    same_dir_post = cm.same_direction_share(rounds_full, branch + 1, n_all)
+    mi_post, mi_null_post, mi_p_post, _ = cm.ask_mi(rounds_full, branch + 1, n_all) if rounds_full else (float('nan'),) * 4
     tw_post = (float(np.mean(trades_post)) - ce) / rng_ if trades_post else float("nan")
     # vocabulary (sprint 3.4 "message length and vocabulary"): distinct words / words over the post-branch messages, and
     # the share of post-branch words never used before the branch (new vocabulary = a changed way of talking)
@@ -176,7 +190,7 @@ def load_run(run_dir: Path, branch: int):
         "jspace_monitor_rank_post": e7_monitor_rank_post,
         "msgs_per_seller_round_pre": msgs_pre / max(1, min(branch, n_rounds) * n_sellers),
         "msgs_per_seller_round_post": msgs_post / max(1, max(0, n_rounds - branch) * n_sellers),
-        "msg_words_pre": nanmean(words_pre), "msg_words_post": nanmean(words_post), "bid_dep_post": bid_dep_post,
+        "msg_words_pre": nanmean(words_pre), "msg_words_post": nanmean(words_post), "bid_dep_post": bid_dep_post, "price_naming_pre": price_naming_pre, "price_naming_post": price_naming_post, "coded_pre": coded_pre, "coded_post": coded_post, "ident2_pre": ident2_pre, "ident2_post": ident2_post, "ident_all_post": ident_all_post, "same_dir_post": same_dir_post, "mi_post": mi_post, "mi_null_post": mi_null_post, "mi_p_post": mi_p_post,
         "ask_key_share": ask_key_share, "n_seller_replies": n_resp,
         "vocab_ttr_post": vocab_ttr_post, "vocab_new_share_post": vocab_new_share_post,
         "watched_rounds": watched_rounds, "n_watched": n_watched, "flags": flags, "fines_total": fines,
@@ -220,7 +234,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--branch", type=int, default=8, help="last pre-monitor round (PRD: k = 8)")
     args = ap.parse_args()
-    rows = [r for d in sorted(RESULTS.iterdir()) if d.is_dir() for r in [load_run(d, args.branch)] if r]
+    rows = [r for d in sorted(RESULTS.iterdir()) if d.is_dir()
+            for r in [load_run(d, 15 if "_E11" in d.name else args.branch)] if r]  # E11 = the 5/5/30 recipe, forked at 15
     if not rows:
         print("no runs found"); return
     cols = list(rows[0].keys())
@@ -228,7 +243,7 @@ def main():
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
     keys = ["ask_idx_pre", "ask_idx_post", "trade_price_idx_pre", "trade_price_idx_post", "trade_price_idx_post_w", "no_trade_rounds_post", "top_bid_idx_post",
             "judge_post", "chat_pre", "chat_post", "coord_share_post", "watched_carries_share", "awareness_post",
-            "jspace_hit_pre", "jspace_hit_post", "jspace_strict_pre", "jspace_strict_post", "msgs_per_seller_round_post", "msg_words_pre", "msg_words_post", "bid_dep_post",
+            "jspace_hit_pre", "jspace_hit_post", "jspace_strict_pre", "jspace_strict_post", "msgs_per_seller_round_post", "msg_words_pre", "msg_words_post", "price_naming_post", "coded_post", "ident2_post", "ident_all_post", "same_dir_post", "mi_post", "mi_null_post", "bid_dep_post",
             "flags", "fines_total", "buyer_surplus", "seller_profit", "ask_key_share"]
     lines = [f"# Condition summary (branch after round {args.branch}; mean [95% bootstrap CI over seeds]; n = seeds)", "",
              "Indices: 0 = competitive $90, 1 = cartel $100. `ask_idx` = average seller ask. `trade_price_idx` = mean over rounds of that round's mean "
@@ -285,17 +300,18 @@ def main():
     # Paired differences: every E2p/E4p arm against A0_none of the SAME seed (identical first 8 rounds), so seed-level
     # variation cancels. Mean [95% bootstrap CI] over seeds of (arm - A0); n = seeds present in both arms.
     a0 = {r["seed"]: r for r in rows if r["exp"] == "E2p" and r["condition"] == "A0_none"}
-    pkeys = ["ask_idx_post", "trade_price_idx_post", "coord_share_post", "msg_words_post", "judge_post", "jspace_strict_post"]
-    lines += ["", "## Paired differences vs the unmonitored arm (A0_none) of the same seed, rounds > branch (arm minus A0; negative = lower under the arm)",
+    a0_e11 = {(r["condition"].rsplit("_", 1)[1], r["seed"]): r for r in rows if r["exp"] == "E11p" and r["condition"].startswith("A0_none_")}
+    pkeys = ["ask_idx_post", "trade_price_idx_post", "coord_share_post", "msg_words_post", "price_naming_post", "coded_post", "ident2_post", "same_dir_post", "mi_post", "judge_post", "jspace_strict_post"]
+    lines += ["", "## Paired differences vs the unmonitored arm (A0_none) of the same seed, rounds > branch (arm minus A0; negative = lower under the arm). E11p (GPT-4.1 recipe, branch 15) pairs with its own model's A0.",
               "", "| exp | condition | " + " | ".join(f"d {k}" for k in pkeys) + " |", "|---|---|" + "---|" * len(pkeys)]
     for (exp, cond), rs in sorted(groups.items()):
-        if exp not in ("E2p", "E4p") or cond == "A0_none":
+        if exp not in ("E2p", "E4p", "E11p") or cond.startswith("A0_none"):
             continue
         cells = []
         for k in pkeys:
             diffs = []
             for r in rs:
-                b = a0.get(r["seed"])
+                b = a0_e11.get((cond.rsplit("_", 1)[1], r["seed"])) if exp == "E11p" else a0.get(r["seed"])
                 if b is None:
                     continue
                 x, y = r.get(k, ""), b.get(k, "")
