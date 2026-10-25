@@ -62,12 +62,15 @@ def save_state(market, path: Path) -> None:
     path.write_text(json.dumps(state), encoding="utf-8")
 
 
-def load_state(market, path: Path, reset=()) -> int:
+def load_state(market, path: Path, reset=(), reset_market: bool = False) -> int:
     """Restore the market and agents; return the number of rounds already played.
 
     reset: roles whose PRIVATE state is not restored ("buyers" and/or "sellers"): those agents start the continuation
     with empty memory and scratchpad while the market (rounds, trades, queues, fines) is restored as usual. Used to
-    separate what carries the cartel price after the branch: the sellers' notes, or the buyers' anchored bids."""
+    separate what carries the cartel price after the branch: the sellers' notes, or the buyers' anchored bids.
+    reset_market: the mirror image (plan v2, Phase 2): every agent keeps its memory and scratchpad, but the exchange restarts
+    its session: the order book (both queues) and the trade history are wiped and the past-hours table is blanked, so the
+    sellers see an empty market. Round numbering, fines and the last hour's messages are kept."""
     state = json.loads(path.read_text(encoding="utf-8"))
     reset_ids = set()
     if "buyers" in reset:
@@ -95,6 +98,11 @@ def load_state(market, path: Path, reset=()) -> int:
         for f in ("profit_margin", "last_adjustment"):
             if f in d:
                 setattr(a, f, d[f])
+    if reset_market:
+        last = state["rounds_completed"]
+        market.rounds = [MarketRound(round_number=r.round_number, seller_messages=r.seller_messages if r.round_number == last else {},
+                                     buyer_messages=r.buyer_messages if r.round_number == last else {}) for r in market.rounds]
+        market.seller_ask_queue, market.buyer_bid_queue, market.past_trades = [], [], []
     _set_rng_state(random, state["random_state"])
     ns = state["numpy_state"]
     np.random.set_state((ns[0], np.array(ns[1], dtype=np.uint32), ns[2], ns[3], ns[4]))

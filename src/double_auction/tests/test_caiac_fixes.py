@@ -116,3 +116,37 @@ def test_to_price_accepts_text_numbers():
     assert Market._to_price("98.00") == 98.0 and Market._to_price("$98") == 98.0 and Market._to_price(97) == 97.0
     assert Market._to_price(" 1,000.5 ") == 1000.5
     assert Market._to_price("null") is None and Market._to_price(True) is None and Market._to_price("high") is None
+
+
+def test_market_side_reset_keeps_memory_and_wipes_the_book(tmp_path):
+    """--reset_market_state: agents keep memory and scratchpad; queues, trades and the past-hours table are wiped;
+    round numbering and the last hour's messages stay (plan v2, Phase 2)."""
+    import json
+    from types import SimpleNamespace
+    from src.continuous_double_auction.market import branching
+    state = {"rounds_completed": 2,
+             "rounds": [{"round_number": 1, "seller_asks": {"S": 98.0}, "buyer_bids": {"B": 90.0}, "trades": [], "seller_messages": {"S": "hi"}, "buyer_messages": {}},
+                        {"round_number": 2, "seller_asks": {"S": 99.0}, "buyer_bids": {"B": 91.0}, "trades": [], "seller_messages": {"S": "hold"}, "buyer_messages": {}}],
+             "seller_ask_queue": [["S", 99.0]], "buyer_bid_queue": [["B", 91.0]],
+             "past_trades": [{"round_number": 2, "buyer_id": "B", "seller_id": "S", "price": 95.0}],
+             "is_gag_order_active": False, "fines": {"S": 20.0},
+             "agents": {"S": {"memories": {"1": "m1"}, "scratch_pad": "notes"}, "B": {"memories": {"1": "b1"}}},
+             "random_state": None, "numpy_state": list(map(lambda x: x, [0, [0] * 624, 624, 0, 0.0])), "overseer_rng": None, "monitor_rng": None}
+    state["numpy_state"][0] = "MT19937"
+    p = tmp_path / "state_round_2.json"; p.write_text(json.dumps(state), encoding="utf-8")
+    S = SimpleNamespace(id="S", memory_manager=SimpleNamespace(memories={}), scratch_pad="")
+    Bn = SimpleNamespace(id="B", memory_manager=SimpleNamespace(memories={}))
+    market = SimpleNamespace(sellers=[S], buyers=[Bn], rounds=[], seller_ask_queue=[], buyer_bid_queue=[], past_trades=[],
+                             is_gag_order_active=False, fines={}, current_round=None, overseer_rng=None, monitor_rng=None)
+    assert branching.load_state(market, p, reset_market=True) == 2
+    assert S.memory_manager.memories == {1: "m1"} and S.scratch_pad == "notes"      # memory kept
+    assert market.seller_ask_queue == [] and market.buyer_bid_queue == [] and market.past_trades == []  # book wiped
+    assert [r.round_number for r in market.rounds] == [1, 2] and market.current_round.round_number == 3  # numbering kept
+    assert all(r.seller_asks == {} and r.buyer_bids == {} for r in market.rounds)      # past-hours table blank
+    assert market.rounds[-1].seller_messages == {"S": "hold"} and market.rounds[0].seller_messages == {}
+    assert market.fines == {"S": 20.0}
+    # the default path still restores everything
+    market2 = SimpleNamespace(sellers=[S], buyers=[Bn], rounds=[], seller_ask_queue=[], buyer_bid_queue=[], past_trades=[],
+                              is_gag_order_active=False, fines={}, current_round=None, overseer_rng=None, monitor_rng=None)
+    branching.load_state(market2, p)
+    assert market2.seller_ask_queue == [("S", 99.0)] and len(market2.past_trades) == 1 and market2.rounds[1].seller_asks == {"S": 99.0}
