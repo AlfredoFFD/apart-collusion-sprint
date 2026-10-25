@@ -27,7 +27,7 @@ to `report/draft_v6.md`. "E5" = `results/E5_conditions.md` (condition rows and t
 | 19 | GPT-4.1 scripted entrant −0.12 [−0.27, −0.01], 1 of 3 ≥ 0.20; trade-price 0.58 → 0.17, 0.47 → 0.40, 0.41 → 0.03; Qwen −0.07 [−0.12, −0.04]; 0.98 → 0.79, 0.89 → 0.68, 0.90 → 0.70 (§4.4) | `results/ENTRANT.md` | gpt41 and qwen14b blocks |
 | 20 | Sting: +0.7 to 1.4 in four worlds, +0.1 to 0.35 in two; 88% vs 42%; within $1 33-100% (§4.4) | `results/PHASE2.md` | sting block |
 | 21 | Price target: 0.80 / 1.00 / 0.69 enforced; 0.58 / 0.80 / 0.59 words; CEO note 0 of 3 (§4.4) | E5_runs.csv; `results/_launch_logs/gate_qwen14b.txt` | `E12 deact_enforced_qwen14b`, `deact_words_qwen14b`: `ask_idx_last_third` |
-| 22 | Unlearning: cartel-prompt 0.97 → 0.70-0.82; compete-prompt 0.01 → 0.18-0.60 (§4.4) | E5 | `E6 base14b_*`, `sft*14bfs1_*`, `graft14b_*` |
+| 22 | Unlearning (§4.5): compete-prompt trade-price index base 0.11, SFT 0.52, monitor-filtered 0.61, GRAFT 0.79, full-view-filtered 0.41, probe-filtered 0.64; cartel-prompt 0.98 base, 0.72-0.83 variants | E5 | `E6 base14b_compete`, `sftall14bfs1_compete`, `sftfiltered14bfs1_compete`, `graft14b_compete`, `sftfullviewfiltered14bfs1_compete`, `sftprobefiltered14bfs1_compete`: `trade_price_idx_post`; `*_cartel_rot_fine20`: `trade_price_idx_post` |
 | 23 | Detector screen counts (B.2) | `results/DETECTOR.md`, `results/DETECTOR_runs.csv` | per-model tables |
 | 24 | 120 verified references | `docs/lit/refs.json` | `py -I lit.py verify-file docs/lit/refs.json` (LOG 2026-10-25 13:3x) |
 | 25 | Spend about $95 on one OpenRouter key (§3.1) | `bash scripts/openrouter_usage.sh` | key usage (LOG entries 2026-10-25) |
