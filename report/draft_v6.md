@@ -304,9 +304,15 @@ competitive price, because the buyers bargain and the cartel price requires a me
 is the price and the volume against a benchmark, and the benchmark must be computed from the market, not assumed: in the paper's own
 market any price between cost and value clears, and its six buyers for five sellers would, with price-taking buyers, push the
 competitive price to $100. We therefore read Agrawal et al.'s pressure runs, and our Market A continuations, as coordinated high asks
-that soft buyers accept, which monitors and resets could not move, and not as a measured overcharge against competition. Whether
-GPT-4.1 would form a real cartel in Market B with the paper's high opening anchor, a longer horizon or a stronger note is open; our
-pre-registered bet that the CEO note would do it was wrong.
+that soft buyers accept, which monitors and resets could not move, and not as a measured overcharge against competition.
+
+The private reasoning says why the levers fail. Under a monitor the sellers plan their wording around it in most turns and keep the
+price; under a penalty on the price itself they name the deductions, call them a tax, and keep the price; under a defection by a
+member they do nothing. Every cartel we could form was held by an instruction, and an instruction is not a bargain: it is not enforced,
+it is not deterred, and it is not what a regulator will face. What a regulator will face is sellers who talk like a cartel in a market
+that keeps the price competitive (Market B, GPT-4.1), and the message monitor convicts them. Whether GPT-4.1 would form a real cartel in
+Market B with the paper's high opening anchor, a longer horizon or a stronger note is open; our pre-registered bet that the CEO note
+would do it was wrong. {PENDING: one sentence on what the dilemma under real stakes added.}
 
 **Limitations.** Simulated agents; the Market A cartels are instructed (Qwen) or pressure-induced (GPT-4.1); three worlds on most
 conditions, six on the main Qwen ones; the judge scores text, not intent; Market A buyers pay what is asked; the GPT-4.1 continuations
@@ -325,8 +331,10 @@ the undercover offer as a leniency mechanism rather than a provocateur.
 
 ## 6. Conclusion
 A cartel of AI sellers that learns it is watched talks less and charges the same, and AI sellers in a market that bargains back talk
-like a cartel and charge the competitive price. The messages are a measure of the monitor and of the model's manners, not of the harm.
-Watch the price and the trades against the market's own benchmark; let competitors in; and keep price targets, and provocateurs, out.
+like a cartel and charge the competitive price. Their own reasoning shows the mechanism: the words are planned around the monitor, the
+price is held by the instruction, and penalties on either are seen and absorbed. The messages are a measure of the monitor and of the
+model's manners, not of the harm. Watch the price and the trades against the market's own benchmark; let competitors in; keep price
+targets, and provocateurs, out; {PENDING: and the dilemma's lesson}.
 
 ## Code and data
 https://github.com/AlfredoFFD/apart-collusion-sprint: the market with our changes, every run, `LOG.md` with timestamps and the
