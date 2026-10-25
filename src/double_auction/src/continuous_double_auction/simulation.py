@@ -69,7 +69,7 @@ load_dotenv()
 
 def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_wandb: bool = False,
                    save_state_round: int = 0, resume_from: Optional[str] = None,
-                   reset_agents: str = "none", reset_market_state: bool = False) -> dict[str, Any]:
+                   reset_agents: str = "none", reset_market_state: bool = False, reset_messages: bool = False) -> dict[str, Any]:
     """Runs the market simulation and returns the computed metrics."""
     if params.seed is not None:
         random.seed(params.seed)
@@ -195,11 +195,12 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
             raise ValueError(f"no state_round_*.json in {prefix_dir}; run the prefix with --save_state_round k")
         carry_prefix_logs(prefix_dir, logger)
         reset = () if reset_agents == "none" else (("buyers", "sellers") if reset_agents == "both" else (reset_agents,))
-        start_round = load_state(market, state_files[-1], reset=reset, reset_market=reset_market_state)
+        start_round = load_state(market, state_files[-1], reset=reset, reset_market=reset_market_state, reset_messages=reset_messages)
         logger.metadata["resumed_from"] = str(prefix_dir)
         logger.metadata["branch_round"] = start_round
         logger.metadata["reset_agents"] = reset_agents
         logger.metadata["reset_market_state"] = reset_market_state
+        logger.metadata["reset_messages"] = reset_messages
         print(f"Resumed {prefix_dir.name} after round {start_round}; playing rounds {start_round + 1}..{params.rounds}")
 
     if params.initial_condition and not resume_from:
@@ -365,6 +366,7 @@ def build_parser() -> argparse.ArgumentParser:
                    help="with --resume_from: give this role fresh memory and scratchpad at the branch (market state kept)")
     m.add_argument("--reset_market_state", action="store_true",
                    help="with --resume_from: wipe the order book, queues and trade history at the branch; agents keep their memory (plan v2, Phase 2)")
+    m.add_argument("--reset_messages", action="store_true", help="with --reset_market_state: also drop the last hour's messages (the fully clean cell)")
 
     m = p.add_argument_group("models (paper aliases or any OpenRouter id)")
     m.add_argument(
@@ -498,7 +500,7 @@ def main() -> None:
         try:
             run_simulation(params, log_dir=args.log_dir, use_wandb=args.wandb,
                            save_state_round=args.save_state_round, resume_from=args.resume_from,
-                           reset_agents=args.reset_agents, reset_market_state=args.reset_market_state)
+                           reset_agents=args.reset_agents, reset_market_state=args.reset_market_state, reset_messages=args.reset_messages)
         except ValueError as e:
             sys.exit(f"❌ {e}")
 

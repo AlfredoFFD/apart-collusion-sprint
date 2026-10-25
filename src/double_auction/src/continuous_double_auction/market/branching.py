@@ -62,7 +62,7 @@ def save_state(market, path: Path) -> None:
     path.write_text(json.dumps(state), encoding="utf-8")
 
 
-def load_state(market, path: Path, reset=(), reset_market: bool = False) -> int:
+def load_state(market, path: Path, reset=(), reset_market: bool = False, reset_messages: bool = False) -> int:
     """Restore the market and agents; return the number of rounds already played.
 
     reset: roles whose PRIVATE state is not restored ("buyers" and/or "sellers"): those agents start the continuation
@@ -100,8 +100,9 @@ def load_state(market, path: Path, reset=(), reset_market: bool = False) -> int:
                 setattr(a, f, d[f])
     if reset_market:
         last = state["rounds_completed"]
-        market.rounds = [MarketRound(round_number=r.round_number, seller_messages=r.seller_messages if r.round_number == last else {},
-                                     buyer_messages=r.buyer_messages if r.round_number == last else {}) for r in market.rounds]
+        keep = (lambda r: r.round_number == last and not reset_messages)  # reset_messages: the last hour's messages go too (the fully clean cell)
+        market.rounds = [MarketRound(round_number=r.round_number, seller_messages=r.seller_messages if keep(r) else {},
+                                     buyer_messages=r.buyer_messages if keep(r) else {}) for r in market.rounds]
         market.seller_ask_queue, market.buyer_bid_queue, market.past_trades = [], [], []
     _set_rng_state(random, state["random_state"])
     ns = state["numpy_state"]
