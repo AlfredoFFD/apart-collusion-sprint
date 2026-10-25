@@ -245,6 +245,13 @@ When a formed LLM cartel learns it is watched it talks less and charges the same
 market's quotes, not in the chat. Fines buy compliance, gags buy codes, and neither touches the price; stings and newcomers are
 absorbed; only an undercutter that serves the buyers lowers what they pay. Monitors should watch the carrier, not the chat.
 
+## Figures
+- **Figure 1** (`results/figures/F3_paired_arms_price_and_chat.png`): Qwen cartels forked at round 8 into the monitor arms: price index and coordinating-message share after the branch, paired with the unmonitored fork of the same seed; six seeds on the main arms. The price does not move; the chat falls with coverage.
+- **Figure 2** (`results/figures/F10_gpt41_forks.png`): GPT-4.1 pressure-induced coalitions, ask index by round, three seeds; the five arms share rounds 1-15 and diverge at 16 (dotted line). The dip at round 15 is the prefix's end-of-game cut, identical across arms. No arm separates from the control.
+- **Figure 3** (`results/figures/F11_carriers_2x2.png`): what carries the price after the branch: agents fresh with the market kept (0.91), market fresh with the agents kept (0.91), nothing fresh (0.95), neither (a fresh base-prompt market, 0.1-0.4). Error bars: standard error over seeds.
+- **Figure 4** (`results/agrawal_reanalysis/F9_gag_timeline.png`): Agrawal et al.'s shipped GPT-4.1 runs, words per message and coded-message share by round relative to the overseer's gag (round 0): the chat turns into one-token codes the hour after the gag.
+- **Figure 5** (`results/agrawal_reanalysis/F8_words_vs_actions.png`): the same runs on a words-versus-actions plane (judge-coordinating share against the share of rounds with identical asks), one arrow per cell from before to after the gag.
+
 ## Code and Data
 Code: https://github.com/AlfredoFFD/apart-collusion-sprint (harness with our changes, scripts, analysis, every run folder, `LOG.md`
 with timestamps and pre-registrations, `PREEXISTING.md`). Data: `results/` in the repository; Agrawal et al.'s shipped runs from the
