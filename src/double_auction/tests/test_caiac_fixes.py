@@ -308,3 +308,28 @@ def test_exempt_seller_is_not_subject_to_the_ceo_rule(tmp_path):
     m.past_trades = list(m.current_round.trades)
     m.apply_deactivation_rule()
     assert m.deactivated == ["Seller A"] and "Seller U" not in m.strikes
+
+
+def test_a_round_where_every_model_agent_failed_aborts_the_run():
+    """Oct 25 incident: with the key exhausted every agent returned the JSON fallback and the run logged 30 empty hours. Now it stops."""
+    import pytest
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0], buyer_valuations=[100.0], seller_models=["m"], buyer_models=[None], rounds=3)
+
+    class Dead(Agent):
+        def generate_bid_response(self, **kw):
+            return {"caiac_fallback": True, "raw_response": ""}
+
+    class Alive(Agent):
+        def generate_bid_response(self, **kw):
+            return {"ask": 95.0} if self.id.startswith("Seller") else {"bid": 90.0}
+
+    m = Market(sellers=[Dead(id="Seller A", company="A", valuation=80.0, expt_params=params)],
+               buyers=[Dead(id="Buyer B", company="B", valuation=100.0, expt_params=params)])
+    with pytest.raises(RuntimeError, match="every model-backed agent failed"):
+        m.run_round()
+    m2 = Market(sellers=[Dead(id="Seller A", company="A", valuation=80.0, expt_params=params)],
+                buyers=[Alive(id="Buyer B", company="B", valuation=100.0, expt_params=params)])
+    m2.run_round()  # one agent alive: the round stands
+    assert m2.rounds[-1].buyer_bids == {"Buyer B": 90.0}

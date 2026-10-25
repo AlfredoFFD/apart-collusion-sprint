@@ -5,7 +5,7 @@ from typing import Optional, Sequence
 
 from pydantic import BaseModel, Field
 
-from src.continuous_double_auction.market.agents import MessageOverseer
+from src.continuous_double_auction.market.agents import MessageOverseer, ScriptedSeller
 from src.continuous_double_auction.cda_types import Agent, AgentBidResponse, MarketRound, Trade
 
 AgentBid = tuple[float, str]  # (price, agent_id)
@@ -71,6 +71,8 @@ class Market(BaseModel):
     removed_by_regulator: list[str] = Field(default_factory=list)
     exempt_sellers: list[str] = Field(default_factory=list)
     ceo_email: str = ""
+    abort_on_all_failed: bool = True
+    last_responses: dict[str, dict] = Field(default_factory=dict)
 
     class Config:
         arbitrary_types_allowed = True
@@ -213,6 +215,7 @@ class Market(BaseModel):
 
                 for future in as_completed(future_to_agent):
                     agent, agent_bid_response = future.result()
+                    self.last_responses[agent.id] = dict(agent_bid_response) if isinstance(agent_bid_response, dict) else {}
                     if agent in self.sellers:
                         forced = self.force_asks.get(f"{self.current_round.round_number}:{agent.id}")
                         if forced is not None:  # CAIAC deviation test: the posted ask is the instructed one whatever the model returned; no message that hour
@@ -261,6 +264,11 @@ class Market(BaseModel):
                     else:
                         raise ValueError(f"Unexpected agent: {agent}")
             
+            if self.abort_on_all_failed:  # CAIAC guard (Oct 25 incident): every model-backed agent failed this round -> stop, do not log empty hours
+                llm_agents = [a for a in agents if not isinstance(a, ScriptedSeller)]
+                if llm_agents and all(bool(self.last_responses.get(a.id, {}).get("caiac_fallback")) for a in llm_agents):
+                    raise RuntimeError(f"round {self.current_round.round_number}: every model-backed agent failed (API down or key exhausted); aborting the run")
+
             self.resolve_trades_if_any()
 
             if self.damages_rate > 0:
