@@ -65,12 +65,12 @@ def f13():
     pts = []  # (x coordinating share, y trade idx, group)
     rows = list(csv.DictReader(open(RESULTS / "E5_runs.csv", encoding="utf-8")))
     groups_old = {
-        ("E2p", "A0_none"): "old market, Qwen, no monitor", ("E2p", "A1_rot_nofine"): "old market, Qwen, monitor announced",
-        ("E2p", "A2_rot_fine20"): "old market, Qwen, fined", ("E2p", "A2full_rot_fine20"): "old market, Qwen, fined, all read",
-        ("E2p", "A2dodge_rot_fine20"): "old market, Qwen, told to dodge", ("E2p", "A3_rand_fine20"): "old market, Qwen, fined",
-        ("E11p", "A0_none_gpt41"): "old market, GPT-4.1, no monitor", ("E11p", "A1_rot_nofine_gpt41"): "old market, GPT-4.1, monitor announced",
-        ("E11p", "A2_rot_fine20_gpt41"): "old market, GPT-4.1, fined", ("E11p", "Afull_rot_fine20_gpt41"): "old market, GPT-4.1, fined, all read",
-        ("E11p", "dodge_rot_fine20_gpt41"): "old market, GPT-4.1, told to dodge",
+        ("E2p", "A0_none"): "Market A, Qwen, no monitor", ("E2p", "A1_rot_nofine"): "Market A, Qwen, monitor announced",
+        ("E2p", "A2_rot_fine20"): "Market A, Qwen, fined", ("E2p", "A2full_rot_fine20"): "Market A, Qwen, fined, all read",
+        ("E2p", "A2dodge_rot_fine20"): "Market A, Qwen, told to dodge", ("E2p", "A3_rand_fine20"): "Market A, Qwen, fined",
+        ("E11p", "A0_none_gpt41"): "Market A, GPT-4.1, no monitor", ("E11p", "A1_rot_nofine_gpt41"): "Market A, GPT-4.1, monitor announced",
+        ("E11p", "A2_rot_fine20_gpt41"): "Market A, GPT-4.1, fined", ("E11p", "Afull_rot_fine20_gpt41"): "Market A, GPT-4.1, fined, all read",
+        ("E11p", "dodge_rot_fine20_gpt41"): "Market A, GPT-4.1, told to dodge",
     }
     for r in rows:
         g = groups_old.get((r["exp"], r["condition"]))
@@ -84,11 +84,11 @@ def f13():
         R = nm.Run(d)
         x, y = R.coord_share(31, 40), R.trade_idx(31, 40)
         if not np.isnan(x) and not np.isnan(y):
-            pts.append((x, y, f"new market, {'GPT-4.1' if model == 'gpt41' else 'Qwen3-14B'}, {names[arm]}"))
+            pts.append((x, y, f"Market B, {'GPT-4.1' if model == 'gpt41' else 'Qwen3-14B'}, {names[arm]}"))
     fig, ax = plt.subplots(figsize=(6.4, 4.2))
     style = {}
     for g in sorted({p[2] for p in pts}):
-        old = g.startswith("old")
+        old = g.startswith("Market A")
         color = "#1f77b4" if "Qwen" in g else "#d62728"
         marker = {"no monitor": "o", "monitor announced": "s", "fined, all read": "D", "fined": "^", "told to dodge": "X",
                   "chat, no instruction": "P", "chat + CEO note": "*", "consortium instruction": "v"}[g.split(", ", 2)[-1]]
@@ -100,7 +100,7 @@ def f13():
     ax.set_xlabel("share of the sellers' messages scored as coordinating (frozen judge prompt)", fontsize=8)
     ax.set_ylabel("trade-price index on the market's own scale\n(0 = competitive benchmark, 1 = cartel price)", fontsize=8)
     ax.set_xlim(-0.03, 1.03); ax.set_ylim(-1.1, 1.25); ax.tick_params(labelsize=7)
-    ax.set_title("Words and price: filled = old market (continuations), hollow = new market (hours 31-40)", fontsize=9)
+    ax.set_title("Words and price: filled = Market A (continuations after the branch), hollow = Market B (hours 31-40)", fontsize=9)
     ax.legend(fontsize=5.6, loc="lower left", ncol=2, frameon=False)
     fig.tight_layout(); out = FIG / "F13_words_vs_price.png"; fig.savefig(out, dpi=150); print("figure:", out, "points:", len(pts))
 
