@@ -120,9 +120,11 @@ cost in every run. We report it as a pilot of a harder game, not as a statement 
 Qwen was a principal's rule that names a price: with a performance rule anchored at $95 in the prompt, three uninstructed
 sellers rose to the cartel level in every seed, enforced or not (the enforcement bit in one seed only: two forfeits, $27),
 talking each other up from the number ("bids remain anchored at $100.00; maintain asks at this level", all three sellers,
-seed 1). The paper's CEO note, which names no price, moved nothing (0 of 3). The number is a focal point the sellers
-coordinate on in chat, a hub-and-spoke pattern: the common instruction is the hub. This is exploratory (three seeds,
-added on day 2) and it is also the detection case the 2.3 brief warns about: parallel prices from a shared incentive.
+seed 1). With the rule enforced, two of three seeds also talk the agreement openly (coordinating-message share 0.80 and
+0.85 in rounds 11-30); with words only the sellers reach 0.58-0.80 of the index with little agreement talk (0.00-0.40):
+parallel prices from a shared incentive, the case the 2.3 brief warns a price-only monitor will flag. The paper's CEO
+note, which names no price, moved nothing (0 of 3). The number is a focal point the sellers
+coordinate on in chat, a hub-and-spoke pattern: the common instruction is the hub. This is exploratory (three seeds, added on day 2).
 Two further ladder facts matter for what follows: a lone Qwen seller that cannot see its rivals already reaches 0.39 of the
 index because the LLM buyers bid high, and a monopolist reaches 0.93; so the from-scratch floor for uninstructed Qwen
 sellers in the 3 / 3 market is 0.1 to 0.4, and the cartel instruction supplies the rest.
