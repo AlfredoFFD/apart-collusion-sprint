@@ -269,7 +269,9 @@ Simulated agents, one market, seeded cartels for Qwen and pressure-induced ones 
 and six on the main Qwen arms; the frozen overseer and the private-intent judge score text, not intent; the LLM buyers
 accept any price under their value, which is why a lone seller already extracts 0.4 of the index; the Qwen formation
 block is a pilot of a harder game; the GPT-4.1 block has one model, three seeds and no no-pressure arm of our own (the
-paper's data supply it); Agrawal's runs are re-analysed with the paper's own judge for message coordination; the market-
+paper's data supply it); its prefixes were played as 15-hour markets, so every fork inherits an end-of-game ask cut made in
+hour 15 (visible as the dip at the branch in F10; identical across the arms of a seed, so the paired comparisons stand,
+but the post-branch level is lower than the paper's for this reason); Agrawal's runs are re-analysed with the paper's own judge for message coordination; the market-
 fresh forks keep the last hour's messages; the unlearning rows depend on a merge correction stated in §4.6.
 
 ## Appendix A. Limitations and Dual-Use / Ethical Considerations (mandatory)
