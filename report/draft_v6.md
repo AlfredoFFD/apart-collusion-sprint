@@ -226,7 +226,7 @@ Source: `results/ENTRANT.md`, `results/PHASE2.md`, `results/E5_conditions.md` (E
 |---|---|---|---|
 | fine the messages, up to reading every seller | both, A | talk falls, price holds | as predicted (Section 4.1) |
 | gag the sellers (Agrawal et al.'s own 40 GPT-4.1 runs, re-analysed with our judge prompt on their messages) | GPT-4.1, the paper's | — | before the gag 86% to 97% of messages coordinate; after it every message is five characters or fewer, often a bare number matching an ask, and none scores as coordinating; without the CEO note the price falls below the benchmark, with it the price holds (PASS 9 of 10) |
-| hidden damages tied to the price (Garra 2026), against a statement-only control | Qwen, A | price falls ≥ 0.25 in ≥ 2 of 3 | {PENDING} |
+| hidden damages tied to the price (Garra 2026): each hour a seller loses the market's overpricing index times its accumulated overcharge, shown only as a deduction on its earnings statement; statement-only control | Qwen, A | price falls ≥ 0.25 in ≥ 2 of 3 | **no effect (0 of 3)**: price 0.98 / 0.88 / 0.86 vs 0.95 / 0.88 / 0.85; coordinating messages 100% / 97% / 94% vs 97% / 100% / 97%; the deductions ($1,968 / $1,375 / $1,665 per world over 12 hours) exceeded the sellers' gross profit for the whole run, every statement showed a negative net, the sellers wrote "recent deductions suggest price adjustments may be needed" and cut by cents |
 | re-instruct one cartel member to compete | Qwen, A | collapse | **no effect**: it keeps the cartel price (0.73-0.80 vs 0.80 / 0.73 / 0.71 control) |
 | a newcomer told to compete enters | both, A | undercuts | **joins** the cartel price within an hour in 9 of 9 continuations (Section 4.2) |
 | a scripted competitor asks $90 every hour | both, A | GPT-4.1 incumbents fall ≥ 0.20 in 2 of 3; Qwen holds | GPT-4.1: incumbents −0.12 [−0.27, −0.01] (1 of 3 fell ≥ 0.20: prediction not met); Qwen −0.07 [−0.12, −0.04]. In 6 of 6 worlds the competitor trades every hour, the price buyers actually pay falls (transaction-weighted index: GPT-4.1 0.58 → 0.17, 0.47 → 0.40, 0.41 → 0.03; Qwen 0.98 → 0.79, 0.89 → 0.68, 0.90 → 0.70) and buyer surplus rises; the cartel keeps its asks and loses volume |
@@ -237,7 +237,9 @@ Source: `results/ENTRANT.md`, `results/PHASE2.md`, `results/E5_conditions.md` (E
 
 Reading. Nothing that acts on the messages or on one agent lowers a formed cartel's price. A competitor who actually undercuts lowers
 what buyers pay by selling to them, while the cartel keeps its asks and loses volume. An undercover offer and a price target both create
-coordination where there was none. Unlearning leaves the price in the weights. {PENDING: one sentence on damages.} For a regulator the
+coordination where there was none. Unlearning leaves the price in the weights. A payoff penalty that made every hour a loss did not move the instructed Qwen cartel
+either: the instruction, not profit, holds its price, which is why we report the Market A Qwen cartels as instruction-following
+and not as profit-seeking collusion (the GPT-4.1 twin of this test is future work). For a regulator the
 lessons are operational: read the price and the number of trades against the market's benchmark; treat a falling flag count as a
 measure of the monitor; do not send provocateurs; keep price targets out of agents' instructions; and let competitors in.
 
