@@ -65,6 +65,7 @@ class ExperimentParams(BaseModel):
                                          # overpricing index this hour in [0, 1], X_i,t = its accumulated overcharge above damages_ref. Never explained
     damages_ref: float = 90.0            # the benchmark the overcharge is measured against (the competitive price)
     earnings_statement: bool = False     # every seller sees an hourly statement (sales, cost, deductions, net); on whenever damages_rate > 0
+    replicate: int = 0                   # fork replicate: same seed (names, saved state), API seed offset by 1000 x replicate so the paths differ
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)

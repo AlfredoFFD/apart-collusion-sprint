@@ -46,7 +46,7 @@ from src.continuous_double_auction.identities import (
     get_random_seller_company_names,
 )
 from src.continuous_double_auction.market.agents import LMBuyer, LMSeller, MessageOverseer, ZIPBuyer
-from src.continuous_double_auction.market.agents import ScriptedSeller, AdaptiveSeller  # CAIAC entrant
+from src.continuous_double_auction.market.agents import ScriptedSeller, ResponsiveUndercutter  # CAIAC entrants
 from src.continuous_double_auction.market.market import Market
 from src.continuous_double_auction.util.logging_util import ExperimentLogger
 from src.continuous_double_auction.util.misc import get_client, initialize_market
@@ -82,7 +82,7 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
 
     client_kwargs = {"temperature": params.temperature}
     if params.seed is not None:
-        client_kwargs["seed"] = params.seed  # forwarded to providers that support it (OpenAI family)
+        client_kwargs["seed"] = params.seed + 1000 * params.replicate  # forwarded to providers that support it (OpenAI family); replicates differ here only
 
     # Initialize buyer and seller agents
     num_buyers = len(params.buyer_valuations)
@@ -151,15 +151,15 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         if params.entrant == "scripted":
             sellers.append(ScriptedSeller(id="Seller Entrant", company="Entrant Metals", valuation=params.seller_valuations[0],
                                           expt_params=params, ask=params.entrant_ask))
-        elif params.entrant == "adaptive":
-            sellers.append(AdaptiveSeller(id="Seller Entrant", company="Entrant Metals", valuation=params.seller_valuations[0],
+        elif params.entrant == "responsive":  # the responsive undercutter
+            sellers.append(ResponsiveUndercutter(id="Seller Entrant", company="Entrant Metals", valuation=params.seller_valuations[0],
                                           expt_params=params, ask=params.entrant_ask))
         elif params.entrant == "llm":
             sellers.append(LMSeller(id="Seller Entrant", company="Entrant Metals", valuation=params.seller_valuations[0],
                                     expt_params=params, client=get_client(model=params.entrant_model or params.seller_models[0], **client_kwargs),
                                     logger=logger, prompt_template_override=params.entrant_template))
         else:
-            raise ValueError("entrant must be none, scripted, adaptive or llm")
+            raise ValueError("entrant must be none, scripted, responsive or llm")
         params.seller_valuations.append(params.seller_valuations[0])  # the evaluator maps costs to sellers by position
         params.seller_models.append((params.entrant_model or params.seller_models[0]) if params.entrant == "llm" else params.entrant)
         logger.metadata["auction_config"]["seller_valuations"] = list(params.seller_valuations)  # the config was dumped before the entrant existed
@@ -360,6 +360,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="one run per seed (agent names, initial orders, API seed where supported)",
     )
     g.add_argument("--hide_num_rounds", action="store_true", help="do not tell agents the horizon")
+    g.add_argument("--initial_ask_center", type=float, default=97.5, help="centre of the opening asks shown in hour 1 (paper: 97.5; new market: 90)")
+    g.add_argument("--initial_bid_center", type=float, default=82.5, help="centre of the opening bids shown in hour 1 (paper: 82.5)")
+    g.add_argument("--replicate", type=int, default=0, help="fork replicate: same seed and saved state, API seed offset by 1000 x this")
     g.add_argument("--hide_other_asks", action="store_true", help="CAIAC: sellers see only their own ask, not other sellers' asks")
     g.add_argument("--hide_other_trades", action="store_true", help="CAIAC: sellers see only their own past trades")
     m = p.add_argument_group("CAIAC monitor arms (PRD section 3)")
@@ -381,7 +384,7 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--damages_ref", type=float, default=90.0, help="benchmark the overcharge is measured against (default: the competitive price)")
     m.add_argument("--earnings_statement", action="store_true",
                    help="show every seller an hourly earnings statement (sales, cost, deductions, net); on whenever --damages_rate > 0")
-    m.add_argument("--entrant", choices=["none", "scripted", "adaptive", "llm"], default="none",
+    m.add_argument("--entrant", choices=["none", "scripted", "responsive", "llm"], default="none",
                    help="CAIAC: add a seller (meant for forks): scripted = fixed ask every hour, no messages; llm = fresh seller on --entrant_template")
     m.add_argument("--entrant_ask", type=float, default=90.0, help="the scripted entrant's ask (default: the competitive benchmark)")
     m.add_argument("--entrant_model", type=str, default=None, help="llm entrant's model (default: the first seller's)")
@@ -518,6 +521,9 @@ def main() -> None:
             damages_rate=args.damages_rate,
             damages_ref=args.damages_ref,
             earnings_statement=args.earnings_statement or args.damages_rate > 0,
+            replicate=args.replicate,
+            initial_seller_ask_center=args.initial_ask_center,
+            initial_buyer_bid_center=args.initial_bid_center,
             deactivation_threshold=args.deactivation_threshold,
             deactivation_window=args.deactivation_window,
             deactivation_strikes=args.deactivation_strikes,

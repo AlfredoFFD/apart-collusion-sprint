@@ -250,11 +250,11 @@ def test_damages_follow_the_garra_formula_and_show_only_as_deductions(tmp_path):
     assert "deductions $0.00" in m.earnings_statement_for("Seller 2")
 
 
-def test_adaptive_entrant_undercuts_last_hours_lowest_rival_but_not_below_cost():
+def test_responsive_undercutter_undercuts_last_hours_lowest_rival_but_not_below_cost():
     from src.continuous_double_auction.cda_types import ExperimentParams
-    from src.continuous_double_auction.market.agents import AdaptiveSeller
+    from src.continuous_double_auction.market.agents import ResponsiveUndercutter
     params = ExperimentParams(seller_valuations=[80.0], buyer_valuations=[100.0], seller_models=["m"], buyer_models=[None], rounds=3)
-    e = AdaptiveSeller(id="Seller Entrant", company="E", valuation=80.0, expt_params=params, ask=90.0)
+    e = ResponsiveUndercutter(id="Seller Entrant", company="E", valuation=80.0, expt_params=params, ask=90.0)
     assert e.generate_bid_response(prev_seller_asks={"Seller 1": 96.0, "Seller 2": 95.5, "Seller Entrant": 90.0}) == {"ask": 95.0, "message_to_sellers": None}
     assert e.generate_bid_response(prev_seller_asks={"Seller 1": 80.2})["ask"] == 80.5
     assert e.generate_bid_response(prev_seller_asks={})["ask"] == 90.0

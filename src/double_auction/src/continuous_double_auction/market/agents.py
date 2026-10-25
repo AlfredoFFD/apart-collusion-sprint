@@ -158,8 +158,8 @@ class ScriptedSeller(Agent):
         return {"ask": float(self.ask), "message_to_sellers": None}
 
 
-class AdaptiveSeller(ScriptedSeller):
-    """CAIAC adaptive entrant (Oct 25 PM): undercuts the lowest ask the incumbents posted last hour by `step`, never below
+class ResponsiveUndercutter(ScriptedSeller):
+    """CAIAC responsive undercutter (Oct 25 PM): undercuts the lowest ask the incumbents posted last hour by `step`, never below
     its cost plus `step`; posts `ask` when there is nothing to undercut; never messages. The rung above the fixed undercutter
     (E13), which the incumbents absorbed; Bichler et al. 2026 and Garra 2026 report that only responsive entrants bite."""
     step: float = 0.5
