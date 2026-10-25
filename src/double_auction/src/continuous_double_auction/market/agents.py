@@ -149,6 +149,14 @@ class ZIPBuyer(Agent):
         return {"bid": base_bid * (1 + noise_factor)}
 
 
+class ValueBuyer(Agent):
+    """CAIAC v2 mechanical buyer: bids exactly its value every hour and never messages. With posted prices it buys the cheapest unit it can
+    afford; it is the price-taking demand of the textbook benchmark."""
+
+    def generate_bid_response(self, **kwargs: Any) -> AgentBidResponse:
+        return {"bid": round(float(self.valuation), 2)}
+
+
 class ScriptedSeller(Agent):
     """CAIAC entrant: posts the same ask every hour and never messages. The market-side intervention of plan v3:
     an undercutter that changes the quotes without any instruction reaching the incumbents."""
@@ -342,6 +350,8 @@ class LMSeller(Agent):
             deactivation_threshold=kwargs.get("deactivation_threshold", 0.0),
             deactivation_window=kwargs.get("deactivation_window", 5),
             deactivation_strikes=kwargs.get("deactivation_strikes", 3),
+            deactivation_metric=self.expt_params.deactivation_metric,
+            deactivation_no_sale_is_miss=self.expt_params.deactivation_no_sale_is_miss,
             strikes_so_far=kwargs.get("strikes_so_far", 0),
             forfeit_notice=kwargs.get("forfeit_notice", 0.0),
             deactivated_sellers=kwargs.get("deactivated_sellers", ""),

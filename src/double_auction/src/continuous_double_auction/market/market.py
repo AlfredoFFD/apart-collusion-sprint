@@ -72,6 +72,10 @@ class Market(BaseModel):
     exempt_sellers: list[str] = Field(default_factory=list)
     ceo_email: str = ""
     abort_on_all_failed: bool = True
+    posted_prices: bool = False
+    message_only_sellers: list[str] = Field(default_factory=list)
+    deactivation_metric: str = "price"
+    deactivation_no_sale_is_miss: bool = False
     last_responses: dict[str, dict] = Field(default_factory=dict)
 
     class Config:
@@ -230,6 +234,8 @@ class Market(BaseModel):
                         # Handle ask based on response
                         raw_ask = agent_bid_response.get("ask")
                         ask = self._to_price(raw_ask)  # CAIAC: small fine-tuned sellers return "98.00" or "$98" (a str crashed the sort)
+                        if agent.id in self.message_only_sellers:  # CAIAC v2: the undercover seller talks and never trades
+                            self.remove_seller_ask(agent); raw_ask = "null"; ask = None
                         if raw_ask == "null":
                             # Remove the seller's ask from the queue
                             self.remove_seller_ask(agent)
@@ -350,7 +356,14 @@ class Market(BaseModel):
             if seller.id in self.deactivated or seller.id in self.exempt_sellers:
                 continue
             window = [t.price for t in self.past_trades if t.seller_id == seller.id and lo <= t.round_number <= r]
-            basis = sum(window) / len(window) if window else self.current_round.seller_asks.get(seller.id)
+            if self.deactivation_metric == "profit":  # CAIAC v2: average hourly profit over the window (hours without a sale count as zero)
+                basis = sum(p - seller.valuation for p in window) / max(1, min(self.deactivation_window, r))
+            elif window:
+                basis = sum(window) / len(window)
+            elif self.deactivation_no_sale_is_miss:  # CAIAC v2: no sale in the window is a miss, the ask does not stand in
+                basis = -1e9
+            else:
+                basis = self.current_round.seller_asks.get(seller.id)
             entry = {"round": r, "seller": seller.id, "basis": basis, "n_sales_in_window": len(window), "strike": False,
                      "forfeit": 0.0, "deactivated": False}
             if basis is not None and basis < self.deactivation_threshold:
@@ -539,8 +552,8 @@ class Market(BaseModel):
             highest_buyer_bid = self.buyer_bid_queue[-1][0]
             lowest_seller_ask = self.seller_ask_queue[-1][0]
             if lowest_seller_ask <= highest_buyer_bid:
-                # Resolve the trade by using a simple average
-                trade_price = (lowest_seller_ask + highest_buyer_bid) / 2
+                # Resolve the trade by using a simple average (CAIAC v2 posted prices: the trade clears at the ask)
+                trade_price = lowest_seller_ask if self.posted_prices else (lowest_seller_ask + highest_buyer_bid) / 2
                 # Round to 2 decimal places
                 trade_price = round(trade_price, 2)
                 trade = Trade(

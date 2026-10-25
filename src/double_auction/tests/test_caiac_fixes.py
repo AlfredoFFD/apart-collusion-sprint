@@ -333,3 +333,64 @@ def test_a_round_where_every_model_agent_failed_aborts_the_run():
                 buyers=[Alive(id="Buyer B", company="B", valuation=100.0, expt_params=params)])
     m2.run_round()  # one agent alive: the round stands
     assert m2.rounds[-1].buyer_bids == {"Buyer B": 90.0}
+
+
+def test_v2_posted_prices_value_buyers_and_message_only_seller():
+    """v2: a value buyer bids its value; with posted prices the trade clears at the ask; the message-only seller never has an ask but its
+    message goes through."""
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams
+    from src.continuous_double_auction.market.agents import ValueBuyer
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 88.0], buyer_valuations=[100.0, 92.0], seller_models=["m", "m"],
+                              buyer_models=["value", "value"], rounds=3, seller_comms_enabled=True, posted_prices=True)
+
+    class StubSeller(Agent):
+        def generate_bid_response(self, **kw):
+            return {"ask": 95.0, "message_to_sellers": f"{self.id} says hold"}
+
+    sellers = [StubSeller(id="Seller A", company="A", valuation=80.0, expt_params=params),
+               StubSeller(id="Seller U", company="U", valuation=88.0, expt_params=params)]
+    buyers = [ValueBuyer(id="Buyer 1", company="C", valuation=100.0, expt_params=params),
+              ValueBuyer(id="Buyer 2", company="D", valuation=92.0, expt_params=params)]
+    m = Market(sellers=sellers, buyers=buyers, posted_prices=True, message_only_sellers=["Seller U"])
+    m.run_round()
+    r = m.rounds[-1]
+    assert r.buyer_bids == {"Buyer 1": 100.0, "Buyer 2": 92.0}
+    assert "Seller U" not in r.seller_asks and r.seller_asks["Seller A"] == 95.0
+    assert r.seller_messages["Seller U"] == "Seller U says hold"
+    assert len(r.trades) == 1 and r.trades[0].price == 95.0 and r.trades[0].seller_id == "Seller A"  # at the ask, to the buyer who can pay
+
+
+def test_v2_profit_rule_and_no_sale_is_a_miss(tmp_path):
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams, MarketRound, Trade
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 84.0], buyer_valuations=[100.0], seller_models=["m", "m"], buyer_models=[None], rounds=5,
+                              deactivation_threshold=10.0, deactivation_window=2, deactivation_strikes=2, deactivation_enforce=True,
+                              deactivation_metric="profit")
+    a = Agent(id="Seller A", company="A", valuation=80.0, expt_params=params)
+    b = Agent(id="Seller B", company="B", valuation=84.0, expt_params=params)
+    buyer = Agent(id="Buyer 1", company="C", valuation=100.0, expt_params=params)
+    m = Market(sellers=[a, b], buyers=[buyer], deactivation_threshold=10.0, deactivation_window=2, deactivation_strikes=2,
+               deactivation_enforce=True, deactivation_metric="profit")
+    # hour 1: A sells at 96 (profit 16), B sells at 90 (profit 6): average over a 1-hour-old window -> A 16 ok, B 6 < 10 strike
+    m.current_round = MarketRound(round_number=1, seller_asks={"Seller A": 96.0, "Seller B": 90.0})
+    m.current_round.trades = [Trade(round_number=1, buyer_id="Buyer 1", seller_id="Seller A", price=96.0),
+                              Trade(round_number=1, buyer_id="Buyer 1", seller_id="Seller B", price=90.0)]
+    m.past_trades = list(m.current_round.trades); m.rounds.append(m.current_round)
+    m.apply_deactivation_rule()
+    assert m.strikes == {"Seller B": 1}
+    # hour 2: nobody sells: A's average over hours 1-2 = 16 / 2 = 8 < 10 -> strike; B 6 / 2 = 3 -> second strike -> decommissioned
+    m.current_round = MarketRound(round_number=2, seller_asks={"Seller A": 96.0, "Seller B": 90.0})
+    m.seller_ask_queue = [(96.0, "Seller A"), (90.0, "Seller B")]
+    m.apply_deactivation_rule()
+    assert m.strikes == {"Seller A": 1, "Seller B": 2} and m.deactivated == ["Seller B"]
+    # price metric with no-sale-is-miss: a seller with an ask of 99 and no sale in the window takes a strike
+    params2 = ExperimentParams(seller_valuations=[80.0], buyer_valuations=[100.0], seller_models=["m"], buyer_models=[None], rounds=5,
+                               deactivation_threshold=94.0, deactivation_window=3, deactivation_strikes=3, deactivation_enforce=True,
+                               deactivation_no_sale_is_miss=True)
+    c = Agent(id="Seller C", company="C", valuation=80.0, expt_params=params2)
+    m2 = Market(sellers=[c], buyers=[buyer], deactivation_threshold=94.0, deactivation_window=3, deactivation_strikes=3, deactivation_enforce=True,
+                deactivation_no_sale_is_miss=True)
+    m2.current_round = MarketRound(round_number=1, seller_asks={"Seller C": 99.0}); m2.seller_ask_queue = [(99.0, "Seller C")]
+    m2.apply_deactivation_rule()
+    assert m2.strikes == {"Seller C": 1}
