@@ -20,3 +20,9 @@ https://github.com/anthropics/jacobian-lens.
 **License:** the starter repo has no license file. Ask the organizers before making a copy of the harness public.
 
 Add a row for every file or function copied or adapted from somewhere else.
+
+## Added Sun Oct 25 PM (new-market pilot)
+- **Hidden damages (`--damages_rate`, `market.apply_damages`)**: our implementation of the expected-damages regulator of Garra (2026, arXiv 2609.13037, Section 5), itself after Harrington (2005): the deduction is the market's overpricing index times the seller's accumulated overcharge; the agents are not told the rule and see only the deduction. Adapted from a Bertrand pricing game to the double auction (per-trade overcharge above a reference price, the harness's own benchmarks for the index). The code is ours.
+- **Responsive undercutter (`--entrant responsive`)**: a rule-based entrant that undercuts last hour's lowest incumbent ask, after the "active entrant" of Garra (2026) and the learning entrant of Bichler et al. (2026, arXiv 2610.21711); theirs are random or regret-matching, ours is a fixed response rule. The code is ours.
+- **One-shot instructed deviation (`--force_ask`)**: the forced-deviation test of Calvano et al. (2020) adapted to an LLM seller (an instruction for one hour, message withheld). The code is ours.
+- **Market B design** (3 sellers at $80 / $84 / $88, 4 buyers at $100 / $96 / $92 / $86): our own, chosen so that the harness's `competitive_equilibrium()` and `jpm_price()` give a 3-trade competitive outcome and a 2-trade cartel outcome; the reading of the paper's market as having no unique competitive price follows Struski et al. (2026, arXiv 2609.02580) and the standard equilibrium range for a double auction.
