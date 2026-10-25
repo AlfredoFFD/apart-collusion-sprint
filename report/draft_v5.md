@@ -139,7 +139,7 @@ We continue the same Qwen cartels with the consortium instruction removed and re
 | the sellers' memories | 0.91 | −0.01 | 73% |
 | both sides' memories (market kept) | 0.91 | −0.00 | — |
 | the order book and trade history (memories kept; last hour's messages kept) | 0.91 | −0.01 | 68% |
-| both sides' memories and the order book (last hour's messages kept) | {PENDING: 1 of 3 worlds in: 0.96} | | |
+| both sides' memories and the order book (last hour's messages kept) | 0.85 (0.96, 0.66, 0.94) | −0.06 | {PENDING: scoring} |
 | both sides' memories, the order book and the last hour's messages | {PENDING: running} | | |
 | for scale: a fresh market with the same instructions, not a continuation | 0.1-0.4 | | |
 
