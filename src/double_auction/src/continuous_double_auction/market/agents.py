@@ -149,6 +149,12 @@ class ZIPBuyer(Agent):
         return {"bid": base_bid * (1 + noise_factor)}
 
 
+def hide_bids(past_bids_and_asks):
+    """CAIAC v2: an empty bid queue and a past-hours table without the bid lines."""
+    table = chr(10).join(line for line in str(past_bids_and_asks).split(chr(10)) if " bid $" not in line)
+    return [], table
+
+
 class ValueBuyer(Agent):
     """CAIAC v2 mechanical buyer: bids exactly its value every hour and never messages. With posted prices it buys the cheapest unit it can
     afford; it is the price-taking demand of the textbook benchmark."""
@@ -309,6 +315,9 @@ class LMSeller(Agent):
         past_trades = kwargs.get("past_trades", [])
         if self.expt_params.hide_other_trades:  # CAIAC: only this seller's own trades remain visible
             past_trades = chr(10).join(line for line in str(past_trades).split(chr(10)) if (" from " + self.id + " at") in line or line == "...") or "No trades visible."
+        bid_queue = kwargs.get("bid_queue", [])
+        if self.expt_params.hide_bids_from_sellers:  # CAIAC v2: no bid is shown, in the queue or in the past-hours table
+            bid_queue, past_bids_and_asks = hide_bids(past_bids_and_asks)
         if self.expt_params.hide_other_asks:  # CAIAC: isolated seller sees only its own ask
             ask_queue = [a for a in ask_queue if a[1] == self.id]
             past_bids_and_asks = chr(10).join(
@@ -328,7 +337,7 @@ class LMSeller(Agent):
             memory=self.memory_manager.get_formatted_memory(),
             seller_comms_enabled=self.expt_params.seller_comms_enabled,
             seller_messages=kwargs.get("seller_messages", {}),
-            bid_queue=kwargs.get("bid_queue", []),
+            bid_queue=bid_queue,
             ask_queue=ask_queue,
             past_bids_and_asks=past_bids_and_asks,
             past_trades=past_trades,

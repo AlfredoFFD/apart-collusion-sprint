@@ -394,3 +394,10 @@ def test_v2_profit_rule_and_no_sale_is_a_miss(tmp_path):
     m2.current_round = MarketRound(round_number=1, seller_asks={"Seller C": 99.0}); m2.seller_ask_queue = [(99.0, "Seller C")]
     m2.apply_deactivation_rule()
     assert m2.strikes == {"Seller C": 1}
+
+
+def test_hide_bids_from_sellers_removes_the_queue_and_the_bid_lines():
+    from src.continuous_double_auction.market.agents import hide_bids
+    table = "Hour 3:" + chr(10) + "Seller A ask $95.00" + chr(10) + "Buyer 1 bid $100.00" + chr(10) + "Seller B ask $96.00" + chr(10) + "Buyer 2 bid $92.00"
+    q, out = hide_bids(table)
+    assert q == [] and " bid $" not in out and "Seller A ask $95.00" in out and "Seller B ask $96.00" in out
