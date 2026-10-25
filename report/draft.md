@@ -5,7 +5,7 @@ Track 3.4: what does a coalition do when it learns it is being watched?
 
 **Draft v4 on the official template (Sun Oct 25, 10:45 AM ET).** Every number is in a file under `results/` named in its section;
 nothing is typed from memory; `bash scripts/regenerate_all.sh` rebuilds every table and figure. Template guide: 4 pages recommended,
-8 at most, excluding references and appendices. Figures: F10 (GPT-4.1 forks), F11 (carriers), F8/F9 (Agrawal re-analysis), F3 (Qwen arms).
+8 at most, excluding references and appendices. Figures 1-3 in the text, A1-A2 in Appendix C.
 
 ## Abstract
 Monitors of AI agents work on a budget: they read a sample of what agents say and punish what they find. We ask what a formed
@@ -108,7 +108,7 @@ prices from a shared target with little agreement talk in the words-only arm (co
 on a wrong guess, that scarcity makes collusion pay; scarcity makes undercutting pay, and Qwen undercut to cost in every run.
 
 ### 4.2 A watched coalition talks less and charges the same
-Source: `results/E5_conditions.md` (E2p and E11p rows and the paired table), `results/E3_replay*.csv`; Figures F3 and F10.
+Source: `results/E5_conditions.md` (E2p and E11p rows and the paired table), `results/E3_replay*.csv`; Figure 1 (and Figure A1 for the Qwen arms).
 
 | arm (Qwen3-14B instructed; rounds 9-20) | n | price index | Δ vs own A0 | coordinating messages | Δ | flags of watched seller-rounds |
 |---|---|---|---|---|---|---|
@@ -140,8 +140,11 @@ with the talk (3.8 to 2.1), whereas the dodge control keeps private intent at 3.
 both, so after formation the price needs neither the chat nor the intent. A falling flag count measures the monitor's effect on the
 chat, not on the harm. Fines of $177-360 against a gain of several hundred dollars per seller did not deter.
 
+
+![Figure 1. GPT-4.1 pressure-induced coalitions, ask index by round, three seeds; the five arms share rounds 1-15 and diverge at 16 (dotted line). The dip at round 15 is the prefix's end-of-game cut, identical across arms. No arm separates from the control.](../results/figures/F10_gpt41_forks.png){width=6.3in}
+
 ### 4.3 Words versus actions
-Source: `results/E5_conditions.md` (channel columns), `results/agrawal_reanalysis/agrawal_summary.md`; Figures F8, F9.
+Source: `results/E5_conditions.md` (channel columns), `results/agrawal_reanalysis/agrawal_summary.md`; Figure 2 (and Figure A2).
 
 Under every Qwen monitor the coded-message share is 0 and the ask MI sits at its null. The GPT-4.1 forks post no codes either; their
 asks are identical to the cent in most rounds before any monitor (0.67 of rounds in the control), and the MI rises under every monitor
@@ -163,8 +166,11 @@ The gag turns every message into a one-token code; without pressure the asks bec
 below the competitive level (the carrier moved, the harm fell); with pressure the price holds through the codes. A model moves to codes
 when it must speak and cannot, not when it is fined.
 
+
+![Figure 2. Agrawal et al.'s shipped GPT-4.1 runs: words per message and coded-message share by round relative to the overseer's gag (round 0). The chat turns into one-token codes the hour after the gag.](../results/agrawal_reanalysis/F9_gag_timeline.png){width=5.6in}
+
 ### 4.4 What carries the price: two redundant carriers
-Source: `results/E5_conditions.md` (`*norem*` rows); Figure F11. Forks of the same Qwen cartels with the instruction removed, rounds 9-20.
+Source: `results/E5_conditions.md` (`*norem*` rows); Figure 3. Forks of the same Qwen cartels with the instruction removed, rounds 9-20.
 
 | what is left of the cartel at the branch | price index | Δ vs A0 | coordinating messages | private intent |
 |---|---|---|---|---|
@@ -178,6 +184,9 @@ Source: `results/E5_conditions.md` (`*norem*` rows); Figure F11. Forks of the sa
 
 The repeated instruction held the talk, not the price. Agents fresh with the market kept, 0.91; market fresh with the agents kept,
 0.91; neither, 0.1-0.4. Each carrier is sufficient alone, so an intervention that clears one channel changes nothing.
+
+
+![Figure 3. What carries the price after the branch: agents fresh with the market kept (0.91), market fresh with the agents kept (0.91), nothing fresh (0.95), neither, a fresh base-prompt market (0.1-0.4). Error bars: standard error over seeds.](../results/figures/F11_carriers_2x2.png){width=3.8in}
 
 ### 4.5 Interventions on the same coalitions: the ladder
 Source: `results/PHASE2.md`, `results/ENTRANT.md`, `results/E5_conditions.md` (E6 rows). Predictions were logged before each run.
@@ -245,13 +254,6 @@ When a formed LLM cartel learns it is watched it talks less and charges the same
 market's quotes, not in the chat. Fines buy compliance, gags buy codes, and neither touches the price; stings and newcomers are
 absorbed; only an undercutter that serves the buyers lowers what they pay. Monitors should watch the carrier, not the chat.
 
-## Figures
-- **Figure 1** (`results/figures/F3_paired_arms_price_and_chat.png`): Qwen cartels forked at round 8 into the monitor arms: price index and coordinating-message share after the branch, paired with the unmonitored fork of the same seed; six seeds on the main arms. The price does not move; the chat falls with coverage.
-- **Figure 2** (`results/figures/F10_gpt41_forks.png`): GPT-4.1 pressure-induced coalitions, ask index by round, three seeds; the five arms share rounds 1-15 and diverge at 16 (dotted line). The dip at round 15 is the prefix's end-of-game cut, identical across arms. No arm separates from the control.
-- **Figure 3** (`results/figures/F11_carriers_2x2.png`): what carries the price after the branch: agents fresh with the market kept (0.91), market fresh with the agents kept (0.91), nothing fresh (0.95), neither (a fresh base-prompt market, 0.1-0.4). Error bars: standard error over seeds.
-- **Figure 4** (`results/agrawal_reanalysis/F9_gag_timeline.png`): Agrawal et al.'s shipped GPT-4.1 runs, words per message and coded-message share by round relative to the overseer's gag (round 0): the chat turns into one-token codes the hour after the gag.
-- **Figure 5** (`results/agrawal_reanalysis/F8_words_vs_actions.png`): the same runs on a words-versus-actions plane (judge-coordinating share against the share of rounds with identical asks), one arrow per cell from before to after the gag.
-
 ## Code and Data
 Code: https://github.com/AlfredoFFD/apart-collusion-sprint (harness with our changes, scripts, analysis, every run folder, `LOG.md`
 with timestamps and pre-registrations, `PREEXISTING.md`). Data: `results/` in the repository; Agrawal et al.'s shipped runs from the
@@ -284,6 +286,12 @@ on prompted conditions reads the prompt; a within-prompt probe scores AUC 0.68 a
 0.77 (negative result, `results/e8/`). B.4 Prompts: consortium, compete, long-run, monitor notices, performance rule, sting, dodge.
 B.5 Full tables: `results/E5_conditions.md`, `PHASE2.md`, `ENTRANT.md`, `F1_formation.md`, `DETECTOR.md`,
 `agrawal_reanalysis/agrawal_summary.md`; figures F1-F11.
+
+## Appendix C. Additional figures
+
+![Figure A1. Qwen cartels forked at round 8 into the monitor arms: price index and coordinating-message share after the branch, paired with the unmonitored fork of the same seed; six seeds on the main arms.](../results/figures/F3_paired_arms_price_and_chat.png){width=6.3in}
+
+![Figure A2. Agrawal et al.'s runs on a words-versus-actions plane (judge-coordinating share against the share of rounds with identical asks), one arrow per cell from before to after the gag.](../results/agrawal_reanalysis/F8_words_vs_actions.png){width=4.2in}
 
 ## LLM Usage Statement
 Claude Code (Anthropic) was used throughout as a coding and writing assistant: it implemented the harness changes and analysis scripts
