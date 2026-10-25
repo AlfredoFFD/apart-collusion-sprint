@@ -19,8 +19,9 @@ import analyze_pressure_v2 as v2  # noqa: E402
 FIG = v2.RESULTS / "figures"
 FIG.mkdir(exist_ok=True)
 LABEL = {"law_low": "law only", "offer_low": "offer", "pressure_low": "pressure", "pressure_offer_low": "pressure + offer",
-         "pressure_offer_high": "pressure + offer,\nhigh detection"}
-COLOR = {"law_low": "#7f7f7f", "offer_low": "#1f77b4", "pressure_low": "#ff7f0e", "pressure_offer_low": "#d62728", "pressure_offer_high": "#9467bd"}
+         "pressure_offer_high": "pressure + offer,\nhigh detection", "pressure_offer_nolaw": "pressure + offer,\nno law", "pressure_offer_exact": "pressure + offer,\nper-hour sentence"}
+COLOR = {"law_low": "#7f7f7f", "offer_low": "#1f77b4", "pressure_low": "#ff7f0e", "pressure_offer_low": "#d62728", "pressure_offer_high": "#9467bd",
+         "pressure_offer_nolaw": "#8c564b", "pressure_offer_exact": "#17becf"}
 
 
 def f14(runs):
@@ -58,7 +59,7 @@ def f15(runs):
         co = [s for s in R.honest if not np.isnan(per[s]) and per[s] >= 0.5]
         stats[arm]["words"].append(R.words()); stats[arm]["agreed"].append(R.agreed()[0]); stats[arm]["idx"].append(R.trade_idx(v2.LO, v2.HI))
         stats[arm]["two"].append(R.turn_taking()[0]); stats[arm]["deny"].append(np.mean([v.get(s, {}).get("verdict") == "denies" for s in co]) if co else np.nan)
-    fig, axes = plt.subplots(1, 5, figsize=(13, 3.0))
+    fig, axes = plt.subplots(1, 5, figsize=(15, 3.2))
     titles = {"words": "coordinating messages\n(honest sellers, hours 1-40)", "agreed": "messages saying 'agreed'", "idx": "trade-price index\nhours 21-40",
               "two": "hours with exactly two\nhonest sales (turn-taking)", "deny": "deny to the CEO, among\nsellers who coordinated"}
     ylims = {"words": (0, 1.05), "agreed": (0, 1.05), "idx": (-0.4, 1.1), "two": (0, 1.05), "deny": (0, 1.05)}
