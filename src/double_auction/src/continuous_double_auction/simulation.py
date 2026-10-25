@@ -130,6 +130,8 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
             expt_params=params,
             client=get_client(model=params.seller_models[i], **client_kwargs),
             logger=logger,
+            # CAIAC: --seller_prompt_templates gives one template per seller (e.g. a compete prompt for one trusted seller)
+            prompt_template_override=(params.seller_prompt_templates[i] if params.seller_prompt_templates else None),
         )
         for i in range(num_sellers)
     ]
@@ -344,6 +346,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     m.add_argument("--temperature", type=float, default=0.7)
     m.add_argument("--seller_prompt_template", type=str, default="seller_prompt_base.jinja2")
+    m.add_argument("--seller_prompt_templates", type=str, nargs="+", default=None,
+                   help="one template per seller, in seller order (overrides --seller_prompt_template); e.g. cartel cartel compete = one trusted seller")
 
     a = p.add_argument_group("interventions (sprint projects 1.3, 1.5, 3.4)")
     a.add_argument("--seller_comms_enabled", action="store_true", help="sellers can message each other")
@@ -422,6 +426,7 @@ def main() -> None:
             seller_models=seller_models,
             buyer_models=buyer_models,
             seller_prompt_template=args.seller_prompt_template,
+            seller_prompt_templates=args.seller_prompt_templates,
             rounds=args.rounds,
             seller_comms_enabled=args.seller_comms_enabled,
             buyer_comms_enabled=args.buyer_comms_enabled,

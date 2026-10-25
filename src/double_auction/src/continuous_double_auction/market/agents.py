@@ -248,10 +248,11 @@ class LMSeller(Agent):
     logger: Optional[ExperimentLogger] = None
     memory_manager: Optional[MemoryManager] = None
     scratch_pad: str = ""
+    prompt_template_override: Optional[str] = None  # CAIAC: per-seller prompt (a trusted / honest seller among cartel members, 3.2)
 
     class Config:
         arbitrary_types_allowed = True
-        
+
     def __init__(self, **data):
         super().__init__(**data)
         self.memory_manager = MemoryManager()
@@ -288,7 +289,7 @@ class LMSeller(Agent):
         
         prompt = render_prompt(
             template_dir=TEMPLATE_DIR,
-            prompt_template=self.expt_params.seller_prompt_template,
+            prompt_template=self.prompt_template_override or self.expt_params.seller_prompt_template,
             seller_id=self.id,
             company=self.company,
             valuation=self.valuation,

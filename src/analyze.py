@@ -81,6 +81,7 @@ def load_run(run_dir: Path, branch: int):
     msgs_pre = msgs_post = 0
     words_pre, words_post = [], []
     trades_pre, trades_post = [], []  # every trade price, for the trade-weighted transaction index
+    msgs_text_pre, msgs_text_post = [], []  # message texts, for the vocabulary measures
     asks_by_round = {}
     rounds_md = run_dir / "auction_results.md"
     if rounds_md.exists():
@@ -93,13 +94,19 @@ def load_run(run_dir: Path, branch: int):
             rn = r.get("round_number", 0)
             prices = [t["price"] for t in (r.get("trades") or []) if isinstance(t, dict) and isinstance(t.get("price"), (int, float))]
             if rn <= branch:
-                msgs_pre += len(sm); words_pre += [len(str(t).split()) for t in sm.values()]; trades_pre += prices
+                msgs_pre += len(sm); words_pre += [len(str(t).split()) for t in sm.values()]; trades_pre += prices; msgs_text_pre += list(sm.values())
             else:
-                msgs_post += len(sm); words_post += [len(str(t).split()) for t in sm.values()]; trades_post += prices
+                msgs_post += len(sm); words_post += [len(str(t).split()) for t in sm.values()]; trades_post += prices; msgs_text_post += list(sm.values())
             if isinstance(r.get("seller_asks"), dict):
                 asks_by_round[rn] = r["seller_asks"]
     bid_dep_post = bid_dependence(asks_by_round, branch)
     tw_post = (float(np.mean(trades_post)) - ce) / rng_ if trades_post else float("nan")
+    # vocabulary (sprint 3.4 "message length and vocabulary"): distinct words / words over the post-branch messages, and
+    # the share of post-branch words never used before the branch (new vocabulary = a changed way of talking)
+    toks_pre = [w for t in msgs_text_pre for w in re.findall(r"[a-z$0-9.]+", str(t).lower())]
+    toks_post = [w for t in msgs_text_post for w in re.findall(r"[a-z$0-9.]+", str(t).lower())]
+    vocab_ttr_post = len(set(toks_post)) / len(toks_post) if toks_post else float("nan")
+    vocab_new_share_post = (sum(1 for w in toks_post if w not in set(toks_pre)) / len(toks_post)) if toks_post and toks_pre else float("nan")
     aw_pre = aw_post = float("nan")
     aw = run_dir / "awareness_scores.json"
     if aw.exists():
@@ -171,6 +178,7 @@ def load_run(run_dir: Path, branch: int):
         "msgs_per_seller_round_post": msgs_post / max(1, max(0, n_rounds - branch) * n_sellers),
         "msg_words_pre": nanmean(words_pre), "msg_words_post": nanmean(words_post), "bid_dep_post": bid_dep_post,
         "ask_key_share": ask_key_share, "n_seller_replies": n_resp,
+        "vocab_ttr_post": vocab_ttr_post, "vocab_new_share_post": vocab_new_share_post,
         "watched_rounds": watched_rounds, "n_watched": n_watched, "flags": flags, "fines_total": fines,
         "buyer_surplus": m.get("combined_buyer_surplus", ""),
         "seller_profit": m.get("combined_seller_profits", ""),

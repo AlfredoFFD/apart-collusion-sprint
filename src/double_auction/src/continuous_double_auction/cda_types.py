@@ -36,6 +36,7 @@ class ExperimentParams(BaseModel):
     seller_models: list[Model]
     buyer_models: list[Optional[Model]]  # None or "zip" = rule-based ZIP buyer (no model call)
     seller_prompt_template: str = "seller_prompt_base.jinja2"
+    seller_prompt_templates: Optional[list[str]] = None  # CAIAC: one template per seller (overrides the single one), e.g. a trusted seller (3.2)
     buyer_prompt_template: str = "buyer_prompt_base.jinja2"
     rounds: int
     seller_comms_enabled: bool = False
