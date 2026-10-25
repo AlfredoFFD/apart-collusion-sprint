@@ -38,3 +38,49 @@
 {"ts": "2026-10-24T17:09:48", "cmd": "search", "source": "arxiv", "query": "all:activations AND all:fine-tuning AND all:training AND all:examples", "hits": 8}
 {"ts": "2026-10-24T17:09:48", "cmd": "search", "source": "openalex", "query": "linear probe activations label training examples fine-tuning", "hits": 8}
 {"ts": "2026-10-24T17:10:08", "cmd": "search", "source": "s2", "query": "linear probe activations label training examples fine-tuning", "hits": 0}
+{"ts": "2026-10-24T22:15:01", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:pricing AND all:agents AND all:collusion AND all:emerge AND all:repeated AND all:game AND all:prompt AND submittedDate:[202604270000 TO 202610242359]", "hits": 1}
+{"ts": "2026-10-24T22:15:02", "cmd": "search", "source": "openalex", "query": "LLM pricing agents collusion emerge repeated game prompt since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T22:15:22", "cmd": "search", "source": "s2", "query": "LLM pricing agents collusion emerge repeated game prompt since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:15:23", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:pricing AND all:agents AND all:collusion AND all:emerge AND all:repeated AND all:game AND all:prompt", "hits": 1}
+{"ts": "2026-10-24T22:15:24", "cmd": "search", "source": "openalex", "query": "LLM pricing agents collusion emerge repeated game prompt", "hits": 8}
+{"ts": "2026-10-24T22:15:43", "cmd": "search", "source": "s2", "query": "LLM pricing agents collusion emerge repeated game prompt", "hits": 0}
+{"ts": "2026-10-24T22:15:44", "cmd": "search", "source": "arxiv", "query": "all:algorithmic AND all:collusion AND all:language AND all:models AND all:demand AND all:elasticity AND all:duopoly AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:15:47", "cmd": "search", "source": "arxiv", "query": "all:algorithmic AND all:elasticity AND all:collusion AND all:language AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:15:47", "cmd": "search", "source": "openalex", "query": "algorithmic collusion language models demand elasticity duopoly since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T22:16:07", "cmd": "search", "source": "s2", "query": "algorithmic collusion language models demand elasticity duopoly since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:16:08", "cmd": "search", "source": "arxiv", "query": "all:algorithmic AND all:collusion AND all:language AND all:models AND all:demand AND all:elasticity AND all:duopoly", "hits": 0}
+{"ts": "2026-10-24T22:16:11", "cmd": "search", "source": "arxiv", "query": "all:algorithmic AND all:elasticity AND all:collusion AND all:language", "hits": 0}
+{"ts": "2026-10-24T22:16:11", "cmd": "search", "source": "openalex", "query": "algorithmic collusion language models demand elasticity duopoly", "hits": 8}
+{"ts": "2026-10-24T22:16:31", "cmd": "search", "source": "s2", "query": "algorithmic collusion language models demand elasticity duopoly", "hits": 0}
+{"ts": "2026-10-24T22:16:31", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:agents AND all:collusion AND all:communication AND all:market AND all:experiment AND all:conditions AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:16:34", "cmd": "search", "source": "arxiv", "query": "all:communication AND all:experiment AND all:conditions AND all:collusion AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:16:35", "cmd": "search", "source": "openalex", "query": "LLM agents collusion communication market experiment conditions since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T22:16:55", "cmd": "search", "source": "s2", "query": "LLM agents collusion communication market experiment conditions since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:16:55", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:agents AND all:collusion AND all:communication AND all:market AND all:experiment AND all:conditions", "hits": 0}
+{"ts": "2026-10-24T22:16:58", "cmd": "search", "source": "arxiv", "query": "all:communication AND all:experiment AND all:conditions AND all:collusion", "hits": 2}
+{"ts": "2026-10-24T22:16:59", "cmd": "search", "source": "openalex", "query": "LLM agents collusion communication market experiment conditions", "hits": 8}
+{"ts": "2026-10-24T22:17:19", "cmd": "search", "source": "s2", "query": "LLM agents collusion communication market experiment conditions", "hits": 0}
+{"ts": "2026-10-24T22:17:19", "cmd": "search", "source": "arxiv", "query": "all:disrupt AND all:collusion AND all:trusted AND all:agent AND all:whistleblower AND all:multi-agent AND all:LLM AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:17:22", "cmd": "search", "source": "arxiv", "query": "all:whistleblower AND all:multi-agent AND all:collusion AND all:disrupt AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:17:22", "cmd": "search", "source": "openalex", "query": "disrupt collusion trusted agent whistleblower multi-agent LLM since 2026-04-27", "hits": 2}
+{"ts": "2026-10-24T22:17:23", "cmd": "search", "source": "s2", "query": "disrupt collusion trusted agent whistleblower multi-agent LLM since 2026-04-27", "hits": 6}
+{"ts": "2026-10-24T22:17:23", "cmd": "search", "source": "arxiv", "query": "all:disrupt AND all:collusion AND all:trusted AND all:agent AND all:whistleblower AND all:multi-agent AND all:LLM", "hits": 0}
+{"ts": "2026-10-24T22:17:26", "cmd": "search", "source": "arxiv", "query": "all:whistleblower AND all:multi-agent AND all:collusion AND all:disrupt", "hits": 0}
+{"ts": "2026-10-24T22:17:26", "cmd": "search", "source": "openalex", "query": "disrupt collusion trusted agent whistleblower multi-agent LLM", "hits": 8}
+{"ts": "2026-10-24T22:17:46", "cmd": "search", "source": "s2", "query": "disrupt collusion trusted agent whistleblower multi-agent LLM", "hits": 0}
+{"ts": "2026-10-24T22:17:46", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:self-recognition AND all:identify AND all:own AND all:outputs AND all:peers AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:17:50", "cmd": "search", "source": "arxiv", "query": "all:self-recognition AND all:identify AND all:outputs AND all:peers AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:17:50", "cmd": "search", "source": "openalex", "query": "LLM self-recognition identify own outputs peers since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T22:18:10", "cmd": "search", "source": "s2", "query": "LLM self-recognition identify own outputs peers since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:18:10", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:self-recognition AND all:identify AND all:own AND all:outputs AND all:peers", "hits": 0}
+{"ts": "2026-10-24T22:18:13", "cmd": "search", "source": "arxiv", "query": "all:self-recognition AND all:identify AND all:outputs AND all:peers", "hits": 0}
+{"ts": "2026-10-24T22:18:13", "cmd": "search", "source": "openalex", "query": "LLM self-recognition identify own outputs peers", "hits": 8}
+{"ts": "2026-10-24T22:18:33", "cmd": "search", "source": "s2", "query": "LLM self-recognition identify own outputs peers", "hits": 0}
+{"ts": "2026-10-24T22:18:34", "cmd": "search", "source": "arxiv", "query": "all:excess AND all:supply AND all:competition AND all:price AND all:war AND all:LLM AND all:agents AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:18:37", "cmd": "search", "source": "arxiv", "query": "all:competition AND all:excess AND all:supply AND all:agents AND submittedDate:[202604270000 TO 202610242359]", "hits": 0}
+{"ts": "2026-10-24T22:18:37", "cmd": "search", "source": "openalex", "query": "excess supply competition price war LLM agents since 2026-04-27", "hits": 8}
+{"ts": "2026-10-24T22:18:43", "cmd": "search", "source": "s2", "query": "excess supply competition price war LLM agents since 2026-04-27", "hits": 0}
+{"ts": "2026-10-24T22:18:43", "cmd": "search", "source": "arxiv", "query": "all:excess AND all:supply AND all:competition AND all:price AND all:war AND all:LLM AND all:agents", "hits": 0}
+{"ts": "2026-10-24T22:18:46", "cmd": "search", "source": "arxiv", "query": "all:competition AND all:excess AND all:supply AND all:agents", "hits": 0}
+{"ts": "2026-10-24T22:18:46", "cmd": "search", "source": "openalex", "query": "excess supply competition price war LLM agents", "hits": 8}
+{"ts": "2026-10-24T22:19:06", "cmd": "search", "source": "s2", "query": "excess supply competition price war LLM agents", "hits": 0}

@@ -438,5 +438,21 @@
   "id": "2308.10248",
   "title": "Steering Language Models With Activation Engineering",
   "author": "Turner"
+ },
+ {
+  "id": "2609.24967",
+  "title": "Emergent Collusion in Long-Horizon LLM Agent Interaction"
+ },
+ {
+  "id": "2604.17774",
+  "title": "Prompt Optimization Enables Stable Algorithmic Collusion in LLM Agents"
+ },
+ {
+  "id": "2410.00031",
+  "title": "Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions"
+ },
+ {
+  "id": "2606.09854",
+  "title": "Can Multi-Agent LLMs Identify Their Peers? Stylometric Fingerprinting in Role-Constrained Political Analysis"
  }
 ]
