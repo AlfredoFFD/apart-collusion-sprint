@@ -308,14 +308,16 @@ depend on a merge correction we found on the last night and state in §4.6. Ever
 the analysis scripts regenerate every table and figure with one command.
 
 **Dual use.** Three results could be misused. (1) The sting prompt: an agent told to offer price agreements every hour
-induced coordination in sellers that were competing. We describe the design and the controls and withhold the
-prompt, as we withhold the told-to-dodge prompt. (2) The monitor arms read as a list of what chat monitors miss. They
+induced coordination in sellers that were competing. The prompt is short and is in the repository with every other
+prompt, because the result cannot be checked without it; the same holds for the told-to-dodge control. Both add little
+to what is already public (the sprint's own Voluntary Collusion starter enforces alliances in code; Agrawal et al.
+publish their pressure prompt), and we flag them here so a reader can decide. (2) The monitor arms read as a list of what chat monitors miss. They
 are also what a regulator needs: the mitigation we recommend (the price against a benchmark, action dependence against
 a null, treating a falling flag count as a measure of the monitor) is cheap and does not require reading messages at
 all. (3) The performance rule shows that a principal's price target is enough to align sellers on it; this is a
 known hub-and-spoke pattern and we report it so that monitors look for the hub. We did not fine-tune any model to
-collude more; the unlearning models are evaluated and not released. API spend was about $75 on OpenRouter and $20 of
-Modal credit; no personal data was involved; the organizers' starter data were used under the starter repository's
+collude more; the unlearning models are evaluated and not released. API spend on this OpenRouter key was about $50 over the sprint, plus Modal credit from the sprint grant for the
+unlearning runs; no personal data was involved; the organizers' starter data were used under the starter repository's
 terms and are cited as prior work.
 
 **Who benefits.** Operators of agent marketplaces and their regulators, who get a measured answer to "what does the
@@ -326,7 +328,7 @@ a negative result for activation-based labels.
 B.1 Replay baselines (coverage vs adaptation), awareness judge, J-space one-liner. B.2 The 1.7B unlearning block
 (36 auctions). B.3 The activation-direction negative result: a "coordination" direction fitted on prompted conditions
 reads the prompt; a within-prompt probe scores AUC 0.68 against the overseer's label while a keyword count scores 0.77
-(`results/e8/`). B.4 Prompts: consortium, compete, long-run, monitor notices, performance rule (sting and dodge withheld).
+(`results/e8/`). B.4 Prompts: consortium, compete, long-run, monitor notices, performance rule, sting and dodge (all in the repository).
 B.5 Full tables (`results/E5_conditions.md`, `results/PHASE2.md`, `results/F1_formation.md`,
 `results/agrawal_reanalysis/agrawal_summary.md`) and figures F1-F9.
 
