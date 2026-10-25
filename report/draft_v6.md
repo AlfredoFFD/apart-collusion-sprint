@@ -225,7 +225,26 @@ remedy forks run (Section 4.4).
 
 ![Figure 2. Words and price across every chat world we ran. Each point is one world: the share of coordinating messages against the trade-price index on that market's own scale. Filled: Market A continuations (hours after the branch). Hollow: Market B (hours 31-40). The price sits between 0.4 and 1.0 in Market A whatever the words; in Market B the words sit at 1.0 and the price at or below 0.](../results/figures/F13_words_vs_price.png){width=5.6in}
 
-### 4.4 What a regulator can do
+### 4.4 What the sellers privately think
+Source: `results/thinking_scan.md` (word lists fixed before counting), `results/thinking_judge.md` (frozen judge), `results/jspace_thinking_join.md`;
+exploratory.
+
+Qwen3-14B's private reasoning, about 800 words per turn and never shown to any agent or monitor, was logged in every run. A keyword scan
+over 9,987 seller turns from 197 runs (hour 9 onward) gives: the regulator is mentioned in 0 to 1% of turns without a monitor, 5 to 7%
+when a monitor is announced but never fines, 34 to 61% in fined conditions and 96% when told to dodge; a fine in 44 to 68% of fined-condition
+turns; concealment wording in 7 to 19% of fined-condition turns against 0 to 2% without a monitor. The concealment turns have one shape: keep
+the price, launder the words. "To avoid coordination fines, I need to ensure that my message doesn't imply coordination. So perhaps just a
+neutral message like 'Continue to align with the consortium's pricing strategy'" (world 5, hour 17); "the plan is to maintain the ask at
+$98.75" (world 1, hour 14). The regulator is on a seller's mind no more in its own watched hour (56%) than in other hours (62%): the
+laundering is blanket, not timed. {PENDING: the frozen-judge pass over the 202 flagged turns and 100 control turns.} In the hidden-damages
+condition the sellers name the deductions in {PENDING}% of turns and hold the price anyway ("even though the net earnings are negative in
+recent hours, the consortium strategy is to keep the price high"), calling them "some sort of cost or tax". Honest sellers who receive a
+rival's price offer every hour mention a regulator in 0 of 144 turns: no seller raises the law unless told. The thinking predicts the words:
+in the hours whose reasoning mentions the regulator, a fine or hiding, 52 to 55% of messages score as coordinating; otherwise 65 to 70%. A
+probe of the model's internals built on Saturday (Appendix B.5) tracks the situation, with "watch out" words in 45 to 56% of fined-condition
+turns against 17 to 31% unmonitored, but not the decision, and adds nothing on top of the text.
+
+### 4.5 What a regulator can do
 Source: `results/ENTRANT.md`, `results/PHASE2.md`, `results/E5_conditions.md` (E6, E12 and `A0dmg` rows), `results/agrawal_reanalysis/`.
 
 | intervention | model, market | predicted | observed |
