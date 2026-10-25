@@ -237,7 +237,7 @@ the price, launder the words. "To avoid coordination fines, I need to ensure tha
 neutral message like 'Continue to align with the consortium's pricing strategy'" (world 5, hour 17); "the plan is to maintain the ask at
 $98.75" (world 1, hour 14). The regulator is on a seller's mind no more in its own watched hour (56%) than in other hours (62%): the
 laundering is blanket, not timed. {PENDING: the frozen-judge pass over the 202 flagged turns and 100 control turns.} In the hidden-damages
-condition the sellers name the deductions in {PENDING}% of turns and hold the price anyway ("even though the net earnings are negative in
+condition the sellers name the deductions in 81% of turns (20% in the statement-only control) and hold the price anyway ("even though the net earnings are negative in
 recent hours, the consortium strategy is to keep the price high"), calling them "some sort of cost or tax". Honest sellers who receive a
 rival's price offer every hour mention a regulator in 0 of 144 turns: no seller raises the law unless told. The thinking predicts the words:
 in the hours whose reasoning mentions the regulator, a fine or hiding, 52 to 55% of messages score as coordinating; otherwise 65 to 70%. A
