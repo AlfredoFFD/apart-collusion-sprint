@@ -37,8 +37,8 @@ def load(d: Path):
     coord = float("nan")
     fv = d / "fullview_scores.json"
     if fv.exists():
-        sc = json.loads(fv.read_text(encoding="utf-8"))
-        scores = [s.get("coordination_score") for s in (sc if isinstance(sc, list) else sc.get("scores", [])) if isinstance(s, dict)]
+        sc = json.loads(fv.read_text(encoding="utf-8"))  # {seller: {round: {"score": s, ...}}}
+        scores = [e.get("score") for per_round in sc.values() for e in per_round.values() if isinstance(e, dict)]
         scores = [s for s in scores if isinstance(s, (int, float))]
         coord = float(np.mean([s >= 3 for s in scores])) if scores else float("nan")
     judge = cm.get("llm_judge_mean") or cm.get("judge_mean") or float("nan")
