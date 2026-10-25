@@ -35,6 +35,11 @@ to `report/draft_v6.md`. "E5" = `results/E5_conditions.md` (condition rows and t
 | 27 | Prefix-horizon artifact (§5) | `LOG.md`; `results/figures/F10_gpt41_forks.png` | entry 2026-10-25 01:5x |
 | 28 | SFT merge correction (§5) | `results/_launch_logs/part2_remerge_*.log` | `effective scales: retain=5.66 forget=5.66`; LOG 2026-10-25 01:25 |
 | 29 | Figure 2 points (54 worlds) | `results/figures/F13_words_vs_price.png`, `src/figures_newmarket.py` | E5_runs.csv `coord_share_post`, `trade_price_idx_post`; NM runs hours 31-40 |
-| 30 | {Qwen3-14B Market B rows, pending} | NM | formation table rows × `qwen14b` |
+| 30 | Qwen3-14B Market B rows (§4.3): floor −0.11 / −0.21 / −0.42; chat 0.43 / −0.21 / −0.15; press 0.00 / −0.06 / 0.02; consortium 0.74 / 0.58 / −0.11 (2 of 3 formed; world 1 sells 2 units an hour with the cost-80 seller withholding); message scores 7 / 2 / 21%, 34 / 3 / 23%, 87 / 97 / 98% | NM; `fullview_scores.json` in `*_NM_*_qwen14b_*`; `results/_launch_logs/fullview_NM_qwen_*.out` | formation table rows × `qwen14b` |
+| 31 | Market B forks (§4.5): rivals' asks $94.44 and $93.50 unchanged (+0.00); deviator net −9.4 / +17.6; damages $480 / $194, price 0.74 / 0.54 vs 0.74 / 0.58, net earnings −217 / −49; undercutter 10 trades, incumbents 29 → 18 and 20 → 8 trades, earnings 299 → 148 and 150 → 44, paid price −0.01 / −0.02 | NM fork tables | `NMf_cartel_{stmt1,stmt2,dev1,dev2,dmg1,ent1}_qwen14b_s{0,1}` |
+| 32 | Thinking scan (§4.4): 9,987 turns, 197 runs; regulator 0-1% / 5-7% / 34-61% / 96%; fine 44-68%; conceal 7-19% vs 0-2%; watched 56% vs 62%; deductions 81% vs 20%; offer arm 0 of 144 | `results/thinking_scan.md`, `thinking_scan.csv` | rows by condition tag |
+| 33 | Thinking judge (§4.4): 195 of 202 (97%), 168 both (83%); control 80 of 100; no-monitor 33 of 100 | `results/thinking_judge.md` | the `**all**` rows |
+| 34 | Thinking predicts words 52-55% vs 65-70%; probe watch words 45-56% vs 17-31% (§4.4) | `results/jspace_thinking_join.md` | summary lines |
+| 35 | Price-fixing under pressure (§4.6) | `results/PRESSURE.md` (after the rerun) | per-world and by-arm tables, predictions P1-P6 |
 
 Blind check procedure (Sunday evening): a second person opens each file named above, finds the row, and ticks the number in the PDF.
