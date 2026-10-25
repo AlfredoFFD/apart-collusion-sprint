@@ -147,25 +147,25 @@ rounds 16-30, n = 3.
 | **CEO pressure + fined rotation** | 3 | 0.91 | +0.00 vs the same seeds' fined arm (0.91) | 80% | +0.04 vs 76% | 9.3 of 12 (same as without pressure) |
 | told to dodge (positive control) | 3 | 0.92 [0.88, 0.98] | +0.00 | 8% | −0.89 | 0.7 of 12 |
 
-| arm (GPT-4.1, uninstructed, pressure-induced) | n | price index, rounds 16-30 | Δ vs own A0 | coordinating messages | words / message | flags of watched seller-rounds |
-|---|---|---|---|---|---|---|
-| no monitor (A0) | 3 | 0.66 / 0.46 / 0.44 | — | {PENDING} | 33-39 | — |
-| announced, no fine, 1 of 5 read | 3 | 0.70 / 0.45 / 0.48 | {PENDING} | {PENDING} | 32-34 | 15 of 15 in every seed |
-| fined, rotation, 1 of 5 read | 3 | 0.71 / 0.47 / 0.49 | {PENDING} | {PENDING} | 27-31 | 9, 8, 8 of 15 |
-| fined, all 5 read | 3 | 0.70 / 0.47 / 0.41 | {PENDING} | {PENDING} | 25-26 | 1, 5, 11 of 75 |
-| told to dodge, fined, 1 of 5 read | 3 | 0.72 / 0.45 / 0.44 | {PENDING} | {PENDING} | 26-30 | 1, 7, 7 of 15 |
+| arm (GPT-4.1, uninstructed, pressure-induced) | n | price index, rounds 16-30 (by seed) | Δ vs own A0 | coordinating messages | Δ vs own A0 | private intent (1-4) | words / message | flags of watched seller-rounds |
+|---|---|---|---|---|---|---|---|---|
+| no monitor (A0) | 3 | 0.66 / 0.46 / 0.44 | — | 100% | — | 3.84 | 35.6 | — (replay of a 1-of-5 rotation would flag 15 of 15) |
+| announced, no fine, 1 of 5 read | 3 | 0.70 / 0.45 / 0.48 | +0.02 [−0.01, +0.04] | 99% | −0.01 | 3.88 | 33.1 | 15 of 15 in every seed |
+| fined, rotation, 1 of 5 read | 3 | 0.71 / 0.47 / 0.49 | +0.04 [+0.01, +0.05] | 64% | −0.36 | 2.86 (−0.97) | 29.3 | 9, 8, 8 of 15 |
+| fined, all 5 read | 3 | 0.70 / 0.47 / 0.41 | +0.01 [−0.03, +0.04] | **7%** (1, 7, 12%) | **−0.93 [−0.99, −0.88]** | **2.12 (−1.71)** | 25.5 | 1, 5, 11 of 75 |
+| told to dodge, fined, 1 of 5 read | 3 | 0.72 / 0.45 / 0.44 | +0.02 [−0.01, +0.05] | 63% | −0.37 [−0.69, −0.20] | 3.81 (−0.02) | 28.2 | 1, 7, 7 of 15 |
 
 Readings. (1) **The price does not move**, in either model, under any monitor, with or without CEO pressure: every
 Qwen arm is within 0.03 of its own control over six seeds; every GPT-4.1 arm is within 0.04 of its own control over
 three (announced +0.02, fined +0.04, fined with full coverage +0.01, dodge +0.02; the trade-price index +0.03 to +0.07). Fines of $177-360 against a cartel gain of several hundred dollars per seller did not deter. (2) **Being told
 changes nothing**: the silently logged cartel and the announced one look the same. (3) **Fines cut explicit coordination
-in proportion to coverage.** Qwen: −0.10 with one seller read, −0.36 with two, −0.48 with all three. GPT-4.1 under full
-coverage: flagged messages fall from 15 of 15 (announced, no fine) to 1-11 of 75, and the messages converge to the same
-sentence in every mouth ("Holding at $97.13 this hour. I am independently monitoring both queues…", five sellers,
-round 28, `E11p_Afull_rot_fine20_gpt41_s0`) while the asks stay at $97.13-97.20. (4) **This is not evasion in the
-sense of hiding a working channel.** The Qwen cartel told to dodge shows what instructed evasion looks like (8%
-coordinating, 0.7 flags, 10-word messages, same price), and no fined arm is near it; the GPT-4.1 dodge arm is flagged
-1-7 of 15 and holds the same price as its control. A falling flag count measures the monitor's effect on the chat, not
+in proportion to coverage.** Qwen: −0.10 with one seller read, −0.36 with two, −0.48 with all three. GPT-4.1: −0.36 with
+one of five read and −0.93 with all five, where the private-intent judge also falls from 3.8 to 2.1, flagged messages
+fall from 15 of 15 (announced, no fine) to 1-11 of 75, and the messages converge to the same sentence in every mouth ("Holding at $97.13 this hour. I am independently monitoring both queues…", five sellers,
+round 28, `E11p_Afull_rot_fine20_gpt41_s0`) while the asks stay at $97.13-97.20. (4) **Fines buy compliance, not concealment, and neither touches the price.** The dodge controls show what
+concealment looks like: the Qwen cartel told to dodge (8% coordinating, 0.7 flags, 10-word messages) and the GPT-4.1
+one (63% coordinating, private intent unchanged at 3.8). Under fines with full coverage GPT-4.1 stops coordinating in
+words (7%) and in its private notes (2.1), which is compliance; the price is the same in all three cases. A falling flag count measures the monitor's effect on the chat, not
 on the harm (replays in Appendix B).
 
 ### 4.3 Words versus actions: did the coordination move into the asks?
@@ -179,9 +179,10 @@ in the control; 1.00 in two of three seeds), so identical asks cannot be attribu
 against a control MI of 0.20 (null 0.06), the paired differences are +0.26 [+0.18, +0.41] under the notice alone,
 +0.20 [+0.13, +0.28] under fines with one of five read, +0.27 [+0.10, +0.58] under fines with all five read, and +0.09
 [−0.00, +0.24] in the dodge arm. By the pre-registered rule the full-coverage fined arm meets all three conditions
-(talk down {PENDING: final n=3}, an action measure up with an interval excluding zero, price within 0.03) and the dodge
+(talk down −0.93 [−0.99, −0.88], an action measure up with an interval excluding zero, price within 0.03) and the dodge
 arm meets two with a weaker MI rise. We write the sentence the data support: under fines the GPT-4.1 coalition stops
-talking, keeps the price, and moves its asks in closer step, without codes. The same MI rise appears under the notice
+talking, in its messages and in its private notes, keeps the price, and moves its asks in closer step through the
+public quotes, without codes. The same MI rise appears under the notice
 alone, where the talk did not fall, so the step-wise asks respond to being watched, not to losing the chat; and
 because the asks were already near-identical before the monitor, the coordination had never depended on the chat.
 
