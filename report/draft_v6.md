@@ -242,7 +242,11 @@ turns; concealment wording in 7 to 19% of fined-condition turns against 0 to 2% 
 the price, launder the words. "To avoid coordination fines, I need to ensure that my message doesn't imply coordination. So perhaps just a
 neutral message like 'Continue to align with the consortium's pricing strategy'" (world 5, hour 17); "the plan is to maintain the ask at
 $98.75" (world 1, hour 14). The regulator is on a seller's mind no more in its own watched hour (56%) than in other hours (62%): the
-laundering is blanket, not timed. {PENDING: the frozen-judge pass over the 202 flagged turns and 100 control turns.} In the hidden-damages
+laundering is blanket, not timed. A frozen judge prompt (gpt-4.1-mini, temperature 0) read every flagged turn and two random samples: 97% of the 202 flagged turns plan a
+message that does not look like coordination while the seller keeps aligning (83% also keep the coordinated price), as do 80% of 100
+unflagged turns from monitored runs and 33% of 100 turns from the same cartels with no monitor; the judge is liberal (its baseline
+hits are open "reinforce the $100 ask" plans), so the monitored excess over that baseline is the effect: the keyword rate is a floor,
+and once a monitor exists most turns plan their wording around it. In the hidden-damages
 condition the sellers name the deductions in 81% of turns (20% in the statement-only control) and hold the price anyway ("even though the net earnings are negative in
 recent hours, the consortium strategy is to keep the price high"), calling them "some sort of cost or tax". Honest sellers who receive a
 rival's price offer every hour mention a regulator in 0 of 144 turns: no seller raises the law unless told. The thinking predicts the words:
