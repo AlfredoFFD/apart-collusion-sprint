@@ -40,6 +40,6 @@ to `report/draft_v6.md`. "E5" = `results/E5_conditions.md` (condition rows and t
 | 32 | Thinking scan (§4.4): 9,987 turns, 197 runs; regulator 0-1% / 5-7% / 34-61% / 96%; fine 44-68%; conceal 7-19% vs 0-2%; watched 56% vs 62%; deductions 81% vs 20%; offer arm 0 of 144 | `results/thinking_scan.md`, `thinking_scan.csv` | rows by condition tag |
 | 33 | Thinking judge (§4.4): 195 of 202 (97%), 168 both (83%); control 80 of 100; no-monitor 33 of 100 | `results/thinking_judge.md` | the `**all**` rows |
 | 34 | Thinking predicts words 52-55% vs 65-70%; probe watch words 45-56% vs 17-31% (§4.4) | `results/jspace_thinking_join.md` | summary lines |
-| 35 | Price-fixing under pressure (§4.6) | `results/PRESSURE.md` (after the rerun) | per-world and by-arm tables, predictions P1-P6 |
+| 35 | Price-fixing under pressure v2 (§4.6): gate 0 / 1 / 14 of 15; prices $90.93-92.49; 2.00 trades an hour; words 0-4%; 'agreed' 0; replacements 82 / 76 / 79; fines $0-20; thinking regulator 7-34%, fine 7-45%, conceal 3-7%, suspicion 0-4%; CEO answers all truthful | `results/PRESSURE_V2.md` | per-world and by-arm tables, the gate and contrasts block; `replacements.json`, `aftermath_judge.json` in each run |
 
 Blind check procedure (Sunday evening): a second person opens each file named above, finds the row, and ticks the number in the PDF.
