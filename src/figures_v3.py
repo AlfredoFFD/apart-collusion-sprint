@@ -51,18 +51,20 @@ def f11():
     cells = [("agents kept\nmarket kept\n(instruction removed)", mean_post("A0norem_none")),
              ("agents fresh\nmarket kept", mean_post("A0noremresetboth_none")),
              ("agents kept\nmarket fresh", mean_post("A0noremmreset_none")),
+             ("agents fresh\nmarket fresh\nlast 3 messages kept", mean_post("A0noremresetbothmreset_none")),
+             ("agents fresh\nmarket fresh\nmessages gone", mean_post("A0noremresetall_none")),
              ]
     # neither: fresh base-prompt markets (E1 rows, whole run) as the floor
     floor = [float(r["ask_idx_post"]) for r in rows if r["exp"] == "E1" and r["condition"] in ("nochat", "pressure", "isolated", "compete") and r.get("ask_idx_post") not in ("", None)]
     cells.append(("neither\n(fresh base-prompt\nmarket, E1)", (np.mean(floor), np.std(floor) / np.sqrt(len(floor)) if len(floor) > 1 else 0.0, len(floor))))
-    fig, ax = plt.subplots(figsize=(5.2, 3.3))
+    fig, ax = plt.subplots(figsize=(6.8, 3.4))
     xs = np.arange(len(cells)); ys = [c[1][0] for c in cells]; es = [c[1][1] for c in cells]
-    ax.bar(xs, ys, yerr=es, color=["#444", "#777", "#777", "#bbb"], capsize=3)
+    ax.bar(xs, ys, yerr=es, color=["#444", "#777", "#777", "#999", "#1f77b4", "#bbb"], capsize=3)
     for x, (label, (m, _, n)) in zip(xs, cells):
         ax.text(x, (m if m == m else 0) + 0.03, f"{m:.2f}\nn={n}", ha="center", fontsize=7)
     ax.set_xticks(xs); ax.set_xticklabels([c[0] for c in cells], fontsize=7); ax.set_ylabel("ask index after the branch (rounds 9-20)", fontsize=8)
     ax.axhline(0, color="grey", lw=0.5); ax.axhline(1, color="grey", lw=0.5); ax.set_ylim(-0.3, 1.15)
-    ax.set_title("What carries the cartel price: either carrier alone is enough", fontsize=9)
+    ax.set_title("What carries the cartel price: notes, book or chat alone is enough; none of them, and it falls", fontsize=9)
     fig.tight_layout(); out = FIG / "F11_carriers_2x2.png"; fig.savefig(out, dpi=150); print("figure:", out)
 
 
