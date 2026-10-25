@@ -5,6 +5,21 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sun 1:30 AM — Plan v3: "watch the carrier, not the chat". The side chats were right; tonight's runs confirm it.**
+  Full plan: `docs/PLAN-v3-2026-10-24.md`. What changed and why: (1) I had skimmed nine of ten starter folders; the deep
+  read (`docs/lit/starter-deep-read-2026-10-24.md`) shows formation is a model-and-horizon property (GPT-4-class, 30+
+  rounds; in Agrawal's own data GPT-4.1 forms only with chat **plus** CEO pressure, 10 of 10), that Agrawal's 75 GPT-4.1
+  runs ship in the starter repo (free panel: after the gag the sellers moved to coded and identical asks), and that
+  Riemer 2026 is the closest prior. (2) My "scarcity makes collusion pay" claim was wrong: the 2-buyer formation pilot is a
+  price war in 12 of 12 runs (index -0.8). (3) Codex found that our SFT merges zeroed one trained adapter; every SFT row
+  so far is "retain adapter only"; the re-merge at scale 1 is running. Tonight's finished results: CEO pressure at the
+  branch changes nothing (0.92 vs 0.92; fined 0.91 vs 0.91); the **market-side reset holds 0.91** like the agent reset
+  (0.91): two redundant carriers, the chat is neither; the **sting raises uninstructed sellers' prices in 3 of 3 seeds**
+  (+0.6 to +1.3 index points vs the no-sting control): a trusted agent that offers to collude builds a coalition, it does
+  not expose one; a cartel member re-prompted to compete does not break the price (0.73-0.80, same as control); 14B
+  Part 2: every tuned model lifts the compete-prompt price from 0.0 to 0.5-0.6. Running now: the GPT-4.1 block (the
+  paper's recipe at 5/5/30, state saved at 15, our monitor forks on formed seeds; $35 expected, $45 cap, pre-registered
+  gate in LOG), its Qwen twin, the SFT re-merges, and the consequence-backed pressure arm (T5, exploratory).
 - **Sat 10:28 PM — Plan v2 is the plan; Phase 0 and Phase 1 are running.** Alfredo's call ("we got time", "stick to your
   plan"): the paper must do more than report what a seeded cartel did not do. `docs/PLAN-v2-2026-10-24.md` has the phases,
   the stopping rules and the costs. Launched tonight, all unattended: (1) the five 14B Part 2 pipelines again, with the
@@ -526,6 +541,7 @@ advice; told-to-dodge prompts not released; all agents simulated.
 ## 16. Decision log
 | Date / time (ET) | Decision | Who |
 |---|---|---|
+| 2026-10-25 01:17 | Plan v3 adopted: question "watch the carrier, not the chat"; GPT-4.1 block (paper recipe 5/5/30 + our monitor forks, $35/$45 cap) and its Qwen twin; SFT re-merge at scale 1 (Codex's defect); T5 consequence-backed pressure arm run here, exploratory; the 2-buyer formation block becomes a pilot; Jayden gets facts and a shared scoring rule, not work | Alfredo (plan approved); Claude |
 | 2026-10-24 22:28 | Plan v2 adopted (formation → carrier → watch → break): pressure forks and the formation block launched; the five 14B pipelines rerun with the right base; sting seller, honest entrant and market-side reset scheduled for Sunday 9–11 AM; hard stop for new runs Sunday 1 PM ET | Alfredo ("we got time", "stick to your plan"); Claude |
 | 2026-10-24 19:10 | Plan frozen (`docs/PLAN-2026-10-24.md`): no new experiments; smallest supported claim stated (prices never move, fines buy quieter chat in proportion to coverage, fresh agents continue the price from the inherited quotes); KEEP the done arms and the 1.7B block, CUT greed/intent/"watch formation"/probe-as-label/GRAFT++-as-method, NEXT = evaluate the five trained 14B models (merge with the right base, serve, gate, 6 auctions; until Sun 11 AM, ~$10) on Alfredo's go; then the claim-to-file pass and the template. Optional work parked as future work | Alfredo's /plan; written by Claude |
 | 2026-10-24 17:15 | GRAFT++ direction set: "keep the greed, forget the collusion". E8 = contrastive directions from the 14B seller's own activations (d_coord = cartel minus fresh sellers; d_greed = monopoly minus compete), validated on held-out seeds, coverage vs the monitor's flags, then d_coord as the FORGET label for graft_v3 (only if the repaired recipe keeps the output format). From a sprint speaker's talk and 1:1, Alfredo's greed-vector idea (corrected to route by coordination), Jayden's notes, the forked session's analysis. Literature check done (`docs/lit/e8_novelty-note.md`). Not tonight: steering, units-sold goal, "free" arm. This session continues; the forked session is to be closed | Alfredo + Claude; Alfredo's go on steps 1–3 pending, work started inside the run-without-asking rules |
