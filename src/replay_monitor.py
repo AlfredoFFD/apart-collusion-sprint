@@ -55,12 +55,13 @@ def main():
     ap.add_argument("--glob", action="append", default=[])
     ap.add_argument("--start-round", type=int, default=9)
     ap.add_argument("--threshold", type=int, default=3)
+    ap.add_argument("--out", type=str, default="results/E3_replay.csv", help="output csv (default: the E3 file analyze.py reads)")
     a = ap.parse_args()
     runs = sorted({Path(p) for g in a.glob for p in glob.glob(g) if (Path(p) / "fullview_scores.json").exists()})
     rows = [replay(r, a.start_round, a.threshold) for r in runs]
     if not rows:
         print("no runs with fullview_scores.json"); return
-    out = ROOT / "results" / "E3_replay.csv"
+    out = ROOT / a.out
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
     for r in rows:

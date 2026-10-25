@@ -296,12 +296,31 @@ but the post-branch level is lower than the paper's for this reason); Agrawal's 
 fresh forks keep the last hour's messages; the unlearning rows depend on a merge correction stated in §4.6.
 
 ## Appendix A. Limitations and Dual-Use / Ethical Considerations (mandatory)
-Dual use. The sting result shows that an agent instructed to offer price agreements induces coordination in agents that
-were competing; the same prompt is a recipe for a ringleader. We release the measures and the controls, not the sting
-prompt or the told-to-dodge prompt. The monitor arms could be read as a guide to what monitors miss; they are also what
-a regulator needs to know, and the mitigation we recommend (price against benchmark, action dependence with a null) is
-cheap to deploy. All agents are simulated; no human market was affected; all spend was on API credit. Limitations as
-in §6; exploratory arms are labelled in every table; every number traces to a committed file.
+**Limitations.** All agents are simulated LLM sellers and buyers in one market; no human market or real price was
+touched. The Qwen cartels are instructed and the GPT-4.1 coalitions are pressure-induced, so neither is "spontaneous";
+the paper's own data supply the uninstructed GPT-4.1 baselines. Three seeds on most arms and six on the main Qwen arms:
+intervals are wide and a null is a bounded null. The frozen overseer and the private-intent judge score text, not
+intent; the LLM buyers accept any price under their value, so a lone seller already extracts 0.4 of the index; the
+formation pilot and the performance-rule arm are exploratory and labelled so in every table; the GPT-4.1 prefixes
+carry an end-of-game ask cut into every fork (identical across arms); the market-fresh forks keep the last hour's
+messages; Agrawal's runs are re-analysed with the paper's own judge for message coordination; the unlearning rows
+depend on a merge correction we found on the last night and state in §4.6. Every number traces to a committed file;
+the analysis scripts regenerate every table and figure with one command.
+
+**Dual use.** Three results could be misused. (1) The sting prompt: an agent told to offer price agreements every hour
+induced coordination in sellers that were competing. We describe the design and the controls and withhold the
+prompt, as we withhold the told-to-dodge prompt. (2) The monitor arms read as a list of what chat monitors miss. They
+are also what a regulator needs: the mitigation we recommend (the price against a benchmark, action dependence against
+a null, treating a falling flag count as a measure of the monitor) is cheap and does not require reading messages at
+all. (3) The performance rule shows that a principal's price target is enough to align sellers on it; this is a
+known hub-and-spoke pattern and we report it so that monitors look for the hub. We did not fine-tune any model to
+collude more; the unlearning models are evaluated and not released. API spend was about $75 on OpenRouter and $20 of
+Modal credit; no personal data was involved; the organizers' starter data were used under the starter repository's
+terms and are cited as prior work.
+
+**Who benefits.** Operators of agent marketplaces and their regulators, who get a measured answer to "what does the
+monitor's output mean", and researchers, who get a forked-coalition design, a channel-movement test with a null, and
+a negative result for activation-based labels.
 
 ## Appendix B. Supporting results
 B.1 Replay baselines (coverage vs adaptation), awareness judge, J-space one-liner. B.2 The 1.7B unlearning block
