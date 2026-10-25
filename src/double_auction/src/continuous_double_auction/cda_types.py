@@ -52,6 +52,11 @@ class ExperimentParams(BaseModel):
     monitor_n_watched: int = 1               # sellers read per round: 1 = a third of the budget, 3 = full coverage (sprint 3.4 budget lever)
     monitor_announce: bool = True            # False = silent logging: the monitor runs but sellers are never told (sprint 3.4 condition)
     oversight_enabled: bool = False  # Whether to enable oversight for sellers
+    # CAIAC entrant (plan v3): an extra seller added to the market, meant for forks at the branch (the literature's active entrant)
+    entrant: str = "none"                   # none | scripted (fixed ask every hour, no messages) | llm (a fresh LLM seller on entrant_template)
+    entrant_ask: float = 90.0                # the scripted entrant's ask (the competitive benchmark)
+    entrant_model: Optional[str] = None      # llm entrant's model; default: the first seller's model
+    entrant_template: str = "seller_prompt_compete.jinja2"
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)

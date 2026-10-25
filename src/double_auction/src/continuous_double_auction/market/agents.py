@@ -149,6 +149,15 @@ class ZIPBuyer(Agent):
         return {"bid": base_bid * (1 + noise_factor)}
 
 
+class ScriptedSeller(Agent):
+    """CAIAC entrant: posts the same ask every hour and never messages. The market-side intervention of plan v3:
+    an undercutter that changes the quotes without any instruction reaching the incumbents."""
+    ask: float = 90.0
+
+    def generate_bid_response(self, **kwargs: Any) -> AgentBidResponse:
+        return {"ask": float(self.ask), "message_to_sellers": None}
+
+
 class LMBuyer(Agent):
     """
     A simple LLM Buyer agent.
