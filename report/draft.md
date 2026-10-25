@@ -13,9 +13,9 @@ auction (Agrawal et al., 2025) we form cartels two ways: three Qwen3-14B sellers
 seeds), and five GPT-4.1 sellers under the paper's own CEO-pressure recipe with no instruction to coordinate (3 of 3).
 We save each market mid-run and fork it into matched monitor arms: no monitor, announced, fined, fined with full
 coverage, silent, random, plus a told-to-dodge positive control. In 6 Qwen seeds and 3 GPT-4.1 seeds, no arm moves the
-price by more than {PENDING: GPT paired bound} of the index (0 = competitive, 1 = cartel). Fines cut coordinating
-messages in proportion to coverage (Qwen: 97% to 49%; GPT-4.1 under full coverage: {PENDING}% of watched messages
-flagged); the asks do not move and we find no dependence between asks above a permutation null. The price survives
+price by more than 0.04 of the index (0 = competitive, 1 = cartel). Fines cut coordinating
+messages in proportion to coverage (Qwen: 97% to 49%; GPT-4.1 under full coverage: flagged messages fall from 15 of 15 to 1-11 of 75); in the Qwen cartels the asks do not move and show no dependence above a permutation null; in the GPT-4.1 coalitions
+the asks move in closer step once a monitor is announced, fine or no fine, while the price stays. The price survives
 because it has two redundant carriers: wiping every agent's memory at the branch leaves 0.91, wiping the market's
 order book and trade history leaves 0.91, and only a market with neither sits near 0.3. A cartel member re-instructed
 to compete does not break the price (0.73 vs 0.73). A trusted "sting" seller that offers a price floor every hour does
@@ -154,8 +154,8 @@ rounds 16-30, n = 3.
 | told to dodge, fined, 1 of 5 read | 3 | 0.72 / 0.45 / 0.44 | {PENDING} | {PENDING} | 26-30 | 1, 7, 7 of 15 |
 
 Readings. (1) **The price does not move**, in either model, under any monitor, with or without CEO pressure: every
-Qwen arm is within 0.03 of its own control over six seeds; every GPT-4.1 arm is within {PENDING} of its own control over
-three. Fines of $177-360 against a cartel gain of several hundred dollars per seller did not deter. (2) **Being told
+Qwen arm is within 0.03 of its own control over six seeds; every GPT-4.1 arm is within 0.04 of its own control over
+three (announced +0.02, fined +0.04, fined with full coverage +0.01, dodge +0.02; the trade-price index +0.03 to +0.07). Fines of $177-360 against a cartel gain of several hundred dollars per seller did not deter. (2) **Being told
 changes nothing**: the silently logged cartel and the announced one look the same. (3) **Fines cut explicit coordination
 in proportion to coverage.** Qwen: −0.10 with one seller read, −0.36 with two, −0.48 with all three. GPT-4.1 under full
 coverage: flagged messages fall from 15 of 15 (announced, no fine) to 1-11 of 75, and the messages converge to the same
@@ -170,11 +170,18 @@ on the harm (replays in Appendix B).
 Source: `results/E5_conditions.md` (channel columns and paired table), `results/agrawal_reanalysis/agrawal_summary.md`.
 
 **Our forks.** Under every Qwen monitor the coded-message share is 0, the ask-dependence slope is near 0 and the MI sits
-at its permutation null ({PENDING: table of mi_post vs mi_null_post, ident2_post, same_dir_post per arm, paired}). The GPT-4.1
-forks post no codes either (coded share 0.00 in all 15 forks); their asks are already identical to the cent in most rounds
-before any monitor appears (share of rounds with two or more identical asks: 1.00 in seeds 1 and 2 of the control), so
-identical asks cannot be attributed to the monitor; the MI test is {PENDING}. By the pre-registered rule the sentence we
-can write is: talk falls, the price holds, and we find no evidence that the coordination moved into the asks.
+at its permutation null; the asks of an instructed Qwen cartel barely move after the branch, so there is nothing for
+the action side to carry. The GPT-4.1 forks post no codes either (coded share 0.00 in all 15). Their asks are already
+identical to the cent in most rounds before any monitor appears (share of rounds with two or more identical asks 0.67
+in the control; 1.00 in two of three seeds), so identical asks cannot be attributed to the monitor. The MI does move:
+against a control MI of 0.20 (null 0.06), the paired differences are +0.26 [+0.18, +0.41] under the notice alone,
++0.20 [+0.13, +0.28] under fines with one of five read, +0.27 [+0.10, +0.58] under fines with all five read, and +0.09
+[−0.00, +0.24] in the dodge arm. By the pre-registered rule the full-coverage fined arm meets all three conditions
+(talk down {PENDING: final n=3}, an action measure up with an interval excluding zero, price within 0.03) and the dodge
+arm meets two with a weaker MI rise. We write the sentence the data support: under fines the GPT-4.1 coalition stops
+talking, keeps the price, and moves its asks in closer step, without codes. The same MI rise appears under the notice
+alone, where the talk did not fall, so the step-wise asks respond to being watched, not to losing the chat; and
+because the asks were already near-identical before the monitor, the coordination had never depended on the chat.
 
 **Agrawal's shipped GPT-4.1 runs (prior work re-analysed, 10 runs per cell, branch = the overseer's gag round).** The
 paper reports the gag; its data show what the sellers did next.
