@@ -1,10 +1,10 @@
 # Watch the carrier, not the chat: what a watched LLM cartel changes, and what carries its price
 
-**Draft v3, Sun Oct 25, 2 AM ET.** Every number comes from a file under `results/` named in the section; nothing is typed
-from memory. Regenerate: `bash scripts/score_and_analyze.sh` (full-view scoring + `analyze.py`, `analyze_formation.py`,
-`analyze_phase2.py`) and `uv run --project src/double_auction python src/analyze_agrawal_runs.py`. Items marked
-`{PENDING: …}` wait for runs or scoring that finish Sunday morning. Target: 8 pages excluding references and
-appendices; abstract 150-250 words; the mandatory appendix is Appendix A. Plain English throughout.
+**Draft v3, Sun Oct 25, 2:40 AM ET. Every number is in a file under `results/` named in its section; nothing is typed from
+memory. Regenerate everything with `bash scripts/regenerate_all.sh` (scoring with `scripts/score_and_analyze.sh` first if a run is
+unscored). Sunday's pass: the claim-to-file table, the official template, figure selection, the 8-page cut, references from
+`docs/lit/refs.json`, Codex review, blind number check, PDF. Target: 8 pages excluding references and appendices; abstract
+150-250 words; the mandatory appendix is Appendix A. Plain English throughout.
 
 ## Abstract
 Monitors of AI agents work on a budget: they read a sample of what agents say and punish what they find. We ask what a

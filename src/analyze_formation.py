@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-RESULTS, FIG = ROOT / "results", ROOT / "figures"
+RESULTS, FIG = ROOT / "results", ROOT / "results" / "figures"
 RX = re.compile(r"_F(\d+)_([a-z]+)_(chat|nochat)_([a-z0-9]+)_s(\d+)$")
 
 
