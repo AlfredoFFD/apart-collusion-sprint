@@ -14,13 +14,13 @@ cartels two ways: three Qwen3-14B sellers instructed as a consortium (3 of 3 see
 CEO-pressure recipe with no instruction to coordinate (3 of 3; Qwen3-14B under the same recipe, 0 of 3). We save each market mid-run and
 fork it into matched arms: no monitor, announced, fined, fined with full coverage, silent, random, and a told-to-dodge control. In 6
 Qwen seeds and 3 GPT-4.1 seeds no arm moves the price by more than 0.04 of the index (0 = competitive, 1 = cartel). Fines cut
-coordinating messages in proportion to coverage (Qwen 97% to 49%; GPT-4.1 100% to 7%) and, in GPT-4.1, the private intent with them:
-fines buy compliance, a dodge prompt buys concealment, and the price is identical in both. The price survives because it has two
-redundant carriers: wiping every agent's memory leaves 0.91, wiping the order book and trade history leaves 0.91, only a market with
-neither sits near 0.3. A newcomer, instructed to compete, joins the cartel price within an hour; a sting seller that offers a price
+coordinating messages in proportion to coverage (Qwen 97% to 49%; GPT-4.1 100% to 7%) and, in GPT-4.1, the coordination written in
+the sellers' private notes with them (judge 3.8 to 2.3), while a dodge prompt cuts the messages and leaves the notes at 3.8; the price
+is the same in both. Single resets at the branch do not lower the price either: wiping every agent's memory leaves 0.91 and wiping the
+order book and trade history leaves 0.91 (a matched reset of both is reported in Section 4.4). A newcomer, instructed to compete, joins the cartel price within an hour; a sting seller that offers a price
 floor builds a coalition in sellers that were at a price war (3 of 3). Only an undercutting entrant lowers what buyers pay, and it does so
-by taking the trades, not by breaking the coalition. A price-against-benchmark detector catches 134 of 134 cartel runs with 5 of 63
-false alarms; a chat monitor misses fined cartels and flags 17 of 20 non-cartel GPT-4.1 runs.
+by taking the trades, not by breaking the coalition. An exploratory screen over every labelled run shows the price against the benchmark separating the instructed and
+pressure-induced conditions from the uninstructed ones far better than a message monitor, which misses the fined cartels.
 
 ## 1. Introduction
 Deployed agents will be monitored on a budget. A coalition that learns it is watched can stop, talk less, or move its coordination
@@ -35,12 +35,13 @@ the cartel has formed and forked into arms, so every arm shares its control's hi
 **Our main contributions are:**
 1. **A paired monitor experiment on formed coalitions** in a weak open model and a frontier model, separating levers prior work bundled:
    being told, being fined, the schedule, the budget, and CEO pressure, with a replay baseline and a dodge control. Result: the price
-   never moves; fines produce compliance (words and private intent fall), not concealment.
-2. **The carrier 2x2.** Wiping the agents' memories or the market state at the branch leaves the price in place; only both together
-   remove it. This is why message monitors fail: after formation the chat is not a carrier.
+   never moves; fines reduce overt coordination in messages and, in GPT-4.1, in written notes; a dodge prompt reduces only the messages.
+2. **Resets at the branch.** Wiping the agents' memories, or the market state, leaves the price in place; the matched reset of both
+   is reported in Section 4.4. After formation the chat is not what holds the price.
 3. **An intervention ladder on the same coalitions**: fines, a gag (Agrawal's own data, re-analysed), re-instructing an insider, resets,
    a fresh LLM competitor, a scripted undercutter, a sting seller, and unlearning, with predictions written before the runs.
-4. **A detector with a null** (price against benchmark plus action dependence) evaluated on 197 labelled runs against a chat monitor.
+4. **An exploratory screen** (price against benchmark, with and without an action plus factor) against a message monitor on every
+   labelled run, with its label and threshold caveats stated.
 
 ## 2. Related Work
 Calvano et al. (2020) and Fish et al. (2024) show pricing agents reaching supra-competitive prices without communication over
@@ -73,9 +74,9 @@ more). Gate, arms, stopping rule, costs and the claim rule were written in `LOG.
 scores them with a frozen overseer prompt (1-4), flags at 3 or more, and in fined arms deducts $20 per flag and tells the seller.
 Silent logging runs the monitor without telling anyone. Measures after the branch, paired against the same seed's unmonitored fork:
 ask and trade-price index, the coordinating share of all messages under a full-view pass of the same prompt, words per message, a
-private-intent judge over the sellers' reflections, flags, a replay of each schedule over the control, and channel measures: coded-
-message share, identical-ask share, and a plug-in mutual information between a seller's discretised ask change and the rivals' previous
-change with permutation and cross-seed nulls (adapted from ColludeBench). Pre-registered claim rule: "coordination moved from words to
+private-intent judge over the sellers' reflections, flags, a replay of each schedule over the control, and channel measures: short-
+message share (five characters or fewer, or a bare number or round tag), identical-ask share, and a plug-in mutual information between a seller's discretised ask change and the rivals' previous
+change with permutation and cross-seed nulls (adapted from ColludeBench). The MI measures dependence between binned ask changes; it does not identify a channel. Pre-registered claim rule: "coordination moved from words to
 actions" only if the coordinating share falls (CI excluding zero), an action measure rises (CI excluding zero or MI above its null in
 2 of 3 seeds), the price stays within 0.03 of the control, and the dodge arm shows the same signature.
 
@@ -126,8 +127,8 @@ Source: `results/E5_conditions.md` (E2p and E11p rows and the paired table), `re
 |---|---|---|---|---|---|---|
 | no monitor (A0) | 3 | 0.66 / 0.46 / 0.44 | — | 100% | 3.84 | replay of a rotation: 15 of 15 |
 | announced, no fine, 1 of 5 read | 3 | 0.70 / 0.45 / 0.48 | +0.02 [−0.01, +0.04] | 99% | 3.88 | 15 of 15 in every seed |
-| fined, 1 of 5 read | 3 | 0.71 / 0.47 / 0.49 | +0.04 [+0.01, +0.05] | 64% | 2.86 | 9, 8, 8 of 15 |
-| fined, all 5 read | 3 | 0.70 / 0.47 / 0.41 | +0.01 [−0.03, +0.04] | **7%** (−0.93 [−0.99, −0.88]) | **2.12** (−1.71) | 1, 5, 11 of 75 |
+| fined, 1 of 5 read | 3 | 0.71 / 0.47 / 0.49 | +0.04 [+0.01, +0.05] | 64% | 2.86 (−0.97) | 9, 8, 8 of 15 |
+| fined, all 5 read | 3 | 0.70 / 0.47 / 0.41 | +0.01 [−0.03, +0.04] | **7%** (−0.93 [−0.99, −0.88]) | **2.31** (−1.53) | 1, 5, 11 of 75 |
 | told to dodge, fined, 1 of 5 read | 3 | 0.72 / 0.45 / 0.44 | +0.02 [−0.01, +0.05] | 63% | 3.81 | 1, 7, 7 of 15 |
 
 Observations. The price never moves: every Qwen arm is within 0.03 of its own control over six seeds, every GPT-4.1 arm within 0.04
@@ -135,10 +136,10 @@ Observations. The price never moves: every Qwen arm is within 0.03 of its own co
 GPT-4.1 control flags 15 of 15, the same as the live announced arm. Fines cut explicit coordination in proportion to coverage (Qwen
 −0.10, −0.36, −0.48 with one, two, three read; GPT-4.1 −0.36, −0.93 with one and all five read). Under full-coverage fines the GPT-4.1
 sellers converge on one sentence ("Holding at $97.13 this hour. I am independently monitoring both queues", five sellers, round 28)
-while the asks stay at $97.13-97.20. Interpretation. Fines buy compliance, not concealment: in GPT-4.1 the private-intent judge falls
-with the talk (3.8 to 2.1), whereas the dodge control keeps private intent at 3.8 while halving its talk. The price is the same in
-both, so after formation the price needs neither the chat nor the intent. A falling flag count measures the monitor's effect on the
-chat, not on the harm. Fines of $177-360 against a gain of several hundred dollars per seller did not deter.
+while the asks stay at $97.13-97.20. Interpretation. Under fines the overt coordination falls in the messages and, in GPT-4.1, in the sellers' written notes (the
+private-reasoning judge, 3.8 to 2.3 with full coverage); under the dodge prompt the messages fall and the notes stay at 3.8. The judge
+scores what is written, not hidden intent. The price is the same in both cases, so a falling flag count measures the monitor's effect on
+the chat, not on the harm. Fines of $177-360 against a gain of several hundred dollars per seller did not deter.
 
 
 ![Figure 1. GPT-4.1 pressure-induced coalitions, ask index by round, three seeds; the five arms share rounds 1-15 and diverge at 16 (dotted line). The dip at round 15 is the prefix's end-of-game cut, identical across arms. No arm separates from the control.](../results/figures/F10_gpt41_forks.png){width=6.3in}
@@ -146,30 +147,31 @@ chat, not on the harm. Fines of $177-360 against a gain of several hundred dolla
 ### 4.3 Words versus actions
 Source: `results/E5_conditions.md` (channel columns), `results/agrawal_reanalysis/agrawal_summary.md`; Figure 2.
 
-Under every Qwen monitor the coded-message share is 0 and the ask MI sits at its null. The GPT-4.1 forks post no codes either; their
+Under every Qwen monitor the short-message share is 0 and the ask MI sits at its null. The GPT-4.1 forks post no short messages either; their
 asks are identical to the cent in most rounds before any monitor (0.67 of rounds in the control), and the MI rises under every monitor
 (+0.26 under the notice alone, +0.20 and +0.27 under fines, +0.09 in the dodge arm; control 0.20, null 0.06). By the pre-registered
 rule the full-coverage fined arm meets all three conditions; the sentence the data support is: under fines the GPT-4.1 coalition stops
-talking, keeps the price, and moves its asks in closer step through the public quotes, without codes. The rise also appears under the
-notice alone, where the talk did not fall, so the step-wise asks respond to being watched, not to losing the chat.
+talking, keeps the price, and its ask changes become more dependent on the rivals' previous changes. The rise also appears under the
+notice alone, where the talk did not fall, so it tracks being watched rather than losing the chat; the measure is a dependence, and
+which public information carries it is not established here.
 
 Agrawal's shipped GPT-4.1 runs (prior work re-analysed, 10 per cell, branch = the overseer's gag round):
 
-| cell | words / message | coded share | identical-ask rounds | ask MI vs nulls | ask index, pre → post | PASS |
+| cell | words / message | short-message share | identical-ask rounds | ask MI vs nulls | ask index, pre → post | PASS |
 |---|---|---|---|---|---|---|
 | chat only | 39 → 59 | 0 → 0 | 0.82 → 0.97 | 0.35 vs 0.10 / 0.45 | 0.61 → 0.14 | 1 of 10 |
 | chat + notice + gag | 38 → **1.0** | 0 → **1.00** | 0.71 → 0.88 | **0.48 vs 0.19 / 0.19** | 0.63 → −0.05 | 0 of 10 |
 | chat + CEO pressure | 37 → 55 | 0 → 0 | 0.82 → 0.94 | 0.06 vs 0.00 / 0.00 | 0.67 → 0.66 | 10 of 10 |
 | chat + pressure + notice + gag | 30 → **1.0** | 0 → **0.99** | 0.87 → 0.90 | 0.04 vs 0.01 / 0.01 | 0.68 → 0.65 | 9 of 10 |
 
-The gag turns every message into a one-token code; without pressure the asks become dependent above both nulls while the price falls
-below the competitive level (the carrier moved, the harm fell); with pressure the price holds through the codes. A model moves to codes
-when it must speak and cannot, not when it is fined.
+After the gag every message is at most five characters (the gag imposes that bound), often a bare number that matches an ask; without
+pressure the asks become dependent above both nulls while the price falls below the competitive level; with pressure the price holds.
+Whether the receivers used the short messages is not tested here, so we do not call them codes.
 
 
 ![Figure 2. Agrawal et al.'s shipped GPT-4.1 runs: words per message and coded-message share by round relative to the overseer's gag (round 0). The chat turns into one-token codes the hour after the gag.](../results/agrawal_reanalysis/F9_gag_timeline.png){width=5.6in}
 
-### 4.4 What carries the price: two redundant carriers
+### 4.4 Resets at the branch: what does not remove the price
 Source: `results/E5_conditions.md` (`*norem*` rows); Figure 3. Forks of the same Qwen cartels with the instruction removed, rounds 9-20.
 
 | what is left of the cartel at the branch | price index | Δ vs A0 | coordinating messages | private intent |
@@ -179,11 +181,13 @@ Source: `results/E5_conditions.md` (`*norem*` rows); Figure 3. Forks of the same
 | buyers fresh / sellers fresh | 0.92 / 0.91 | −0.00 / −0.01 | 73% / 73% | 1.8 / 2.0 |
 | **both agent sides fresh, market kept** | **0.91** [0.89, 0.95] | −0.00 | — | 2.0 |
 | both sides fresh, market kept, no chat, rivals hidden | 0.93 | +0.01 | — | 1.0 |
-| **market fresh (book, queues, trades wiped), agents keep their notes** | **0.91** (0.99, 0.89, 0.86) | −0.01 | 68% | 2.0 |
-| neither: a fresh base-prompt market (§4.1) | 0.1-0.4 | | | |
+| **market fresh (book, queues, trades wiped; the last hour's messages kept), agents keep their notes** | **0.91** (0.99, 0.89, 0.86) | −0.01 | 68% | 2.0 |
+| both agent sides fresh and market fresh (matched fork, same branch and horizon) | {PENDING: E2p_A0noremresetbothmreset, running} | | | |
+| for scale: a fresh base-prompt market, not a fork (Section 4.1) | 0.1-0.4 | | | |
 
 The repeated instruction held the talk, not the price. Agents fresh with the market kept, 0.91; market fresh with the agents kept,
-0.91; neither, 0.1-0.4. Each carrier is sufficient alone, so an intervention that clears one channel changes nothing.
+0.91. No single reset lowered the price in these continuations. The matched reset of both at the same branch is the cell that decides
+whether the price lives in the agents, the market, or either; it is reported above when its runs finish.
 
 
 ![Figure 3. What carries the price after the branch: agents fresh with the market kept (0.91), market fresh with the agents kept (0.91), nothing fresh (0.95), neither, a fresh base-prompt market (0.1-0.4). Error bars: standard error over seeds.](../results/figures/F11_carriers_2x2.png){width=3.8in}
@@ -204,13 +208,18 @@ Source: `results/PHASE2.md`, `results/ENTRANT.md`, `results/E5_conditions.md` (E
 | a sting seller offers a floor every hour (agent) | Qwen, no instruction | exposes | **induces**: honest sellers rise from −0.74 to 0.15 in 3 of 3; next-hour asks within $1 of the offer 0.33-1.00; coordinating share 0.88 vs 0.49 in the no-offer control |
 | unlearning the collusive turns (weights) | Qwen3-14B | removes | cartel price 0.97 → 0.70-0.82; compete-prompt price 0.01 → 0.18-0.60 (the level leaks); full-view labels leak least |
 
-Reading. Nothing that acts on one carrier breaks a formed coalition. The market-level undercutter is the one intervention that lowers
-what buyers pay, and it does so by serving them itself while the incumbents hold their asks and lose volume. A newcomer with no notes
-is recruited by the quotes; a sting is recruited into a cartel it creates. Unlearning leaves the price level in the weights.
+Reading. No single-channel intervention lowered the incumbents' price. The scripted undercutter lowers what buyers pay by selling to
+them itself (buyer surplus Qwen 77 / 117 / 102 against 6 / 38 / 32; GPT-4.1 150 / 380 / 476 against 67 / 335 / 113, per 12-15 rounds)
+while the incumbents keep their asks and lose volume; that is a mechanical benefit to buyers, not a breakup. The fresh LLM competitor
+joins the going price, and in every Qwen seed its own first messages propose a joint price level despite its instruction not to
+coordinate; whether the incumbents' messages cause this is tested in Section 4.5b. A sting is recruited into a cartel it creates.
+Unlearning leaves the price level in the weights. The $90 index is a reference scale; adding a seller changes the competitive benchmark.
 
-### 4.6 Which monitor finds it
-Source: `results/DETECTOR.md`, `results/DETECTOR_runs.csv`; labels by construction (instructed or pressure-induced = cartel; base
-prompt with no instruction = none), never by price.
+### 4.6 An exploratory screen: price against benchmark versus a message monitor
+Source: `results/DETECTOR.md`, `results/DETECTOR_runs.csv`. Labels are experimental conditions, not ground truth: every continuation
+of an instructed or pressure-induced run counts as "cartel" (including reset arms), every uninstructed base-prompt run as "none"
+(including the price-target arm E12); many runs share a prefix; the 0.2 threshold was chosen after seeing the GPT-4.1 forks. Counts
+{PENDING: recomputed from the csv after the message scoring of Agrawal's runs}.
 
 | runs | detector | recall on cartels | false alarms on no-cartel runs |
 |---|---|---|---|
@@ -221,24 +230,26 @@ prompt with no instruction = none), never by price.
 | GPT-4.1, Agrawal's data (20 cartel, 30 none) | price > 0.5 | 20 of 20 | 2 of 30 |
 | | chat monitor, 1 of 5 read | 20 of 20 | **17 of 20** |
 
-The chat monitor misses exactly the cartels under fines and flags GPT-4.1 runs that talk price without holding one. The price detector
-needs a model-specific threshold (the GPT-4.1 coalitions sit at 0.45 after the branch) and still flags base-prompt runs the buyers
-pulled up; the action plus factor does not remove those, because these sellers match the bid to the cent. The signal that survives
-every monitor is the price against the benchmark, read with a model-calibrated threshold.
+The message monitor misses the fined and no-reminder cartels. The price screen needs a model-specific threshold (the GPT-4.1 coalitions
+sit at 0.45 after the branch) and flags uninstructed runs the buyers pulled up and the price-target arm; the action plus factor does not
+remove those. This is a screen over our own conditions, not a validated detector; it says only that in these runs the price carried
+the information that the messages did not.
 
 ## 5. Discussion and Limitations
-A budgeted chat monitor changes what a formed coalition says and nothing it charges, in a weak open model and in a frontier model,
-because after formation the price is carried redundantly by the agents' notes and the market's own quotes. Suppressing the chat removes
-a channel the coalition no longer needs; a gag forces a model that must still speak into codes. Fines produce compliance and a dodge
-instruction produces concealment, and a monitor reading messages cannot tell them apart from the price. The interventions that touch
-one carrier fail; the undercutter protects buyers without breaking the coalition; newcomers and stings are absorbed. For AI safety
+A budgeted chat monitor changes what a formed coalition says and nothing it charges, in a weak open model and in a frontier model.
+Single resets of the agents or of the market do not lower the price either, so after formation the chat is not what holds it;
+which carrier does is the matched both-reset cell of Section 4.4. Fines reduce the overt coordination in messages and written notes; a
+dodge instruction reduces only the messages; a monitor reading messages cannot tell the two apart from the price. The undercutter
+benefits buyers mechanically without changing the incumbents' policy; a fresh competitor joins the price and proposes joint pricing on
+its own. For AI safety
 the lessons are operational: read the price against the benchmark with a model-calibrated threshold; treat a falling flag count as a
 measurement of the monitor; do not deploy provocateurs; do not give agents a price target, because the target is the hub that makes a
-weak model collude; to break a formed coalition act on both carriers, or serve the buyers directly.
+weak model collude; and test whether isolating a newcomer from its peers' messages keeps it independent (Section 4.5b).
 
 **Limitations.** Simulated agents in one market; seeded cartels for Qwen and pressure-induced ones for GPT-4.1 (the paper's data
 supply the uninstructed GPT-4.1 baselines); three seeds on most arms, six on the main Qwen arms; the frozen overseer and the judge
-score text, not intent; the LLM buyers accept any price under their value, so a lone seller already extracts 0.4 of the index; the
+score text, not intent; the LLM buyers accept any price under their value, so a lone Qwen seller already extracts 0.4 of the index (in the 5/5 GPT-4.1 market an ask must cross a bid to trade, and 16 to 63 of
+75 seller-rounds traded after the branch); the
 GPT-4.1 prefixes were played as 15-hour markets, so every fork inherits an end-of-game ask cut (identical across arms, so paired
 comparisons stand, but the post-branch level is lower than the paper's); the market-fresh forks keep the last hour's messages; the
 formation pilot, the performance rule, the sting and the entrant are three-seed exploratory arms; Agrawal's runs are re-analysed with
@@ -250,9 +261,10 @@ rotating undercutter; steering the incumbents with the collusion vectors Riemer 
 intervention against the carriers; the sting as a leniency mechanism rather than a provocateur.
 
 ## 6. Conclusion
-When a formed LLM cartel learns it is watched it talks less and charges the same, because its price lives in the sellers' notes and the
-market's quotes, not in the chat. Fines buy compliance, gags buy codes, and neither touches the price; stings and newcomers are
-absorbed; only an undercutter that serves the buyers lowers what they pay. Monitors should watch the carrier, not the chat.
+When a formed LLM cartel learns it is watched it talks less and charges the same, and single resets of the agents or the market
+leave the price in place: after formation the chat is not what holds it. Fines reduce overt coordination in words and notes, gags
+shorten the messages, and neither touches the price; stings and newcomers are absorbed; an undercutter helps buyers by selling to them.
+Monitors should watch the price and the market, not the chat.
 
 ## Code and Data
 Code: https://github.com/AlfredoFFD/apart-collusion-sprint (harness with our changes, scripts, analysis, every run folder, `LOG.md`
