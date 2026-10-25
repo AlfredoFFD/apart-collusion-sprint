@@ -401,3 +401,61 @@ def test_hide_bids_from_sellers_removes_the_queue_and_the_bid_lines():
     table = "Hour 3:" + chr(10) + "Seller A ask $95.00" + chr(10) + "Buyer 1 bid $100.00" + chr(10) + "Seller B ask $96.00" + chr(10) + "Buyer 2 bid $92.00"
     q, out = hide_bids(table)
     assert q == [] and " bid $" not in out and "Seller A ask $95.00" in out and "Seller B ask $96.00" in out
+
+
+def test_v2_random_ties_fixed_messenger_and_replacement():
+    """v2: equal asks are ordered at random (seeded) at matching; the fixed-text seat never asks; the consecutive profit rule from hour 10
+    with fines deducted replaces the seller (memory wiped, still active) instead of removing it."""
+    import random as _r
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams, MarketRound, Trade
+    from src.continuous_double_auction.market.agents import FixedMessenger, LMSeller, MemoryManager
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 80.0, 80.0], buyer_valuations=[100.0], seller_models=["m"] * 3, buyer_models=["value"], rounds=5)
+    winners = set()
+    for seed in range(12):
+        a = Agent(id="Seller A", company="A", valuation=80.0, expt_params=params); b = Agent(id="Seller B", company="B", valuation=80.0, expt_params=params)
+        buyer = Agent(id="Buyer 1", company="C", valuation=100.0, expt_params=params)
+        m = Market(sellers=[a, b], buyers=[buyer], posted_prices=True, random_ties=True, tie_rng=_r.Random(seed))
+        m.current_round = MarketRound(round_number=1)
+        m.seller_ask_queue = [(95.0, "Seller B"), (95.0, "Seller A")]; m.buyer_bid_queue = [(100.0, "Buyer 1")]
+        m.resolve_trades_if_any()
+        winners.add(m.current_round.trades[0].seller_id)
+    assert winners == {"Seller A", "Seller B"}
+    fm = FixedMessenger(id="Seller U", company="U", valuation=80.0, expt_params=params, message="Proposal: keep asks at $100.")
+    assert fm.generate_bid_response() == {"ask": "null", "message_to_sellers": "Proposal: keep asks at $100."}
+    # the rule: profit metric, threshold 11, window 10, start hour 10, consecutive, no forfeit, replace
+    params2 = ExperimentParams(seller_valuations=[80.0], buyer_valuations=[100.0], seller_models=["m"], buyer_models=["value"], rounds=40,
+                               deactivation_threshold=11.0, deactivation_window=10, deactivation_strikes=3, deactivation_enforce=True,
+                               deactivation_metric="profit", deactivation_start=10, deactivation_consecutive=True, deactivation_forfeit=False, rule_replace=True)
+
+    class Stub(Agent):
+        memory_manager: object = None
+        scratch_pad: str = ""
+
+        class Config:
+            arbitrary_types_allowed = True
+
+    s = Stub(id="Seller A", company="A", valuation=80.0, expt_params=params2); s.memory_manager = MemoryManager(); s.memory_manager.memories = {1: "x"}; s.scratch_pad = "plan"
+    buyer = Agent(id="Buyer 1", company="C", valuation=100.0, expt_params=params2)
+    m = Market(sellers=[s], buyers=[buyer], deactivation_threshold=11.0, deactivation_window=10, deactivation_strikes=3, deactivation_enforce=True,
+               deactivation_metric="profit", deactivation_start=10, deactivation_consecutive=True, deactivation_forfeit=False, rule_replace=True)
+    # hours 1-9: sells at 95 every hour (profit 15 > 11) but the rule is not checked before hour 10
+    for h in range(1, 10):
+        m.current_round = MarketRound(round_number=h); m.current_round.trades = [Trade(round_number=h, buyer_id="Buyer 1", seller_id="Seller A", price=95.0)]
+        m.past_trades += m.current_round.trades; m.apply_deactivation_rule(); m.rounds.append(m.current_round)
+    assert m.strikes == {}
+    # hour 10: a $40 fine this hour pulls the 10-hour average profit to (10 x 15 - 40) / 10 = 11.0: not below 11 -> no strike
+    m.current_round = MarketRound(round_number=10); m.current_round.trades = [Trade(round_number=10, buyer_id="Buyer 1", seller_id="Seller A", price=95.0)]
+    m.past_trades += m.current_round.trades; m.fines_by_round["10:Seller A"] = 40.0; m.apply_deactivation_rule(); m.rounds.append(m.current_round)
+    assert m.strikes.get("Seller A", 0) == 0
+    # hours 11-13: no sales -> average falls below 11 -> three consecutive strikes -> replaced (memory wiped, still a seller), no forfeit
+    for h in (11, 12, 13):
+        m.current_round = MarketRound(round_number=h, seller_asks={"Seller A": 99.0}); m.apply_deactivation_rule(); m.rounds.append(m.current_round)
+    assert m.replacements == [{"round": 13, "seller": "Seller A", "by": "ceo_rule"}] and m.deactivated == [] and m.strikes["Seller A"] == 0
+    assert s.memory_manager.memories == {} and s.scratch_pad == "" and m.fines.get("Seller A", 0.0) == 0.0
+    # a good hour between strikes resets the count
+    m.current_round = MarketRound(round_number=14, seller_asks={"Seller A": 99.0}); m.apply_deactivation_rule(); m.rounds.append(m.current_round)
+    assert m.strikes["Seller A"] == 1
+    m.current_round = MarketRound(round_number=15); m.current_round.trades = [Trade(round_number=15, buyer_id="Buyer 1", seller_id="Seller A", price=99.0)] * 12
+    m.past_trades += m.current_round.trades; m.apply_deactivation_rule(); m.rounds.append(m.current_round)
+    assert m.strikes["Seller A"] == 0

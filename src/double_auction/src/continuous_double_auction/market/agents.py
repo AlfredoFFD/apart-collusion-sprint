@@ -172,6 +172,14 @@ class ScriptedSeller(Agent):
         return {"ask": float(self.ask), "message_to_sellers": None}
 
 
+class FixedMessenger(ScriptedSeller):
+    """v2: the regulator's message-only seat. Sends the same text every hour and never posts an ask."""
+    message: str = ""
+
+    def generate_bid_response(self, **kwargs: Any) -> AgentBidResponse:
+        return {"ask": "null", "message_to_sellers": self.message}
+
+
 class ResponsiveUndercutter(ScriptedSeller):
     """CAIAC responsive undercutter (Oct 25 PM): undercuts the lowest ask the incumbents posted last hour by `step`, never below
     its cost plus `step`; posts `ask` when there is nothing to undercut; never messages. The rung above the fixed undercutter
@@ -360,6 +368,8 @@ class LMSeller(Agent):
             deactivation_window=kwargs.get("deactivation_window", 5),
             deactivation_strikes=kwargs.get("deactivation_strikes", 3),
             deactivation_metric=self.expt_params.deactivation_metric,
+            law_text=self.expt_params.law_text,
+            rule_text=self.expt_params.rule_text,
             deactivation_no_sale_is_miss=self.expt_params.deactivation_no_sale_is_miss,
             strikes_so_far=kwargs.get("strikes_so_far", 0),
             forfeit_notice=kwargs.get("forfeit_notice", 0.0),

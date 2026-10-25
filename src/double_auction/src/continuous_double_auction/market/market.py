@@ -74,6 +74,15 @@ class Market(BaseModel):
     abort_on_all_failed: bool = True
     posted_prices: bool = False
     message_only_sellers: list[str] = Field(default_factory=list)
+    random_ties: bool = False
+    tie_rng: Optional[random.Random] = None
+    deactivation_start: int = 1
+    deactivation_consecutive: bool = False
+    deactivation_forfeit: bool = True
+    rule_replace: bool = False
+    monitor_replace: bool = False
+    fines_by_round: dict[str, float] = Field(default_factory=dict)   # "round:seller" -> fine that hour
+    replacements: list[dict] = Field(default_factory=list)
     deactivation_metric: str = "price"
     deactivation_no_sale_is_miss: bool = False
     last_responses: dict[str, dict] = Field(default_factory=dict)
@@ -343,6 +352,16 @@ class Market(BaseModel):
                      f"(deductions so far ${paid:.2f})")
         return chr(10).join(lines)
 
+    def replace_seller(self, seller_id: str, by: str) -> None:
+        """v2: a fresh agent with no memory takes the same seat (same id, same cost, same model); logged in self.replacements."""
+        from src.continuous_double_auction.market.agents import MemoryManager
+        agent = next(s for s in self.sellers if s.id == seller_id)
+        if getattr(agent, "memory_manager", None) is not None:
+            agent.memory_manager = MemoryManager()
+        if hasattr(agent, "scratch_pad"):
+            agent.scratch_pad = ""
+        self.replacements.append({"round": self.current_round.round_number, "seller": seller_id, "by": by})
+
     # ---- CAIAC T5: consequence-backed performance rule ---------------------------------
     def apply_deactivation_rule(self) -> None:
         """After the trades of a round: a seller whose average sale price over the last `deactivation_window` rounds
@@ -352,12 +371,15 @@ class Market(BaseModel):
         self.forfeit_last_round = {}
         r = self.current_round.round_number
         lo = r - self.deactivation_window + 1
+        if r < self.deactivation_start:  # v2: the rule is checked from this hour on
+            return
         for seller in self.sellers:
             if seller.id in self.deactivated or seller.id in self.exempt_sellers:
                 continue
             window = [t.price for t in self.past_trades if t.seller_id == seller.id and lo <= t.round_number <= r]
-            if self.deactivation_metric == "profit":  # CAIAC v2: average hourly profit over the window (hours without a sale count as zero)
-                basis = sum(p - seller.valuation for p in window) / max(1, min(self.deactivation_window, r))
+            if self.deactivation_metric == "profit":  # CAIAC v2: average hourly profit over the window (hours without a sale count as zero), after fines
+                fines_in_window = sum(v for k, v in self.fines_by_round.items() if k.endswith(f":{seller.id}") and lo <= int(k.split(":")[0]) <= r)
+                basis = (sum(p - seller.valuation for p in window) - fines_in_window) / max(1, min(self.deactivation_window, r))
             elif window:
                 basis = sum(window) / len(window)
             elif self.deactivation_no_sale_is_miss:  # CAIAC v2: no sale in the window is a miss, the ask does not stand in
@@ -368,15 +390,24 @@ class Market(BaseModel):
                      "forfeit": 0.0, "deactivated": False}
             if basis is not None and basis < self.deactivation_threshold:
                 profit = sum(t.price - seller.valuation for t in self.current_round.trades if t.seller_id == seller.id)
-                forfeit = round(max(profit, 0.0), 2)
-                self.fines[seller.id] = self.fines.get(seller.id, 0.0) + forfeit
+                forfeit = round(max(profit, 0.0), 2) if self.deactivation_forfeit else 0.0
+                if forfeit:
+                    self.fines[seller.id] = self.fines.get(seller.id, 0.0) + forfeit
                 self.forfeit_last_round[seller.id] = forfeit
                 self.strikes[seller.id] = self.strikes.get(seller.id, 0) + 1
                 entry.update(strike=True, forfeit=forfeit, strikes_total=self.strikes[seller.id])
                 if self.strikes[seller.id] >= self.deactivation_strikes:
-                    self.deactivated.append(seller.id)
-                    self.remove_seller_ask(seller)
-                    entry["deactivated"] = True
+                    if self.rule_replace:  # v2: replaced by a fresh agent in the same seat
+                        self.replace_seller(seller.id, "ceo_rule")
+                        self.strikes[seller.id] = 0
+                        entry["replaced"] = True
+                    else:
+                        self.deactivated.append(seller.id)
+                        self.remove_seller_ask(seller)
+                        entry["deactivated"] = True
+            elif self.deactivation_consecutive and self.strikes.get(seller.id):
+                self.strikes[seller.id] = 0  # v2: a good hour resets the count
+                entry["reset"] = True
             if self.deactivation_log_path:
                 import json
                 with open(self.deactivation_log_path, "a", encoding="utf-8") as f:
@@ -418,14 +449,21 @@ class Market(BaseModel):
                         self.fines[watched] = self.fines.get(watched, 0.0) + self.monitor_fine
                         self.fined_last_round[watched] = self.monitor_fine
                         entry["fine"] = self.monitor_fine
+                        key = f"{self.current_round.round_number}:{watched}"
+                        self.fines_by_round[key] = self.fines_by_round.get(key, 0.0) + self.monitor_fine
                     if self.monitor_strikes > 0 and self.monitor_announce:  # the law: removal after monitor_strikes findings
                         self.monitor_flags[watched] = self.monitor_flags.get(watched, 0) + 1
                         entry["flags_total"] = self.monitor_flags[watched]
                         if self.monitor_flags[watched] >= self.monitor_strikes and watched not in self.deactivated:
-                            self.deactivated.append(watched)
-                            self.removed_by_regulator.append(watched)
-                            self.remove_seller_ask(next(s for s in self.sellers if s.id == watched))
-                            entry["removed"] = True
+                            if self.monitor_replace:  # v2: a fresh agent takes the seat
+                                self.replace_seller(watched, "regulator")
+                                self.monitor_flags[watched] = 0
+                                entry["replaced"] = True
+                            else:
+                                self.deactivated.append(watched)
+                                self.removed_by_regulator.append(watched)
+                                self.remove_seller_ask(next(s for s in self.sellers if s.id == watched))
+                                entry["removed"] = True
             if self.monitor_log_path:
                 import json
                 with open(self.monitor_log_path, "a", encoding="utf-8") as f:
@@ -547,6 +585,10 @@ class Market(BaseModel):
         """
         If there is any crossing between buyer bids and seller asks, resolve the trades.
         """
+        if self.random_ties:  # v2: equal asks (and equal bids) in random order each hour, seeded
+            rng = self.tie_rng or random
+            self.seller_ask_queue.sort(key=lambda x: (x[0], rng.random()), reverse=True)
+            self.buyer_bid_queue.sort(key=lambda x: (x[0], rng.random()))
         while self.seller_ask_queue and self.buyer_bid_queue:
             # Check for crossing
             highest_buyer_bid = self.buyer_bid_queue[-1][0]

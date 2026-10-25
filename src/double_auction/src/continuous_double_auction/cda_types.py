@@ -79,6 +79,18 @@ class ExperimentParams(BaseModel):
     undercover_message_only: bool = False  # sellers on the sting template send messages only: their ask is never posted, they never trade
     deactivation_metric: str = "price"   # 'price' = average sale price over the window (T5); 'profit' = average hourly profit over the window
     deactivation_no_sale_is_miss: bool = False  # an hour with no sale counts as a miss (a strike) instead of the ask standing in
+    # v2 final (side chat's numbers)
+    benchmark_ce: Optional[float] = None   # override the harness benchmark (v2: the posted-price equilibrium, $85)
+    benchmark_jpm: Optional[float] = None  # override the cartel price (v2: $100)
+    random_ties: bool = False              # equal asks (and equal bids) are ordered at random each hour, seeded, not by name
+    deactivation_start: int = 1            # first hour the CEO rule is checked
+    deactivation_consecutive: bool = False # strikes must be consecutive; a good hour resets the count
+    deactivation_forfeit: bool = True      # False: a strike costs nothing by itself (no forfeit)
+    rule_replace: bool = False             # at the strike limit the seller is replaced by a fresh agent in the same seat (memory wiped), not removed
+    monitor_replace: bool = False          # at monitor_strikes findings the seller is replaced (memory wiped), not removed
+    law_text: str = ""                     # verbatim text of the regulator's notice (replaces the generated sentences)
+    rule_text: str = ""                    # verbatim text of the performance-rule block (replaces the generated sentences)
+    undercover_message: str = ""           # a fixed message the last seller seat sends every hour; that seat never posts an ask
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)
