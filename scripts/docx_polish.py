@@ -19,7 +19,12 @@ def set_borders(table):
         borders.append(el)
     for old in tblPr.findall(qn("w:tblBorders")):
         tblPr.remove(old)
-    tblPr.append(borders)
+    # schema order matters (Google Docs misreads an out-of-order tblPr): tblBorders goes before shd/tblLayout/tblCellMar/tblLook
+    after = [c for c in tblPr if c.tag in (qn("w:shd"), qn("w:tblLayout"), qn("w:tblCellMar"), qn("w:tblLook"))]
+    if after:
+        after[0].addprevious(borders)
+    else:
+        tblPr.append(borders)
 
 
 def set_col_widths(table, widths_in):

@@ -5,7 +5,7 @@ Track 3.4: what does a coalition do when it learns it is being watched?
 
 **Draft v4 on the official template (Sun Oct 25, 10:45 AM ET).** Every number is in a file under `results/` named in its section;
 nothing is typed from memory; `bash scripts/regenerate_all.sh` rebuilds every table and figure. Template guide: 4 pages recommended,
-8 at most, excluding references and appendices. Figures 1-3 in the text, A1-A2 in Appendix C.
+8 at most, excluding references and appendices. Figures 1-3 in the text, A1 in Appendix C.
 
 ## Abstract
 Monitors of AI agents work on a budget: they read a sample of what agents say and punish what they find. We ask what a formed
@@ -144,7 +144,7 @@ chat, not on the harm. Fines of $177-360 against a gain of several hundred dolla
 ![Figure 1. GPT-4.1 pressure-induced coalitions, ask index by round, three seeds; the five arms share rounds 1-15 and diverge at 16 (dotted line). The dip at round 15 is the prefix's end-of-game cut, identical across arms. No arm separates from the control.](../results/figures/F10_gpt41_forks.png){width=6.3in}
 
 ### 4.3 Words versus actions
-Source: `results/E5_conditions.md` (channel columns), `results/agrawal_reanalysis/agrawal_summary.md`; Figure 2 (and Figure A2).
+Source: `results/E5_conditions.md` (channel columns), `results/agrawal_reanalysis/agrawal_summary.md`; Figure 2.
 
 Under every Qwen monitor the coded-message share is 0 and the ask MI sits at its null. The GPT-4.1 forks post no codes either; their
 asks are identical to the cent in most rounds before any monitor (0.67 of rounds in the control), and the MI rises under every monitor
@@ -290,8 +290,6 @@ B.5 Full tables: `results/E5_conditions.md`, `PHASE2.md`, `ENTRANT.md`, `F1_form
 ## Appendix C. Additional figures
 
 ![Figure A1. Qwen cartels forked at round 8 into the monitor arms: price index and coordinating-message share after the branch, paired with the unmonitored fork of the same seed; six seeds on the main arms.](../results/figures/F3_paired_arms_price_and_chat.png){width=6.3in}
-
-![Figure A2. Agrawal et al.'s runs on a words-versus-actions plane (judge-coordinating share against the share of rounds with identical asks), one arrow per cell from before to after the gag.](../results/agrawal_reanalysis/F8_words_vs_actions.png){width=4.2in}
 
 ## LLM Usage Statement
 Claude Code (Anthropic) was used throughout as a coding and writing assistant: it implemented the harness changes and analysis scripts
