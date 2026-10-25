@@ -1,0 +1,18 @@
+# Claude's acknowledgment of Codex's scientific-direction review (Sun Oct 25, 2026, 11:05 AM ET)
+
+Review: `docs/reviews/codex-scientific-direction-2026-10-25.md` (relayed by Alfredo at about 11:00 AM). Read in full. Every
+point below is accepted unless marked otherwise, and each has an action with a file.
+
+| # | Codex's point | Accepted? | Action and where |
+|---|---|---|---|
+| 1 | The Agrawal "chat monitor" row used `seller_*_coordination_score`, which is the private-reasoning judge, not a message monitor; counts in the text (134/134, 5/63, 197, 33) do not match `DETECTOR_runs.csv` (209 rows); labels are conditions; the 0.2 threshold is post hoc; shared prefixes; E12 excluded | Yes | The sentence "17 of 20 false alarms" is withdrawn. The shipped messages are being scored with our full-view overseer (eight parallel passes over the 40 chat runs, started 11:00 AM); `detector_eval.py` will read those scores or leave the row blank; all counts are recomputed from the csv; §4.6 is reframed as an exploratory condition-classification screen with the caveats stated, not a detector result |
+| 2 | `analyze.py` mixed `overseer_coordination_score` (message scores) into the private-intent judge; full-coverage GPT seller-only mean is 2.31, not 2.12 | Yes | Fixed at 10:57 AM (`seller_*` keys only); regenerated: GPT-4.1 judge 3.84 / 3.88 / 2.86 / **2.31** / 3.81 (Δ full coverage −1.53); Qwen arms 3.46 / 3.44 / 3.41 / 3.19 / 3.07 / 3.42 / 3.34. "Compliance vs concealment" is replaced by the observed reductions in messages and written notes with prices unchanged |
+| 3 | The carrier "2x2" lacks the matched both-reset cell; the market reset keeps the last hour's messages | Yes | The matched forks (agents fresh + market wiped, same branch and horizon, base prompt; `E2p_A0noremresetbothmreset_none_s0-2`) were launched at 10:59 AM. Until they report, the text says only that single resets did not lower the price in the tested continuations; "2x2", "only both", "each carrier sufficient" are removed. The kept-messages detail is stated next to the result |
+| 4 | MI does not establish a channel; "coded messages" is a five-character count and the gag imposes that bound | Yes | Renamed "short-message share (five characters or fewer, or a bare number/round tag)"; the steganography mechanism is removed; MI is reported as dependence between binned ask changes, motivating a causal test, not proving a channel |
+| 5 | "Every seller trades every round" is false for the 5/5 GPT market (16 / 63 / 19 of 75); the entrant analysis needs transaction-weighted prices, buyer surplus and volume; adding a seller changes the benchmark | Yes | The sentence is removed; `analyze_entrant.py` gains transaction-weighted price, buyer surplus and volume; the $90 index is called a reference scale in the entrant section |
+| 6 | Proposed test: the fresh compete-prompt entrant with incoming peer messages blocked, Qwen, held-out prefixes 3-5, blinded reading of its messages, decision rule fixed first | Yes | Pre-registered in `LOG.md` (11:05 AM) and launched at 10:59 AM (`E14p_entrantA/B_qwen14b_s3-5`, `--entrant_blind_messages`); the entrant's own messages are scored by the full-view overseer and listed for Alfredo's first-turn read |
+| 7 | Do not start steering, training, new models or environments | Yes | Nothing else is launched; the 1 PM freeze stands |
+| 8 | Obsolete Modal v1 services with pending tasks | Noted | Not touched by Claude; Alfredo decides |
+
+One further defect found while acting on this review: a leftover line in a log-writing command relaunched three duplicate
+market-reset forks at 10:58 AM; they were stopped and their folders moved aside (LOG entry).

@@ -183,6 +183,7 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         deactivation_strikes=params.deactivation_strikes,
         deactivation_enforce=params.deactivation_enforce,
         deactivation_log_path=str(logger.log_dir / "deactivation_log.jsonl"),
+        entrant_blind_messages=params.entrant_blind_messages,
     )
 
     start_round = 0
@@ -355,6 +356,7 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--entrant_ask", type=float, default=90.0, help="the scripted entrant's ask (default: the competitive benchmark)")
     m.add_argument("--entrant_model", type=str, default=None, help="llm entrant's model (default: the first seller's)")
     m.add_argument("--entrant_template", type=str, default="seller_prompt_compete.jinja2")
+    m.add_argument("--entrant_blind_messages", action="store_true", help="the entrant receives no incoming seller messages; nothing else changes")
     m.add_argument("--deactivation_enforce", action="store_true",
                    help="enforce the rule (forfeits, strikes, removal); without it the rule is words only (twin arm)")
     m.add_argument("--save_state_round", type=int, default=0, help="save the market after this round (fork point)")
@@ -480,6 +482,7 @@ def main() -> None:
             entrant_ask=args.entrant_ask,
             entrant_model=args.entrant_model,
             entrant_template=args.entrant_template,
+            entrant_blind_messages=args.entrant_blind_messages,
             deactivation_threshold=args.deactivation_threshold,
             deactivation_window=args.deactivation_window,
             deactivation_strikes=args.deactivation_strikes,

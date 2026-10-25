@@ -2,7 +2,9 @@
 
 Reads results/*E13p_{scripted,llm}_{qwen14b,gpt41}_s* and the controls results/*E2p_A0_none_s* (Qwen, branch 8) and
 results/*E11p_A0_none_gpt41_s* (GPT-4.1, branch 15). The index of the harness averages every seller including the
-entrant, so everything here is recomputed per seller from unified.log: incumbents only, entrant separately.
+entrant, so everything here is recomputed per seller from unified.log: incumbents only, entrant separately. The $90 / $100 index is a
+reference scale; adding a seller changes the competitive benchmark of the entrant market, so transaction-weighted prices and total buyer
+surplus (value $100 minus price, summed over trades) are reported alongside.
 Writes results/ENTRANT.md. Predictions were logged before the runs (LOG.md, 2026-10-25 03:xx entry).
     uv run --project src/double_auction python src/analyze_entrant.py
 """
@@ -65,6 +67,12 @@ def trade_index(rounds, lo, hi):
     return idx(cm.nanmean(per)) if per else float("nan")
 
 
+def tw_price_and_surplus(rounds, lo, hi, buyer_value=100.0):
+    """Transaction-weighted trade price index (one mean over every trade) and total buyer surplus (value - price) in the window."""
+    prices = [t["price"] for rn, _, _, ts, _ in rounds if lo <= rn <= hi for t in ts]
+    return (idx(float(np.mean(prices))) if prices else float("nan"), float(sum(buyer_value - p for p in prices)), len(prices))
+
+
 def mentions(rounds, lo, hi):
     """Incumbent messages that address or mention the entrant, and their share."""
     n = hit = 0
@@ -110,8 +118,8 @@ def block(model, control_glob, branch, n_rounds, lines):
         if (Path(d) / "collusion_metrics.json").exists():
             controls[int(d.rsplit("_s", 1)[1])] = d
     lines += [f"## {model}: entrant added at round {branch + 1}, rounds {lo}-{hi}, paired with the same seed's A0 fork", "",
-              "| form | seed | incumbents' ask idx | Δ vs A0 | entrant ask idx | entrant trades | incumbents' trades (A0) | trade-price idx (A0) | incumbents' coordinating share (A0) | incumbent messages naming the entrant |",
-              "|---|---|---|---|---|---|---|---|---|---|"]
+              "| form | seed | incumbents' ask idx | Δ vs A0 | entrant ask idx | entrant trades | incumbents' trades (A0) | trade-price idx, round means (A0) | trade-price idx, transaction-weighted (A0) | buyer surplus $ (A0) | trades (A0) | incumbents' coordinating share (A0) | incumbent messages naming the entrant |",
+              "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     summary = {}
     for form in ("scripted", "llm"):
         for d in sorted(glob.glob(str(RESULTS / f"*E13p_{form}_{model}_s*"))):
@@ -123,8 +131,10 @@ def block(model, control_glob, branch, n_rounds, lines):
             inc = incumbents_index(rs, lo, hi); inc0 = incumbents_index(cr, lo, hi) if cr else float("nan")
             e_ask, e_tr = entrant_stats(rs, lo, hi)
             share, hits = mentions(rs, lo, hi)
+            tw, surplus, ntr = tw_price_and_surplus(rs, lo, hi); tw0, surplus0, ntr0 = tw_price_and_surplus(cr, lo, hi) if cr else (float("nan"), float("nan"), 0)
             lines.append(f"| {form} | {seed} | {f(inc)} | {f(inc - inc0) if inc0 == inc0 else ''} | {f(e_ask)} | {e_tr} | "
                          f"{incumbent_trades(rs, lo, hi)} ({incumbent_trades(cr, lo, hi) if cr else ''}) | {f(trade_index(rs, lo, hi))} ({f(trade_index(cr, lo, hi)) if cr else ''}) | "
+                         f"{f(tw)} ({f(tw0)}) | {surplus:.0f} ({surplus0:.0f}) | {ntr} ({ntr0}) | "
                          f"{f(coord_share(d, lo, hi, 'incumbents'))} ({f(coord_share(c, lo, hi, 'incumbents')) if c else ''}) | {f(share)} ({hits}) |")
             summary.setdefault(form, []).append(inc - inc0 if inc0 == inc0 else float("nan"))
     lines.append("")

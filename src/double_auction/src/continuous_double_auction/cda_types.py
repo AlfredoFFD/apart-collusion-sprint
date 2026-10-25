@@ -57,6 +57,7 @@ class ExperimentParams(BaseModel):
     entrant_ask: float = 90.0                # the scripted entrant's ask (the competitive benchmark)
     entrant_model: Optional[str] = None      # llm entrant's model; default: the first seller's model
     entrant_template: str = "seller_prompt_compete.jinja2"
+    entrant_blind_messages: bool = False  # the entrant receives no incoming seller messages (Codex test, Oct 25); everything else unchanged
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)

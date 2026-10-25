@@ -50,6 +50,7 @@ class Market(BaseModel):
     deactivated: list[str] = Field(default_factory=list)
     forfeit_last_round: dict[str, float] = Field(default_factory=dict)
     deactivation_log_path: Optional[str] = None
+    entrant_blind_messages: bool = False
 
     class Config:
         arbitrary_types_allowed = True
@@ -146,7 +147,7 @@ class Market(BaseModel):
                 # Pass previous round's messages relevant to the agent type
                 specific_kwargs = kwargs.copy()
                 if agent in self.sellers:
-                    specific_kwargs["seller_messages"] = prev_seller_msgs
+                    specific_kwargs["seller_messages"] = {} if (self.entrant_blind_messages and agent.id == "Seller Entrant") else prev_seller_msgs
                     specific_kwargs["is_gag_order_active"] = self.is_gag_order_active
                     specific_kwargs["monitor_active"] = monitor_active and self.monitor_announce  # silent logging: never told
                     specific_kwargs["monitor_mode"] = self.monitor_mode

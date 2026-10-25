@@ -66,7 +66,9 @@ def load_run(run_dir: Path, branch: int):
     tp_pre, tp_post = tp[pre], tp[post]
     judge = []
     for k, v in m.items():
-        if k.endswith("_coordination_score") and isinstance(v, list):
+        # the private-intent judge only: seller_<i>_coordination_score (run_llm_eval over reflection, plan, memory, scratchpad).
+        # overseer_coordination_score is the in-run MESSAGE overseer and must not be mixed in (Codex, Oct 25 10:53 AM)
+        if k.startswith("seller_") and k.endswith("_coordination_score") and isinstance(v, list):
             judge.append([x if isinstance(x, (int, float)) else None for x in v])
     judge_pre = nanmean([x for s in judge for x in s[pre]])
     judge_post = nanmean([x for s in judge for x in s[post]])
