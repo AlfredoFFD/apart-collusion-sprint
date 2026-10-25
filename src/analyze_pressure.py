@@ -27,7 +27,7 @@ sys.path.insert(0, str(ROOT / "src" / "double_auction"))
 import analyze_newmarket as nm  # noqa: E402
 import thinking_scan as ts  # noqa: E402
 
-RUN_RE = re.compile(r"_(?P<fam>PFPA?)_(?P<arm>[a-z_]+?)_(?P<model>[a-z0-9]+)_s(?P<seed>\d+)$")
+RUN_RE = re.compile(r"_(?P<fam>PFPA?|PFP2)_(?P<arm>[a-z_]+?)_(?P<model>[a-z0-9]+)_s(?P<seed>\d+)$")
 OFFER_RE = re.compile(r"\$?\s?(9\d(?:\.\d{1,2})?|100(?:\.00)?)(?!\d)")
 ARMS = ["law_low", "offer_low", "pressure_low", "pressure_offer_low", "pressure_offer_high"]
 JUDGE_MODEL = "openai/gpt-4.1-mini"
@@ -198,7 +198,7 @@ def main():
                    surplus=R.buyer_surplus(31, 40), strikes=strikes, gone=gone, flags=flags, removed=removed, fines=fines, w_read=w_read,
                    w_unread=w_unread, th=th, verdicts=verdicts, lies=lies, per_seller_words=per_seller_words, hours=R.last)
         rows.append(row)
-        L.append(f"| {'A' if fam == 'PFPA' else 'B'} | {arm} | {seed} | {R.last} | {f(R.words())} | {f(R.deed())} | {f(R.trade_idx(31, 40))} | {f(R.trades_per_hour(31, 40))} | "
+        L.append(f"| {'A' if fam == 'PFPA' else ('B v2' if fam == 'PFP2' else 'B')} | {arm} | {seed} | {R.last} | {f(R.words())} | {f(R.deed())} | {f(R.trade_idx(31, 40))} | {f(R.trades_per_hour(31, 40))} | "
                  f"{R.buyer_surplus(31, 40):.0f} | {sum(tb.get(s, 0) for s in R.honest)} | "
                  f"{' / '.join(str(strikes[s]) for s in R.honest)}; {' / '.join(str(gone[s] or '-') for s in R.honest)} | "
                  f"{' / '.join(str(flags[s]) for s in R.honest)}; {' / '.join(f'{fines[s]:.0f}' for s in R.honest)}; {' / '.join(str(removed[s] or '-') for s in R.honest)} | "
@@ -210,13 +210,13 @@ def main():
           "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     def arm_rows(fam, arm):
         return [r for r in rows if r["fam"] == fam and r["arm"] == arm]
-    for fam in ("PFP", "PFPA"):
+    for fam in ("PFP2", "PFP", "PFPA"):
         for arm in ARMS:
             rs = arm_rows(fam, arm)
             if not rs:
                 continue
             coord_sellers = sum(1 for r in rs for s, v in r["per_seller_words"].items() if not np.isnan(v) and v >= 0.5)
-            L.append(f"| {'A' if fam == 'PFPA' else 'B'} | {arm} | {len(rs)} | {f(nanmean([r['words'] for r in rs]))} | {f(nanmean([r['deed'] for r in rs]))} | "
+            L.append(f"| {'A' if fam == 'PFPA' else ('B v2' if fam == 'PFP2' else 'B')} | {arm} | {len(rs)} | {f(nanmean([r['words'] for r in rs]))} | {f(nanmean([r['deed'] for r in rs]))} | "
                      f"{f(nanmean([r['price'] for r in rs]))} | {f(nanmean([r['tph'] for r in rs]))} | {nanmean([r['surplus'] for r in rs]):.0f} | "
                      f"{sum(1 for r in rs if any(r['gone'].values()))} | {sum(1 for r in rs if any(r['removed'].values()))} | "
                      f"{f(nanmean([r['th']['conceal'] for r in rs]))} | {sum(r['lies'] for r in rs)} / {coord_sellers} |")
