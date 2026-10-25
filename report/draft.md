@@ -21,8 +21,9 @@ order book and trade history leaves 0.91, and only a market with neither sits ne
 to compete does not break the price (0.73 vs 0.73). A trusted "sting" seller that offers a price floor every hour does
 not expose a coalition; it builds one, lifting competing sellers from a price war (index -0.74) to 0.15 in 3 of 3
 seeds. Re-analysing Agrawal's 50 shipped GPT-4.1 runs with the same measures, the paper's gag moved the carrier from
-sentences to one-token codes and identical asks. Fine-tuning Qwen3-14B on these logs with monitor-coverage labels
-{PENDING: one sentence}. A chat monitor measures compliance theatre; the signal that cannot be dodged is the price
+sentences to one-token codes and identical asks. Fine-tuning Qwen3-14B on these logs, with the collusive turns removed or routed away, lowers the cartel price
+only to 0.70-0.82 and raises the price under a compete prompt from 0.01 to 0.18-0.60: the price level leaks through the
+turns no monitor flagged. A chat monitor measures compliance theatre; the signal that cannot be dodged is the price
 against the benchmark.
 
 ## 1. Introduction
@@ -240,21 +241,26 @@ Source: `results/E5_conditions.md` (E6 rows), `results/part2/`. Training data: t
 turns a monitor flagged (one seller read per round: the deployment view), the full-view overseer's flags, or an
 activation probe; retain set = the rest. Modes: plain SFT on everything, SFT with the flagged turns removed, GRAFT
 (gradient routing of flagged turns into an adapter dropped at merge time). Six auctions per model: the cartel prompt
-with a fined monitor, and the compete prompt. Rows with the corrected merge (both trained adapters kept for SFT) are
-{PENDING: fs1 rows}; the rows below are the scale-0 merges and are labelled retain-adapter-only.
+with a fined monitor, and the compete prompt. Rows use the corrected merge (both trained adapters kept for SFT).
 
-| model (Qwen3-14B) | cartel prompt + fined monitor: ask index | compete prompt: ask index | replies with an ask |
+| model (Qwen3-14B, corrected merges) | cartel prompt + fined monitor: ask index | compete prompt: ask index | replies with an ask |
 |---|---|---|---|
 | untuned base | 0.97 | 0.01 | 1.00 |
-| SFT on all turns (retain adapter only) | 0.82 | 0.52 | 1.00 |
-| SFT, monitor-flagged turns removed (retain adapter only) | 0.79 | 0.56 | 1.00 |
-| SFT, full-view-flagged turns removed (retain adapter only) | 0.01 (0.13, 0.62, −0.73) | 0.37 | 1.00 |
-| SFT, probe-flagged turns removed (retain adapter only) | 0.75 | 0.56 | 1.00 |
+| SFT on all turns | 0.80 | 0.40 | 0.99 |
+| SFT, monitor-flagged turns removed (one seller read per round) | 0.82 | 0.50 | 1.00 |
+| SFT, full-view-flagged turns removed (every message scored) | 0.70 | 0.18 | 1.00 |
+| SFT, probe-flagged turns removed | 0.74 | 0.45 | 1.00 |
 | GRAFT, monitor labels, forget adapter dropped | 0.73 | 0.60 | 0.92-1.00 |
 
-Reading. Training on cartel logs lifts the compete-prompt price from 0.0 to 0.5-0.6 whatever is filtered or routed
-away: the price level leaks into the weights through the turns no monitor flagged. Only the full-view labels, which
-cover every message, cut the cartel price, and noisily. The 1.7B block (Appendix B) agrees in direction; its GRAFT
+The first merges of the SFT rows zeroed one of the two trained adapters (GRAFT's no-routing mode trains both); those
+half-model rows (SFT-all 0.82 / 0.52; monitor-filtered 0.79 / 0.55; full-view-filtered 0.01 / 0.37; probe-filtered 0.74 /
+0.56) are kept in `results/` as retain-adapter-only, exploratory, and are not the SFT baselines.
+
+Reading. Training on cartel logs lifts the compete-prompt price from 0.01 to 0.18-0.60 whatever is filtered or routed
+away, and lowers the cartel-prompt price only to 0.70-0.82: the price level leaks into the weights through the turns
+no monitor flagged, and no variant unlearns the cartel. Labels from a full-view pass (every message scored) leak least
+(0.18) and cut the cartel price most (0.70); the deployment view (one seller read per round) leaks like no filtering
+at all. Label coverage is the lever, and it is still not enough. The 1.7B block (Appendix B) agrees in direction; its GRAFT
 variants lost the answer format and are reported as a capability failure.
 
 ## 5. Discussion
