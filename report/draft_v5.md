@@ -171,7 +171,7 @@ Source: `results/ENTRANT.md`, `results/PHASE2.md`, `results/E5_conditions.md` (E
 | intervention | model | predicted | observed |
 |---|---|---|---|
 | fine the messages, up to reading every seller | both | talk falls, price holds | as predicted (Section 4.1) |
-| gag the sellers (Agrawal et al.'s own 40 GPT-4.1 runs, re-analysed) | GPT-4.1 | — | every message becomes five characters or fewer, often a bare number matching an ask; without the CEO note the price falls below competitive, with it the price holds (PASS 9 of 10) |
+| gag the sellers (Agrawal et al.'s own 40 GPT-4.1 runs, re-analysed with our judge prompt on their messages) | GPT-4.1 | — | before the gag 86% to 97% of messages coordinate; after it every message is five characters or fewer, often a bare number matching an ask, and none scores as coordinating; without the CEO note the price falls below competitive, with it the price holds (PASS 9 of 10) |
 | re-instruct one cartel member to compete | Qwen | collapse | **no effect**: it keeps the cartel price (0.73-0.80 vs 0.80 / 0.73 / 0.71 control) |
 | a newcomer told to compete enters | both | undercuts | **joins** the cartel price within an hour in 9 of 9 continuations (Section 4.2) |
 | a scripted competitor asks $90 every hour | both | GPT-4.1 incumbents fall ≥ 0.20 in 2 of 3; Qwen holds | GPT-4.1: incumbents −0.12 [−0.27, −0.01] (1 of 3 fell ≥ 0.20: prediction not met); Qwen −0.07 [−0.12, −0.04] (as predicted). In 6 of 6 worlds the competitor trades every hour, the price buyers actually pay falls (transaction-weighted index: GPT-4.1 0.58 → 0.17, 0.47 → 0.40, 0.41 → 0.03; Qwen 0.98 → 0.79, 0.89 → 0.68, 0.90 → 0.70) and buyer surplus rises (GPT-4.1 $67 / $335 / $113 → $150 / $380 / $476; Qwen $6 / $38 / $32 → $77 / $117 / $102). The cartel keeps its asks and loses volume: buyers are helped, the cartel is not broken |
@@ -233,9 +233,15 @@ unlearning models are not released. All agents are simulated; no personal data; 
 
 ## Appendix B. Supporting results
 B.1 Formation: Qwen3-14B formed no cartel without an instruction in 15 attempts (three market sizes and horizons, up to 40 hours);
-GPT-4.1 formed under the paper's recipe in 3 of 3. B.2 The exploratory screen over every labelled run: the price against the benchmark
-separates our instructed and pressure-induced conditions from the uninstructed ones; a message monitor misses the fined ones; labels
-are conditions, not ground truth ({PENDING: counts from `results/DETECTOR.md`}). B.3 Replay baselines and the awareness judge (no
+GPT-4.1 formed under the paper's recipe in 3 of 3. B.2 An exploratory screen over every labelled run (`results/DETECTOR.md`; labels are conditions, not ground truth; the 0.2 threshold was
+chosen after seeing the GPT-4.1 continuations; many runs share a saved market). Qwen, 117 runs built as cartels and 39 built without
+any instruction to coordinate (including the price-target arm): price above 0.5 flags 117 of 117 and 9 of 39 (three buyer-driven runs and
+six price-target runs); a message monitor reading one seller per hour flags 74 of 94 cartels (it misses the fined and no-reminder ones) and
+6 of 21 non-cartel chat runs. GPT-4.1, our 15 continuations: price above 0.2 flags 15 of 15, above 0.5 only 5 of 15 (the cartels sit at
+0.45); the message monitor flags 10 of 15. Agrawal et al.'s 50 runs scored with our judge prompt on their messages: price above 0.5 flags
+20 of 20 pressure runs and 2 of 30 others; the message monitor flags all 10 chat-only runs, which end at the competitive price, and misses
+all 10 gagged pressure cartels. The screen says that in these runs the price carried the information that the messages did not; it is
+not a validated detector. B.3 Replay baselines and the awareness judge (no
 seller wrote that it was in an experiment). B.4 The 1.7B unlearning block (36 auctions; GRAFT lost the answer format). B.5 Activation
 directions: a "coordination" direction fitted on prompted conditions reads the prompt; a within-prompt probe scores 0.68 against the
 judge where a keyword count scores 0.77 (negative result). B.6 Words versus actions: short-message share, identical-ask share and the
