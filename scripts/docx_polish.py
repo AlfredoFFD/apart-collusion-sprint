@@ -36,14 +36,22 @@ def set_col_widths(table, widths_in):
 
 def main(path):
     d = Document(path)
+    import os
     for t in d.tables:
-        set_borders(t)
+        if os.environ.get("NO_BORDERS") != "1":
+            set_borders(t)
         for row in t.rows:
             for cell in row.cells:
                 for p in cell.paragraphs:
                     p.paragraph_format.space_before = Pt(0); p.paragraph_format.space_after = Pt(0)
                     for r in p.runs:
                         r.font.size = Pt(8.5)
+        # Google Docs merges a bordered table's header row into the next row when the row carries w:tblHeader; drop the marker
+        for row in t.rows:
+            trPr = row._tr.trPr
+            if trPr is not None:
+                for h in trPr.findall(qn("w:tblHeader")):
+                    trPr.remove(h)
         header = " ".join(c.text.strip().lower() for c in t.rows[0].cells) if t.rows else ""
         if header.startswith("intervention (level)"):
             set_col_widths(t, [1.7, 0.9, 1.1, 3.3])

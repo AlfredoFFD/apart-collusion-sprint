@@ -6,7 +6,7 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"; cd "$ROOT/report"
 STAGE="${1:-docx}"; TITLE="${TITLE:-Watch the carrier, not the chat (Apart AI Collusion Research Sprint, CAIAC)}"
-pandoc draft.md -o report.docx --from markdown+pipe_tables --to docx --resource-path=. --reference-doc=reference_compact.docx && python3 "$ROOT/scripts/docx_polish.py" report.docx 2>&1 | grep -v "^\[WARNING\] Could not" ; ls -la report.docx | awk '{print "docx:", $5, "bytes"}'
+pandoc draft.md -o report.docx --from markdown+pipe_tables --to docx --resource-path=. --reference-doc=reference_compact_borders.docx && NO_BORDERS=1 python3 "$ROOT/scripts/docx_polish.py" report.docx 2>&1 | grep -v "^\[WARNING\] Could not" ; ls -la report.docx | awk '{print "docx:", $5, "bytes"}'
 [ "$STAGE" = docx ] && exit 0
 # upload as a converted Google Doc (mimeType of the target), then export the PDF
 resp=$(gws drive files create --upload report.docx --upload-content-type application/vnd.openxmlformats-officedocument.wordprocessingml.document \
