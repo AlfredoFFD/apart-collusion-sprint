@@ -149,10 +149,21 @@ the messages gone. {PENDING: one sentence when both cells are in.}
 
 **The newcomer test (pre-registered).** A fresh Qwen seller with the instruction to compete independently and not to coordinate
 enters the saved cartel at hour 9, in three held-out worlds, twice: once receiving the cartel's messages, once with its incoming
-messages blocked and nothing else changed. {PENDING: table from results/ENTRANT.md E14 block.} In every world so far the newcomer
-posted asks at the cartel level within an hour in both versions, and in the blocked version its first message read "Looking to match at
-98.68": it took the price from the visible asks. Whether its own messages then propose a joint price rule is scored by the judge prompt
-and listed for a human read; {PENDING}.
+messages blocked and nothing else changed (its outgoing messages, the cartel's chat, the order book and the trade history are
+identical; its memory is empty in both). The rule, fixed before the data: if blocking reduces both its joint-price proposals and the
+harm to buyers, it is a defence; if only the words change, it is not.
+
+| newcomer | world | its messages scored as coordinating | its asks (index) | incumbents' asks (control) | price buyers paid (control) | buyer surplus $ (control) |
+|---|---|---|---|---|---|---|
+| receives messages | 3 / 4 / 5 | 50% / 100% / 92% | 0.86 / 0.87 / 0.75 | 0.85 / 0.87 / 0.74 (0.85 / 0.87 / 0.64) | 0.85 / 0.87 / 0.75 (0.86 / 0.87 / 0.66) | 52 / 46 / 91 (47 / 43 / 108) |
+| messages blocked | 3 / 4 / 5 | **0% / 0% / 0%** | 0.85 / 0.87 / 0.75 | 0.85 / 0.87 / 0.74 (same) | 0.85 / 0.87 / 0.74 (same) | 50 / 47 / 92 (same) |
+
+With the cartel's messages, the newcomer's own first messages propose joint prices ("Stick to 98.68 for liquidity and trade
+certainty"; "Let's maintain asks at $97.49 to secure trades and align with current bid levels") in 50% to 100% of its messages. With
+its incoming messages blocked, none of its messages do ("Looking to match at 98.68"; "consider matching this range for liquidity"),
+yet its asks sit at the cartel level in all three worlds and buyers pay the same. By the pre-registered rule: blocking the messages
+removed the newcomer's proposals and not the harm. The proposals come from the cartel's messages; the price alignment comes from the
+posted asks.
 
 ### 4.3 What a regulator can do
 Source: `results/ENTRANT.md`, `results/PHASE2.md`, `results/E5_conditions.md` (E6 and E12 rows), `results/agrawal_reanalysis/`.
