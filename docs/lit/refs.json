@@ -559,5 +559,35 @@
   "id": "10.1257/aer.20190623",
   "title": "Artificial Intelligence, Algorithmic Pricing, and Collusion",
   "author": "Calvano"
+ },
+ {
+  "id": "2610.28787",
+  "title": "Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets",
+  "author": "Tran"
+ },
+ {
+  "id": "2609.02580",
+  "title": "Competitive Market Behavior of LLMs",
+  "author": "Struski"
+ },
+ {
+  "id": "2610.21711",
+  "title": "How language model agents reshape price competition",
+  "author": "Bichler"
+ },
+ {
+  "id": "2609.20548",
+  "title": "Mitigating Retaliatory Algorithmic Collusion in Repeated Games",
+  "author": "Sivachandran"
+ },
+ {
+  "id": "2606.03030",
+  "title": "Do Matching Mechanisms Work with LLM Agents?",
+  "author": "Hoshino"
+ },
+ {
+  "id": "2411.16574",
+  "title": "The Illusion of Collusion",
+  "author": "Douglas"
  }
 ]
