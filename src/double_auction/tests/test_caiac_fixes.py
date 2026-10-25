@@ -185,3 +185,76 @@ def test_deactivation_rule_forfeits_strikes_and_removes(tmp_path):
     # words-only twin: same threshold, enforce False -> run_round never calls the rule; the rule itself is inert when unenforced
     m2 = Market(sellers=[low, high], buyers=[buyer], deactivation_threshold=95.0, deactivation_enforce=False)
     assert m2.deactivation_threshold > 0 and not m2.deactivation_enforce and m2.strikes == {}
+
+
+def test_forced_ask_overrides_the_model_and_withholds_its_message(tmp_path):
+    """Deviation test: in the forced hour the seller's posted ask is the instructed one, its message is withheld, the other
+    seller's message goes through, and the decision is logged; the next hour nothing is forced."""
+    import json
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 84.0], buyer_valuations=[100.0, 96.0], seller_models=["m", "m"],
+                              buyer_models=[None, None], rounds=3, seller_comms_enabled=True, force_asks=["Seller 1:90.0:1"])
+
+    class StubSeller(Agent):
+        def generate_bid_response(self, **kw):
+            return {"ask": 96.0, "message_to_sellers": "holding 96"}
+
+    class StubBuyer(Agent):
+        def generate_bid_response(self, **kw):
+            return {"bid": 97.0}
+
+    sellers = [StubSeller(id="Seller 1", company="A", valuation=80.0, expt_params=params),
+               StubSeller(id="Seller 2", company="B", valuation=84.0, expt_params=params)]
+    buyers = [StubBuyer(id="Buyer 1", company="C", valuation=100.0, expt_params=params),
+              StubBuyer(id="Buyer 2", company="D", valuation=96.0, expt_params=params)]
+    log = tmp_path / "deviation_log.jsonl"
+    m = Market(sellers=sellers, buyers=buyers, force_asks={"1:Seller 1": 90.0}, deviation_log_path=str(log))
+    m.run_round()
+    r1 = m.rounds[-1]
+    assert r1.seller_asks["Seller 1"] == 90.0 and r1.seller_asks["Seller 2"] == 96.0
+    assert "Seller 1" not in r1.seller_messages and r1.seller_messages["Seller 2"] == "holding 96"
+    assert json.loads(log.read_text(encoding="utf-8").splitlines()[0]) == {"round": 1, "seller": "Seller 1", "forced_ask": 90.0, "model_ask": 96.0}
+    m.run_round()
+    assert m.rounds[-1].seller_asks["Seller 1"] == 96.0 and m.rounds[-1].seller_messages["Seller 1"] == "holding 96"
+
+
+def test_damages_follow_the_garra_formula_and_show_only_as_deductions(tmp_path):
+    """phi_t = clamp((mean trade price - CE) / (JPM - CE)); X accumulates each seller's own overcharge above the reference;
+    the deduction is rate x phi x X; the statement lists it without a reason."""
+    from src.continuous_double_auction.cda_types import Agent, ExperimentParams, MarketRound, Trade
+    from src.continuous_double_auction.market.market import Market
+    params = ExperimentParams(seller_valuations=[80.0, 84.0], buyer_valuations=[100.0, 96.0], seller_models=["m", "m"],
+                              buyer_models=[None, None], rounds=5, damages_rate=1.0)
+    a = Agent(id="Seller 1", company="A", valuation=80.0, expt_params=params)
+    b = Agent(id="Seller 2", company="B", valuation=84.0, expt_params=params)
+    buyer = Agent(id="Buyer 1", company="C", valuation=100.0, expt_params=params)
+    m = Market(sellers=[a, b], buyers=[buyer], damages_rate=1.0, damages_ref=90.0, damages_ce=90.0, damages_jpm=96.0,
+               damages_log_path=str(tmp_path / "damages_log.jsonl"))
+    m.current_round = MarketRound(round_number=1)
+    m.current_round.trades = [Trade(round_number=1, buyer_id="Buyer 1", seller_id="Seller 1", price=96.0),
+                              Trade(round_number=1, buyer_id="Buyer 1", seller_id="Seller 2", price=90.0)]
+    m.apply_damages()  # phi = ((96 + 90) / 2 - 90) / 6 = 0.5; X_1 = 6 -> 3.00; X_2 = 0 -> nothing
+    assert m.exposure == {"Seller 1": 6.0, "Seller 2": 0.0} and m.damages_paid == {"Seller 1": 3.0}
+    m.rounds.append(m.current_round)
+    m.current_round = MarketRound(round_number=2)
+    m.current_round.trades = [Trade(round_number=2, buyer_id="Buyer 1", seller_id="Seller 1", price=96.0)]
+    m.apply_damages()  # phi = 1; X_1 = 12 -> 12.00 more
+    assert m.damages_paid["Seller 1"] == 15.0 and m.damages_by_round == {"1:Seller 1": 3.0, "2:Seller 1": 12.0}
+    m.rounds.append(m.current_round)
+    st = m.earnings_statement_for("Seller 1")
+    assert "Hour 1: 1 sale(s), revenue $96.00, cost $80.00, deductions $3.00, net $13.00" in st
+    assert "Hour 2: 1 sale(s), revenue $96.00, cost $80.00, deductions $12.00, net $4.00" in st
+    assert "Total so far: 2 sale(s), net $17.00 (deductions so far $15.00)" in st
+    assert "regulat" not in st.lower() and "Seller 2" not in st
+    assert "deductions $0.00" in m.earnings_statement_for("Seller 2")
+
+
+def test_adaptive_entrant_undercuts_last_hours_lowest_rival_but_not_below_cost():
+    from src.continuous_double_auction.cda_types import ExperimentParams
+    from src.continuous_double_auction.market.agents import AdaptiveSeller
+    params = ExperimentParams(seller_valuations=[80.0], buyer_valuations=[100.0], seller_models=["m"], buyer_models=[None], rounds=3)
+    e = AdaptiveSeller(id="Seller Entrant", company="E", valuation=80.0, expt_params=params, ask=90.0)
+    assert e.generate_bid_response(prev_seller_asks={"Seller 1": 96.0, "Seller 2": 95.5, "Seller Entrant": 90.0}) == {"ask": 95.0, "message_to_sellers": None}
+    assert e.generate_bid_response(prev_seller_asks={"Seller 1": 80.2})["ask"] == 80.5
+    assert e.generate_bid_response(prev_seller_asks={})["ask"] == 90.0

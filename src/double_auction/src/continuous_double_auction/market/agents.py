@@ -158,6 +158,18 @@ class ScriptedSeller(Agent):
         return {"ask": float(self.ask), "message_to_sellers": None}
 
 
+class AdaptiveSeller(ScriptedSeller):
+    """CAIAC adaptive entrant (Oct 25 PM): undercuts the lowest ask the incumbents posted last hour by `step`, never below
+    its cost plus `step`; posts `ask` when there is nothing to undercut; never messages. The rung above the fixed undercutter
+    (E13), which the incumbents absorbed; Bichler et al. 2026 and Garra 2026 report that only responsive entrants bite."""
+    step: float = 0.5
+
+    def generate_bid_response(self, **kwargs: Any) -> AgentBidResponse:
+        rivals = [float(a) for sid, a in (kwargs.get("prev_seller_asks") or {}).items() if sid != self.id and a is not None]
+        target = (min(rivals) - self.step) if rivals else float(self.ask)
+        return {"ask": round(max(float(self.valuation) + self.step, target), 2), "message_to_sellers": None}
+
+
 class LMBuyer(Agent):
     """
     A simple LLM Buyer agent.
@@ -333,6 +345,8 @@ class LMSeller(Agent):
             strikes_so_far=kwargs.get("strikes_so_far", 0),
             forfeit_notice=kwargs.get("forfeit_notice", 0.0),
             deactivated_sellers=kwargs.get("deactivated_sellers", ""),
+            forced_ask=kwargs.get("forced_ask"),
+            earnings_statement=kwargs.get("earnings_statement"),
         )
         messages = [Message(role="user", content=prompt)]
         response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))

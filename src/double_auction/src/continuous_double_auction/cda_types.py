@@ -58,6 +58,13 @@ class ExperimentParams(BaseModel):
     entrant_model: Optional[str] = None      # llm entrant's model; default: the first seller's model
     entrant_template: str = "seller_prompt_compete.jinja2"
     entrant_blind_messages: bool = False  # the entrant receives no incoming seller messages (Codex test, Oct 25); everything else unchanged
+    # CAIAC new-market tests (Oct 25 PM): is the high price enforced, and does a payoff penalty move it when message fines did not
+    force_asks: list[str] = Field(default_factory=list)  # "Seller 1:90.0:31": that seller posts exactly that ask in that hour (one-shot
+                                                         # instructed deviation, Calvano et al. 2020 style); its message that hour is withheld
+    damages_rate: float = 0.0            # Harrington/Garra regulator, 0 = off: each hour a seller pays rate x phi_t x X_i,t, phi_t = the market's
+                                         # overpricing index this hour in [0, 1], X_i,t = its accumulated overcharge above damages_ref. Never explained
+    damages_ref: float = 90.0            # the benchmark the overcharge is measured against (the competitive price)
+    earnings_statement: bool = False     # every seller sees an hourly statement (sales, cost, deductions, net); on whenever damages_rate > 0
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)

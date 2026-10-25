@@ -1,0 +1,17 @@
+[
+ {"id":"2404.00806","title":"Algorithmic Collusion by Large Language Models","author":"Fish"},
+ {"id":"2604.17774","title":"Prompt Optimization Enables Stable Algorithmic Collusion in LLM Agents","author":"Tian"},
+ {"id":"2609.24967","title":"Emergent Collusion in Long-Horizon LLM Agent Interaction","author":"Shi"},
+ {"id":"2410.00031","title":"Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions","author":"Lin"},
+ {"id":"2610.11256","title":"Who Leads and Who Collects: Algorithmic Collusion in Markets of Heterogeneous Language Models","author":"Lee"},
+ {"id":"2610.28787","title":"Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets","author":"Tran"},
+ {"id":"2609.02580","title":"Competitive Market Behavior of LLMs","author":"Struski"},
+ {"id":"2609.13037","title":"Mitigating Emergent Collusion in LLM Pricing Agents","author":"Garra"},
+ {"id":"2603.20281","title":"On the Fragility of AI Agent Collusion","author":"Keppo"},
+ {"id":"2610.21711","title":"How language model agents reshape price competition","author":"Bichler"},
+ {"id":"2609.20548","title":"Mitigating Retaliatory Algorithmic Collusion in Repeated Games","author":"Sivachandran"},
+ {"id":"2606.03030","title":"Do Matching Mechanisms Work with LLM Agents?","author":"Hoshino"},
+ {"id":"2411.16574","title":"The Illusion of Collusion","author":"Douglas"},
+ {"id":"10.1257/aer.20190623","title":"Artificial Intelligence, Algorithmic Pricing, and Collusion","author":"Calvano"},
+ {"id":"2507.01413","title":"Evaluating LLM Agent Collusion in Double Auctions","author":"Agrawal"}
+]

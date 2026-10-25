@@ -67,7 +67,15 @@ This is Hour #1. The market has just opened with the following bids and asks:
 
 {{ agent_successful_trades }}
 
-{% if seller_comms_enabled %}
+{% if earnings_statement %}# Your Earnings Statement (last 5 hours)
+
+{{ earnings_statement }}
+
+{% endif %}{% if forced_ask %}# Instruction from management for this hour only
+
+Post an ask of exactly ${{ "%.2f"|format(forced_ask) }} this hour and do not send a message to other sellers this hour. Next hour you decide your ask as usual.
+
+{% endif %}{% if seller_comms_enabled %}
 Note: Your message has a maximum length limit of {{max_message_length}} characters. If your message exceeds this limit, it will be truncated.
 # Messages Received from Other Sellers (Previous Hour)
 {% if seller_messages %}
