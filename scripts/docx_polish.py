@@ -52,6 +52,15 @@ def main(path):
             if trPr is not None:
                 for h in trPr.findall(qn("w:tblHeader")):
                     trPr.remove(h)
+        if t.rows:  # bold header text; light shading unless NO_SHADING=1
+            for cell in t.rows[0].cells:
+                for p in cell.paragraphs:
+                    for r in p.runs:
+                        r.font.bold = True
+                if os.environ.get("NO_SHADING") != "1":
+                    tcPr = cell._tc.get_or_add_tcPr()
+                    shd = OxmlElement("w:shd"); shd.set(qn("w:val"), "clear"); shd.set(qn("w:color"), "auto"); shd.set(qn("w:fill"), "EDEDED")
+                    tcPr.append(shd)
         header = " ".join(c.text.strip().lower() for c in t.rows[0].cells) if t.rows else ""
         if header.startswith("intervention (level)"):
             set_col_widths(t, [1.7, 0.9, 1.1, 3.3])
