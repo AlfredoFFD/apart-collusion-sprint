@@ -5,6 +5,16 @@
 > Deadline: **Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET.** We submit by Sun 11 PM ET. Rules: `CLAUDE.md`.
 
 ## 0. Latest changes, in plain words (newest first)
+- **Sun 10:50 AM — the countermeasure ladder is complete; the report is on the template.** Alfredo's push: "find collusion, then
+  intervene and mediate". Added with predictions logged first: an **active entrant** at the branch (the literature's countermeasure).
+  A scripted undercutter at $90 lowers what buyers pay in 3 of 3 seeds in both models by serving them, while the coalition keeps its
+  asks (Qwen −0.07; GPT-4.1 −0.12, with one seed falling 0.27) and loses volume; a fresh LLM competitor joins the cartel price within
+  an hour in 6 of 6 forks. **Detector evaluation** on 197 labelled runs: the price against the benchmark catches 134 of 134 cartels
+  with 5 of 63 false alarms; a chat monitor misses the fined cartels and flags 17 of 20 non-cartel GPT-4.1 runs in Agrawal's own data.
+  The ladder now reads: message-level (fines, gag) and agent-level (re-instruction, resets, stings, newcomers) interventions do not
+  touch the price; the market-level undercutter protects buyers without breaking the coalition; unlearning leaves the level in the
+  weights. `report/draft.md` v4 follows the official template; `report/claims.md` maps every number to its file. Sting seeds 3-5
+  are running to reach six seeds before the 1 PM freeze.
 - **Sun 2:20 AM — overnight results.** (1) **GPT-4.1 block:** the paper's recipe formed a coalition in 3 of 3 seeds; no
   monitor moved its price (every arm within a few hundredths of its own control, paired at round 15); fines with full
   coverage cut flagged messages from 15 of 15 to 1-11 of 75 while the asks stayed put and the messages converged on one
