@@ -70,8 +70,8 @@ Pre-registered rule: enforced collusion = rivals' ask falls >= $1 in >= 2 of 3 w
 | cartel | qwen14b | 0 | stmt2 | 0.74 | 0.74 | 3.00 | 0 | 313 | -13 | 1.00 |
 | cartel | qwen14b | 0 | dmg1 | 0.74 | 0.74 | 2.40 | 480 | -217 | -15 | 0.73 |
 | cartel | qwen14b | 1 | stmt1 | 0.58 | 0.58 | 2.00 | 0 | 150 | 90 | 1.00 |
-| cartel | qwen14b | 1 | stmt2 | 0.58 | 0.58 | 1.80 | 0 | 131 | 85 |  |
-| cartel | qwen14b | 1 | dmg1 | 0.54 | 0.53 | 2.00 | 194 | -49 | 95 |  |
+| cartel | qwen14b | 1 | stmt2 | 0.58 | 0.58 | 1.80 | 0 | 131 | 85 | 1.00 |
+| cartel | qwen14b | 1 | dmg1 | 0.54 | 0.53 | 2.00 | 194 | -49 | 95 | 0.87 |
 
 Trade-price index, dmg minus mean stmt, per world: +0.00, -0.04.
 Pre-registered rule: damages work = at least 0.25 below stmt in >= 2 of 3. Met in 0 of 2.
