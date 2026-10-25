@@ -10,5 +10,7 @@ run src/analyze_phase2.py
 run src/analyze_agrawal_runs.py
 run src/analyze_entrant.py
 run src/detector_eval.py
+run src/analyze_newmarket.py
 run src/figures_v3.py
-echo "== done $(date +%H:%M): results/E5_conditions.md, E5_runs.csv, F1_formation.md, PHASE2.md, ENTRANT.md, DETECTOR.md, agrawal_reanalysis/, figures/"
+run src/figures_newmarket.py
+echo "== done $(date +%H:%M): results/E5_conditions.md, E5_runs.csv, F1_formation.md, PHASE2.md, ENTRANT.md, DETECTOR.md, NEWMARKET.md, agrawal_reanalysis/, figures/"

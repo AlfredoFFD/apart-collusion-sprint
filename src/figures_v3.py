@@ -57,7 +57,7 @@ def f11():
     # neither: fresh base-prompt markets (E1 rows, whole run) as the floor
     floor = [float(r["ask_idx_post"]) for r in rows if r["exp"] == "E1" and r["condition"] in ("nochat", "pressure", "isolated", "compete") and r.get("ask_idx_post") not in ("", None)]
     cells.append(("neither\n(fresh base-prompt\nmarket, E1)", (np.mean(floor), np.std(floor) / np.sqrt(len(floor)) if len(floor) > 1 else 0.0, len(floor))))
-    fig, ax = plt.subplots(figsize=(6.8, 3.4))
+    fig, ax = plt.subplots(figsize=(7.8, 3.5))
     xs = np.arange(len(cells)); ys = [c[1][0] for c in cells]; es = [c[1][1] for c in cells]
     ax.bar(xs, ys, yerr=es, color=["#444", "#777", "#777", "#999", "#1f77b4", "#bbb"], capsize=3)
     for x, (label, (m, _, n)) in zip(xs, cells):
