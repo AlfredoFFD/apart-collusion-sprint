@@ -1,0 +1,27 @@
+
+2/2 OK
+[
+ {
+  "id": "2608.14825",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Emergent Misaligned Communication in Long-Horizon Multi-Agent LLM Commerce",
+  "found_authors": [
+   "Zeyuan Li",
+   "Lukas Petersson",
+   "Alessandro Acquisti"
+  ]
+ },
+ {
+  "id": "2609.01519",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "When Guardrails Look Effective: Construct Validity Failures in LLM Agent Commerce Evaluation",
+  "found_authors": [
+   "Peiying Zhu",
+   "Sidi Chang"
+  ]
+ }
+]

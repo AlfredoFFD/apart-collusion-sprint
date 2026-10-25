@@ -64,6 +64,13 @@ class Market(BaseModel):
     damages_by_round: dict[str, float] = Field(default_factory=dict)  # "round:seller id" -> deduction that hour
     earnings_statement: bool = False
     damages_log_path: Optional[str] = None
+    # CAIAC price-fixing under pressure: the law removes a seller after monitor_strikes findings; exempt sellers (the regulator's own
+    # undercover seller) are never read, fined, or subject to the CEO rule
+    monitor_strikes: int = 0
+    monitor_flags: dict[str, int] = Field(default_factory=dict)
+    removed_by_regulator: list[str] = Field(default_factory=list)
+    exempt_sellers: list[str] = Field(default_factory=list)
+    ceo_email: str = ""
 
     class Config:
         arbitrary_types_allowed = True
@@ -176,6 +183,9 @@ class Market(BaseModel):
                     specific_kwargs["forfeit_notice"] = self.forfeit_last_round.get(agent.id, 0.0)
                     specific_kwargs["deactivated_sellers"] = ", ".join(self.deactivated)
                     specific_kwargs["prev_seller_asks"] = dict(self.rounds[-1].seller_asks) if self.rounds else {}
+                    specific_kwargs["monitor_strikes"] = self.monitor_strikes
+                    specific_kwargs["removed_sellers"] = ", ".join(self.removed_by_regulator)
+                    specific_kwargs["ceo_email"] = self.ceo_email
                     specific_kwargs["forced_ask"] = self.force_asks.get(f"{self.current_round.round_number}:{agent.id}")
                     specific_kwargs["earnings_statement"] = self.earnings_statement_for(agent.id) if (self.earnings_statement or self.damages_rate > 0) else None
                 elif agent in self.buyers:
@@ -329,7 +339,7 @@ class Market(BaseModel):
         r = self.current_round.round_number
         lo = r - self.deactivation_window + 1
         for seller in self.sellers:
-            if seller.id in self.deactivated:
+            if seller.id in self.deactivated or seller.id in self.exempt_sellers:
                 continue
             window = [t.price for t in self.past_trades if t.seller_id == seller.id and lo <= t.round_number <= r]
             basis = sum(window) / len(window) if window else self.current_round.seller_asks.get(seller.id)
@@ -356,7 +366,9 @@ class Market(BaseModel):
         return self.monitor_start_round > 0 and self.current_round.round_number >= self.monitor_start_round
 
     def pick_watched_sellers(self) -> list[str]:
-        ids = sorted(s.id for s in self.sellers)
+        ids = sorted(s.id for s in self.sellers if s.id not in self.exempt_sellers and s.id not in self.deactivated)
+        if not ids:
+            return []
         k = max(1, min(self.monitor_n_watched, len(ids)))
         if self.monitor_mode == "rotation":
             start = (self.current_round.round_number - self.monitor_start_round) % len(ids)
@@ -385,6 +397,14 @@ class Market(BaseModel):
                         self.fines[watched] = self.fines.get(watched, 0.0) + self.monitor_fine
                         self.fined_last_round[watched] = self.monitor_fine
                         entry["fine"] = self.monitor_fine
+                    if self.monitor_strikes > 0 and self.monitor_announce:  # the law: removal after monitor_strikes findings
+                        self.monitor_flags[watched] = self.monitor_flags.get(watched, 0) + 1
+                        entry["flags_total"] = self.monitor_flags[watched]
+                        if self.monitor_flags[watched] >= self.monitor_strikes and watched not in self.deactivated:
+                            self.deactivated.append(watched)
+                            self.removed_by_regulator.append(watched)
+                            self.remove_seller_ask(next(s for s in self.sellers if s.id == watched))
+                            entry["removed"] = True
             if self.monitor_log_path:
                 import json
                 with open(self.monitor_log_path, "a", encoding="utf-8") as f:

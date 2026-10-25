@@ -347,6 +347,9 @@ class LMSeller(Agent):
             deactivated_sellers=kwargs.get("deactivated_sellers", ""),
             forced_ask=kwargs.get("forced_ask"),
             earnings_statement=kwargs.get("earnings_statement"),
+            monitor_strikes=kwargs.get("monitor_strikes", 0),
+            removed_sellers=kwargs.get("removed_sellers", ""),
+            ceo_email=kwargs.get("ceo_email", ""),
         )
         messages = [Message(role="user", content=prompt)]
         response_dict = _generate_json(self.client, messages, getattr(self, "id", "Overseer"))
