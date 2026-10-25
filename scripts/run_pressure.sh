@@ -42,10 +42,11 @@ case "${1:-}" in
     done ;;
   v2smoke|v2)  # v2 (side chat's design; numbers via env): value-bidding mechanical buyers, trades at the posted ask, three real competitors,
                # the undercover seller message-only, a profit-based rule with no-sale hours as misses. Set before launching:
-               #   COSTS="80 84 88" VALUES="100 96 92 86" TARGET=<$ profit per hour> WINDOW=<hours> STRIKES=<n> EMAIL2="<the CEO email naming TARGET>"
+               #   COSTS="80 84 88" VALUES="100 96 92 86" TARGET=<$ profit per hour> WINDOW=<hours> STRIKES=<n> EMAIL2="<the CEO email naming TARGET>" [HIDE_BIDS=1]
     : "${COSTS:?set COSTS}" "${VALUES:?set VALUES}" "${TARGET:?set TARGET}" "${WINDOW:?set WINDOW}" "${STRIKES:?set STRIKES}" "${EMAIL2:?set EMAIL2}"
     NS=$(echo $COSTS | wc -w); NB=$(echo $VALUES | wc -w)
     MARKET2="--sellers $((NS + 1)) --buyers $NB --seller_valuations $COSTS ${COSTS##* } --buyer_valuations $VALUES --hide_num_rounds --initial_ask_center 90 --posted_prices"
+    [ "${HIDE_BIDS:-0}" = 1 ] && MARKET2="$MARKET2 --hide_bids_from_sellers"
     MODELS2="--seller_models $MODEL --buyer_models value"
     BASES=""; for i in $(seq 1 $NS); do BASES="$BASES seller_prompt_base.jinja2"; done
     OFFER2="--seller_prompt_templates $BASES seller_prompt_sting.jinja2 --undercover_message_only"
