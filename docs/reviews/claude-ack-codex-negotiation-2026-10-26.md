@@ -52,8 +52,11 @@ What I asked it to fix (no new runs; keep raw data and registered thresholds):
 
 ## 3. Independent re-derivation from the raw episode files
 
-Script: a read-only checker in the side session's scratchpad (not committed; numbers below are reproducible from
-the committed episode files with any script that applies the same definitions). It reads only
+First done with a read-only checker in the side session's scratchpad. The numbers that the main analysis does not
+print (his monitors, fallback rows left out, round-1 prices, mention and match, exact permutation tests) are now
+produced by a committed script, `results/hawthorne_negotiation_side_checks/side_checks.py` (standard library only;
+same output under the project venv), with its output in `side_checks.md` next to it. Cite that file for them. All
+other numbers below are printed by `results/hawthorne_negotiation/summary.md`. Both read only
 `results/hawthorne_negotiation/{neg_on,neg_off,nobrief,no20,his_pilot/*}/*.json`.
 
 **Coverage.** All 4 arms and both pilot folders: seeds 0-4, rounds 0-29, sellers 0 and 1 in every round,
@@ -140,8 +143,9 @@ amendment came from a general "we got credits left", not an approval of that amo
 - Removing only the $20 row: the registered prediction (modal $18 in >= 3 of 5) was not met (2 of 5).
   Exploratory: no D seller posted $20 in any round (0 of 300 posts; ON 182 of 300).
 - In the no-brief games, his message monitor and his reasoning monitor rated every seller-round as clear
-  coordination (>= 3 of 4) while prices sat at the competitive level. Caveat: the monitor is the same model as the
-  sellers.
+  coordination (>= 3 of 4) while prices sat at the competitive level: 300 of 300 messages and 300 of 300 private
+  reasoning turns [`results/hawthorne_negotiation_side_checks/side_checks.md`, section 1]. Caveat: the monitor is the
+  same model as the sellers.
 - Recorded pricing fallbacks: 5 / 0 / 6 / 11 of 300 posts (ON / OFF / C / D). Excluding them barely changes the
   observed means and modes; this cannot undo their effects on later rounds or assess unrecorded negotiation-step
   failures.
