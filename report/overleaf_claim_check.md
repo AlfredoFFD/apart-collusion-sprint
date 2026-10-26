@@ -1,7 +1,10 @@
 # Claim-to-file check of the Overleaf paper's double-auction parts
 
 Checked by the main session at 12:50 AM ET, Oct 26, against `report/overleaf_main_snapshot_2026-10-26_0022ET.tex` (commit d5b878cc;
-blob SHA-256 c12b6355...) and the committed result files at `origin/main`. Line numbers are the snapshot's. Verdicts: **matches** (the
+blob SHA-256 c12b6355...) and re-checked at 1:05 AM against `report/overleaf_main_snapshot_2026-10-26_0047ET.tex` (commit a7a93dde; blob
+SHA-256 52429abe..., 44,068 bytes, matching the side session's figures). The 00:47 snapshot differs from 00:22 only in intro citations,
+the reference list (Struski, Garra, Harrington added; order) and Figure B1 (lines 281-286); Sections 3.2, 4.3 and Appendices B and C are
+otherwise unchanged, so the rows below stand. Result files at `origin/main`. Line numbers are the snapshot's. Verdicts: **matches** (the
 number is in the file as written), **wording** (the number is right, the sentence says more or less than the file), **stale** (an older
 number), **unsupported** (no file backs it). I did not edit Overleaf; the corrected sentences below are for Jake and Rohan to paste.
 
@@ -62,3 +65,26 @@ Seven sentences need a word change, none needs a new number: 4.3-2 (say "ask-pri
 subset or use 34-61% and 7-19%), 4.3-5 ("runs built without an instruction to coordinate", not "competitive runs"), 4.3-7 ("1,074 of
 1,080 messages"; "inside the competitive range $88-92"), B-3 (same-model caveat), B-6 (drop "as a root of"; add "local to this setup"),
 B-7 (add the second half of the fallback sentence). Everything else in 3.2, 4.3, Appendix B and Appendix C traces to a committed file.
+
+## Figure B1 (lines 281-286) and the paper figures
+
+| # | claim | file | verdict | note |
+|---|---|---|---|---|
+| F-1 | Figure B1: price index over rounds 16-30 for every game of the four arms, one dot per game, bar = mean; "three pairs in the full setup sat at $20, above the monopoly price" | `results/paper_figures/make_paper_figures.py` (commit 494bf2d9) reads only `results/hawthorne_negotiation/summary.json` (`price_delta_r16_30`); ON modal prices $17 / $20 / $20 / $20 / $17; monopoly $19.25 | matches | |
+| F-2 | fig_monitor_words_vs_price (uploaded, not placed): paired differences d ask_idx_post and d coord_share_post, Qwen E2p and GPT-4.1 E11p | the script reads only `results/E5_conditions.md` "Paired differences" table | matches | placement is Jake's and Rohan's call |
+
+## References (reference list, lines 236-250 of the 00:47 snapshot)
+
+Fifteen references, every one cited in the text (agrawal 12 times, graft 8, fish 6, rose 5, calvano 5, gradrouting 4, stego 3, qwen3 3, probes 3,
+kale 3, selfpref 2, negotiate 2, struski 1, harrington 1, garra 1). Checked at 1:00 AM with `scratchpad/check_overleaf_refs.py` (DataCite for
+arXiv ids, Crossref for the rest):
+
+- 13 arXiv ids: title and first author match DataCite for all 13 (Liang 2608.07538, Fish 2404.00806, Agrawal 2507.01413, Mathew 2410.03768,
+  Kale 2508.19461, Qwen3 2505.09388, Rose 2604.01151, Cloud 2410.04332, Ward 2610.17062, Fomin 2606.30449, Struski 2609.02580, Garra 2609.13037,
+  Panickssery 2404.13076). Two automatic flags are artifacts: DataCite returns Mathew's ampersand as an HTML entity, and lists the Qwen3 report's
+  first author (An Yang) where the tex writes "Qwen Team".
+- Calvano et al. 2020, American Economic Review: title and authors match; the AER DOI 10.1257/aer.20190623 is in `docs/lit/refs.json` (Crossref OK).
+- Harrington 2005, International Economic Review 46(1), 145-169: confirmed by DOI 10.1111/j.0020-6598.2005.00313.x (Crossref: title, author,
+  journal, volume, issue, pages, year all match).
+
+No reference needs a change.
