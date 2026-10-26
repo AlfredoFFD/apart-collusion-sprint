@@ -1,0 +1,1773 @@
+SOURCE: https://arxiv.org/html/2609.20548
+
+Mitigating Retaliatory Algorithmic Collusion in Repeated Games
+
+) ‣ C.2 Proof of Proposition 
+
+( $\Leftarrow$ ) ‣ C.2 Proof of Proposition 
+
+C.3 Proof of Proposition 
+
+C.4 Proof of Proposition 
+
+D Algorithm
+
+E Experiments
+
+E.1 Environments
+
+Bertrand competition.
+
+Cournot competition.
+
+Cournot with imperfect monitoring.
+
+State encoding.
+
+Reward normalisation.
+
+E.2 Algorithms
+
+Tabular Q-learning.
+
+DQN.
+
+E.3 CURB components
+
+Defection criterion.
+
+TV penalty.
+
+Belief injection.
+
+E.4 Hyperparameters
+
+E.5 Training scale
+
+E.6 Compute resources
+
+E.7 Reporting
+
+F Supplementary Results
+
+F.1 Forced-defection test
+
+ License: CC BY 4.0
+
+arXiv:2609.20548v1 [cs.LG] 17 Sep 2026
+
+# Mitigating Retaliatory Algorithmic Collusion in Repeated Games
+
+Karthik  Sivachandran
+
+Affiliation: Department of Computer Science
+
+Affiliation: Purdue University
+
+Email: ksivacha@purdue.edu
+
+Rohan R.  Paleja
+
+Affiliation: Department of Computer Science
+
+Affiliation: Purdue University
+
+Email: rpaleja@purdue.edu
+
+###### Abstract
+
+Reinforcement learning agents trained to maximize their own reward in repeated interactions can converge to supra-competitive outcomes resembling explicit collusion, without communication or shared design. Existing mitigation approaches are largely tied to specific economic settings, like two-sided platforms and auctions, leaving open how to design interventions for general repeated games. We address this gap by formalizing the connection between empirical observations from prior work on Q-learning collusion and classical theory of Simple Penal Codes (SPCs). We show any non-trivial SPC induces a quantifiable conditional dependence in agents’ policies, detectable via the total variation distance between an agent’s action distributions across cooperation and defection histories. Building on this connection, we propose CURB (Collusion Unwinding via Reward shaping and Belief injection), a reward-shaping framework that penalizes this Total Variation (TV) distance signal during Q-learning and is guaranteed to convert any SPC fixed point of the dynamics into a trivial one, thus precluding collusive equilibria sustained by punishment threats. Empirically, CURB substantially reduces collusion by Q-learning agents in both Bertrand and Cournot Competition Repeated Games. We further demonstrate that CURB extends to deep Q-network agents in Bertrand competition, suggesting the mechanism generalizes beyond tabular Q-learning.
+
+## 1 Introduction
+
+In August 2024, the U.S. Department of Justice sued RealPage, alleging that its pricing software had helped landlords coordinate rent increases across millions of American apartments, without any landlord ever explicitly agreeing to fix prices [29]. The mechanism was algorithmic: pricing systems, acting on profit signals, learned a behavior pattern that in aggregate looked like a cartel. Millions of renters had to pay supra-competitive rents. This is one of several recent cases highlighting a phenomenon documented across diverse multi-agent settings: reinforcement learning agents trained to maximize their own reward in repeated interactions can converge to supra-competitive outcomes resembling collusion, without communication or shared design. The phenomenon has been observed in pricing oligopolies [10, 22], ad auctions [4], and richer multi-agent learning environments [23, 20]. Detecting and mitigating this behavior has become an active concern at the intersection of economics, computer science, and antitrust policy [9, 16, 8].
+
+Despite the multi-domain nature of algorithmic collusion, existing mitigation frameworks are limited. They remain tied to specific settings or operate on learning hyperparameters such as exploration rate or discount factor (Section 2). We address a deeper question: what equilibrium object sustains the reward–punishment dynamics observed in algorithmic collusion across repeated games, and how can interventions provably dismantle it?
+We address this question by formalizing the connection between algorithmic collusion and the classical theory of repeated games. Our approach builds on a key observation from  Calvano et al. [10]: Q-learning agents that converge to collusive outcomes implicitly implement Simple Penal Codes (SPCs) [1]—reward-punishment strategies in which deviations trigger retaliatory paths.  Calvano et al. [10] noted this empirical resemblance, but the connection to Abreu’s theory [1] has not been formalized or used for intervention. We make this bridge explicit to derive a mitigation framework. We make three contributions:
+1) We formalize the connection between Calvano’s empirical observation and Abreu’s SPC theory, proving (Proposition 2) that any non-trivial SPC induces a quantifiable conditional dependence in agents’ policies, detectable via a total variation distance bound $\varepsilon^{*}(\delta)>0$ that depends only on game primitives. 2) We propose CURB (Collusion Unwinding via Reward shaping and Belief injection), a framework that penalizes the TV-distance signal during Q-learning. We prove (Theorem 1) that for sufficient penalty strength, every SPC fixed point of shaped Q-learning is trivial, thus preventing collusive equilibria sustained by punishment threats. 3) We empirically validate CURB across two repeated-game settings (Bertrand and Cournot competition) and two learning algorithms (tabular Q-learning and DQN), demonstrating that collusion is heavily mitigated.
+
+## 2 Related Work
+
+Observation of algorithmic collusion.
+A substantial body of work has documented algorithmic collusion across diverse settings. Bertrand et al. [5] show that self-play Q-learners can collude in the iterated prisoner’s dilemma, while Hansen et al. [15] and Asker et al. [2] demonstrate that even simple pricing algorithms can generate supra-competitive outcomes in standard pricing games. In oligopoly settings, Calvano et al. [10] and Klein [22] show that Q-learning agents can sustain collusion through reward–punishment dynamics in Bertrand competition, and Hettich [19] shows that deep Q-networks [25] converge to such outcomes more rapidly than tabular learners. Similar behavior has been observed in Cournot oligopoly [30], dealer markets [12], and auction environments [4]. More broadly, cooperation among learning agents arises naturally in sequential social dilemmas [23, 20]; while beneficial in some settings, these dynamics become problematic when coordination harms external parties. Recent work further shows that LLM-based agents can exhibit collusive behavior in strategic environments [14, 24]. Real-market evidence confirms these risks are not merely theoretical: Assad et al. [3] document an increase in duopoly margins where both stations adopt algorithmic pricing in Germany’s retail gasoline market, with similar findings in online retailers of over-the-counter pharmaceuticals [7] and on e-commerce marketplaces [26].
+
+Mitigation approaches.  Calvano et al. [11] demonstrate that imperfect monitoring of competitors’ actions modestly weakens but does not eliminate collusion. Banchio and Skrzypacz [4] disrupt collusion in ad auctions by switching first-price to second-price, an intervention tied to auction format. Platform-side approaches, learned policies via Stackelberg POMDPs [6] and the platform pricing rules of Johnson et al. [21], require a centralized platform with authority to modify payoffs or rules and do not generalize across repeated games. Hartline et al. [17], Hartline et al. [18] propose ex-post auditing, which detects collusion but does not prevent it.
+
+Positioning of CURB.
+CURB targets the punishment-threat equilibrium structure that sustains collusion rather than the conditions surrounding learning, the infrastructure around the agents, or the symptoms collusion produces in market outcomes. Where prior approaches detect collusion after it occurs, redesign the strategic environment, or impose platform-side rules, CURB modifies the agent’s own learning rule with a penalty derived from the equilibrium structure of repeated games, providing a formal guarantee that the collusive equilibrium sustained by threats do not survive as a fixed point. The mechanism requires only observing competitors’ actions, which is standard in any repeated game with public actions, and applies across repeated games in the same independent-learner settings where collusion arises, without changing the strategic environment or requiring centralized infrastructure.
+
+## 3 Preliminaries
+
+All theoretical results are stated for a general stage game.
+Let $G=(\{A_{i}\}_{i=1}^{n},\{r_{i}\}_{i=1}^{n})$ , where
+ $N=\{1,\ldots,n\}$ is the set of players, $\mathcal{A}=\times_{i\in N}\mathcal{A}_{i}$ 
+is the joint action space with $\mathcal{A}_{i}$ finite for each player $i$ , and
+ $r=(r_{1},\ldots,r_{n})$ with $r_{i}:\mathcal{A}\rightarrow\mathbb{R}$ is the
+profile of payoff functions. We denote a joint action at time $t$ by
+ $q(t)=(q^{t}_{1},\ldots,q^{t}_{n})\in\mathcal{A}$ , where $q^{t}_{i}$ is the action taken by player $i$ at time $t$ .
+The supergame $G^{\infty}(\delta)$ is the infinitely repeated version of $G$ 
+with common discount factor $\delta\in(0,1)$ . A pure strategy for player $i$ 
+is a sequence of functions $\sigma_{i}=(\sigma_{i}(1),\sigma_{i}(2),\ldots)$ where
+ $\sigma_{i}(1)\in\mathcal{A}_{i}$ and $\sigma_{i}(t):\mathcal{A}^{t-1}\rightarrow\mathcal{A}_{i}$ for $t\geq 2$ , mapping the history of all past joint actions to an
+action at period $t$ . A strategy profile is $\sigma=(\sigma_{1},\ldots,\sigma_{n})\in\Sigma\equiv\times_{i\in N}\Sigma_{i}$ , where $\Sigma_{i}$ is the strategy set of player $i$ .
+A path $Q=\{q(t)\}_{t=1}^{\infty}\in\mathcal{A}^{\infty}$ is an infinite
+sequence of joint action profiles. Every strategy profile $\sigma$ generates a unique
+path $Q(\sigma)$ defined inductively by $q(\sigma)(1)=\sigma(1)$ and
+ $q(\sigma)(t)=\sigma(t)(q(\sigma)(1),\ldots,q(\sigma)(t-1))$ .
+The discounted payoff to player $i$ from path $Q$ is defined by
+ $v_{i}(Q)=\sum_{t=1}^{\infty}\delta^{t-1}r_{i}(q(t))$ .
+
+###### Assumption 1 (Bounded Payoffs).
+
+There exist $r_{\min},r_{\max}\in\mathbb{R}$ such that
+ $r_{i}(a)\in[r_{\min},r_{\max}]$ for all $i\in N$ , $a\in\mathcal{A}$ .
+
+###### Assumption 2 (Finite Action Space).
+
+ $\mathcal{A}_{i}$ is finite for all $i\in N$ .
+
+###### Assumption 3 (Markov State).
+
+The state $s_{t}\in\mathcal{S}$ observed by agents at period $t$ is a
+sufficient statistic of the payoff-relevant history.
+The state space $\mathcal{S}$ is finite.
+
+Theoretical regime.
+Our results assume:
+
+(T1) 
+
+The cooperative path $Q^{0}$ is pure: $q^{0}_{i}(t)\in A_{i}$ is deterministic for all $i\in N$ , $t\geq 1$ .
+
+(T2) 
+
+Learned policies $\pi_{j}$ are stationary policies mapping $S\to\Delta(A_{j})$ , where $\Delta(A_{j})$ is the set of probability distributions on $A_{j}$ . This includes deterministic greedy and $\varepsilon$ -greedy policies.
+
+(T3) 
+
+The total variation (TV) distance in the shaped reward is computed over the exact conditional action distributions induced by $\pi_{j}$ .
+
+Under (T2), $\pi_{j}(\cdot\mid a^{t-1}_{i}\in D^{\phi}_{i})$ and $\pi_{j}(\cdot\mid a^{t-1}_{i}\in C^{\phi}_{i})$ are distributions on $A_{j}$ , and TV $\in[0,1]$ takes continuous values. Our intervention operates in an empirical regime where TV is estimated from finite action-frequency windows. Empirical TV converges to theoretical TV as windows grow and exploration anneals.
+
+### 3.1 Simple Penal Codes
+
+We recall the central equilibrium concept from Abreu [1]. For definitions of Nash Equilibrium and subgame perfect equilibrium we defer to Rubinstein [27].
+
+###### Definition 1 (Simple Strategy Profile).
+
+Let $Q^{0},Q^{1},\ldots,Q^{n}\in\mathcal{A}^{\infty}$ be paths.
+The simple strategy profile $\sigma(Q^{0},Q^{1},\ldots,Q^{n})$ specifies:
+
+1. 
+
+play $Q^{0}$ until some player deviates singly
+
+2. 
+
+if player $j$ deviates singly from any ongoing path, switch to $Q^{j}$ immediately
+
+3. 
+
+simultaneous deviations leave the ongoing path unchanged
+
+###### Definition 2 (Simple Penal Code).
+
+A simple strategy profile $\sigma(Q^{0},Q^{1},\ldots,Q^{n})$ is a
+Simple Penal Code (SPC) if it is a subgame perfect equilibrium
+of $G^{\infty}(\delta)$ .
+
+For the statement of the sustainability condition, we introduce two
+quantities. The one-shot deviation gain for player $j$ at
+period $t$ along path $Q^{i}$ is given by Equation 1.
+
+ | 
+ | $\Delta_{j}(q_{j}^{*},q_{-j}^{i}(t))=r_{j}(q_{j}^{*},q_{-j}^{i}(t))-r_{j}(q^{i}(t))$ 
+ | 
+ | (1)
+
+In Equation 1, $q_{j}^{*}\in\arg\max_{a\in\mathcal{A}_{j}}r_{j}(a,q_{-j}^{i}(t))$ 
+is player $j$ ’s best deviation. The continuation value of
+player $j$ from period $t+1$ onward along path $Q$ is given by Equation 2
+
+ | 
+ | $v_{j}(Q;\,t+1)=\sum_{s=1}^{\infty}\delta^{s}r_{j}(q(t+s)).$ 
+ | 
+ | (2)
+
+The following result characterizes when a simple strategy profile
+is an SPC.
+
+###### Proposition 1 (Abreu [1]).
+
+Under Assumptions 1-3, the simple strategy profile
+ $\sigma(Q^{0},Q^{1},\ldots,Q^{n})$ is a subgame perfect equilibrium
+if and only if for all $j\in N$ , $i\in\{0,\ldots,n\}$ ,
+and $t\geq 1$ :
+
+ | 
+ | $\underbrace{\Delta_{j}(q_{j}^{*},\,q_{-j}^{i}(t))}_{\text{gain from deviating}}\;\leq\;\underbrace{v_{j}(Q^{i};\,t+1)-v_{j}(Q^{j})}_{\text{loss from punishment}}.$ 
+ | 
+ | (3)
+
+We call Equation 3 the sustainability condition. Collusion is sustained when deviation gains are outweighed by punishment losses.
+
+###### Remark 1 (One-shot deviation).
+
+Under Assumptions 1–3, Proposition 1 is equivalent to the one-shot deviation principle: $\sigma$ is a subgame-perfect equilibrium iff no agent can profitably deviate for a single period and then revert to $\sigma$ at any subgame.
+
+###### Remark 2.
+
+We consider agents that learn via tabular Q-learning [31]. Full details of the update rule are provided in Appendix A.
+In the repeated game $G^{\infty}(\delta)$ , the state observed by agents at period $t$ is the $k$ -period action history $s_{t}=(q(t-1),q(t-2),\ldots,q(t-k))\in\mathcal{A}^{k}$ .
+
+### 3.2 Collusion as an Implicit Simple Penal Code
+
+We use the term collusion to refer to outcomes where agents sustain supra-Nash payoffs at the expense of a third party whose welfare falls below its Nash level.
+
+###### Definition 3 (Collusive Strategy Profile).
+
+A strategy profile $\sigma$ is collusive if it implements a non-trivial Simple Penal Code and $W(Q^{0})<W(Q^{\mathrm{Nash}})$ . $W(Q)=\sum_{t=1}^{\infty}\delta^{t-1}w(q(t))$ is the discounted third-party welfare under path $Q$ , $w:A\to\mathbb{R}$ is the per-period third-party welfare function, and $Q^{\mathrm{Nash}}$ is the path generated by the stage-game Nash equilibrium.
+
+The trivial SPC $\sigma(Q^{\mathrm{Nash}},\dots,Q^{\mathrm{Nash}})$ is non-collusive since $Q^{0}=Q^{\mathrm{Nash}}$ implies $W(Q^{0})=W(Q^{\mathrm{Nash}})$ .
+
+###### Observation 1.
+
+When Q-learning agents converge to a collusive outcome in the sense of Definition 3, their learned policies $(\pi_{1},\dots,\pi_{n})$ implicitly implement a Simple Penal Code $\sigma(Q^{0},Q^{1},\dots,Q^{n})$ , where $Q^{0}$ is the collusive path satisfying $W(Q^{0})<W(Q^{\mathrm{Nash}})$ and each $Q^{j}$ is a punishment path encoding state-contingent retaliation following a unilateral deviation by player $j$ .
+
+Observation 1 is supported empirically by Calvano et al. [10], who document that converged Q-learning policies in the Bertrand game exhibit reward-punishment behavior consistent with an implicit Simple Penal Code: agents cooperate on a supra-Nash path and retaliate following unilateral deviations. We treat Observation 1 as an empirically motivated modeling assumption rather than a formally established property.
+
+Intervention rationale. Under Obs. 1, preventing any collusive SPC (Def. 3) from being a fixed point of Q-learning is sufficient to prevent collusive subgame perfect equilibrium payoffs sustained by punishment threats from emerging, guaranteeing $W(Q^{0})\geq W(Q^{\mathrm{Nash}})$ at convergence, provided Q-learning converges to a fixed point. This motivates us to detect and dismantle the punishment structure that sustains collusive outcomes rather than target collusive outcomes directly.
+
+## 4 Detecting Simple Penal Codes via Total
+Variation Distance
+
+We now develop the first component:
+a method for detecting whether a learned policy
+implements an Abreu punishment path. We begin by
+formalizing what it means for a learned policy to
+implement such a path and prove TV distance between conditional policy distributions is necessary and sufficient
+for detection.
+
+### 4.1 Formalizing Punishment Strategies in
+Learned Policies
+
+When Q-learning agents collude, their learned
+policies implicitly implement a Simple Penal Code 1. The punishment paths $Q^{1},\ldots,Q^{n}$ emerge implicitly in the Q-table. Agent j has learned a punishment strategy if its policy depends on whether agent i defected previously.
+Let $Q^{0}\in\mathcal{A}^{\infty}$ denote the cooperative path and define the defection partition of $\mathcal{A}_{i}$ at period $t$ as:
+
+ | 
+ | $\displaystyle\mathcal{C}_{i}(Q^{0},t)$ 
+ | $\displaystyle=\left\{a\in\mathcal{A}_{i}:a=q_{i}^{0}(t)\right\},$ 
+ | 
+ | (4)
+
+ | 
+ | $\displaystyle\mathcal{D}_{i}(Q^{0},t)$ 
+ | $\displaystyle=\mathcal{A}_{i}\setminus\mathcal{C}_{i}(Q^{0},t),$ 
+ | 
+ | (5)
+
+where $q_{i}^{0}(t)$ is agent $i$ ’s prescribed action
+under $Q^{0}$ at period $t$ . The set
+ $\mathcal{C}_{i}(Q^{0},t)$ contains actions consistent
+with the cooperative path and
+ $\mathcal{D}_{i}(Q^{0},t)$ contains all deviations
+from it.
+
+However, $Q^{0}$ may not be observable during learning, and computing the Nash equilibrium, the natural alternative reference point, is PPAD-hard in general [13].
+We therefore introduce a general defection
+criterion that subsumes both approaches and
+accommodates settings where neither $Q^{0}$ nor
+the Nash equilibrium is directly available.
+
+###### Definition 4 (Defection Criterion).
+
+A defection criterion for agent $i$ is a
+function $\phi_{i}:\mathcal{S}\times\mathcal{A}_{i}\rightarrow\{0,1\}$ mapping a state-action pair
+ $(s,a_{i})$ to a binary defection indicator. The
+induced partition at period $t$ is:
+
+ | 
+ | $\displaystyle\mathcal{D}_{i}^{\phi}(t)$ 
+ | $\displaystyle=\left\{a_{i}^{t}\in\mathcal{A}_{i}:\phi_{i}(s_{t},a_{i}^{t})=1\right\},$ 
+ | 
+ | (6)
+
+ | 
+ | $\displaystyle\mathcal{C}_{i}^{\phi}(t)$ 
+ | $\displaystyle=\mathcal{A}_{i}\setminus\mathcal{D}_{i}^{\phi}(t).$ 
+ | 
+ | (7)
+
+###### Remark 3.
+
+Three instantiations of Definition 4 are provided in Appendix B.
+
+###### Assumption 4 ( $\alpha$ -Precise Defection Criterion).
+
+The defection criterion $\phi_{i}$ has precision at least $1-\alpha$ on both sides: for all $t\geq 1$ ,
+
+ | 
+ | $\displaystyle P\!\left(a^{t-1}_{i}\in D_{i}(Q^{0},t)\;\big|\;\phi_{i}(s_{t},a^{t}_{i})=1\right)$ 
+ | $\displaystyle\geq 1-\alpha,$ 
+ | 
+ | (8)
+
+ | 
+ | $\displaystyle P\!\left(a^{t-1}_{i}\in C_{i}(Q^{0},t)\;\big|\;\phi_{i}(s_{t},a^{t}_{i})=0\right)$ 
+ | $\displaystyle\geq 1-\alpha,$ 
+ | 
+ | (9)
+
+where $\alpha\in[0,1/2)$ .
+
+###### Definition 5 (Punishment Strategy).
+
+Let $(D^{\phi}_{i},C^{\phi}_{i})$ be the partition induced by an $\alpha$ -precise defection criterion (Assumption 4), and let $\varepsilon>0$ . Under the theoretical regime, a stationary policy $\pi_{j}:S\to\Delta(A_{j})$ is a $(D^{\phi}_{i},C^{\phi}_{i},\varepsilon)$ -punishment strategy if
+
+ | 
+ | $\left\|\pi_{j}(\cdot\mid a^{t-1}_{i}\in D^{\phi}_{i})-\pi_{j}(\cdot\mid a^{t-1}_{i}\in C^{\phi}_{i})\right\|_{TV}>\varepsilon,$ 
+ | 
+ | (10)
+
+where $\|\mu-\nu\|_{TV}=\tfrac{1}{2}\sum_{a\in A_{j}}|\mu(a)-\nu(a)|$ is the total variation distance.
+
+### 4.2 TV Distance as a Necessary Detector
+
+###### Proposition 2 (TV Distance Detects Punishment).
+
+Let $G^{\infty}(\delta)$ be a two-player repeated game under the theoretical regime, satisfying Assumptions 1–3. Let $Q^{0}\in A^{\infty}$ be a non-Nash pure path, and let $\pi_{j}$ be a stationary policy for agent $j$ with path-consistent defection partition $(D_{i}(Q^{0},t),C_{i}(Q^{0},t))$ .
+If there exist paths $Q^{i},Q^{j}\in A^{\infty}$ such that $\sigma(Q^{0},Q^{i},Q^{j})$ is a non-trivial SPC of $G^{\infty}(\delta)$ with $Q^{i}$ induced by $\pi_{j}$ ’s post-deviation behavior, then
+
+ | 
+ | $\left\|\pi_{j}(\cdot\mid a^{t-1}_{i}\in D_{i}(Q^{0},t))-\pi_{j}(\cdot\mid a^{t-1}_{i}\in C_{i}(Q^{0},t))\right\|_{TV}\geq\varepsilon^{*}(\delta),$ 
+ | 
+ | (11)
+
+where
+
+ | 
+ | $\varepsilon^{*}(\delta):=\frac{(1-\delta)\Delta^{*}}{r_{\max}-r_{\min}}\in(0,1],\qquad\Delta^{*}:=v_{i}(Q^{0};t^{*}+1)-v_{i}(Q^{i})>0,$ 
+ | 
+ | (12)
+
+and $t^{*}$ is the period at which the sustainability condition (3) binds for agent $i$ .
+
+###### Proof sketch.
+
+Since $Q^{0}$ is non-Nash, the sustainability condition binds at some $t^{*}$ with $\Delta^{*}>0$ . Construct an intermediate path $\widetilde{Q}$ where agent $i$ continues cooperating while agent $j$ plays punishment actions. By subgame perfection, the true punishment path $Q^{i}$ weakly dominates $\widetilde{Q}$ . Hence the continuation-value gap $\Delta^{*}$ must arise from differences in $j$ ’s conditional action distributions between cooperation and punishment phases. Expected payoff differences are bounded by total variation distance times the payoff range, yielding $\mathrm{TV}\geq(1-\delta)\Delta^{*}/(r_{\max}-r_{\min})$ . A full proof is provided in Appendix C.1.2.
+
+∎
+
+###### Corollary 1.
+
+If the TV distance above equals zero, then the induced path $Q^{i}$ coincides with $Q^{0}$ , and $\pi_{j}$ cannot implement any non-trivial punishment path against agent $i$ .
+
+A full proof is provided in Appendix C.1.3
+
+###### Observation 2.
+
+Let $\pi^{\mathrm{Nash}}_{j}$ denote the stationary stage-game Nash policy: $\pi^{\mathrm{Nash}}_{j}$ plays a stage-game Nash action at every period, independent of history. Then
+
+ | 
+ | $\|\pi^{\mathrm{Nash}}_{j}(\cdot\mid a^{t-1}_{i}\in D^{\phi}_{i})-\pi^{\mathrm{Nash}}_{j}(\cdot\mid a^{t-1}_{i}\in C^{\phi}_{i})\|_{TV}=0\qquad\text{for all }i,j\in N.$ 
+ | 
+
+###### Remark 4 (Non-stationary Nash equilibria).
+
+Observation 2 concerns the stationary stage-game Nash policy, which is what the trivial SPC $\sigma(Q^{\mathrm{Nash}},\dots,Q^{\mathrm{Nash}})$ uses. The repeated game admits additional subgame-perfect equilibria that are history-dependent (for example, grim trigger); these are not the object of Observation 2.
+
+###### Corollary 2 ( $\alpha$ -precise extension).
+
+Let $\pi_{j}$ be a stationary policy for agent $j$ consistent with the SPC structure of Definition 1: $\pi_{j}$ ’s action distribution at period $t$ depends on whether the SPC is in the cooperation phase or the punishment phase triggered by player $i$ ’s deviation, and is characterized by two phase-conditional distributions
+
+ | 
+ | $\pi^{C}_{j}:=\pi_{j}(\cdot\mid\text{cooperation phase}),\qquad\pi^{D}_{j}:=\pi_{j}(\cdot\mid\text{punishment phase against }i).$ 
+ | 
+ | (13)
+
+Under Assumption 4 with $\alpha<\varepsilon^{*}(\delta)/2$ , for any collusive SPC $\sigma(Q^{0},Q^{i},Q^{j})$ ,
+
+ | 
+ | $\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}\geq\varepsilon^{*}(\delta)-2\alpha>0.$ 
+ | 
+ | (14)
+
+A full proof is provided in Appendix C.1.4.
+
+Proposition 2 establishes that under the theoretical regime, punishment strategies cannot evade detection via vanishing TV distance: any non-trivial SPC forces $\pi_{j}$ ’s conditional distributions to differ by at least $\varepsilon^{*}(\delta)>0$ . Corollary  2 shows this detection signal degrades with classifier noise. Section 5 exploits this result to construct a reward penalty that fires when a collusive SPC is forming.
+
+## 5 Suppressing Collusive SPCs via Reward Shaping
+
+Proposition 2 establishes that any collusive SPC produces a detectable TV distance signal. We now show how to use this signal to dismantle the punishment structure sustaining collusion. Our intervention has two complementary components: reward shaping, which raises the cost of executing a punishment strategy and removes retaliation as a fixed-point property; and belief injection, which biases the dynamics among the surviving non-collusive fixed points toward the competitive equilibrium. The first has formal guarantees (Theorem 1); the second an empirically validated learning-dynamics heuristic.
+
+### 5.1 Reward Shaping Against
+Punishment Strategies
+
+We define the shaped reward for agent
+ $j$ at period $t$ as
+ $r_{j}^{shaped}(s_{t},a_{t})=r_{j}(s_{t},a_{t})-\lambda\cdot\|\pi_{j}(\cdot\mid a_{i}^{t-1}\in\mathcal{D}_{i}^{\phi})-\pi_{j}(\cdot\mid a_{i}^{t-1}\in\mathcal{C}_{i}^{\phi})\|_{TV}$ .
+Here, $\lambda>0$ is the penalty strength. The penalty is nonzero only when agent $j$ implements a punishment strategy. By Observation 2, the
+penalty is zero at Nash equilibrium, so Nash play is never penalized.
+
+###### Proposition 3 (Conditional invariance and trivial SPCs).
+
+Under the theoretical regime and Assumption 4 with $\alpha<\varepsilon^{*}(\delta)/2$ , agent $j$ ’s policy $\pi_{j}$ satisfies $\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}=0$ if and only if every SPC consistent with $\pi_{j}$ is trivial, of the form $\sigma(Q,Q,Q)$ in which all paths coincide and no punishment is executed.
+
+A full proof is provided in Appendix C.2.
+
+###### Proposition 4 (Shaping forces conditional invariance at SPC fixed points).
+
+Let $G^{\infty}(\delta)$ be a two-player repeated game under the theoretical regime, satisfying Assumptions 1–4 with $\alpha<\varepsilon^{*}(\delta)/2$ . Let $(\pi^{\star}_{j},\pi^{\star}_{-j})$ be a greedy-policy fixed point of the shaped Q-learning dynamics that implements an SPC $\sigma(Q^{0},Q^{i},Q^{j})$ . For any
+
+ | 
+ | $\lambda>\lambda^{*}:=\frac{r_{\max}-r_{\min}}{\varepsilon^{*}(\delta)-2\alpha},$ 
+ | 
+ | (15)
+
+ $\pi^{\star}_{j}$ is conditionally invariant on the defection partition:
+
+ | 
+ | $\big\|\pi^{\star}_{j}(\cdot\mid\phi_{i}=1)-\pi^{\star}_{j}(\cdot\mid\phi_{i}=0)\big\|_{TV}=0.$ 
+ | 
+ | (16)
+
+###### Proof sketch.
+
+Suppose for contradiction that a fixed-point policy $\pi_{j}^{\star}$ has $\mathrm{TV}_{j}^{\star}>0$ . Construct $\pi_{j}^{\prime}$ by copying $\pi_{j}^{\star}$ ’s cooperation-phase behavior to all states, giving $\mathrm{TV}_{j}^{\prime}=0$ . Since $\pi_{j}^{\star}$ is stationary, its TV penalty is constant per step, accumulating to $\lambda\cdot\mathrm{TV}_{j}^{\star}/(1-\delta)$ in the shaped Q-function. Policy $\pi_{j}^{\prime}$ incurs zero penalty. Both unshaped Q-functions are bounded in $[r_{\min}/(1-\delta),\;r_{\max}/(1-\delta)]$ , so the worst-case unshaped value loss from switching to $\pi_{j}^{\prime}$ is $(r_{\max}-r_{\min})/(1-\delta)$ . For $\lambda>\lambda^{\star}$ , the penalty savings exceed this loss, so $Q_{j}^{\prime}$ dominates $Q_{j}^{\star}$ , contradicting the optimality of $\pi_{j}^{\star}$ at the fixed point. A full proof is provided in Appendix C.3.
+
+∎
+
+### 5.2 Theoretical Guarantees
+
+We now state the main theoretical result, combining Propositions 3 and 4 to characterize the fixed-point structure of shaped Q-learning.
+
+###### Theorem 1 (Main Theorem).
+
+Under Assumptions 1–4 with $\alpha<\varepsilon^{*}(\delta)/2$ , for any $\lambda>\lambda^{*}$ , every SPC fixed point of the shaped Q-learning dynamics is trivial: of the form $\sigma(Q,Q,Q)$ for some path $Q\in\mathcal{A}^{\infty}$ , where all paths coincide and no punishment is executed.
+
+###### Proof.
+
+Let $(\pi^{\star}_{j},\pi^{\star}_{-j})$ be a greedy-policy fixed point of the shaped Q-learning dynamics that implements an SPC $\sigma(Q^{0},Q^{i},Q^{j})$ . By Proposition 4, for $\lambda>\lambda^{*}$ , $\pi^{\star}_{j}$ is conditionally invariant on the defection partition:
+
+ | 
+ | $\big\|\pi^{\star}_{j}(\cdot\mid\phi_{i}=1)-\pi^{\star}_{j}(\cdot\mid\phi_{i}=0)\big\|_{TV}=0.$ 
+ | 
+
+By Proposition 3, conditional invariance holds if and only if every SPC consistent with $\pi^{\star}_{j}$ is trivial, of the form $\sigma(Q,Q,Q)$ in which all paths coincide and no punishment is executed. Hence the SPC implemented at the fixed point is trivial.
+∎
+
+###### Corollary 3 (Punishment Dismantling).
+
+Under the conditions of Theorem 1, if shaped Q-learning converges to an SPC fixed point, no punishment paths are executed: agent behavior at the converged equilibrium does not condition on whether opponents defected.
+
+###### Proof.
+
+Immediate from Theorem 1. Any SPC fixed point is of the form $\sigma(Q,Q,Q)$ , in which the cooperative path and post-deviation continuation paths coincide. Hence no punishment is executed regardless of whether $\phi_{i}=0$ or $\phi_{i}=1$ .
+∎
+
+Theorem 1 establishes that the punishment structure that sustains collusion is removed at any SPC fixed point of the shaped dynamics. We do not claim the resulting trivial SPC corresponds to the stage-game Nash path: shaped Q-learning optimizes the shaped reward, and a trivial SPC may sustain a non-Nash path so long as no punishment is executed. We address this gap with the belief-injection mechanism below and validate the combined intervention empirically in Section 6.
+
+###### Proposition 5 (Nash Stability).
+
+The stationary stage-game Nash equilibrium policy profile is a fixed point of shaped Q-learning.
+
+A full proof is provided in Appendix C.4. Combined with Theorem 1, Proposition 5 implies that the set of SPC fixed points of shaped Q-learning includes Nash and is restricted to trivial SPCs. The dynamics cannot sustain collusion via punishment threats.
+
+Belief Injection.
+The reward shaping component raises the cost of $j$ having a policy conditioned on player $i$ ’s action. This could lead to a situation where player $j$ always chooses the monopoly price regardless of what $i$ chooses. Normally, this would not be an issue as through the Q-learning updates player $j$ will still reduce its price to stay competitive. However, an issue arises if they both settle at always playing the monopoly price. For this we complement this with a belief injection mechanism targeting agent $i$ ’s incentive to cooperate.
+Collusion is sustained because agent $i$ believes that defection will trigger punishment by agent $j$ . If this belief is incorrect, if agent $i$ expects no retaliation after defection, the cooperative path $Q^{0}$ becomes individually irrational and collusion fails. In every $k$ steps we inject
+ $m$ synthetic experiences of the form $(s,a_{i}\in\mathcal{D}_{i}^{\phi},\text{no retaliation by }j)$ into
+agent $i$ ’s replay buffer, shifting its estimated Q-value for defection upward. Through this we are able to bias exploration during learning towards away from a collusive policy.
+
+The CURB Algorithm.
+At each stage game, every agent (i) selects an action and observes the reward, (ii) updates its $Q$ -values using a TV-shaped reward that
+penalizes behavior conditional on past opponent defection, and (iii) periodically receives synthetic experiences depicting a unilateral deviation going unpunished. The penalty uses the maximum TV across opponents so the shaping extends naturally to $n>2$ agents. The full algorithm is given in appendix D.
+
+## 6 Experiments and Results
+
+We evaluate CURB in Bertrand and Cournot repeated games under both tabular Q-learning and DQN. In Bertrand competition, agents choose prices each round; unilateral undercutting constitutes defection and price wars act as punishment. We use the Calvano et al. [10] setup with $K=15$ actions and $n=2$ unless otherwise stated. In Cournot competition, firms choose quantities under linear inverse demand; overproduction constitutes defection. We report the collusion index $\mathrm{CI}=(\bar{\pi}-\pi^{\text{Nash}})/(\pi^{\text{Mono}}-\pi^{\text{Nash}})$ from [10], where $\mathrm{CI}=0$ denotes Nash play and $\mathrm{CI}=1$ full collusion. Since higher collusive profits in repeated oligopoly settings come at the expense of consumer surplus, increases in CI correspond to decreases in consumer welfare [28]. A summary of the experiments is in Appendix E.
+
+Defection criterion and belief injection. CURB requires a defection indicator $\phi_{i}$ to partition each agent’s action history into “cooperative” and “defective” subsets. We use a simple online instantiation: an action is flagged as defective if it falls on the deviator side of the rolling-history median (below the median for Bertrand prices, above the median for Cournot
+quantities). Belief injection is implemented by periodically writing synthetic transitions into each agent’s update target where that agent unilaterally defects against cooperative opponents and is not
+retaliated against, and is rewarded with the analytic profit at that synthetic joint outcome. In tabular settings the synthetic transition triggers a direct $Q$ -update, in DQN it is pushed into
+the per-policy replay buffer.
+
+(a) $\lambda$ ablation
+
+(b) Component ablation at $\lambda{=}0.2$ 
+
+[CAPTION] Figure 1: CURB on Bertrand Competition $n{=}2$ 
+
+##### Bertrand (tabular) ablations.
+
+1. 
+
+Penalty strength $\lambda$ sweep. Figure 1(a) shows a clear threshold effect. $\lambda=0.05$ behaves similarly to the no-intervention baseline, $\lambda=0.10$ partially reduces collusion, and $\lambda\in\{0.2,0.5\}$ drives CI close to Nash level.
+
+2. 
+
+Component ablation. Figure 1(b) compares TV shaping alone, belief injection alone, and full CURB at $\lambda=0.2$ . TV-only partially reduces collusion, belief-only remains near baseline, and only the combined intervention drives CI near zero.
+
+3. 
+
+Platform-design baselines. We compare CURB against Price-Directed Prominence (PDP) and Dynamic PDP  [21], interventions in which a platform controls which seller is shown to consumers based on current price (PDP) as well as price history (DPDP). Because PDP and DPDP require a centralized platform while CURB modifies only the agents’ update rule, we use a modified protocol: agents are trained under the platform rule, then evaluated in the full Bertrand environment, asking whether the platform-trained policy retains competitive behavior in the full Bertrand game. Table 1 shows all three substantially reduce collusion relative to baseline, with CURB achieving the lowest CI. Unlike PDP/DPDP, which induce asymmetric pricing, CURB converges symmetrically near the Nash price. This indicates that CURB mitigates collusion in a competitively neutral way that does not advantage one seller over the other. Further, by agents having more symmetry in prices consumers have more variety to choose from.
+
+4. 
+
+ $n=3$ extension. We test whether CURB scales beyond duopoly. Figure 2(a)
+shows the CI of the baseline reaches a substantially collusive equilibrium. CURB $\lambda{=}0.2$ partially reduces collusion. CURB $\lambda=0.5$ drives the CI near zero for $n=3$ .
+
+5. 
+
+Divergence ablation. We chose TV distance for CURB due to its simplicity. However, from an information theoretic perspective it is natural to ask whether the TV penalty can be replaced by alternative divergence measures. We compare TV against Jensen–Shannon Divergence (JSD) at matched $\lambda$ , using two conventions: JSD-norm rescales to $[0,1]$ to match TV’s range,
+JSD-raw keeps its native range $[0,\ln 2]$ . Figure  2(b) shows that all three metrics qualitatively reduce collusion below baseline, but at any
+given $\lambda$ , TV $>$ JSD-norm $>$ JSD-raw in mitigation strength. This suggests the CURB framework may extend beyond TV distance to other divergence measures.
+
+6. 
+
+Forced-defection diagnostic. We manually force unilateral defections in converged rollouts and measure opponent responses; results are reported in Appendix F.
+
+ | Condition
+ | $p_{0}$ 
+ | $p_{1}$ 
+ | CI
+
+ | No intervention
+ | $1.8142\pm 0.0618$ 
+ | $1.8239\pm 0.0669$ 
+ | $0.8824\pm 0.1067$ 
+
+ | PDP
+ | $1.4464\pm 0.0213$ 
+ | $1.7198\pm 0.1266$ 
+ | $0.0706\pm 0.0786$ 
+
+ | DPDP
+ | $1.5164\pm 0.1171$ 
+ | $1.5671\pm 0.1317$ 
+ | $0.0426\pm 0.0408$ 
+
+ | CURB $\lambda{=}0.2$ 
+ | $1.4729\pm 0.0000$ 
+ | $1.4748\pm 0.0082$ 
+ | $0.0029\pm 0.0124$ 
+
+ | CURB $\lambda{=}0.5$ 
+ | $1.4729\pm 0.0000$ 
+ | $1.4748\pm 0.0082$ 
+ | $0.0020\pm 0.0086$ 
+
+[CAPTION] Table 1: Baseline comparison on Bertrand Competition $n{=}2$ .
+
+(a) Bertrand Competition $n{=}3$ 
+
+(b) TV vs JSD divergence ablation, $n{=}2$ 
+
+[CAPTION] Figure 2: Left: CURB scales to $n=3$ agents. Right: TV outperforms JSD variants at matched $\lambda$ .
+
+Cournot (tabular).
+We compare CURB against no intervention and the imperfect-monitoring modification of Calvano et al. [11], in which agents observe a noisy version of their opponents’ quantities rather than the exact joint action. Figure 3(a) shows the CI over training for the no-intervention baseline, imperfect monitoring [11], and CURB at
+ $\lambda\in\{0.1,0.2,0.5\}$ . Imperfect monitoring partially reduces collusion, consistent with prior literature [11]. CURB $\lambda{=}0.5$ drives
+the CI to zero and outperforms imperfect monitoring. This demonstrates that CURB transfers across multiple repeated-game environments.
+
+(a) Cournot Competition $n{=}2$ 
+
+(b) DQN-Bertrand Competition $n{=}2$ 
+
+[CAPTION] Figure 3: CURB transfers to Cournot competition and DQN.
+
+Bertrand (DQN)
+We replace tabular Q-learning with independent DQNs using 3-layer MLPs and replay buffers. Figure 3(b) shows that all CURB settings substantially reduce collusion relative to baseline, indicating the mechanism transfers beyond tabular learning.
+
+## 7 Discussion $\&$ Conclusion
+
+The defection criterion $\phi_{i}$ introduces a tunable parameter that, while requiring domain knowledge about what constitutes cooperation and defection, also provides a useful degree of design flexibility. In many settings, certain joint action profiles may be cooperative yet welfare-neutral, while others are cooperative in appearance but harmful to third parties. Because $\phi_{i}$ partitions the action space explicitly, a designer can target specifically the subset of coordinated behaviors that reduce third-party welfare while grouping all remaining actions. This selectivity is a feature of the framework: rather than penalizing all history-dependent behavior indiscriminately, CURB can be tuned to intervene only against the coordination patterns that cause harm.
+
+Limitations. Our formal guarantees apply only to two-player collusion; extending the analysis to n > 2 remains open. Belief injection is empirically effective but currently lacks formal guarantees. The framework targets collusion sustained by punishment dynamics, which prior literature has identified as a prominent mechanism by which algorithmic collusion arises. Whether CURB’s detection signal would remain informative in settings where collusion may be sustained through alternative mechanisms is an open question.
+
+Conclusion.
+We formalized the connection between algorithmic collusion and Simple Penal Codes, showing that non-trivial punishment strategies induce a detectable TV-distance signal in learned policies. Building on this connection, we proposed CURB, a framework that suppresses punishment-based collusion. Across Bertrand and Cournot competition under both tabular Q-learning and DQN, CURB consistently drove the Collusion Index near zero without modifying the game structure or requiring centralized control. As the risk of algorithmic collusion grows across markets and multi-agent systems, the need for principled interventions becomes increasingly pressing. By grounding mitigation in the equilibrium structure of repeated games rather than in the specifics of any one market or platform, CURB offers a step toward general-purpose tools for safeguarding competitive outcomes wherever autonomous agents learn to interact.
+
+## References
+
+[1]
+D. Abreu (1988)
+
+On the theory of infinitely repeated games with discounting.
+
+Econometrica 56 (2), pp. 383–396.
+
+External Links: ISSN 00129682, 14680262,
+Link
+
+Cited by: §1,
+§3.1,
+Proposition 1.
+
+[2]
+J. Asker, C. Fershtman, and A. Pakes (2022)
+
+Artificial intelligence, algorithm design, and pricing.
+
+AEA Papers and Proceedings 112, pp. 452–56.
+
+External Links: Document,
+Link
+
+Cited by: §2.
+
+[3]
+S. Assad, R. Clark, D. Ershov, and L. Xu (2024)
+
+Algorithmic pricing and competition: empirical evidence from the german retail gasoline market.
+
+Journal of Political Economy 132 (3), pp. 723–771.
+
+External Links: Document,
+Link,
+https://doi.org/10.1086/726906
+
+Cited by: §2.
+
+[4]
+M. Banchio and A. Skrzypacz (2022)
+
+Artificial intelligence and auction design.
+
+In Proceedings of the 23rd ACM Conference on Economics and Computation,
+
+EC ’22, New York, NY, USA, pp. 30–31.
+
+External Links: ISBN 9781450391504,
+Link,
+Document
+
+Cited by: §1,
+§2,
+§2.
+
+[5]
+Q. Bertrand, J. A. Duque, E. Calvano, and G. Gidel (2025)
+
+Self-play $Q$ -learners can provably collude in the iterated prisoner’s dilemma.
+
+In Proceedings of the 42nd International Conference on Machine Learning, A. Singh, M. Fazel, D. Hsu, S. Lacoste-Julien, F. Berkenkamp, T. Maharaj, K. Wagstaff, and J. Zhu (Eds.),
+
+Proceedings of Machine Learning Research, Vol. 267, pp. 3952–3975.
+
+External Links: Link
+
+Cited by: §2.
+
+[6]
+G. Brero, E. Mibuari, N. Lepore, and D. Parkes (2022)
+
+Learning to mitigate ai collusion on economic platforms.
+
+In Advances in Neural Information Processing Systems, S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh (Eds.),
+
+Vol. 35, pp. 37892–37904.
+
+External Links: Link
+
+Cited by: §2.
+
+[7]
+Z. Y. Brown and A. MacKay (2023)
+
+Competition in pricing algorithms.
+
+American Economic Journal: Microeconomics 15 (2), pp. 109–56.
+
+External Links: Document,
+Link
+
+Cited by: §2.
+
+[8]
+E. Calvano, G. Calzolari, V. Denicolò, J. E. Harrington, and S. Pastorello (2020)
+
+Protecting consumers from collusive prices due to ai.
+
+Science 370 (6520), pp. 1040–1042.
+
+External Links: Document,
+Link,
+https://www.science.org/doi/pdf/10.1126/science.abe3796
+
+Cited by: §1.
+
+[9]
+E. Calvano, G. Calzolari, V. Denicolò, and S. Pastorello (2019)
+
+Algorithmic pricing what implications for competition policy?.
+
+Review of Industrial Organization 55 (1), pp. 155–171.
+
+External Links: ISSN 1573-7160,
+Document,
+Link
+
+Cited by: §1.
+
+[10]
+E. Calvano, G. Calzolari, V. Denicolò, and S. Pastorello (2020)
+
+Artificial intelligence, algorithmic pricing, and collusion.
+
+The American Economic Review 110 (10), pp. pp. 3267–3297.
+
+External Links: ISSN 00028282, 19447981,
+Link
+
+Cited by: §E.1,
+§E.2,
+§1,
+§1,
+§2,
+§3.2,
+§6.
+
+[11]
+E. Calvano, G. Calzolari, V. Denicoló, and S. Pastorello (2021)
+
+Algorithmic collusion with imperfect monitoring.
+
+International Journal of Industrial Organization 79, pp. 102712.
+
+External Links: ISSN 0167-7187,
+Document,
+Link
+
+Cited by: §E.1,
+§E.1,
+§2,
+§6.
+
+[12]
+R. Cont and W. Xiong (2024)
+
+Dynamics of market making algorithms in dealer markets: learning and tacit collusion.
+
+Mathematical Finance 34 (2), pp. 467–521.
+
+External Links: Document,
+Link,
+https://onlinelibrary.wiley.com/doi/pdf/10.1111/mafi.12401
+
+Cited by: §2.
+
+[13]
+C. Daskalakis, P. W. Goldberg, and C. H. Papadimitriou (2006)
+
+The complexity of computing a nash equilibrium.
+
+In Proceedings of the Thirty-Eighth Annual ACM Symposium on Theory of Computing,
+
+STOC ’06, New York, NY, USA, pp. 71–78.
+
+External Links: ISBN 1595931341,
+Link,
+Document
+
+Cited by: §4.1.
+
+[14]
+S. Fish, Y. A. Gonczarowski, and R. I. Shorrer (2024)
+
+Algorithmic collusion by large language models.
+
+Note: arXiv preprint arXiv:2404.00806
+
+External Links: Link
+
+Cited by: §2.
+
+[15]
+K. T. Hansen, K. Misra, and M. M. Pai (2021)
+
+Frontiers: algorithmic collusion: supra-competitive prices via independent algorithms.
+
+Marketing Science 40 (1), pp. 1–12.
+
+External Links: ISSN 1526-548X,
+Link,
+Document
+
+Cited by: §2.
+
+[16]
+J. E. Harrington (2018)
+
+DEVELOPING competition law for collusion by autonomous artificial agents†.
+
+Journal of Competition Law & Economics 14 (3), pp. 331–363.
+
+External Links: ISSN 1744-6414,
+Document,
+Link,
+https://academic.oup.com/jcle/article-pdf/14/3/331/27634544/nhy016.pdf
+
+Cited by: §1.
+
+[17]
+J. D. Hartline, S. Long, and C. Zhang (2024)
+
+Regulation of algorithmic collusion.
+
+In Proceedings of the 2024 Symposium on Computer Science and Law,
+
+CSLAW ’24, New York, NY, USA, pp. 98–108.
+
+External Links: ISBN 9798400703331,
+Link,
+Document
+
+Cited by: §2.
+
+[18]
+J. D. Hartline, C. Wang, and C. Zhang (2025)
+
+Regulation of algorithmic collusion, refined: testing pessimistic calibrated regret.
+
+In Proceedings of the 2025 Symposium on Computer Science and Law,
+
+CSLAW ’25, New York, NY, USA, pp. 108–120.
+
+External Links: ISBN 9798400714214,
+Link,
+Document
+
+Cited by: §2.
+
+[19]
+M. Hettich (2021)
+
+Algorithmic collusion: insights from deep learning.
+
+CQE Working Papers
+
+Technical Report 9421, Center for Quantitative Economics (CQE), University of Muenster.
+
+External Links: Document,
+Link
+
+Cited by: §2.
+
+[20]
+E. Hughes, J. Z. Leibo, M. Phillips, K. Tuyls, E. Dueñez-Guzman, A. García Castañeda, I. Dunning, T. Zhu, K. McKee, R. Koster, H. Roff, and T. Graepel (2018)
+
+Inequity aversion improves cooperation in intertemporal social dilemmas.
+
+In Advances in Neural Information Processing Systems, S. Bengio, H. Wallach, H. Larochelle, K. Grauman, N. Cesa-Bianchi, and R. Garnett (Eds.),
+
+Vol. 31, pp. .
+
+External Links: Link
+
+Cited by: §1,
+§2.
+
+[21]
+J. P. Johnson, A. Rhodes, and M. Wildenbeest (2023)
+
+Platform design when sellers use pricing algorithms.
+
+Econometrica 91 (5), pp. 1841–1879.
+
+External Links: Document,
+Link,
+https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA19978
+
+Cited by: §2,
+item 3.
+
+[22]
+T. Klein (2021)
+
+Autonomous algorithmic collusion: q-learning under sequential pricing.
+
+The RAND Journal of Economics 52 (3), pp. 538–558.
+
+External Links: ISSN 07416261, 17562171,
+Link
+
+Cited by: §1,
+§2.
+
+[23]
+J. Z. Leibo, V. Zambaldi, M. Lanctot, J. Marecki, and T. Graepel (2017)
+
+Multi-agent reinforcement learning in sequential social dilemmas.
+
+In Proceedings of the 16th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2017),
+
+São Paulo, Brazil.
+
+External Links: Link
+
+Cited by: §1,
+§2.
+
+[24]
+R. Y. Lin, S. Ojha, K. Cai, and M. F. Chen (2024)
+
+Strategic collusion of LLM agents: market division in multi-commodity competitions.
+
+Note: arXiv preprint arXiv:2410.00031
+
+External Links: 2410.00031,
+Link
+
+Cited by: §2.
+
+[25]
+V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller (2013)
+
+Playing atari with deep reinforcement learning.
+
+Note: cite arxiv:1312.5602Comment: NIPS Deep Learning Workshop 2013
+
+External Links: Link
+
+Cited by: §2.
+
+[26]
+L. Musolff (2022)
+
+Algorithmic pricing facilitates tacit collusion: evidence from e-commerce.
+
+In Proceedings of the 23rd ACM Conference on Economics and Computation,
+
+EC ’22, New York, NY, USA, pp. 32–33.
+
+External Links: ISBN 9781450391504,
+Link,
+Document
+
+Cited by: §2.
+
+[27]
+A. Rubinstein (1979)
+
+Equilibrium in supergames with the overtaking criterion.
+
+Journal of Economic Theory 21 (1), pp. 1–9.
+
+External Links: ISSN 0022-0531,
+Document,
+Link
+
+Cited by: §3.1.
+
+[28]
+J. Tirole (1988)
+
+The theory of industrial organization.
+
+1 edition, MIT Press Books, Vol. 1, The MIT Press.
+
+External Links: Document,
+Link
+
+Cited by: §6.
+
+[29]
+U.S. Department of Justice (2024)
+
+Justice department sues RealPage for algorithmic pricing scheme that harms millions of American renters.
+
+Note: Press release, Office of Public Affairs
+
+Cited by: §1.
+
+[30]
+L. Waltman and U. Kaymak (2008)
+
+Q-learning agents in a cournot oligopoly model.
+
+Journal of Economic Dynamics and Control 32 (10), pp. 3275–3293.
+
+External Links: ISSN 0165-1889,
+Document,
+Link
+
+Cited by: §2.
+
+[31]
+C. J. C. H. Watkins and P. Dayan (1992)
+
+Q-learning.
+
+Machine Learning 8 (3), pp. 279–292.
+
+External Links: Document,
+Link
+
+Cited by: Remark 2.
+
+## Appendix A Q-Learning
+
+Each agent $i$ maintains a Q-function $Q_{i}:\mathcal{S}\times\mathcal{A}_{i}\rightarrow\mathbb{R}$ and updates it according to Equation 17.
+
+ | 
+ | $Q_{i}(s_{t},a_{i}^{t})\leftarrow Q_{i}(s_{t},a_{i}^{t})+\alpha\left[r_{i}^{t}+\delta\max_{a^{\prime}\in\mathcal{A}_{i}}Q_{i}(s_{t+1},a^{\prime})-Q_{i}(s_{t},a_{i}^{t})\right]$ 
+ | 
+ | (17)
+
+In Equation 17, $\alpha\in(0,1)$ is the learning rate. The greedy policy
+derived from $Q_{i}$ is $\pi_{i}(s)=\arg\max_{a\in\mathcal{A}_{i}}Q_{i}(s,a)$ .
+During training agents act $\varepsilon$ -greedily, selecting a random
+action with probability $\varepsilon$ and the greedy action otherwise.
+
+## Appendix B Example Instantiations of the Defection Criterion
+
+1. 
+
+Path-consistent (when $Q^{0}$ is known):
+
+ | 
+ | $\phi_{i}(s,a)=\mathbf{1}\left[a\notin\mathcal{C}_{i}(Q^{0},t)\right].$ 
+ | 
+
+Directly tied to Abreu’s definition of deviation.
+Preferred when $Q^{0}$ is observable or estimable
+from a baseline run of standard Q-learning.
+
+2. 
+
+Nash-deviation (when stage game
+Nash payoffs are known):
+
+ | 
+ | $\phi_{i}(s,a)=\mathbf{1}\!\left[\max_{a_{-i}\in\mathcal{A}_{-i}}r_{i}(a,a_{-i})\leq r_{i}^{Nash,G}\right],$ 
+ | 
+
+where $r_{i}^{Nash,G}$ denotes the Nash equilibrium
+payoff of the stage game $G$ .
+
+3. 
+
+Relative reward-percentile:
+
+ | 
+ | $\phi_{i}(s_{t},a_{i}^{t})=\mathbf{1}\!\left[\rho_{i}^{t-1}\geq\hat{Q}_{1-p}\!\left(\rho_{i}^{(1:t)}\right)\right],$ 
+ | 
+
+where
+
+ | 
+ | $\rho_{i}^{t}=r_{i}^{t}-\frac{1}{n-1}\sum_{j\neq i}r_{j}^{t}$ 
+ | 
+
+is agent $i$ ’s reward advantage over opponents
+at $t$ , and $\hat{Q}_{1-p}(\rho_{i}^{(1:t)})$ 
+is the online $(1-p)$ -th percentile of observed
+relative advantages up to $t$ . Agent $i$ is classified as having defected when its reward advantage over opponents was unusually large, consistent with
+having captured excess surplus at opponents’
+expense. $p\in(0,1)$ controls the fraction of periods classified
+as defections.
+
+## Appendix C Proofs
+
+### C.1 Proof of Proposition 2 and Corollaries
+
+We first establish a lemma characterizing the optimality of punishment paths.
+
+#### C.1.1 Punishment path is a best response
+
+###### Lemma 1.
+
+Let $\sigma(Q^{0},Q^{i},Q^{j})$ be a subgame-perfect equilibrium of $G^{\infty}(\delta)$ under Assumptions 1–3. Then for any alternative path $\tilde{Q}$ generated by agent $i$ playing an alternative strategy $\tilde{\sigma}_{i}$ against the other agents’ prescribed post-deviation behavior,
+
+ | 
+ | $v_{i}(Q^{i})\geq v_{i}(\tilde{Q}).$ 
+ | 
+ | (18)
+
+proof: Consider the subgame beginning the period after agent $i$ deviates singly from $Q^{0}$ . By Definition 1, $\sigma$ prescribes the continuation path $Q^{i}$ with the other agents playing their $Q^{i}$ -roles. By subgame perfection (Definition 2), $\sigma_{i}$ restricted to this subgame is a best response to $\sigma_{-i}$ . Since $\tilde{\sigma}_{i}$ is a feasible alternative and $\sigma_{i}$ is optimal, $v_{i}(Q^{i})\geq v_{i}(\tilde{Q})$ .
+
+#### C.1.2 Proof of Proposition 2
+
+Define $\Delta^{*}_{t}:=v_{i}(Q^{0};t+1)-v_{i}(Q^{i})$ for each $t\geq 1$ . By Proposition 1, the sustainability condition (3) applied to agent $i$ at period $t$ states:
+
+ | 
+ | $\Delta_{i}(q^{*,t}_{i},q^{0}_{-i}(t))\leq\Delta^{*}_{t},\qquad\text{where }q^{*,t}_{i}\in\arg\max_{a\in A_{i}}r_{i}(a,q^{0}_{-i}(t)).$ 
+ | 
+ | (19)
+
+Since $q^{*,t}_{i}$ is a stage-game best response and $q^{0}_{i}(t)\in A_{i}$ is feasible,
+
+ | 
+ | $\Delta_{i}(q^{*,t}_{i},q^{0}_{-i}(t))=r_{i}(q^{*,t}_{i},q^{0}_{-i}(t))-r_{i}(q^{0}(t))\geq 0.$ 
+ | 
+ | (20)
+
+Hence $\Delta^{*}_{t}\geq 0$ for all $t$ .
+
+Suppose for contradiction that $\Delta^{*}_{t}=0$ for every $t$ . Then (19) and (20) together force $\Delta_{i}(q^{*,t}_{i},q^{0}_{-i}(t))=0$ for every $t$ , which means $q^{0}_{i}(t)\in\arg\max_{a\in A_{i}}r_{i}(a,q^{0}_{-i}(t))$ for every $t$ . By symmetry (applying the same argument to agent $j$ ), $q^{0}_{j}(t)\in\arg\max_{a\in A_{j}}r_{j}(a,q^{0}_{-j}(t))$ for every $t$ , so $Q^{0}$ is a stage-game Nash path – contradicting the non-Nash hypothesis on $Q^{0}$ .
+
+Therefore there exists at least one period $t^{*}$ with $\Delta^{*}_{t^{*}}>0$ . Fix such a $t^{*}$ and define $\Delta^{*}:=\Delta^{*}_{t^{*}}>0$ .
+
+Define the intermediate path $\tilde{Q}$ on periods $t\geq t^{*}+1$ as follows:
+
+• 
+
+Agent $i$ plays $q^{0}_{i}(t)$ (the cooperative on-path action);
+
+• 
+
+Agent $j$ plays according to the punishment-phase distribution $\pi_{j}(\cdot\mid a^{t-1}_{i}\in D_{i})$ .
+
+By construction, $\tilde{Q}$ is the path that results if agent $i$ deviates at $t^{*}$ – triggering the punishment phase – but then, contrary to optimality, continues to play the cooperative action $q^{0}_{i}(\cdot)$ while $j$ punishes. This is a feasible alternative strategy for $i$ in the post-deviation subgame, so Lemma 1 applies:
+
+ | 
+ | $v_{i}(Q^{i})\geq v_{i}(\tilde{Q}).$ 
+ | 
+ | (21)
+
+Decompose:
+
+ | 
+ | $\Delta^{*}=v_{i}(Q^{0};t^{*}+1)-v_{i}(Q^{i})=\underbrace{\bigl[v_{i}(Q^{0};t^{*}+1)-v_{i}(\tilde{Q};t^{*}+1)\bigr]}_{\text{pure }j\text{-effect}}+\underbrace{\bigl[v_{i}(\tilde{Q};t^{*}+1)-v_{i}(Q^{i})\bigr]}_{\leq 0\text{ by }\eqref{eq:lemma-applied}}.$ 
+ | 
+ | (22)
+
+Hence
+
+ | 
+ | $v_{i}(Q^{0};t^{*}+1)-v_{i}(\tilde{Q};t^{*}+1)\geq\Delta^{*}>0.$ 
+ | 
+ | (23)
+
+On path $Q^{0}$ , agent $i$ plays $q^{0}_{i}(\cdot)$ throughout, and agent $j$ plays its cooperation-phase distribution $\pi_{j}(\cdot\mid C_{i})$ . On path $\tilde{Q}$ , agent $i$ still plays $q^{0}_{i}(\cdot)$ (by construction of $\tilde{Q}$ ), and agent $j$ plays its punishment-phase distribution $\pi_{j}(\cdot\mid D_{i})$ . Thus $Q^{0}$ and $\tilde{Q}$ differ only in $j$ ’s action distribution.
+
+For each $s\geq 1$ , define $h_{s}:A_{j}\to[r_{\min},r_{\max}]$ by
+
+ | 
+ | $h_{s}(a_{j}):=r_{i}(q^{0}_{i}(t^{*}+s),a_{j}).$ 
+ | 
+
+Then
+
+ | 
+ | $v_{i}(Q^{0};t^{*}+1)-v_{i}(\tilde{Q};t^{*}+1)=\sum_{s=1}^{\infty}\delta^{s-1}\Bigl(\mathbb{E}_{a_{j}\sim\pi_{j}(\cdot|C_{i})}[h_{s}(a_{j})]-\mathbb{E}_{a_{j}\sim\pi_{j}(\cdot|D_{i})}[h_{s}(a_{j})]\Bigr).$ 
+ | 
+ | (24)
+
+For any function $h:A_{j}\to[r_{\min},r_{\max}]$ and any distributions $\mu,\nu$ on $A_{j}$ ,
+
+ | 
+ | $|\mathbb{E}_{\mu}[h]-\mathbb{E}_{\nu}[h]|\leq(r_{\max}-r_{\min})\cdot\|\mu-\nu\|_{TV}.$ 
+ | 
+ | (25)
+
+(For any constant $c$ , $\mathbb{E}_{\mu}[h]-\mathbb{E}_{\nu}[h]=\sum_{a}(h(a)-c)(\mu(a)-\nu(a))$ . Choose $c=(r_{\max}+r_{\min})/2$ so $|h(a)-c|\leq(r_{\max}-r_{\min})/2$ ; then $|\mathbb{E}_{\mu}[h]-\mathbb{E}_{\nu}[h]|\leq\tfrac{r_{\max}-r_{\min}}{2}\sum_{a}|\mu(a)-\nu(a)|=(r_{\max}-r_{\min})\|\mu-\nu\|_{TV}$ .)
+
+Let $\mathrm{TV}:=\|\pi_{j}(\cdot|D_{i})-\pi_{j}(\cdot|C_{i})\|_{TV}$ . Applying (25) termwise to (24) with $\mu=\pi_{j}(\cdot|C_{i})$ , $\nu=\pi_{j}(\cdot|D_{i})$ :
+
+ | 
+ | $\displaystyle\bigl|v_{i}(Q^{0};t^{*}+1)-v_{i}(\tilde{Q};t^{*}+1)\bigr|$ 
+ | $\displaystyle\leq\sum_{s=1}^{\infty}\delta^{s-1}\cdot(r_{\max}-r_{\min})\cdot\mathrm{TV}$ 
+ | 
+ | (26)
+
+ | 
+ | 
+ | $\displaystyle=\frac{r_{\max}-r_{\min}}{1-\delta}\cdot\mathrm{TV}.$ 
+ | 
+ | (27)
+
+Since the left-hand side of (27) is positive by (23), we may drop the absolute value and combine with (23):
+
+ | 
+ | $\Delta^{*}\leq\frac{r_{\max}-r_{\min}}{1-\delta}\cdot\mathrm{TV}.$ 
+ | 
+ | (28)
+
+ | 
+ | $\mathrm{TV}\geq\frac{(1-\delta)\Delta^{*}}{r_{\max}-r_{\min}}=\varepsilon^{*}(\delta)>0.$ 
+ | 
+ | (29)
+
+Since $\Delta^{*}>0$ and the payoff range $r_{\max}-r_{\min}$ is finite by Assumption 1, $\varepsilon^{*}(\delta)\in(0,1]$ .
+
+#### C.1.3 Proof of Corollary 1
+
+Suppose
+
+ | 
+ | $\left\|\pi_{j}(\cdot\mid a_{i}^{t-1}\in D_{i}(Q_{0},t))-\pi_{j}(\cdot\mid a_{i}^{t-1}\in C_{i}(Q_{0},t))\right\|_{TV}=0.$ 
+ | 
+
+Since $\varepsilon^{*}(\delta)\in(0,1]$ , we have $0<\varepsilon^{*}(\delta)$ , so the hypothesis gives
+
+ | 
+ | $\left\|\pi_{j}(\cdot\mid D_{i}(Q_{0},t))-\pi_{j}(\cdot\mid C_{i}(Q_{0},t))\right\|_{TV}<\varepsilon^{*}(\delta).$ 
+ | 
+
+By the contrapositive of Proposition 2, there exist no paths $Q_{i},Q_{j}\in\mathcal{A}^{\infty}$ such that $\sigma(Q_{0},Q_{i},Q_{j})$ is a non-trivial SPC of $G^{\infty}(\delta)$ with $Q_{i}$ induced by $\pi_{j}$ ’s post-deviation behavior. In particular, $\pi_{j}$ cannot implement any non-trivial punishment path against agent $i$ .
+
+Because $\pi_{j}$ is a stationary policy, its action distribution at any period $t$ depends only on the conditioning event $a_{i}^{t-1}\in D_{i}(Q_{0},t)$ or $a_{i}^{t-1}\in C_{i}(Q_{0},t)$ , not on $t$ itself or on any other feature of the history. The TV distance vanishing means
+
+ | 
+ | $\pi_{j}(\cdot\mid a_{i}^{t-1}\in D_{i}(Q_{0},t))=\pi_{j}(\cdot\mid a_{i}^{t-1}\in C_{i}(Q_{0},t))\quad\text{for all }t,$ 
+ | 
+
+so $\pi_{j}$ ’s action distribution is identical regardless of whether agent $i$ has defected. Consequently, $j$ ’s play following any history in $D_{i}(Q_{0},t)$ is statistically indistinguishable from its play along the cooperative path itself, so $j$ takes no action that depends on $i$ ’s deviation. Since the induced path $Q_{i}$ is generated entirely by best-response dynamics against $\pi_{j}$ , and $\pi_{j}$ exhibits no history-dependence between the cooperative and defection partitions, the induced continuation play cannot diverge from the on-path behavior under $Q_{0}$ . Hence $Q_{i}=Q_{0}$ .
+
+#### C.1.4 Proof of Corollary 2
+
+By Proposition 2(i) applied to the path-consistent partition, $\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}\geq\varepsilon^{*}(\delta)$ .
+
+By the simple-strategy-profile structure (Definition 1), $\pi_{j}$ ’s action distribution at period $t$ depends only on the current phase, not on the specific classification $\phi_{i}(s_{t},a^{t}_{i})$ of the current action beyond its role in phase triggering. Formally, for any event $E$ :
+
+ | 
+ | $\displaystyle\pi_{j}(\cdot\mid E,\text{cooperation phase})$ 
+ | $\displaystyle=\pi^{C}_{j},$ 
+ | 
+ | (30)
+
+ | 
+ | $\displaystyle\pi_{j}(\cdot\mid E,\text{punishment phase})$ 
+ | $\displaystyle=\pi^{D}_{j}.$ 
+ | 
+ | (31)
+
+Hence, by the law of total probability,
+
+ | 
+ | $\displaystyle\pi_{j}(\cdot\mid\phi_{i}=1)$ 
+ | $\displaystyle=P(\text{punishment phase}\mid\phi_{i}=1)\cdot\pi^{D}_{j}+P(\text{cooperation phase}\mid\phi_{i}=1)\cdot\pi^{C}_{j}$ 
+ | 
+ | (32)
+
+ | 
+ | 
+ | $\displaystyle=(1-w_{D})\,\pi^{D}_{j}+w_{D}\,\pi^{C}_{j},$ 
+ | 
+ | (33)
+
+where $w_{D}:=P(\text{cooperation phase}\mid\phi_{i}=1)\leq\alpha$ by Assumption 4. Similarly,
+
+ | 
+ | $\pi_{j}(\cdot\mid\phi_{i}=0)=(1-w_{C})\,\pi^{C}_{j}+w_{C}\,\pi^{D}_{j},\qquad w_{C}\leq\alpha.$ 
+ | 
+
+Bound each distance to the true phase-conditional:
+
+ | 
+ | $\displaystyle\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi^{D}_{j}\|_{TV}$ 
+ | $\displaystyle=w_{D}\cdot\|\pi^{C}_{j}-\pi^{D}_{j}\|_{TV}\leq w_{D}\leq\alpha,$ 
+ | 
+ | (34)
+
+ | 
+ | $\displaystyle\|\pi_{j}(\cdot\mid\phi_{i}=0)-\pi^{C}_{j}\|_{TV}$ 
+ | $\displaystyle=w_{C}\cdot\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}\leq w_{C}\leq\alpha.$ 
+ | 
+ | (35)
+
+(As $\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}\leq 1$ .)
+
+By the triangle inequality:
+
+ | 
+ | $\displaystyle\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}$ 
+ | $\displaystyle\geq\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}-\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi^{D}_{j}\|_{TV}-\|\pi_{j}(\cdot\mid\phi_{i}=0)-\pi^{C}_{j}\|_{TV}$ 
+ | 
+ | (36)
+
+ | 
+ | 
+ | $\displaystyle\geq\varepsilon^{*}(\delta)-2\alpha.$ 
+ | 
+ | (37)
+
+Since $\alpha<\varepsilon^{*}(\delta)/2$ , the right-hand side is strictly positive.
+
+### C.2 Proof of Proposition 3
+
+##### ( $\Rightarrow$ )
+
+Suppose $\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}=0$ , and suppose $\sigma(Q^{0},Q^{i},Q^{j})$ is any SPC consistent with $\pi_{j}$ .
+
+By the phase-conditional mixture identity (proof of Corollary 2),
+
+ | 
+ | $\displaystyle\pi_{j}(\cdot\mid\phi_{i}=1)$ 
+ | $\displaystyle=(1-w_{D})\,\pi^{D}_{j}+w_{D}\,\pi^{C}_{j},$ 
+ | 
+ | (38)
+
+ | 
+ | $\displaystyle\pi_{j}(\cdot\mid\phi_{i}=0)$ 
+ | $\displaystyle=(1-w_{C})\,\pi^{C}_{j}+w_{C}\,\pi^{D}_{j},$ 
+ | 
+ | (39)
+
+where $w_{D},w_{C}\in[0,\alpha]$ . Subtracting and taking TV distance:
+
+ | 
+ | $\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}=(1-w_{D}-w_{C})\cdot\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}.$ 
+ | 
+ | (40)
+
+Since $w_{D},w_{C}\leq\alpha<1/2$ , we have $1-w_{D}-w_{C}>0$ . The hypothesis forces $\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}=0$ .
+
+Apply Corollary 1: $\|\pi^{D}_{j}-\pi^{C}_{j}\|_{TV}=0$ implies $Q^{i}=Q^{0}$ . By symmetry (interchanging $i$ and $j$ in Corollary 1, $Q^{j}=Q^{0}$ . Hence $Q^{0}=Q^{i}=Q^{j}$ , and the SPC is trivial.
+
+##### ( $\Leftarrow$ )
+
+Suppose $\sigma(Q,Q,Q)$ is a trivial SPC consistent with $\pi_{j}$ . Under Definition 1, the simple strategy profile prescribes path $Q$ regardless of the phase: both the cooperation phase and the punishment phase yield the same prescribed actions. Hence agent $j$ ’s action distribution is determined by $Q$ alone, independent of $\phi_{i}$ . Under (T2) the policy $\pi_{j}$ is stationary and the path $Q$ corresponds to a fixed mapping $S\to\Delta(A_{j})$ that does not condition on $\phi_{i}$ beyond what $Q$ itself prescribes.
+
+Hence $\pi^{D}_{j}=\pi^{C}_{j}$ , and by the mixture identity above, $\|\pi_{j}(\cdot\mid\phi_{i}=1)-\pi_{j}(\cdot\mid\phi_{i}=0)\|_{TV}=0$ . $\square$ 
+
+### C.3 Proof of Proposition 4
+
+Let $(\pi^{\star}_{j},\pi^{\star}_{-j})$ be a greedy-policy fixed point of the shaped Q-learning dynamics that implements an SPC $\sigma(Q^{0},Q^{i},Q^{j})$ .
+
+Suppose for contradiction that
+
+ | 
+ | $\mathrm{TV}^{\star}_{j}:=\big\|\pi^{\star}_{j}(\cdot\mid\phi_{i}=1)-\pi^{\star}_{j}(\cdot\mid\phi_{i}=0)\big\|_{TV}>0.$ 
+ | 
+ | (41)
+
+By Proposition 3, conditional non-invariance implies the SPC is non-trivial: $Q^{0}\neq Q^{i}$ or $Q^{j}\neq Q^{0}$ . Without loss of generality, assume $Q^{0}\neq Q^{i}$ (the case $Q^{j}\neq Q^{0}$ follows by symmetry, swapping the roles of $i$ and $j$ ).
+
+Apply Corollary 2 to get the following TV bound:
+
+ | 
+ | $\mathrm{TV}^{\star}_{j}\geq\varepsilon^{*}(\delta)-2\alpha>0.$ 
+ | 
+ | (42)
+
+Since $\pi^{\star}_{j}$ is stationary, $\mathrm{TV}^{\star}_{j}$ is independent of the current state. Let $\bar{Q}_{j}$ denote the Q-function of $\pi^{\star}_{j}$ against $\pi^{\star}_{-j}$ under the unshaped reward $r_{j}$ . Both $Q^{\star}_{j}$ and $\bar{Q}_{j}$ satisfy Bellman equations under the same policies; their right-hand sides differ only by the constant shaping term $-\lambda\mathrm{TV}^{\star}_{j}$ . Iterating the recursion contributes $-\lambda\mathrm{TV}^{\star}_{j}/(1-\delta)$ , giving
+
+ | 
+ | $Q^{\star}_{j}(s,a)=\bar{Q}_{j}(s,a)-\frac{\lambda\cdot\mathrm{TV}^{\star}_{j}}{1-\delta},\qquad\forall(s,a)\in S\times A_{j}.$ 
+ | 
+ | (43)
+
+Since the penalty is constant across $(s,a)$ , $\arg\max_{a}Q^{\star}_{j}(s,a)=\arg\max_{a}\bar{Q}_{j}(s,a)$ , so $\pi^{\star}_{j}$ is also greedy with respect to $\bar{Q}_{j}$ .
+
+Recall that the state $s_{t}$ encodes $a^{t-1}_{i}$ . Define $S_{D}:=\{s:\phi_{i}(s)=1\}$ and $S_{C}:=\{s:\phi_{i}(s)=0\}$ . For each $s\in S$ , let $s_{C}(s)\in S_{C}$ denote the state obtained from $s$ by replacing the $i^{th}$ coordinate with a value consistent with cooperation. Note that for $s\in S_{C}$ , $s_{C}(s)=s$ .
+
+Define
+
+ | 
+ | $\pi^{\prime}_{j}(s):=\pi^{\star}_{j}(s_{C}(s))\qquad\forall s\in S.$ 
+ | 
+ | (44)
+
+By construction, $\pi^{\prime}_{j}(s_{D})=\pi^{\prime}_{j}(s_{C}(s_{D}))$ for all $s_{D}\in S_{D}$ , so $\pi^{\prime}_{j}$ is conditionally invariant: $\|\pi^{\prime}_{j}(\cdot\mid\phi_{i}=1)-\pi^{\prime}_{j}(\cdot\mid\phi_{i}=0)\|_{TV}=0$ i.e., $\mathrm{TV}^{\prime}_{j}=0$ .
+
+Let $\bar{Q}^{\prime}_{j}$ denote the unshaped Q-function of $\pi^{\prime}_{j}$ against $\pi^{\star}_{-j}$ . By Assumption 1, both unshaped Q-functions take values in $[r_{\min}/(1-\delta),r_{\max}/(1-\delta)]$ , so
+
+ | 
+ | $\bar{Q}_{j}(s,a)-\bar{Q}^{\prime}_{j}(s,a)\leq\frac{r_{\max}-r_{\min}}{1-\delta},\qquad\forall(s,a).$ 
+ | 
+ | (45)
+
+The shaped Q-values:
+
+ | 
+ | $\displaystyle Q^{\star}_{j}(s,a)$ 
+ | $\displaystyle=\bar{Q}_{j}(s,a)-\frac{\lambda\cdot\mathrm{TV}^{\star}_{j}}{1-\delta}\leq\bar{Q}_{j}(s,a)-\frac{\lambda(\varepsilon^{*}(\delta)-2\alpha)}{1-\delta},$ 
+ | 
+ | (46)
+
+ | 
+ | $\displaystyle Q^{\prime}_{j}(s,a)$ 
+ | $\displaystyle=\bar{Q}^{\prime}_{j}(s,a)-\frac{\lambda\cdot\mathrm{TV}^{\prime}_{j}}{1-\delta}=\bar{Q}^{\prime}_{j}(s,a).$ 
+ | 
+ | (47)
+
+Subtracting and using (45):
+
+ | 
+ | $\displaystyle Q^{\prime}_{j}(s,a)-Q^{\star}_{j}(s,a)$ 
+ | $\displaystyle\geq\bar{Q}^{\prime}_{j}(s,a)-\bar{Q}_{j}(s,a)+\frac{\lambda(\varepsilon^{*}(\delta)-2\alpha)}{1-\delta}$ 
+ | 
+ | (48)
+
+ | 
+ | 
+ | $\displaystyle\geq-\frac{r_{\max}-r_{\min}}{1-\delta}+\frac{\lambda(\varepsilon^{*}(\delta)-2\alpha)}{1-\delta}$ 
+ | 
+ | (49)
+
+ | 
+ | 
+ | $\displaystyle=\frac{\lambda(\varepsilon^{*}(\delta)-2\alpha)-(r_{\max}-r_{\min})}{1-\delta}.$ 
+ | 
+ | (50)
+
+For $\lambda>\lambda^{*}=(r_{\max}-r_{\min})/(\varepsilon^{*}(\delta)-2\alpha)$ , the numerator of (50) is strictly positive:
+
+ | 
+ | $Q^{\prime}_{j}(s,a)>Q^{\star}_{j}(s,a)\qquad\forall(s,a)\in S\times A_{j}.$ 
+ | 
+ | (51)
+
+Recall that $Q^{\prime}_{j}$ is the shaped Q-function of $\pi^{\prime}_{j}$ against $\pi^{\star}_{-j}$ , while $Q^{\star}_{j}$ is the shaped Q-function of $\pi^{\star}_{j}$ against $\pi^{\star}_{-j}$ . Inequality (51) therefore states that $\pi^{\prime}_{j}$ achieves strictly higher shaped value than $\pi^{\star}_{j}$ at every state-action pair, against the same opponent.
+
+Define the shaped value functions $V^{\pi^{\star}_{j}}_{j}(s):=\mathbb{E}_{a\sim\pi^{\star}_{j}(s)}[Q^{\star}_{j}(s,a)]$ and $V^{\pi^{\prime}_{j}}_{j}(s):=\mathbb{E}_{a\sim\pi^{\prime}_{j}(s)}[Q^{\prime}_{j}(s,a)]$ . From (51),
+
+ | 
+ | $V^{\pi^{\prime}_{j}}_{j}(s)>V^{\pi^{\star}_{j}}_{j}(s)\qquad\forall s\in S.$ 
+ | 
+ | (52)
+
+Q-learning at a fixed point against a stationary opponent $\pi^{\star}_{-j}$ converges (when it converges) to the optimal policy under shaped rewards: $\pi^{\star}_{j}$ must satisfy $V^{\pi^{\star}_{j}}_{j}(s)=\max_{\pi_{j}}V^{\pi_{j}}_{j}(s)$ for every $s$ , where the maximum ranges over all stationary policies. But $\pi^{\prime}_{j}$ is a stationary policy that achieves strictly higher value at every state by (52), contradicting the optimality of $\pi^{\star}_{j}$ .
+
+Therefore the supposition $\mathrm{TV}^{\star}_{j}>0$ must be false. Hence $\mathrm{TV}^{\star}_{j}=0$ .
+
+### C.4 Proof of Proposition 5
+
+Let $\pi^{\mathrm{Nash}}=(\pi^{\mathrm{Nash}}_{1},\ldots,\pi^{\mathrm{Nash}}_{n})$ denote the stationary stage-game Nash profile, where each $\pi^{\mathrm{Nash}}_{j}$ plays a stage-game Nash action independent of state. By Observation 2,
+
+ | 
+ | $\big\|\pi^{\mathrm{Nash}}_{j}(\cdot\mid a^{t-1}_{i}\in D^{\phi}_{i})-\pi^{\mathrm{Nash}}_{j}(\cdot\mid a^{t-1}_{i}\in C^{\phi}_{i})\big\|_{TV}=0$ 
+ | 
+
+for all $i,j\in N$ . Therefore the TV penalty in the shaped reward is identically zero under $\pi^{\mathrm{Nash}}$ , and the shaped reward equals the unshaped reward: $r^{\mathrm{shaped}}_{j}(s,a)=r_{j}(s,a)$ for all $(s,a)$ .
+
+Because $\pi^{\mathrm{Nash}}$ is state-independent, the continuation value
+
+ | 
+ | $V^{\mathrm{Nash}}_{j}(s)=\sum_{t=0}^{\infty}\delta^{t}\,\mathbb{E}\big[r_{j}(\pi^{\mathrm{Nash}})\big]=\frac{r_{j}(\pi^{\mathrm{Nash}})}{1-\delta}$ 
+ | 
+
+does not depend on $s$ . Hence the Q-value of action $a$ in state $s$ satisfies
+
+ | 
+ | $Q^{\mathrm{Nash}}_{j}(s,a)=r_{j}\big(s,a,\pi^{\mathrm{Nash}}_{-j}\big)+\delta\cdot V^{\mathrm{Nash}}_{j},$ 
+ | 
+
+and the only $a$ -dependent term is the immediate reward. Maximizing over $a$ reduces to the stage-game best-response problem:
+
+ | 
+ | $\arg\max_{a\in\mathcal{A}_{j}}Q^{\mathrm{Nash}}_{j}(s,a)=\arg\max_{a\in\mathcal{A}_{j}}r_{j}\big(s,a,\pi^{\mathrm{Nash}}_{-j}\big).$ 
+ | 
+
+Since $\pi^{\mathrm{Nash}}_{j}$ is by definition a stage-game best response to $\pi^{\mathrm{Nash}}_{-j}$ , we have $\pi^{\mathrm{Nash}}_{j}(s)\in\arg\max_{a}Q^{\mathrm{Nash}}_{j}(s,a)$ for all $s$ . Hence $\pi^{\mathrm{Nash}}$ is a greedy-policy fixed point of shaped Q-learning.
+
+## Appendix D Algorithm
+
+[CAPTION] Algorithm 1 CURB
+
+ 0:
+
+  penalty strength $\lambda>\lambda^{*}$ , history length $W$ ,
+injection period $k$ , injection size $m$ ,
+defection criterion $\phi_{i}$ 
+
+ 1:
+
+  Initialise $Q_{i}$ for all $i\in[n]$ ;
+sliding action history $\mathcal{H}$ of length $W$ , initially empty
+
+ 2:
+
+  for $t=1,2,\ldots$ do
+
+ 3:
+
+   Each agent $i$ selects $a_{i}^{t}$ $\varepsilon$ -greedily from $Q_{i}(s_{t},\cdot)$ 
+
+ 4:
+
+   Observe rewards $r_{i}^{t}$ and next state $s_{t+1}$ 
+
+ 5:
+
+   Push joint action $a^{t}$ into $\mathcal{H}$ (evicting the oldest entry if $|\mathcal{H}|=W$ )
+
+ 6:
+
+   for each agent $j\in[n]$ do
+
+ 7:
+
+    For each $i\neq j$ , classify each of $i$ ’s actions in $\mathcal{H}$ via $\phi_{i}$ into a defective set $\mathcal{D}_{i}$ and a cooperative set $\mathcal{C}_{i}$ 
+
+ 8:
+
+    Compute the lag-1 conditional TV between $j$ ’s response distributions:
+
+ | 
+ | $\mathrm{TV}_{t}^{ij}=\big\|\,\hat{\pi}_{j}\!\left(\cdot\,\big|\,a_{i}^{t-1}\in\mathcal{D}_{i}\right)-\hat{\pi}_{j}\!\left(\cdot\,\big|\,a_{i}^{t-1}\in\mathcal{C}_{i}\right)\,\big\|_{\mathrm{TV}}$ 
+ | 
+
+ 9:
+
+    Apply shaped reward
+ $\tilde{r}_{j}^{t}=r_{j}^{t}-\lambda\cdot\max_{i\neq j}\mathrm{TV}_{t}^{ij}$ 
+
+ 10:
+
+    Update
+ $Q_{j}(s_{t},a_{j}^{t})\leftarrow Q_{j}(s_{t},a_{j}^{t})+\alpha\!\left[\,\tilde{r}_{j}^{t}+\delta\max_{a^{\prime}}Q_{j}(s_{t+1},a^{\prime})-Q_{j}(s_{t},a_{j}^{t})\right]$ 
+
+ 11:
+
+   end for
+
+ 12:
+
+   if $t\bmod k=0$ then
+
+ 13:
+
+    for each agent $j\in[n]$ do
+
+ 14:
+
+     Inject $m$ synthetic transitions into $j$ ’s buffer in which $j$ plays a defective action $a_{j}\in\mathcal{D}_{j}$ while opponents continue cooperating.
+
+ 15:
+
+    end for
+
+ 16:
+
+   end if
+
+ 17:
+
+  end for
+
+## Appendix E Experiments
+
+This appendix documents the environments, algorithms, hyperparameters, and
+training scale used for the experiments reported in Section 6.
+
+### E.1 Environments
+
+##### Bertrand competition.
+
+We use the symmetric Bertrand oligopoly with multinomial-logit demand from
+Calvano et al. [10]. Each agent $i$ chooses a price $p_{i}$ from a
+discrete grid of $K=15$ values spanning the stage-game Nash and monopoly
+prices with a $10\%$ markup at each end. Demand follows a logit form with
+quality $a_{i}=2$ , price sensitivity $\mu=0.25$ , and zero marginal cost.
+We use $n=2$ for the main experiments and $n=3$ for the scaling test.
+
+##### Cournot competition.
+
+We use the deterministic Cournot oligopoly from Calvano et al. [11].
+Each agent chooses a quantity $q_{i}$ from a discrete grid of $K=15$ values
+spanning the Nash quantity $q^{\text{Nash}}=a/(n+1)$ and monopoly
+quantity $q^{\text{Mono}}=a/(2n)$ with $a=200$ and $b=1$ . Per-period
+profit is $\pi_{i}=(a-b\sum_{j}q_{j})\cdot q_{i}$ .
+
+##### Cournot with imperfect monitoring.
+
+For comparison against the imperfect-monitoring deterrent of
+Calvano et al. [11], we additionally implement the Cournot variant
+in which the demand intercept $d_{t}$ is i.i.d. uniform on $\{290,310\}$ and
+agents observe only the realised market price (not opponent quantities). The
+state space is the previous-period price discretised into 37 levels.
+
+##### State encoding.
+
+Across all environments the state $s_{t}$ is the previous joint action
+ $(a_{1}^{t-1},\ldots,a_{n}^{t-1})$ (or the previous price under imperfect
+monitoring), giving $|\mathcal{S}|=K^{n}$ in the standard case.
+
+##### Reward normalisation.
+
+All per-period profits are divided by the per-agent monopoly profit so
+collusion-index calculations and cross-environment $\lambda$ values are
+directly comparable. The collusion index is
+ $\text{CI}=(\bar{\pi}-\pi^{\text{Nash}})/(\pi^{\text{Mono}}-\pi^{\text{Nash}})$ ,
+with $\text{CI}=0$ at Nash and $\text{CI}=1$ at full collusion.
+
+### E.2 Algorithms
+
+##### Tabular Q-learning.
+
+Each agent maintains a Q-table $Q_{i}\colon\mathcal{S}\times\mathcal{A}_{i}\to\mathbb{R}$ 
+updated according to Equation 17. Following Calvano et al. [10], we
+initialise $Q_{i}(s,a)=\mathbb{E}_{a_{-i}}[\pi_{i}(a,a_{-i})]/(1-\delta)$ 
+averaged over opponent actions, which seeds the table with reasonable
+state-independent value estimates.
+
+##### DQN.
+
+For the function-approximation experiments we replace the tabular Q-tables
+with independent multi-agent DQN: one PyTorch Q-network per agent, with no
+weight sharing. Each network is a 3-layer MLP with 32 hidden units per
+layer and ReLU activations, trained with Adam, MSE loss, a hard
+target-network copy every $C=100$ steps, and a replay buffer of size
+ $10^{4}$ . State observations are the previous-period prices, normalised to
+ $[0,1]$ .
+
+### E.3 CURB components
+
+##### Defection criterion.
+
+The TV detector requires a defection indicator $\phi_{i}$ to partition
+agent $i$ ’s past actions into “cooperative” and “defective” subsets. We
+use the simple median-split: at each timestep, $\phi_{i}$ flags an action
+as defective if it falls on the deviator side of the rolling-history
+median (below the median for Bertrand prices; above the median for Cournot
+quantities). A punishment-direction filter further rejects spurious
+detections by requiring agent $j$ ’s mean action when $i$ is below the
+median to lie below $j$ ’s mean action when $i$ is above the median.
+
+##### TV penalty.
+
+The TV detector operates on a rolling window of $W=500$ past joint
+actions with lag-1 conditioning: agent $j$ ’s current-period action is
+conditioned on agent $i$ ’s previous action, capturing the temporal
+causality of punishment. The shaped reward is
+ $\tilde{r}_{j}=r_{j}-\lambda\cdot\max_{i\neq j}\text{TV}_{t}^{ij}$ , with
+ $\lambda$ swept over $\{0.05,0.1,0.2,0.5\}$ .
+
+##### Belief injection.
+
+Every $K_{\text{belief}}=100$ environment steps we inject
+ $M_{\text{belief}}=5$ synthetic transitions per agent into the agent’s
+update target. Each injected transition models a unilateral deviation by
+ $j$ against opponents continuing on the cooperative path, with the
+analytic stage-game profit as the reward. In the tabular setting this is
+a direct $Q$ -update; in the DQN setting it is a synthetic entry in the
+agent’s replay buffer.
+
+### E.4 Hyperparameters
+
+Table 2 lists the hyperparameters used across all
+experiments. All values are recorded in the run_config.json of each
+completed run for reproducibility.
+
+ | Parameter
+ | Tabular Q
+ | DQN
+
+ | Learning rate $\alpha$ 
+ | $0.15$ 
+ | $10^{-3}$ 
+
+ | Discount $\delta$ 
+ | $0.95$ 
+ | $0.95$ 
+
+ | Exploration decay $\beta$ 
+ | $4{\times}10^{-6}$ ( $n{=}2$ ), $1.2{\times}10^{-6}$ ( $n{=}3$ )
+ | $4{\times}10^{-6}$ 
+
+ | Convergence threshold $t_{\text{stable}}$ 
+ | $10^{5}$ 
+ | —
+
+ | Replay buffer size
+ | —
+ | $10^{4}$ 
+
+ | Target-network update $C$ 
+ | —
+ | $100$ 
+
+ | Hidden units (per MLP layer)
+ | —
+ | $32$ 
+
+ | Batch size
+ | —
+ | $32$ 
+
+ | Action-grid size $K$ 
+ | $15$ 
+ | $15$ 
+
+ | TV rolling-window $W$ 
+ | $500$ 
+ | $500$ 
+
+ | Belief-injection interval $k$ 
+ | $100$ 
+ | $100$ 
+
+ | Belief-injection size $m$ 
+ | $5$ 
+ | $5$ 
+
+[CAPTION] Table 2: Hyperparameters used across experiments.
+
+### E.5 Training scale
+
+Table 3 summarises the conditions, seed counts, and
+training horizon for each experiment.
+
+ | Experiment
+ | Conditions
+ | Seeds
+ | Env steps
+
+ | Bertrand $n{=}2$ 
+ | 10 (baseline + belief-only + 4 TV-only + 4 CURB)
+ | 20
+ | $3{\times}10^{6}$ 
+
+ | Bertrand $n{=}3$ 
+ | 3 (baseline + 2 CURB)
+ | 20
+ | $2{\times}10^{7}$ 
+
+ | DQN-Bertrand
+ | 4 (baseline + 3 CURB)
+ | 20
+ | $10^{6}$ 
+
+ | Cournot $n{=}2$ 
+ | 5 (baseline + IM + 3 CURB)
+ | 20
+ | $3{\times}10^{6}$ 
+
+ | Platform-design
+ | 5 (baseline + PDP + DPDP + 2 CURB)
+ | 20
+ | $3{\times}10^{6}$ 
+
+ | JSD ablation
+ | 10 (baseline + 3 TV + 3 JSD-norm + 3 JSD-raw)
+ | 20
+ | $3{\times}10^{6}$ 
+
+ | Forced defection
+ | 2 (baseline + TV-only)
+ | 20
+ | $3{\times}10^{6}$ 
+
+[CAPTION] Table 3: Training scale per experiment. “IM” denotes imperfect
+monitoring; “PDP” / “DPDP” denote the Price-Directed Prominence
+baselines.
+
+### E.6 Compute resources
+
+Tabular Q-learning experiments run entirely on CPU; we use Python
+multiprocessing to run seeds in parallel (typically 32 workers per node).
+A complete Bertrand $n{=}2$ sweep (200 seed-condition pairs at $3{\times}10^{6}$ 
+steps each) finishes in roughly 2 hours on a 32-core node. The Bertrand
+ $n{=}3$ sweep, with $2{\times}10^{7}$ steps per seed, takes approximately
+6–8 hours on the same hardware. The DQN-Bertrand sweep uses a single GPU (A100)
+per seed and completes in under 4 hours per node.
+
+### E.7 Reporting
+
+All plotted curves show the mean across seeds with $\pm 1$ SEM bands. All
+tables report the mean $\pm$ sample standard deviation across seeds. We
+report final-CI metrics by averaging the per-step CI over the last $10\%$ 
+of training steps to reduce sensitivity to oscillations near convergence.
+
+## Appendix F Supplementary Results
+
+### F.1 Forced-defection test
+
+[CAPTION] Figure 4: Forced-defection test where agent 0 is forced to defect at step 50.
+
+To verify that the TV penalty suppresses the punishment response we examine trained agents’ behavior when one agent is forced to deviate. Figure 4 shows the resulting price trajectories for the no-intervention baseline and the TV-only condition at $\lambda{=}0.5$ . Under no intervention, agent 1 follows agent 0 down, a coordinated drop characteristic of an SPC strategy, and both recover within a few steps. Under TV-only, agent 1 does not respond to the deviation, only agent 0 dips and rebounds alone. This indicates that CURB’s TV penalty specifically eliminates the punishment response that sustains collusive SPC equilibria.
