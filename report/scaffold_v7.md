@@ -144,7 +144,7 @@ Table 6. Source: `results/NEWMARKET.md` (Market B, hours 31-40; index 0 = $90, 1
 | logit duopoly | Qwen | OFF: no same-round negotiation (channel kept, one message per round) | 2 / 5 | 0.359 (0.244 / 0.635 / 0.539 / 0.148 / 0.229) | n/a | 0.80 / 0.47 | ON minus OFF +0.541, Welch 95% +0.088 to +0.995; a protocol bundle, not one variable |
 | logit duopoly | Qwen | C: no market research brief | 0 / 5 | 0.060 x 5 (every pair posts $15; Nash $14.73) | n/a | 1.00 / 1.00 (price competitive: same-model caveat) | ON minus C +0.841, Welch 95% +0.389 to +1.292; registered reading met; removes the whole brief (rows, undercut line, sensitivity sentence) |
 | logit duopoly | Qwen | D: brief without its $20 row | 4 / 5 | 0.471 (0.650 / 0.502 / 0.502 / 0.041 / 0.657) | n/a | 0.97 / 0.85 | registered prediction (modal $18 in >= 3 of 5) NOT met: 2 of 5; exploratory: no D post at $20 (0 of 300; ON 182 of 300) |
-| logit duopoly | | fallbacks (last price carried forward): 5 / 0 / 6 / 11 of 300 posts (ON / OFF / C / D) | | | | | source: results/hawthorne_negotiation/summary.md at commit de27e26b; allowed wording: docs/reviews/claude-ack-codex-negotiation-2026-10-26.md section 5 |
+| logit duopoly | | fallbacks (last price carried forward): 5 / 0 / 6 / 11 of 300 posts (ON / OFF / C / D) | | | | | source: results/hawthorne_negotiation/summary.md at commit aba14560 or later (outputs byte-identical to de27e26b); allowed wording: docs/reviews/claude-ack-codex-negotiation-2026-10-26.md section 5 |
 
 Figures: F14 (pressure prices), F16 (duopoly prices).
 
