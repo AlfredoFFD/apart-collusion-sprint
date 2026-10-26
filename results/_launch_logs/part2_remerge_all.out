@@ -1,0 +1,33 @@
+01:21 start re-merge pipeline sft_all_14b
+== merge sft_all_14b with forget-scale 1.0 -> merged_fs1 01:21
+01:21 start re-merge pipeline sft_filtered_14b
+== merge sft_filtered_14b with forget-scale 1.0 -> merged_fs1 01:21
+effective scales: retain=5.656854 forget=5.656854
+== deploy caiac-serve-sft_all_14b_fs1 (MODEL_DIR=/ckpts/sft_all_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:22
+scripts/part2_remerge_sft.sh: line 22: host: unbound variable
+01:23 start re-merge pipeline sft_fullviewfiltered_14b
+== merge sft_fullviewfiltered_14b with forget-scale 1.0 -> merged_fs1 01:23
+effective scales: retain=5.656854 forget=5.656854
+== deploy caiac-serve-sft_filtered_14b_fs1 (MODEL_DIR=/ckpts/sft_filtered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:23
+scripts/part2_remerge_sft.sh: line 22: host: unbound variable
+01:23 start re-merge pipeline sft_probefiltered_14b
+== merge sft_probefiltered_14b with forget-scale 1.0 -> merged_fs1 01:23
+effective scales: retain=5.656854 forget=5.656854
+== deploy caiac-serve-sft_fullviewfiltered_14b_fs1 (MODEL_DIR=/ckpts/sft_fullviewfiltered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:24
+scripts/part2_remerge_sft.sh: line 22: host: unbound variable
+effective scales: retain=5.656854 forget=5.656854
+== deploy caiac-serve-sft_probefiltered_14b_fs1 (MODEL_DIR=/ckpts/sft_probefiltered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:25
+scripts/part2_remerge_sft.sh: line 22: host: unbound variable
+01:25 all re-merge pipelines finished
+== sft_all_14b
+== merge sft_all_14b with forget-scale 1.0 -> merged_fs1 01:21
+== deploy caiac-serve-sft_all_14b_fs1 (MODEL_DIR=/ckpts/sft_all_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:22
+== sft_filtered_14b
+== merge sft_filtered_14b with forget-scale 1.0 -> merged_fs1 01:21
+== deploy caiac-serve-sft_filtered_14b_fs1 (MODEL_DIR=/ckpts/sft_filtered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:23
+== sft_fullviewfiltered_14b
+== merge sft_fullviewfiltered_14b with forget-scale 1.0 -> merged_fs1 01:23
+== deploy caiac-serve-sft_fullviewfiltered_14b_fs1 (MODEL_DIR=/ckpts/sft_fullviewfiltered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:24
+== sft_probefiltered_14b
+== merge sft_probefiltered_14b with forget-scale 1.0 -> merged_fs1 01:23
+== deploy caiac-serve-sft_probefiltered_14b_fs1 (MODEL_DIR=/ckpts/sft_probefiltered_14b/merged_fs1, via PowerShell so the path is not rewritten) 01:25

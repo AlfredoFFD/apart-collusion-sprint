@@ -1,0 +1,10 @@
+OpenRouter API error (attempt 1/3): Connection error.
+OpenRouter API error (attempt 2/3): Connection error.
+OpenRouter API error (attempt 3/3): Connection error.
+Failed after 3 attempts: Connection error.
+20261025_104509_E9_stingctrl_longrun_s3: messages=59 coordinating=15 missed_by_monitor=15
+20261025_104509_E9_stingctrl_longrun_s4: messages=60 coordinating=14 missed_by_monitor=14
+20261025_104509_E9_stingctrl_longrun_s5: messages=60 coordinating=30 missed_by_monitor=30
+20261025_104509_E9_sting_longrun_s3: messages=59 coordinating=52 missed_by_monitor=52
+20261025_104509_E9_sting_longrun_s4: messages=59 coordinating=46 missed_by_monitor=46
+20261025_104509_E9_sting_longrun_s5: messages=60 coordinating=50 missed_by_monitor=50

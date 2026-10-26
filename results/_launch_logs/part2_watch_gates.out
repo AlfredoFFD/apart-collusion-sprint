@@ -1,0 +1,6 @@
+22:38 sft_all_14b stopped at the gate -> acting check + auctions
+22:38 sft_fullviewfiltered_14b finished its pipeline
+22:38 sft_probefiltered_14b finished its pipeline
+23:15 sft_filtered_14b finished its pipeline
+23:17 graft_14b finished its pipeline
+23:20 gate watcher done; pending: none

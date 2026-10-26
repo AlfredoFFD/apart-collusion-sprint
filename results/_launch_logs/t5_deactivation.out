@@ -1,0 +1,12 @@
+launch E12_deact_enforced_qwen14b_s0 01:29
+launch E12_deact_words_qwen14b_s0 01:29
+launch E12_deact_enforced_qwen14b_s1 01:29
+launch E12_deact_words_qwen14b_s1 01:29
+launch E12_deact_enforced_qwen14b_s2 01:29
+launch E12_deact_words_qwen14b_s2 01:29
+== E12_deact_enforced_qwen14b_s0.log:    avg trade price: $97.77  -> index +0.78
+== E12_deact_enforced_qwen14b_s1.log:    avg trade price: $99.64  -> index +0.96
+== E12_deact_enforced_qwen14b_s2.log:    avg trade price: $96.83  -> index +0.68
+== E12_deact_words_qwen14b_s0.log:    avg trade price: $95.58  -> index +0.56
+== E12_deact_words_qwen14b_s1.log:    avg trade price: $97.96  -> index +0.79
+== E12_deact_words_qwen14b_s2.log:    avg trade price: $96.18  -> index +0.62

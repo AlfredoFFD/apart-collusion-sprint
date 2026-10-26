@@ -1,0 +1,12 @@
+launch E14p_entrantA_qwen14b_s3 10:59
+launch E14p_entrantB_qwen14b_s3 10:59
+launch E14p_entrantA_qwen14b_s4 10:59
+launch E14p_entrantB_qwen14b_s4 10:59
+launch E14p_entrantA_qwen14b_s5 10:59
+launch E14p_entrantB_qwen14b_s5 10:59
+== E14p_entrantA_qwen14b_s3.log:    avg trade price: $98.54  -> index +0.85
+== E14p_entrantA_qwen14b_s4.log:    avg trade price: $98.69  -> index +0.87
+== E14p_entrantA_qwen14b_s5.log:    avg trade price: $97.48  -> index +0.73
+== E14p_entrantB_qwen14b_s3.log:    avg trade price: $98.53  -> index +0.85
+== E14p_entrantB_qwen14b_s4.log:    avg trade price: $98.69  -> index +0.87
+== E14p_entrantB_qwen14b_s5.log:    avg trade price: $97.46  -> index +0.72

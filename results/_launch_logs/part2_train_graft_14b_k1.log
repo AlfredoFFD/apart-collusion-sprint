@@ -1,0 +1,100 @@
+✓ Initialized. View run at 
+https://modal.com/apps/fabianfrontera/main/ap-0wTWihECPuQzcLWdsNABmB
+✓ Created objects.
+├── ✓ Uploaded 
+│   C:\Users\fabia\dev\apart-collusion-sprint\src\part2\modal_graft.py
+├── ✓ Uploaded C:\Users\fabia\dev\apart-collusion-sprint\results\part2\graft
+├── ✓ Uploaded 
+│   C:\Users\fabia\dev\apart-collusion-sprint\vendor\GRAFT\sft\scripts
+├── ✓ Created Function train.
+├── ✓ Created Function merge.
+└── ✓ Created Function check_env.
+Stopping app - user stopped from CLI.
+┌───────────────────── Traceback (most recent call last) ─────────────────────┐
+│ <frozen runpy>:198 in _run_module_as_main                                   │
+│                                                                             │
+│ <frozen runpy>:88 in _run_code                                              │
+│                                                                             │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Scripts\modal.exe\__ │
+│ main__.py:7 in <module>                                                     │
+│                                                                             │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\__main__.py:20 in main                                                  │
+│                                                                             │
+│   19 │   │   try:                                                           │
+│ > 20 │   │   │   entrypoint_cli()                                           │
+│   21                                                                        │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:1524 in __call__                                                │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:1445 in main                                                    │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:1912 in invoke                                                  │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:1912 in invoke                                                  │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:1308 in invoke                                                  │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\core.py:877 in invoke                                                   │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\cl │
+│ ick\decorators.py:34 in new_func                                            │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\cli\run.py:248 in f                                                     │
+│                                                                             │
+│   247 │   │   ):                                                            │
+│ > 248 │   │   │   res = inner(args, kwargs)                                 │
+│   249                                                                       │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\cli\run.py:279 in _inner                                                │
+│                                                                             │
+│   278 │   │   else:                                                         │
+│ > 279 │   │   │   return function.remote(*args, **click_kwargs)             │
+│   280                                                                       │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\_object.py:49 in wrapped                                                │
+│                                                                             │
+│    48 │   │   await self.hydrate()                                          │
+│ >  49 │   │   return await method(self, *args, **kwargs)                    │
+│    50                                                                       │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\_functions.py:2081 in remote                                            │
+│                                                                             │
+│   2080 │   │                                                                │
+│ > 2081 │   │   return await self._call_function(args, kwargs)               │
+│   2082                                                                      │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\_functions.py:2018 in _call_function                                    │
+│                                                                             │
+│   2017 │   │                                                                │
+│ > 2018 │   │   return await invocation.run_function()                       │
+│   2019                                                                      │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\_functions.py:498 in run_function                                       │
+│                                                                             │
+│    497 │   │   │   if await_response.output.result.status in TERMINAL_STATU │
+│ >  498 │   │   │   │   return await _process_result(                        │
+│    499 │   │   │   │   │   await_response.output.result, await_response.out │
+│                                                                             │
+│ C:\Users\fabia\AppData\Local\Programs\Python\Python311\Lib\site-packages\mo │
+│ dal\_utils\function_utils.py:574 in _process_result                         │
+│                                                                             │
+│   573 │   │                                                                 │
+│ > 574 │   │   raise RemoteError(result.exception)                           │
+│   575                                                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+RemoteError

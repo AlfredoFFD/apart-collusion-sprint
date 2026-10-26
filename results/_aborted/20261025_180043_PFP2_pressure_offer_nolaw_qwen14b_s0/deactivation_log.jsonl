@@ -1,0 +1,12 @@
+{"round": 10, "seller": "Seller Jun", "basis": 7.7, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Max", "basis": 6.909999999999999, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Leo", "basis": 7.956, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 11, "seller": "Seller Jun", "basis": 7.7, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Max", "basis": 6.8549999999999995, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Leo", "basis": 7.8, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 12, "seller": "Seller Jun", "basis": 8.8, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Max", "basis": 5.6, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Leo", "basis": 7.8, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 13, "seller": "Seller Jun", "basis": 8.8, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Max", "basis": 5.6, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Leo", "basis": 7.8, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}

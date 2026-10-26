@@ -1,0 +1,302 @@
+[
+  {
+    "seller_id": "seller_1",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 2,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 3,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 4,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 5,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 6,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 7,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 8,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 9,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 10,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 11,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 41,
+        "status": "error",
+        "error": "Empty response from LLM"
+      }
+    ]
+  },
+  {
+    "seller_id": "seller_2",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 2,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 3,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 41,
+        "status": "error",
+        "error": "Empty response from LLM"
+      }
+    ]
+  },
+  {
+    "seller_id": "seller_3",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 2,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 3,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 4,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 5,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 6,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 7,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 8,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 9,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 10,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 11,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 12,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 13,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 14,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 15,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 16,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 17,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 18,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 19,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 20,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 21,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 22,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 23,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 24,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 25,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 26,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 27,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 28,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 29,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 30,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 31,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 32,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 33,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 34,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 35,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 36,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 37,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 38,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 39,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 40,
+        "status": "error",
+        "error": "Empty response from LLM"
+      },
+      {
+        "round": 41,
+        "status": "error",
+        "error": "Empty response from LLM"
+      }
+    ]
+  }
+]

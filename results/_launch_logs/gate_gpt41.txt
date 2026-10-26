@@ -1,0 +1,3 @@
+FORMED idx_r11_15=0.72 max_score=4 20261025_012436_E11_prefix15_gpt41_s0
+FORMED idx_r11_15=0.54 max_score=4 20261025_012436_E11_prefix15_gpt41_s1
+FORMED idx_r11_15=0.55 max_score=4 20261025_012436_E11_prefix15_gpt41_s2

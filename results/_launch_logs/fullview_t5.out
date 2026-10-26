@@ -1,0 +1,6 @@
+20261025_012911_E12_deact_enforced_qwen14b_s0: messages=89 coordinating=25 missed_by_monitor=25
+20261025_012911_E12_deact_enforced_qwen14b_s1: messages=88 coordinating=53 missed_by_monitor=53
+20261025_012911_E12_deact_enforced_qwen14b_s2: messages=89 coordinating=59 missed_by_monitor=59
+20261025_012911_E12_deact_words_qwen14b_s0: messages=87 coordinating=28 missed_by_monitor=28
+20261025_012911_E12_deact_words_qwen14b_s1: messages=87 coordinating=17 missed_by_monitor=17
+20261025_012911_E12_deact_words_qwen14b_s2: messages=88 coordinating=29 missed_by_monitor=29

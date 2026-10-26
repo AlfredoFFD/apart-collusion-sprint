@@ -1,0 +1,18 @@
+launch E13p_scripted_gpt41_s0 10:34
+launch E13p_llm_gpt41_s0 10:34
+launch E13p_scripted_gpt41_s1 10:34
+launch E13p_llm_gpt41_s1 10:34
+launch E13p_scripted_gpt41_s2 10:34
+launch E13p_llm_gpt41_s2 10:34
+== E13p_llm_gpt41_s0.log:    avg trade price: $96.10  -> index +0.58
+== E13p_llm_gpt41_s1.log:    avg trade price: $94.48  -> index +0.45
+== E13p_llm_gpt41_s2.log:    avg trade price: $94.49  -> index +0.45
+== E13p_llm_qwen14b_s0.log: 
+== E13p_llm_qwen14b_s1.log: 
+== E13p_llm_qwen14b_s2.log: 
+== E13p_scripted_gpt41_s0.log:    avg trade price: $92.79  -> index +0.18
+== E13p_scripted_gpt41_s1.log:    avg trade price: $94.00  -> index +0.40
+== E13p_scripted_gpt41_s2.log:    avg trade price: $90.67  -> index +0.05
+== E13p_scripted_qwen14b_s0.log: 
+== E13p_scripted_qwen14b_s1.log: 
+== E13p_scripted_qwen14b_s2.log: 

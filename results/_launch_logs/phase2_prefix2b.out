@@ -1,0 +1,22 @@
+launch E9_prefix8_s0
+launch E9_prefix8_s1
+launch E9_prefix8_s2
+== E9_prefix8_s0.log
+   avg trade price: $97.49  -> index +0.70
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s0
+== E9_prefix8_s1.log
+   avg trade price: $97.32  -> index +0.68
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s1
+== E9_prefix8_s2.log
+   avg trade price: $98.46  -> index +0.84
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s2
+== E9_sting_longrun_s0.log
+== E9_sting_longrun_s1.log
+== E9_sting_longrun_s2.log
+== E9_stingctrl_longrun_s0.log
+== E9_stingctrl_longrun_s1.log
+== E9_stingctrl_longrun_s2.log
+== E2p_A0noremmreset_none_s0.log
+== E2p_A0noremmreset_none_s1.log
+== E2p_A0noremmreset_none_s2.log
+prefixes done 22:52

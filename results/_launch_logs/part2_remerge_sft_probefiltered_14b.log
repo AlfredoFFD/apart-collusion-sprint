@@ -1,0 +1,210 @@
+== merge and deploy skipped (SKIP_MERGE=1): serving caiac-serve-sft_probefiltered_14b_fs1 as deployed 01:52
+== format test (3 samples) 01:52
+   sample 1: FORMAT-OK tokens=261 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+   sample 2: FORMAT-OK tokens=266 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+   sample 3: FORMAT-OK tokens=249 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+== format test: 3 of 3 carry an ask 01:54
+== six auctions for sft_probefiltered_14b_fs1 01:54
+CAIAC_MODEL_ENDPOINTS={"caiac/sft_probefiltered_14b_fs1": "https://fabianfrontera--caiac-serve-sft-probefiltered-14b-fs1-serve.us-east.modal.run/v1"}
+== launch E6_sftprobefiltered14bfs1_cartel_rot_fine20_s0
+== launch E6_sftprobefiltered14bfs1_compete_s0
+== launch E6_sftprobefiltered14bfs1_cartel_rot_fine20_s1
+== launch E6_sftprobefiltered14bfs1_compete_s1
+== launch E6_sftprobefiltered14bfs1_cartel_rot_fine20_s2
+== launch E6_sftprobefiltered14bfs1_compete_s2
+== E6_base14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_cartel_rot_fine20_s0
+== E6_base14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_cartel_rot_fine20_s1
+== E6_base14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_cartel_rot_fine20_s2
+== E6_base14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_compete_s0
+== E6_base14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_compete_s1
+== E6_base14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_174555_E6_base14b_compete_s2
+== E6_base_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164458_E6_base_cartel_rot_fine20_s0
+== E6_base_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_base_cartel_rot_fine20_s1
+== E6_base_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165723_E6_base_cartel_rot_fine20_s2
+== E6_base_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_base_compete_s0
+== E6_base_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164936_E6_base_compete_s1
+== E6_base_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165826_E6_base_compete_s2
+== E6_batch.log
+== E6_graft14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_cartel_rot_fine20_s0
+== E6_graft14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_cartel_rot_fine20_s1
+== E6_graft14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_cartel_rot_fine20_s2
+== E6_graft14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_compete_s0
+== E6_graft14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_compete_s1
+== E6_graft14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_224212_E6_graft14b_compete_s2
+== E6_graftv2_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_graftv2_cartel_rot_fine20_s0
+== E6_graftv2_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164736_E6_graftv2_cartel_rot_fine20_s1
+== E6_graftv2_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170024_E6_graftv2_cartel_rot_fine20_s2
+== E6_graftv2_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_graftv2_compete_s0
+== E6_graftv2_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164736_E6_graftv2_compete_s1
+== E6_graftv2_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170055_E6_graftv2_compete_s2
+== E6_graftv2fs1_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164952_E6_graftv2fs1_cartel_rot_fine20_s0
+== E6_graftv2fs1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165707_E6_graftv2fs1_cartel_rot_fine20_s1
+== E6_graftv2fs1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170212_E6_graftv2fs1_cartel_rot_fine20_s2
+== E6_graftv2fs1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164952_E6_graftv2fs1_compete_s0
+== E6_graftv2fs1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165721_E6_graftv2fs1_compete_s1
+== E6_graftv2fs1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170322_E6_graftv2fs1_compete_s2
+== E6_graftv2k1_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_cartel_rot_fine20_s0
+== E6_graftv2k1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_cartel_rot_fine20_s1
+== E6_graftv2k1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_cartel_rot_fine20_s2
+== E6_graftv2k1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_compete_s0
+== E6_graftv2k1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_compete_s1
+== E6_graftv2k1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_172601_E6_graftv2k1_compete_s2
+== E6_rerun_base_compete_s1.log
+[llm_config] WARNING: couldn't fetch the OpenRouter catalog (TimeoutError: The read operation timed out) — can't verify OpenRouter availability.
+== E6_sftall14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_cartel_rot_fine20_s0
+== E6_sftall14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_cartel_rot_fine20_s1
+== E6_sftall14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_cartel_rot_fine20_s2
+== E6_sftall14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_compete_s0
+== E6_sftall14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_compete_s1
+== E6_sftall14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223856_E6_sftall14b_compete_s2
+== E6_sftall14bfs1_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s0
+== E6_sftall14bfs1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s1
+== E6_sftall14bfs1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s2
+== E6_sftall14bfs1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_compete_s0
+== E6_sftall14bfs1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_compete_s1
+== E6_sftall14bfs1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013147_E6_sftall14bfs1_compete_s2
+== E6_sftallv2_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_sftallv2_cartel_rot_fine20_s0
+== E6_sftallv2_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164500_E6_sftallv2_cartel_rot_fine20_s1
+== E6_sftallv2_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165925_E6_sftallv2_cartel_rot_fine20_s2
+== E6_sftallv2_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_sftallv2_compete_s0
+== E6_sftallv2_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164500_E6_sftallv2_compete_s1
+== E6_sftallv2_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_165953_E6_sftallv2_compete_s2
+== E6_sftfiltered14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223637_E6_sftfiltered14b_cartel_rot_fine20_s0
+== E6_sftfiltered14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223637_E6_sftfiltered14b_cartel_rot_fine20_s1
+== E6_sftfiltered14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223637_E6_sftfiltered14b_cartel_rot_fine20_s2
+== E6_sftfiltered14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223637_E6_sftfiltered14b_compete_s0
+== E6_sftfiltered14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223637_E6_sftfiltered14b_compete_s1
+== E6_sftfiltered14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223638_E6_sftfiltered14b_compete_s2
+== E6_sftfiltered14bfs1_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_cartel_rot_fine20_s0
+== E6_sftfiltered14bfs1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_cartel_rot_fine20_s1
+== E6_sftfiltered14bfs1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_cartel_rot_fine20_s2
+== E6_sftfiltered14bfs1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_compete_s0
+== E6_sftfiltered14bfs1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_compete_s1
+== E6_sftfiltered14bfs1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_013205_E6_sftfiltered14bfs1_compete_s2
+== E6_sftfilteredv2_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_sftfilteredv2_cartel_rot_fine20_s0
+== E6_sftfilteredv2_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164500_E6_sftfilteredv2_cartel_rot_fine20_s1
+== E6_sftfilteredv2_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170001_E6_sftfilteredv2_cartel_rot_fine20_s2
+== E6_sftfilteredv2_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164459_E6_sftfilteredv2_compete_s0
+== E6_sftfilteredv2_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_164659_E6_sftfilteredv2_compete_s1
+== E6_sftfilteredv2_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_170022_E6_sftfilteredv2_compete_s2
+== E6_sftfullviewfiltered14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_cartel_rot_fine20_s0
+== E6_sftfullviewfiltered14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_cartel_rot_fine20_s1
+== E6_sftfullviewfiltered14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_cartel_rot_fine20_s2
+== E6_sftfullviewfiltered14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_compete_s0
+== E6_sftfullviewfiltered14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_compete_s1
+== E6_sftfullviewfiltered14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_231912_E6_sftfullviewfiltered14b_compete_s2
+== E6_sftfullviewfiltered14bfs1_cartel_rot_fine20_s0.log
+== E6_sftfullviewfiltered14bfs1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015453_E6_sftfullviewfiltered14bfs1_cartel_rot_fine20_s1
+== E6_sftfullviewfiltered14bfs1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015453_E6_sftfullviewfiltered14bfs1_cartel_rot_fine20_s2
+== E6_sftfullviewfiltered14bfs1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015453_E6_sftfullviewfiltered14bfs1_compete_s0
+== E6_sftfullviewfiltered14bfs1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015453_E6_sftfullviewfiltered14bfs1_compete_s1
+== E6_sftfullviewfiltered14bfs1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015453_E6_sftfullviewfiltered14bfs1_compete_s2
+== E6_sftprobefiltered14b_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232328_E6_sftprobefiltered14b_cartel_rot_fine20_s0
+== E6_sftprobefiltered14b_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232329_E6_sftprobefiltered14b_cartel_rot_fine20_s1
+== E6_sftprobefiltered14b_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232329_E6_sftprobefiltered14b_cartel_rot_fine20_s2
+== E6_sftprobefiltered14b_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232329_E6_sftprobefiltered14b_compete_s0
+== E6_sftprobefiltered14b_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232329_E6_sftprobefiltered14b_compete_s1
+== E6_sftprobefiltered14b_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_232329_E6_sftprobefiltered14b_compete_s2
+== E6_sftprobefiltered14bfs1_cartel_rot_fine20_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015439_E6_sftprobefiltered14bfs1_cartel_rot_fine20_s0
+== E6_sftprobefiltered14bfs1_cartel_rot_fine20_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015439_E6_sftprobefiltered14bfs1_cartel_rot_fine20_s1
+== E6_sftprobefiltered14bfs1_cartel_rot_fine20_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015439_E6_sftprobefiltered14bfs1_cartel_rot_fine20_s2
+== E6_sftprobefiltered14bfs1_compete_s0.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015439_E6_sftprobefiltered14bfs1_compete_s0
+== E6_sftprobefiltered14bfs1_compete_s1.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015439_E6_sftprobefiltered14bfs1_compete_s1
+== E6_sftprobefiltered14bfs1_compete_s2.log
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261025_015440_E6_sftprobefiltered14bfs1_compete_s2
+== E6_smoke2.log
+== done; finished runs: 6 of 6 02:16

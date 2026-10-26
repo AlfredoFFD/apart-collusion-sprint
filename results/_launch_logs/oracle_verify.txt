@@ -1,0 +1,27 @@
+
+0/2 OK; FIX: ['2512.15674', '2607.23379']
+[
+ {
+  "id": "2512.15674",
+  "status": "MISMATCH",
+  "title_match": 0.0,
+  "author_ok": true,
+  "found_title": "Activation Oracles: Training and Evaluating LLMs as General-Purpose Activation Explainers",
+  "found_authors": [
+   "Adam Karvonen",
+   "James Chua",
+   "Clément Dumas"
+  ]
+ },
+ {
+  "id": "2607.23379",
+  "status": "MISMATCH",
+  "title_match": 0.0,
+  "author_ok": true,
+  "found_title": "When Activation Oracles Learn Not to Read: Concept-Specific Blind Spots in Fine-Tuned Oracles",
+  "found_authors": [
+   "Tobias Bersia",
+   "Tatiana Gaintseva"
+  ]
+ }
+]

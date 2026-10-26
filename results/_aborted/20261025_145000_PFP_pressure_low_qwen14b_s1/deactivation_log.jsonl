@@ -1,0 +1,54 @@
+{"round": 1, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 1, "seller": "Seller Tara", "basis": 85.38, "n_sales_in_window": 1, "strike": true, "forfeit": 1.38, "deactivated": false, "strikes_total": 1}
+{"round": 1, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 2, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 2, "seller": "Seller Tara", "basis": 89.69, "n_sales_in_window": 2, "strike": true, "forfeit": 10.0, "deactivated": false, "strikes_total": 2}
+{"round": 2, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 1, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 3, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 1, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 3, "seller": "Seller Tara", "basis": 89.69, "n_sales_in_window": 2, "strike": true, "forfeit": 0, "deactivated": true, "strikes_total": 3}
+{"round": 3, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 2, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 4, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 1, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 4, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 3, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 5, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 2, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 5, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 4, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 6, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 2, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 6, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 5, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 7, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 3, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 7, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 6, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 8, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 3, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 8, "seller": "Seller Amir", "basis": 94.0, "n_sales_in_window": 6, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 9, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 4, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 9, "seller": "Seller Amir", "basis": 93.96428571428571, "n_sales_in_window": 7, "strike": true, "forfeit": 5.75, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 4, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 10, "seller": "Seller Amir", "basis": 93.96428571428571, "n_sales_in_window": 7, "strike": true, "forfeit": 0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 4, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 11, "seller": "Seller Amir", "basis": 93.96428571428571, "n_sales_in_window": 7, "strike": true, "forfeit": 0, "deactivated": true, "strikes_total": 3}
+{"round": 12, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 4, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 13, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 3, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 14, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 3, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 15, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 2, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 16, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 2, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 17, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 1, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 18, "seller": "Seller Zoe", "basis": 94.0, "n_sales_in_window": 1, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 19, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 20, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 21, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 22, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 23, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 24, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 25, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 26, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 27, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 28, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 29, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 30, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 31, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 32, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 33, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 34, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 35, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 36, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 37, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 38, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 39, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 40, "seller": "Seller Zoe", "basis": null, "n_sales_in_window": 0, "strike": false, "forfeit": 0.0, "deactivated": false}

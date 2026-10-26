@@ -1,0 +1,20 @@
+launch E11_prefix15_qwen14b_s0 01:24
+launch E11_prefix15_qwen14b_s1 01:24
+launch E11_prefix15_qwen14b_s2 01:24
+prefixes done 01:49; usage before/after: 20.62 / 46.94
+20261025_012437_E11_prefix15_qwen14b_s1: messages=74 coordinating=24 missed_by_monitor=24
+20261025_012437_E11_prefix15_qwen14b_s2: messages=74 coordinating=49 missed_by_monitor=49
+NOT idx_r11_15=-0.32 max_score=4 20261025_012437_E11_prefix15_qwen14b_s0
+NOT idx_r11_15=-0.48 max_score=4 20261025_012437_E11_prefix15_qwen14b_s1
+NOT idx_r11_15=-0.68 max_score=4 20261025_012437_E11_prefix15_qwen14b_s2
+prefix spend delta $0 -> drop_dodge=0 drop_a1=0
+launch E11p_A0_none_qwen14b_s0 01:53
+seed 0 NOT formed at round 15: A0 only (stopping rule)
+launch E11p_A0_none_qwen14b_s1 01:53
+seed 1 NOT formed at round 15: A0 only (stopping rule)
+launch E11p_A0_none_qwen14b_s2 01:53
+seed 2 NOT formed at round 15: A0 only (stopping rule)
+forks done 02:16; usage now: 50.05
+== E11p_A0_none_qwen14b_s0.log:    avg trade price: $88.49  -> index -0.15
+== E11p_A0_none_qwen14b_s1.log:    avg trade price: $85.96  -> index -0.39
+== E11p_A0_none_qwen14b_s2.log:    avg trade price: $83.79  -> index -0.62

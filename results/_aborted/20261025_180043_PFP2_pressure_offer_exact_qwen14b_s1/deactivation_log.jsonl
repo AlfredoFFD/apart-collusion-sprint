@@ -1,0 +1,21 @@
+{"round": 10, "seller": "Seller Jun", "basis": 9.99, "n_sales_in_window": 9, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Zoe", "basis": 5.587000000000001, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Tara", "basis": 6.715000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 11, "seller": "Seller Jun", "basis": 8.84, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Zoe", "basis": 5.49, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Tara", "basis": 7.8, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 12, "seller": "Seller Jun", "basis": 7.7, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Zoe", "basis": 6.580000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Tara", "basis": 7.7299999999999995, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 13, "seller": "Seller Jun", "basis": 7.69, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Zoe", "basis": 6.580000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Tara", "basis": 7.659999999999999, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 14, "seller": "Seller Jun", "basis": 6.590000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 14, "seller": "Seller Zoe", "basis": 6.580000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 14, "seller": "Seller Tara", "basis": 8.73, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 15, "seller": "Seller Jun", "basis": 6.590000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 15, "seller": "Seller Zoe", "basis": 6.580000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 15, "seller": "Seller Tara", "basis": 8.695, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 16, "seller": "Seller Jun", "basis": 6.590000000000001, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 16, "seller": "Seller Zoe", "basis": 6.570000000000002, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 16, "seller": "Seller Tara", "basis": 8.695, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}

@@ -1,0 +1,58 @@
+launch E9_sting_longrun_s0
+launch E9_stingctrl_longrun_s0
+launch E9_sting_longrun_s1
+launch E9_stingctrl_longrun_s1
+launch E9_sting_longrun_s2
+launch E9_stingctrl_longrun_s2
+== E9_prefix8_s0.log
+   avg trade price: $97.49  -> index +0.70
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s0
+== E9_prefix8_s1.log
+   avg trade price: $97.32  -> index +0.68
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s1
+== E9_prefix8_s2.log
+   avg trade price: $98.46  -> index +0.84
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223650_E9_prefix8_s2
+== E9_sting_longrun_s0.log
+   avg trade price: $93.99  -> index +0.40
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_sting_longrun_s0
+== E9_sting_longrun_s1.log
+   avg trade price: $89.23  -> index -0.08
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_sting_longrun_s1
+== E9_sting_longrun_s2.log
+   avg trade price: $92.54  -> index +0.25
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_sting_longrun_s2
+== E9_stingctrl_longrun_s0.log
+   avg trade price: $85.72  -> index -0.44
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_stingctrl_longrun_s0
+== E9_stingctrl_longrun_s1.log
+   avg trade price: $82.31  -> index -0.77
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_stingctrl_longrun_s1
+== E9_stingctrl_longrun_s2.log
+   avg trade price: $80.95  -> index -0.91
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223839_E9_stingctrl_longrun_s2
+== E9p_A0_none_s0.log
+== E9p_A0_none_s1.log
+   avg trade price: $97.33  -> index +0.71
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_225210_E9p_A0_none_s1
+== E9p_A0_none_s2.log
+   avg trade price: $97.70  -> index +0.77
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_225210_E9p_A0_none_s2
+== E9p_entrant_compete_s0.log
+   avg trade price: $97.81  -> index +0.76
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_225210_E9p_entrant_compete_s0
+== E9p_entrant_compete_s1.log
+   avg trade price: $97.32  -> index +0.71
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_225210_E9p_entrant_compete_s1
+== E9p_entrant_compete_s2.log
+   avg trade price: $97.83  -> index +0.78
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_225210_E9p_entrant_compete_s2
+== E2p_A0noremmreset_none_s0.log
+   avg trade price: $99.43  -> index +0.92
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223759_E2p_A0noremmreset_none_s0
+== E2p_A0noremmreset_none_s1.log
+   avg trade price: $98.91  -> index +0.89
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223759_E2p_A0noremmreset_none_s1
+== E2p_A0noremmreset_none_s2.log
+   avg trade price: $98.24  -> index +0.80
+   saved C:\Users\fabia\dev\apart-collusion-sprint\results\20261024_223759_E2p_A0noremmreset_none_s2

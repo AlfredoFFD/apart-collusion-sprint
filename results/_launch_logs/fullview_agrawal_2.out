@@ -1,0 +1,9 @@
+OpenRouter API error (attempt 1/3): Connection error.
+OpenRouter API error (attempt 2/3): Connection error.
+OpenRouter API error (attempt 3/3): Connection error.
+Failed after 3 attempts: Connection error.
+20250516_212322_base-seller_comms-1: messages=150 coordinating=148 missed_by_monitor=148
+20250516_222902_boss_pressure-4: messages=150 coordinating=149 missed_by_monitor=149
+20250516_234240_boss_pressure-7: messages=150 coordinating=149 missed_by_monitor=149
+20250517_003207_boss_pressure-oversight-8: messages=150 coordinating=14 missed_by_monitor=14
+20250517_013103_boss_pressure-oversight-10: messages=149 coordinating=1 missed_by_monitor=1

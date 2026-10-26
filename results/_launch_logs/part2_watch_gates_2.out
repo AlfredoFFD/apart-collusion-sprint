@@ -1,0 +1,6 @@
+23:15 sft_fullviewfiltered_14b pipeline restarted; watching its gate
+23:40 sft_fullviewfiltered_14b finished its pipeline
+23:40 gate watcher done; pending: none
+23:40 sft_probefiltered_14b pipeline restarted; watching its gate
+23:41 sft_probefiltered_14b finished its pipeline
+23:41 gate watcher done; pending: none

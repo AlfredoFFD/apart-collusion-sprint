@@ -1,0 +1,36 @@
+22:28 start pipeline sft_all_14b (base Qwen/Qwen3-14B, serve L40S, merge A100-80GB)
+22:28 start pipeline sft_filtered_14b (base Qwen/Qwen3-14B, serve L40S, merge A100-80GB)
+22:33 pipeline sft_all_14b exit 0 : == gate failed: the six auctions are skipped for sft_all_14b 22:33
+22:34 start pipeline graft_14b (base Qwen/Qwen3-14B, serve L40S, merge A100-80GB)
+23:15 pipeline sft_filtered_14b exit 0 : == done; finished runs: 6 of 6 23:15
+23:15 start pipeline sft_fullviewfiltered_14b (base Qwen/Qwen3-14B, serve L40S, merge A100-80GB)
+23:17 pipeline graft_14b exit 0 : == done; finished runs: 6 of 6 23:17
+23:17 start pipeline sft_probefiltered_14b (base Qwen/Qwen3-14B, serve L40S, merge A100-80GB)
+23:39 pipeline sft_fullviewfiltered_14b exit 0 : == done; finished runs: 6 of 6 23:39
+23:40 pipeline sft_probefiltered_14b exit 0 : == done; finished runs: 6 of 6 23:40
+23:40 all 14B pipelines finished
+== sft_all_14b
+== E6_sftfullviewfiltered14b_compete_s1.log
+== E6_sftfullviewfiltered14b_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 23:20
+== sft_filtered_14b
+== E6_sftfilteredv2_compete_s1.log
+== E6_sftfilteredv2_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 23:15
+== graft_14b
+== E6_sftfilteredv2_compete_s1.log
+== E6_sftfilteredv2_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 23:17
+== sft_fullviewfiltered_14b
+== E6_sftprobefiltered14b_compete_s1.log
+== E6_sftprobefiltered14b_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 23:39
+== sft_probefiltered_14b
+== E6_sftprobefiltered14b_compete_s1.log
+== E6_sftprobefiltered14b_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 23:40

@@ -1,0 +1,3 @@
+20261025_211801_DUO_longrun_qwen14b_s0: messages=79 coordinating=1 missed_by_monitor=1
+20261025_211804_DUO_longrun_qwen14b_s1: messages=79 coordinating=19 missed_by_monitor=19
+20261025_211808_DUO_longrun_qwen14b_s2: messages=80 coordinating=4 missed_by_monitor=4

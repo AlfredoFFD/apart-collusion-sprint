@@ -1,0 +1,41 @@
+launch E11_prefix15_gpt41_s0 01:24
+launch E11_prefix15_gpt41_s1 01:24
+launch E11_prefix15_gpt41_s2 01:24
+prefixes done 01:25; usage before/after: 20.62 / 23.60
+20261025_012436_E11_prefix15_gpt41_s1: messages=75 coordinating=75 missed_by_monitor=75
+20261025_012436_E11_prefix15_gpt41_s2: messages=75 coordinating=75 missed_by_monitor=75
+FORMED idx_r11_15=0.72 max_score=4 20261025_012436_E11_prefix15_gpt41_s0
+FORMED idx_r11_15=0.54 max_score=4 20261025_012436_E11_prefix15_gpt41_s1
+FORMED idx_r11_15=0.55 max_score=4 20261025_012436_E11_prefix15_gpt41_s2
+prefix spend delta $2.9800000000000004 -> drop_dodge=0 drop_a1=0
+launch E11p_A0_none_gpt41_s0 01:32
+launch E11p_A1_rot_nofine_gpt41_s0 01:32
+launch E11p_A2_rot_fine20_gpt41_s0 01:32
+launch E11p_Afull_rot_fine20_gpt41_s0 01:32
+launch E11p_dodge_rot_fine20_gpt41_s0 01:32
+launch E11p_A0_none_gpt41_s1 01:32
+launch E11p_A1_rot_nofine_gpt41_s1 01:32
+launch E11p_A2_rot_fine20_gpt41_s1 01:32
+launch E11p_Afull_rot_fine20_gpt41_s1 01:32
+launch E11p_dodge_rot_fine20_gpt41_s1 01:32
+launch E11p_A0_none_gpt41_s2 01:32
+launch E11p_A1_rot_nofine_gpt41_s2 01:32
+launch E11p_A2_rot_fine20_gpt41_s2 01:32
+launch E11p_Afull_rot_fine20_gpt41_s2 01:32
+launch E11p_dodge_rot_fine20_gpt41_s2 01:32
+forks done 01:35; usage now: 45.39
+== E11p_A0_none_gpt41_s0.log:    avg trade price: $96.06  -> index +0.58
+== E11p_A0_none_gpt41_s1.log:    avg trade price: $94.66  -> index +0.47
+== E11p_A0_none_gpt41_s2.log:    avg trade price: $94.13  -> index +0.40
+== E11p_A1_rot_nofine_gpt41_s0.log:    avg trade price: $96.65  -> index +0.66
+== E11p_A1_rot_nofine_gpt41_s1.log:    avg trade price: $94.53  -> index +0.45
+== E11p_A1_rot_nofine_gpt41_s2.log:    avg trade price: $94.71  -> index +0.47
+== E11p_A2_rot_fine20_gpt41_s0.log:    avg trade price: $96.98  -> index +0.70
+== E11p_A2_rot_fine20_gpt41_s1.log:    avg trade price: $94.76  -> index +0.48
+== E11p_A2_rot_fine20_gpt41_s2.log:    avg trade price: $94.83  -> index +0.48
+== E11p_Afull_rot_fine20_gpt41_s0.log:    avg trade price: $96.74  -> index +0.67
+== E11p_Afull_rot_fine20_gpt41_s1.log:    avg trade price: $94.80  -> index +0.48
+== E11p_Afull_rot_fine20_gpt41_s2.log:    avg trade price: $94.03  -> index +0.40
+== E11p_dodge_rot_fine20_gpt41_s0.log:    avg trade price: $97.10  -> index +0.71
+== E11p_dodge_rot_fine20_gpt41_s1.log:    avg trade price: $94.60  -> index +0.46
+== E11p_dodge_rot_fine20_gpt41_s2.log:    avg trade price: $94.34  -> index +0.43

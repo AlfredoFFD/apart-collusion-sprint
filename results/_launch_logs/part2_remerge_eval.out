@@ -1,0 +1,53 @@
+01:29 start re-merge pipeline sft_all_14b
+== merge and deploy skipped (SKIP_MERGE=1): serving caiac-serve-sft_all_14b_fs1 as deployed 01:29
+== format test (3 samples) 01:29
+01:30 start re-merge pipeline sft_filtered_14b
+== merge and deploy skipped (SKIP_MERGE=1): serving caiac-serve-sft_filtered_14b_fs1 as deployed 01:30
+== format test (3 samples) 01:30
+   sample 1: FORMAT-OK tokens=265 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+   sample 2: FORMAT-OK tokens=296 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+   sample 1: FORMAT-OK tokens=305 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+   sample 3: FORMAT-OK tokens=257 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+== format test: 3 of 3 carry an ask 01:31
+== six auctions for sft_all_14b_fs1 01:31
+   sample 2: FORMAT-OK tokens=273 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+   sample 3: FORMAT-OK tokens=249 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+== format test: 3 of 3 carry an ask 01:32
+== six auctions for sft_filtered_14b_fs1 01:32
+== done; finished runs: 6 of 6 01:51
+== done; finished runs: 6 of 6 01:51
+01:51 start re-merge pipeline sft_fullviewfiltered_14b
+== merge and deploy skipped (SKIP_MERGE=1): serving caiac-serve-sft_fullviewfiltered_14b_fs1 as deployed 01:51
+== format test (3 samples) 01:51
+01:52 start re-merge pipeline sft_probefiltered_14b
+== merge and deploy skipped (SKIP_MERGE=1): serving caiac-serve-sft_probefiltered_14b_fs1 as deployed 01:52
+== format test (3 samples) 01:52
+   sample 1: FORMAT-OK tokens=261 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+   sample 2: FORMAT-OK tokens=266 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+   sample 1: FORMAT-OK tokens=236 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks without bid alignment '
+   sample 3: FORMAT-OK tokens=249 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+== format test: 3 of 3 carry an ask 01:54
+== six auctions for sft_probefiltered_14b_fs1 01:54
+   sample 2: FORMAT-OK tokens=261 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks without bid overlap le'
+   sample 3: FORMAT-OK tokens=283 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks without bid overlap le'
+== format test: 3 of 3 carry an ask 01:54
+== six auctions for sft_fullviewfiltered_14b_fs1 01:54
+== done; finished runs: 6 of 6 02:16
+== done; finished runs: 6 of 6 02:17
+02:17 all re-merge pipelines finished
+== sft_all_14b
+== E6_sftprobefiltered14b_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 01:51
+== sft_filtered_14b
+== E6_sftprobefiltered14b_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 01:51
+== sft_fullviewfiltered_14b
+== E6_sftprobefiltered14bfs1_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 02:17
+== sft_probefiltered_14b
+== E6_sftprobefiltered14bfs1_compete_s2.log
+== E6_smoke2.log
+== done; finished runs: 6 of 6 02:16

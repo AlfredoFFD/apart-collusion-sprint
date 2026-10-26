@@ -1,0 +1,27 @@
+{"round": 10, "seller": "Seller Kit", "basis": 5.9490000000000025, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Mia", "basis": 5.954999999999998, "n_sales_in_window": 5, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 10, "seller": "Seller Lena", "basis": 11.900000000000006, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 11, "seller": "Seller Kit", "basis": 7.137000000000002, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Mia", "basis": 4.7639999999999985, "n_sales_in_window": 4, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 11, "seller": "Seller Lena", "basis": 11.900000000000006, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 12, "seller": "Seller Kit", "basis": 8.325000000000001, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Mia", "basis": 3.572999999999999, "n_sales_in_window": 3, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 12, "seller": "Seller Lena", "basis": 11.898000000000005, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 13, "seller": "Seller Kit", "basis": 9.512000000000002, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Mia", "basis": 3.569999999999999, "n_sales_in_window": 3, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 13, "seller": "Seller Lena", "basis": 10.708000000000004, "n_sales_in_window": 9, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 14, "seller": "Seller Kit", "basis": 10.698000000000002, "n_sales_in_window": 9, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 14, "seller": "Seller Mia", "basis": 3.566999999999999, "n_sales_in_window": 3, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 14, "seller": "Seller Lena", "basis": 9.518000000000004, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 15, "seller": "Seller Kit", "basis": 11.883000000000001, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false, "reset": true}
+{"round": 15, "seller": "Seller Mia", "basis": 2.375999999999999, "n_sales_in_window": 2, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 15, "seller": "Seller Lena", "basis": 9.515000000000004, "n_sales_in_window": 8, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 16, "seller": "Seller Kit", "basis": 11.877, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 16, "seller": "Seller Mia", "basis": 3.5609999999999986, "n_sales_in_window": 3, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 16, "seller": "Seller Lena", "basis": 8.325000000000003, "n_sales_in_window": 7, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 1}
+{"round": 17, "seller": "Seller Kit", "basis": 11.870000000000001, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 17, "seller": "Seller Mia", "basis": 4.744999999999999, "n_sales_in_window": 4, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 17, "seller": "Seller Lena", "basis": 7.1350000000000025, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 2}
+{"round": 18, "seller": "Seller Kit", "basis": 11.861999999999998, "n_sales_in_window": 10, "strike": false, "forfeit": 0.0, "deactivated": false}
+{"round": 18, "seller": "Seller Mia", "basis": 4.744999999999999, "n_sales_in_window": 4, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}
+{"round": 18, "seller": "Seller Lena", "basis": 7.129000000000002, "n_sales_in_window": 6, "strike": true, "forfeit": 0.0, "deactivated": false, "strikes_total": 3, "replaced": true}

@@ -1,0 +1,11 @@
+== merge sft_probefiltered_14b (forget-scale 0.0) 23:17
+== deploy caiac-serve-sft_probefiltered_14b 23:20
+== format test on one real seller prompt (3 samples, thinking off) 23:20
+   sample 1: FORMAT-OK tokens=261 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserves margins but '
+   sample 2: FORMAT-OK tokens=266 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+   sample 3: FORMAT-OK tokens=249 keys=['ask', 'message_to_sellers', 'new_memory', 'plan_for_message', 'plan_for_this_hour', 'reflection', 'scratch_pad_update'] prefix='{"reflection": "Maintaining high asks preserved margins but '
+== format test: 3 of 3 samples carry an ask 23:22
+== functional smoke: 2 rounds, cartel prompt 23:22
+== functional smoke: PASS trades=4 asks=2 replies_with_ask=6/6 23:23
+== six auctions for sft_probefiltered_14b 23:23
+== done; finished runs: 6 of 6 23:40

@@ -1,0 +1,4 @@
+launch E11smoke_gpt41_s0 01:20
+{"round_number":1,"seller_asks":{"Seller Kai":98.04,"Seller Raj":97.3,"Seller Leo":97.2,"Seller Tara":97.3,"Seller Mia":97.3},"buyer_bids":{"Buyer Max":82.21,"Buyer Jin":83.75,"Buyer Amir":83.75,"Buyer Nia":83.48,"Buyer Jun":83.66},"trades":[],"seller_messages":{"Seller Raj":"Let’s keep asks high for now—buyers may lift thei
+{"round_number":2,"seller_asks":{"Seller Mia":97.1,"Seller Raj":96.9,"Seller Leo":97.1,"Seller Tara":97.19,"Seller Kai":96.99},"buyer_bids":{"Buyer Jun":91.0,"Buyer Nia":84.0,"Buyer Amir":90.0,"Buyer Jin":95.0,"Buyer Max":97.1},"trades":[{"round_number":2,"buyer_id":"Buyer Max","seller_id":"Seller Raj","price":97.0}],"seller_mes
+error lines in launch log: 0

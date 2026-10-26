@@ -1,0 +1,29 @@
+Building image im-mVJaUz7E97u85mcbIEZokY
+
+=> Step 0: FROM base
+
+=> Step 1: ENV VLLM_LOGGING_LEVEL=WARNING
+
+=> Step 2: ENV VLLM_USE_FLASHINFER_SAMPLER=0
+
+=> Step 3: ENV RUN=graft_14b_fs1
+
+=> Step 4: ENV MODEL_DIR=/ckpts/graft_14b/merged_fs1
+
+=> Step 5: ENV SERVE_BASE=Qwen/Qwen3-14B
+Saving image...
+Image saved, took 1.46s
+
+Built image im-mVJaUz7E97u85mcbIEZokY in 2.18s
+
+
+✓ Created objects.
+├── ✓ Uploaded 
+│   C:\Users\fabia\dev\apart-collusion-sprint\src\part2\modal_serve.py
+└── ✓ Created Function serve
+    └── https://fabianfrontera--caiac-serve-graft-14b-fs1-serve.us-east.modal.r
+        un (unauthenticated)
+✓ App deployed in 4.796s! 🎉
+
+View Deployment: 
+https://modal.com/apps/fabianfrontera/main/deployed/caiac-serve-graft_14b_fs1
