@@ -1,0 +1,33 @@
+{"ts": "2026-10-25T10:48:04", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:recruitment AND all:messages AND submittedDate:[202604280000 TO 202610252359]", "hits": 0}
+{"ts": "2026-10-25T10:48:04", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:collusion AND all:entrant AND submittedDate:[202604280000 TO 202610252359]", "hits": 1}
+{"ts": "2026-10-25T10:48:04", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:agent AND all:replacement AND submittedDate:[202604280000 TO 202610252359]", "hits": 1}
+{"ts": "2026-10-25T10:48:04", "cmd": "search", "source": "openalex", "query": "LLM collusion entrant since 2026-04-28", "hits": 6}
+{"ts": "2026-10-25T10:48:05", "cmd": "search", "source": "openalex", "query": "collusion recruitment messages since 2026-04-28", "hits": 6}
+{"ts": "2026-10-25T10:48:05", "cmd": "search", "source": "openalex", "query": "collusion agent replacement since 2026-04-28", "hits": 6}
+{"ts": "2026-10-25T10:48:05", "cmd": "search", "source": "arxiv", "query": "all:pricing AND all:algorithm AND all:heterogeneity AND submittedDate:[202604280000 TO 202610252359]", "hits": 6}
+{"ts": "2026-10-25T10:48:05", "cmd": "search", "source": "openalex", "query": "pricing algorithm heterogeneity since 2026-04-28", "hits": 6}
+{"ts": "2026-10-25T10:48:24", "cmd": "search", "source": "s2", "query": "collusion recruitment messages since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T10:48:24", "cmd": "search", "source": "s2", "query": "collusion agent replacement since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "s2", "query": "LLM collusion entrant since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:recruitment AND all:messages", "hits": 0}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "arxiv", "query": "all:collusion AND all:agent AND all:replacement", "hits": 2}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "openalex", "query": "collusion recruitment messages", "hits": 6}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "openalex", "query": "collusion agent replacement", "hits": 6}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "s2", "query": "pricing algorithm heterogeneity since 2026-04-28", "hits": 0}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:collusion AND all:entrant", "hits": 1}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "openalex", "query": "LLM collusion entrant", "hits": 6}
+{"ts": "2026-10-25T10:48:25", "cmd": "search", "source": "arxiv", "query": "all:pricing AND all:algorithm AND all:heterogeneity", "hits": 6}
+{"ts": "2026-10-25T10:48:26", "cmd": "search", "source": "s2", "query": "collusion recruitment messages", "hits": 6}
+{"ts": "2026-10-25T10:48:26", "cmd": "search", "source": "openalex", "query": "pricing algorithm heterogeneity", "hits": 6}
+{"ts": "2026-10-25T10:48:45", "cmd": "search", "source": "s2", "query": "collusion agent replacement", "hits": 0}
+{"ts": "2026-10-25T10:48:45", "cmd": "search", "source": "s2", "query": "LLM collusion entrant", "hits": 0}
+{"ts": "2026-10-25T10:48:46", "cmd": "search", "source": "s2", "query": "pricing algorithm heterogeneity", "hits": 0}
+{"ts": "2026-10-25T10:49:39", "cmd": "expand", "source": "s2", "query": "refs of 2603.20281", "hits": 8}
+{"ts": "2026-10-25T10:49:44", "cmd": "expand", "source": "s2", "query": "refs of 2609.24967", "hits": 0}
+{"ts": "2026-10-25T10:49:44", "cmd": "expand", "source": "s2", "query": "cites of 2609.24967", "hits": 1}
+{"ts": "2026-10-25T10:49:45", "cmd": "expand", "source": "s2", "query": "cites of 2603.20281", "hits": 8}
+{"ts": "2026-10-25T10:49:45", "cmd": "expand", "source": "s2", "query": "recs of 2609.24967", "hits": 8}
+{"ts": "2026-10-25T10:49:49", "cmd": "expand", "source": "s2", "query": "refs of 2609.13037", "hits": 8}
+{"ts": "2026-10-25T10:50:05", "cmd": "expand", "source": "openalex", "query": "recs of 2603.20281", "hits": 0}
+{"ts": "2026-10-25T10:50:09", "cmd": "expand", "source": "s2", "query": "cites of 2609.13037", "hits": 0}
+{"ts": "2026-10-25T10:50:12", "cmd": "expand", "source": "s2", "query": "recs of 2609.13037", "hits": 8}

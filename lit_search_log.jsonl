@@ -476,3 +476,14 @@
 {"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "refs of 2609.20548", "hits": 12}
 {"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "cites of 2609.20548", "hits": 1}
 {"ts": "2026-10-25T14:51:23", "cmd": "expand", "source": "s2", "query": "recs of 2609.20548", "hits": 12}
+{"ts": "2026-10-25T17:43:23", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:oracles", "hits": 5}
+{"ts": "2026-10-25T17:43:23", "cmd": "search", "source": "openalex", "query": "activation oracles", "hits": 5}
+{"ts": "2026-10-25T17:43:43", "cmd": "search", "source": "s2", "query": "activation oracles", "hits": 0}
+{"ts": "2026-10-25T22:30:04", "cmd": "search", "source": "arxiv", "query": "all:LLM AND all:agents AND all:activation AND all:monitor AND all:collusion AND all:continue AND submittedDate:[202510300000 TO 202610252359] [ERROR The read operation timed out]", "hits": 0}
+{"ts": "2026-10-25T22:30:45", "cmd": "search", "source": "arxiv", "query": "all:activation AND all:collusion AND all:continue AND all:monitor AND submittedDate:[202510300000 TO 202610252359] [ERROR HTTP Error 429: Unknown Error]", "hits": 0}
+{"ts": "2026-10-25T22:30:45", "cmd": "search", "source": "openalex", "query": "LLM agents activation monitor collusion continue since 2025-10-30", "hits": 10}
+{"ts": "2026-10-25T22:31:05", "cmd": "search", "source": "s2", "query": "LLM agents activation monitor collusion continue since 2025-10-30", "hits": 0}
+{"ts": "2026-10-25T22:39:28", "cmd": "search", "source": "arxiv", "query": "all:Large AND all:Language AND all:Models AND all:can AND all:Strategically AND all:Deceive AND all:their AND all:Users AND all:when AND all:Put AND all:Under AND all:Pressure [ERROR The read operation timed out]", "hits": 0}
+{"ts": "2026-10-25T22:40:50", "cmd": "search", "source": "arxiv", "query": "all:Strategically AND all:Language AND all:Pressure AND all:Deceive [ERROR The read operation timed out]", "hits": 0}
+{"ts": "2026-10-25T22:40:50", "cmd": "search", "source": "openalex", "query": "Large Language Models can Strategically Deceive their Users when Put Under Pressure", "hits": 5}
+{"ts": "2026-10-25T22:41:10", "cmd": "search", "source": "s2", "query": "Large Language Models can Strategically Deceive their Users when Put Under Pressure", "hits": 0}

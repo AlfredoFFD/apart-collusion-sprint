@@ -1,0 +1,27 @@
+[
+  {
+    "id": "2609.13037",
+    "title": "Mitigating Emergent Collusion in LLM Pricing Agents",
+    "author": "Garra"
+  },
+  {
+    "id": "2603.20281",
+    "title": "On the Fragility of AI Agent Collusion",
+    "author": "Keppo"
+  },
+  {
+    "id": "2602.15198",
+    "title": "Colosseum: Auditing Collusion in Cooperative Multi-Agent Systems",
+    "author": "Nakamura"
+  },
+  {
+    "id": "2609.24967",
+    "title": "Emergent Collusion in Long-Horizon LLM Agent Interaction",
+    "author": "Shi"
+  },
+  {
+    "id": "2607.26385",
+    "title": "Collusion with Competitive Marginals: Price-Level Audits Are Blind by Construction",
+    "author": "Xu"
+  }
+]

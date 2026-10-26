@@ -1,0 +1,60 @@
+[
+ {
+  "id": "2609.13037",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Mitigating Emergent Collusion in LLM Pricing Agents",
+  "found_authors": [
+   "Abdullah Garra"
+  ]
+ },
+ {
+  "id": "2603.20281",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "On the Fragility of AI Agent Collusion",
+  "found_authors": [
+   "Jussi Keppo",
+   "Yuze Li",
+   "Gerry Tsoukalas"
+  ]
+ },
+ {
+  "id": "2602.15198",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Colosseum: Auditing Collusion in Cooperative Multi-Agent Systems",
+  "found_authors": [
+   "Mason Nakamura",
+   "Abhinav Kumar",
+   "Saswat Das"
+  ]
+ },
+ {
+  "id": "2609.24967",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Emergent Collusion in Long-Horizon LLM Agent Interaction",
+  "found_authors": [
+   "Xinrui Shi",
+   "Yanzhe Zhang",
+   "Diyi Yang"
+  ]
+ },
+ {
+  "id": "2607.26385",
+  "status": "OK",
+  "title_match": 1.0,
+  "author_ok": true,
+  "found_title": "Collusion with Competitive Marginals: Price-Level Audits Are Blind by Construction",
+  "found_authors": [
+   "Xin Xu",
+   "Chengrui Wu",
+   "Jiayu Lu"
+  ]
+ }
+]
