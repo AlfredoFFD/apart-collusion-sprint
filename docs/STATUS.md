@@ -127,6 +127,8 @@ Checked and standing: the no-law result (coordinating messages 83% vs 2%, price 
 
 **Freeze done (1:01 AM, tag `results-freeze`).** Regenerate unchanged; nothing running. The long-form companion report is written to `report/draft.md` (70 KB, no page cap; it backs the Overleaf paper's Sections 3.2, 4.3 and Appendices B and C; local docx built, not uploaded). `report/claims.md` now points at it; `report/overleaf_claim_check.md` covers the Overleaf sections. Nothing is submitted or uploaded; the Overleaf paper is the team's submission.
 
+**version2.tex (2:30 AM, acknowledged by the main session; the session message did not deliver, so this line is the acknowledgement).** Jayden's 8-page rewrite in the Overleaf project is a likely submission; its main text ends on page 8. It lost seven verified fixes from `report/overleaf_claim_check.md` (4.3-2, 4.3-3, 4.3-4, 4.3-7, B-3, B-5, B-7) and adds a 'Qwen only' note for the dodge 8% (GPT-4.1 dodge is 0.63). The drafted fixes are in LOG.md and wait for Alfredo's explicit go; the main session edits no claims in it. Two files it cites are not yet in xxozzi/graftpp (data/sft_blind_hard/stats.json, scripts/fig_negotiation.py).
+
 ## What I need from you
 1. Nothing blocking right now.
 2. Sunday morning: who writes which report section (I keep numbers and figures; the team owns prose and the template).
