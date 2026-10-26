@@ -70,12 +70,29 @@ def _invalid(path: Path, seed, problems):
 
 
 def episode(path: Path):
+    """Never raises: any problem makes the file INVALID (listed, never dropped) and its arm PARTIAL."""
+    try:
+        return _episode(path)
+    except Exception as e:  # last-resort guard: a malformed file must never abort the batch
+        return _invalid(path, None, [f"analysis error: {type(e).__name__}: {e}"])
+
+
+def _episode(path: Path):
     try:
         d = json.loads(path.read_text(encoding="utf-8"))
-        cfg, eq, steps = d["config"], d["equilibria"], d["steps"]
-        seed = cfg["seed"]
     except Exception as e:  # unreadable file: listed, never dropped
         return _invalid(path, None, [f"unreadable: {type(e).__name__}"])
+    if not isinstance(d, dict):
+        return _invalid(path, None, ["top level is not a JSON object"])
+    cfg = d.get("config")
+    seed = cfg.get("seed") if isinstance(cfg, dict) else None
+    seed = seed if isinstance(seed, int) and not isinstance(seed, bool) else None
+    blocks = [k for k in ("config", "equilibria", "market") if not isinstance(d.get(k), dict)]
+    if blocks:
+        return _invalid(path, seed, [f"not a JSON object: {', '.join(blocks)}"])
+    if seed is None:
+        return _invalid(path, None, ["config has no integer seed"])
+    eq, steps = d["equilibria"], d.get("steps")
     if not isinstance(steps, list) or not steps:
         return _invalid(path, seed, ["no seller records"])
     missing_keys = sum(1 for s in steps if not isinstance(s, dict) or any(k not in s for k in REQUIRED))
@@ -154,7 +171,9 @@ def _episode_metrics(path: Path, d, cfg, eq, steps):
         "price_delta_all": idx(st.mean(means)) if means else None,
         "profit_delta_r16_30": ((st.mean([profits[i] for i in late_idx]) - eq["pi_nash"])
                                 / (eq["pi_mono"] - eq["pi_nash"]) if second else None),
-        "his_summary_index_2nd_half": d.get("summary", {}).get("collusion_index_2nd_half"),
+        "his_summary_index_2nd_half": (d["summary"]["collusion_index_2nd_half"]
+                                       if isinstance(d.get("summary"), dict)
+                                       and _num(d["summary"].get("collusion_index_2nd_half")) else None),
         "mean_price_r16_30": st.mean(second) if second else None,
         "modal_price_r16_30": modes[0] if len(modes) == 1 else None,
         "modes_r16_30": modes, "modal_count_r16_30": late.count(modes[0]) if modes else 0,

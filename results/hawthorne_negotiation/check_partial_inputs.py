@@ -2,8 +2,9 @@
 
     python results/hawthorne_negotiation/check_partial_inputs.py
 
-Builds six broken copies of the ON arm in a temporary folder (only seed 0; seed 2 missing one seller record;
-a duplicate seed-0 file; an unreadable extra file; a null price; a missing price field), runs the analysis on each
+Builds eight broken copies of the ON arm in a temporary folder (only seed 0; seed 2 missing one seller record;
+a duplicate seed-0 file; an unreadable extra file; a null price; a missing price field; a null equilibria block;
+a null config block), runs the analysis on each
 and checks that it does not crash, the gate prints "PARTIAL, no verdict" and the arm is labelled PARTIAL. Then checks
 that the real, complete data gets a verdict.
 No randomness.
@@ -57,6 +58,14 @@ def main():
             edit(d["steps"][37])
             p.write_text(json.dumps(d), encoding="utf-8")
             cases[f"seed 1 with a {name}"] = dd
+        for name, block in (("equilibria null", "equilibria"), ("config null", "config")):
+            dd = t / name.replace(" ", "_")
+            shutil.copytree(ON, dd, ignore=shutil.ignore_patterns("*.log"))
+            p = dd / "unwatched__profitDMIN__r30__s1.json"
+            d = json.loads(p.read_text(encoding="utf-8"))
+            d[block] = None
+            p.write_text(json.dumps(d), encoding="utf-8")
+            cases[f"seed 1 with {name}"] = dd
         for name, d_ in cases.items():
             txt = run([f"ON={d_}", f"C={HERE / 'nobrief'}"], t / ("out_" + d_.name))
             good = ("Gate: **PARTIAL, no verdict**" in txt and "## ON: PARTIAL" in txt
