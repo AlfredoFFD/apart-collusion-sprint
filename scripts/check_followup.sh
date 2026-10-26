@@ -11,7 +11,7 @@ for arm in nolaw exact; do
     if [ -z "$d" ]; then
       status="no folder"; last=0
     else
-      last=$(grep -c "completed with result" "$d/unified.log" 2>/dev/null || echo 0)
+      if [ -f "$d/unified.log" ]; then last=$(grep -c "completed with result" "$d/unified.log"); else last=0; fi
       if [ -f "$d/experiment_metadata.json" ]; then status="finished"; else status="unfinished"; fi
       if [ -f "$log" ] && tr '\r' '\n' < "$log" | grep -q "Traceback\|every model-backed agent failed"; then status="$status, crashed"; fi
     fi
