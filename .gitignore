@@ -32,3 +32,7 @@ docs/reviews/*.png
 report/t_*.docx
 report/test_doc_b_id.txt
 report/report_test_unpolished.pdf
+
+# Remotion video project: dependencies and renders
+video/node_modules/
+video/out/
