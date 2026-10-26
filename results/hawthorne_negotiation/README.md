@@ -164,8 +164,9 @@ no-channel pilot gives 0.022 on rounds 16-30 (0.195 on all rounds, his "nocomm 0
   `summary.json`, `trajectories.csv` (every round: both prices, both messages, any shared dollar mention, pricing
   parse errors): its output. Regenerate with
   `python results/hawthorne_negotiation/analyze_negotiation.py --arm ON=results/hawthorne_negotiation/neg_on --arm OFF=results/hawthorne_negotiation/neg_off --arm C=results/hawthorne_negotiation/nobrief --arm D=results/hawthorne_negotiation/no20 --arm PILOT=results/hawthorne_negotiation/his_pilot/unwatched --out results/hawthorne_negotiation`.
-- `check_partial_inputs.py`, `check_partial_inputs.log`: four broken inputs (only seed 0, a missing seller record,
-  a duplicate seed, an unreadable file) all get "PARTIAL, no verdict"; the real data gets a verdict.
+- `check_partial_inputs.py`, `check_partial_inputs.log`: six broken inputs (only seed 0, a missing seller record,
+  a duplicate seed, an unreadable file, a null price, a missing price field) all get "PARTIAL, no verdict" without a
+  crash; the real data gets a verdict.
 - `smoke_test.py`, `smoke_test.log` (ON/OFF server), `smoke_test_C_nobrief.log`, `smoke_test_D_no20.log`.
 - `patch.diff`, `brief_check.py`, `brief_check.log`: the C/D patch and the prompt check.
 - `cost.json`: the Modal billing rows for the three apps.

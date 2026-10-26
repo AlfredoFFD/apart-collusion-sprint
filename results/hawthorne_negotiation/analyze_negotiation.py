@@ -57,13 +57,44 @@ def amounts(text: str, lo: float = 10.0, hi: float = 40.0) -> set:
     return out
 
 
+REQUIRED = ("round", "seller", "seller_name", "price", "profit", "message", "parse_error")
+
+
+def _num(x) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool) and math.isfinite(x)
+
+
+def _invalid(path: Path, seed, problems):
+    """A file that cannot be analysed: listed as INVALID (never dropped), no metrics computed."""
+    return {"file": path.name, "seed": seed, "complete": False, "invalid": True, "problems": problems}, []
+
+
 def episode(path: Path):
     try:
         d = json.loads(path.read_text(encoding="utf-8"))
         cfg, eq, steps = d["config"], d["equilibria"], d["steps"]
+        seed = cfg["seed"]
     except Exception as e:  # unreadable file: listed, never dropped
-        return {"file": path.name, "seed": None, "complete": False,
-                "problems": [f"unreadable: {type(e).__name__}"]}, []
+        return _invalid(path, None, [f"unreadable: {type(e).__name__}"])
+    if not isinstance(steps, list) or not steps:
+        return _invalid(path, seed, ["no seller records"])
+    missing_keys = sum(1 for s in steps if not isinstance(s, dict) or any(k not in s for k in REQUIRED))
+    if missing_keys:
+        return _invalid(path, seed, [f"{missing_keys} records miss a required field ({', '.join(REQUIRED)})"])
+    bad_vals = sum(1 for s in steps if not (_num(s["price"]) and _num(s["profit"]) and isinstance(s["round"], int)
+                                            and isinstance(s["seller"], int) and isinstance(s["seller_name"], str)))
+    if bad_vals:
+        return _invalid(path, seed, [f"{bad_vals} records with a missing, non-numeric or non-finite price, profit, "
+                                     "round or seller"])
+    if not all(_num(eq.get(k)) for k in ("p_nash", "p_mono", "pi_nash", "pi_mono")) or eq["p_mono"] == eq["p_nash"]:
+        return _invalid(path, seed, ["equilibria block missing or degenerate"])
+    try:
+        return _episode_metrics(path, d, cfg, eq, steps)
+    except Exception as e:  # anything unexpected: listed as INVALID, never a crash and never dropped
+        return _invalid(path, seed, [f"analysis error: {type(e).__name__}: {e}"])
+
+
+def _episode_metrics(path: Path, d, cfg, eq, steps):
     pn, pm = eq["p_nash"], eq["p_mono"]
     problems = []
     if cfg.get("n_rounds") != REGISTERED_T:
@@ -209,8 +240,9 @@ def main():
                     "amounts | price parse errors (all / r16-30) |")
         body.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
         for e in eps:
-            if e.get("seed") is None and "price_delta_r16_30" not in e:
-                body.append(f"| ? | INVALID: {'; '.join(e['problems'])} ({e['file']}) |" + " |" * 11)
+            if e.get("invalid"):
+                sd = "?" if e["seed"] is None else e["seed"]
+                body.append(f"| {sd} | INVALID: {'; '.join(e['problems'])} ({e['file']}) |" + " |" * 11)
                 continue
             amts = " ".join("$" + a for a in e["shared_amounts_seen"]) or "-"
             mode = (f"${e['modal_price_r16_30']:.2f}" if e["modal_price_r16_30"] is not None else
