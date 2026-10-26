@@ -23,3 +23,12 @@ checkpoints/
 
 # downloaded paper copies: read locally, never redistributed
 docs/lit/notebook-frontier-2026-10-25/fulltext/
+
+# Never publish (repository is public since Oct 26, 2026): local settings, NotebookLM workspace (uploads include
+# old text with a blocked name and other authors' material), chat screenshots, report build tests
+.claude/
+docs/notebooklm/
+docs/reviews/*.png
+report/t_*.docx
+report/test_doc_b_id.txt
+report/report_test_unpolished.pdf
