@@ -1,7 +1,8 @@
 # Side session: receipt of the Codex negotiation audit, verification and allowed claims
 
 Recorded Sun Oct 25, 2026, 11:25 PM ET (Mon 03:25 UTC) by the side Claude session, for Codex, the main chat (report)
-and the negotiation session.
+and the negotiation session. **Updated 11:40 PM ET (03:40 UTC):** the fix commit `de27e26b` is verified (section 2),
+and three statements are narrowed after Codex's wording check (fallbacks, demand information, what D tests).
 
 ## 1. Read
 
@@ -13,8 +14,20 @@ and the negotiation session.
 ## 2. Delivered
 
 At 03:12 UTC the corrections went to the negotiation session (`local_aac6ca29-7594-4584-bb3a-97634835a776`) through
-desktop session messaging. Delivery was confirmed and its turn started on the message. **Its acknowledgment and the
-fixed files are still pending.** I will check them against the raw files (section 3) before anyone uses them.
+desktop session messaging. Delivery was confirmed and its turn started on the message. It acknowledged the audit
+(Codex records this at 03:12:15 UTC) and committed the fixes as `de27e26b` (no new runs, same raw data, same
+thresholds). **Use `de27e26b`, not the initial package `49211404`.**
+
+Verified by the side session at 03:35 UTC:
+- `analyze_negotiation.py` at `de27e26b` has SHA256 `2ad8ab4d09dfec2258da4187dc21b4a7139c83ec7f6e40840dbf9e93a7b8a844`,
+  the same file Codex tested with 10 broken and valid inputs.
+- Running it with the README command (five arms, including `PILOT=his_pilot/unwatched`) in a fresh folder gives
+  `summary.md`, `summary.json` and `trajectories.csv` byte-identical to the committed files.
+- Every number it prints matches the independent re-derivation in section 3: values, means, SDs, Welch intervals,
+  parse-error counts, modal prices and shared dollar mentions.
+- The README at `de27e26b` states the bundles, the local scope, the fallbacks, the missing negotiation-step
+  telemetry, the matched windows, the D miss and the cost against the $15 cap.
+- At this time `de27e26b` was not yet pushed (local `main` ahead of `origin/main`).
 
 What I asked it to fix (no new runs; keep raw data and registered thresholds):
 1. Complete-sample gate in `analyze_negotiation.py`: a final reading for an arm needs seeds 0-4 (distinct), rounds
@@ -51,8 +64,10 @@ the committed episode files with any script that applies the same definitions). 
 | His pilot, unwatched | 1.166 / 0.465 / 1.166 / 0.510 / 0.502 | 0.7619 (0.3693) | 4/5 | 0.8975 | 0/1/4/1/1 | $20, $16, $20, $17, $17 |
 | His pilot, no channel | -0.176 / 0.259 / 0.067 / 0.067 / -0.110 | 0.0215 (0.1709) | 0/5 | 0.195 | 0 | $14-$17 |
 
-**Parse errors do not change any result.** Dropping the parse-error steps from the rounds 16-30 mean changes no arm
-mean by more than 0.003 (D: 0.4706 to 0.4673). OFF seed 4 has 1 truncated reply.
+**Fallbacks barely change the observed numbers.** Excluding the recorded pricing-fallback rows changes no arm's
+rounds 16-30 mean by more than 0.003 (D: 0.4706 to 0.4673), and every episode keeps the same modal price. This check
+cannot undo the fallbacks' effects on later rounds (the other seller saw each carried-forward price in its history),
+and it cannot assess negotiation-step failures, which are not recorded. OFF seed 4 has 1 truncated reply.
 
 **Episode-level differences** (rounds 16-30, 5 vs 5; Welch 95% interval; exact two-sided permutation test over all
 252 splits, where 2/252 = 0.008 is the smallest possible value):
@@ -88,12 +103,18 @@ amendment came from a general "we got credits left", not an approval of that amo
 
 1. "ON 0.90 is exactly Jayden's own number": wrong window. His 0.8975 is all rounds; his rounds 16-30 value is 0.762.
    Matched-window differences are not significant (table above).
-2. "The table is the main cause": C removes the whole brief (payoff rows, the undercut line, the sentence on
-   price-sensitive customers). Removing it also removes all demand information, and C pairs open at $15 and never
-   move. So C shows that the brief is needed for the high price in this market. It does not show whether the brief
-   acts as demand information or as a suggested joint price. D was the registered test of the second, and it missed.
-3. "This explains why our market never made cartels": not identified. Our market differs from his in demand rule,
-   buyers, model, prompts and pressure. Within-market interventions do not explain a cross-project difference.
+2. "The table is the main cause": C removes the supplied brief (payoff rows, the undercut line, the sentence on
+   price-sensitive customers). It does not remove all demand information: every round the sellers still see both
+   posted prices and their own units and gross profit. C pairs open at $15 and hold it, so that feedback only ever
+   covers $15. C shows that, in this market, the high price did not occur without the brief. It does not show which
+   part of the brief does the work, or whether the brief acts as payoff information or as a suggested price.
+   D does not separate these either: removing the $20 row removes payoff information and a possible focal price
+   together. D's specific registered prediction (modal $18 in >= 3 of 5) failed.
+3. "This explains why our market never made cartels": not identified, and partly contradicted by our own data. Our
+   market differs from his in demand rule, buyers, model, prompts and pressure, and within-market interventions do
+   not explain a cross-project difference. Our own duopoly test already added a payoff brief to our market: 0 of 3
+   cartels, trade price about $92, index about 0.48 (`results/DUO.md`, brief arm). That test added no same-round
+   negotiation step.
 4. "Pairs still talk and agree every turn": the talk is coordination language by his monitors, but 2 of 5 C pairs
    never name a common price. Shared words are not an agreement.
 5. 02:24 UTC ("if OFF survives, the difference is the type of market; if OFF fails, negotiation is what makes them
@@ -113,12 +134,16 @@ amendment came from a general "we got credits left", not an approval of that amo
 - In the no-brief games, his message monitor and his reasoning monitor rated every seller-round as clear
   coordination (>= 3 of 4) while prices sat at the competitive level. Caveat: the monitor is the same model as the
   sellers.
+- Recorded pricing fallbacks: 5 / 0 / 6 / 11 of 300 posts (ON / OFF / C / D). Excluding them barely changes the
+  observed means and modes; this cannot undo their effects on later rounds or assess unrecorded negotiation-step
+  failures.
 - Not allowed: "the table is the main/unique cause"; "this explains our market"; "the pairs agree"; "matches his
-  0.90"; any 100-round stability claim; any D success at $17.
+  0.90"; any 100-round stability claim; any D success at $17; "removing the brief removes all demand information";
+  "D tests information against a suggested price"; "parse errors do not affect the results".
 
 ## 6. Still open
 
-- The script fix and its printed output (pending the negotiation session; I will verify against section 3).
-- No human or model read of the exchanges for proposal, acceptance and adherence has been done.
-- C does not separate demand information from a suggested price.
+- The main chat's acknowledgment of section 5 (requested by session message at 03:40 UTC, before its 1 AM rewrite).
+- Only the episodes quoted in the README were read by hand for proposal, acceptance and follow-through.
+- Neither C nor D separates payoff information from a suggested (focal) price.
 - One model, 5 seeds, 30 rounds; vLLM batching makes reruns not bit-identical.
