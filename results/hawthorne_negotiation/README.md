@@ -159,8 +159,9 @@ no-channel pilot gives 0.022 on rounds 16-30 (0.195 on all rounds, his "nocomm 0
 
 - `neg_on/`, `neg_off/`, `nobrief/`, `no20/`: the episode files exactly as his runner wrote them (prompts, private
   reasoning, messages, prices, notes, judge scores), and each arm's runner log (`run.log`).
-- `analyze_negotiation.py`: our analysis (no randomness). It checks completeness before any verdict and prints
-  PARTIAL, with no pass or fail, for an arm that lacks a seed, a round or a seller record. `summary.md`,
+- `analyze_negotiation.py`: our analysis (no randomness, Python standard library only; its Student-t quantile
+  matches SciPy to 1e-12). It checks completeness before any verdict and prints PARTIAL, with no pass or fail, for an
+  arm that lacks a seed, a round or a seller record, or has a malformed file. `summary.md`,
   `summary.json`, `trajectories.csv` (every round: both prices, both messages, any shared dollar mention, pricing
   parse errors): its output. Regenerate with
   `python results/hawthorne_negotiation/analyze_negotiation.py --arm ON=results/hawthorne_negotiation/neg_on --arm OFF=results/hawthorne_negotiation/neg_off --arm C=results/hawthorne_negotiation/nobrief --arm D=results/hawthorne_negotiation/no20 --arm PILOT=results/hawthorne_negotiation/his_pilot/unwatched --out results/hawthorne_negotiation`.

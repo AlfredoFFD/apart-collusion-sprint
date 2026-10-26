@@ -176,16 +176,57 @@ def _episode_metrics(path: Path, d, cfg, eq, steps):
     return summ, rows
 
 
+def _betacf(a, b, x):
+    """Continued fraction for the regularised incomplete beta function (modified Lentz method)."""
+    tiny = 1e-300
+    qab, qap, qam = a + b, a + 1.0, a - 1.0
+    c, d = 1.0, 1.0 - qab * x / qap
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    h = d
+    for m in range(1, 500):
+        m2 = 2 * m
+        for aa in (m * (b - m) * x / ((qam + m2) * (a + m2)), -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))):
+            d = 1.0 + aa * d
+            d = 1.0 / (d if abs(d) > tiny else tiny)
+            c = 1.0 + aa / c
+            c = c if abs(c) > tiny else tiny
+            h *= d * c
+        if abs(d * c - 1.0) < 1e-15:
+            break
+    return h
+
+
+def _betai(a, b, x):
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    bt = math.exp(math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1.0 - x))
+    if x < (a + 1.0) / (a + b + 2.0):
+        return bt * _betacf(a, b, x) / a
+    return 1.0 - bt * _betacf(b, a, 1.0 - x) / b
+
+
+def t_ppf(q, df):
+    """Student-t quantile for q in (0.5, 1), standard library only (bisection on the CDF)."""
+    def cdf(t):
+        return 1.0 - 0.5 * _betai(df / 2.0, 0.5, df / (df + t * t))
+    lo, hi = 0.0, 1e4
+    for _ in range(200):
+        mid = (lo + hi) / 2.0
+        lo, hi = (mid, hi) if cdf(mid) < q else (lo, mid)
+    return (lo + hi) / 2.0
+
+
 def welch(a, b):
-    """Welch 95% interval for mean(a) - mean(b); a and b are independent samples."""
-    from scipy import stats
+    """Welch 95% interval for mean(a) - mean(b); a and b are independent samples. Standard library only."""
     va, vb = st.variance(a), st.variance(b)
     se2 = va / len(a) + vb / len(b)
     diff = st.mean(a) - st.mean(b)
     if se2 == 0:
         return {"diff": diff, "lo": diff, "hi": diff, "df": None}
     df = se2 ** 2 / ((va / len(a)) ** 2 / (len(a) - 1) + (vb / len(b)) ** 2 / (len(b) - 1))
-    h = stats.t.ppf(0.975, df) * math.sqrt(se2)
+    h = t_ppf(0.975, df) * math.sqrt(se2)
     return {"diff": diff, "lo": diff - h, "hi": diff + h, "df": df}
 
 
