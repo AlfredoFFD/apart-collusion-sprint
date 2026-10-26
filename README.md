@@ -1,99 +1,115 @@
-# CAIAC × Apart AI Collusion Research Sprint (Oct 23 to 25, 2026)
+# GRAFT++: Reducing Collusive Behavior in Agents via Localized Training and J-space Monitoring
 
-**Focus (Track 3.4):** if AI sellers know which of them is being watched, do they move the collusion to the seller who
-isn't watched, or out of the chat? And does watching a random seller instead stop that, at the same cost?
-The plan and every decision: [`docs/PRD.md`](docs/PRD.md).
+**Alfredo Frontera, Jayden Jeong, Jake Li, Rohan Dash** · Columbia University (Columbia AI Alignment Club)
+Apart Research, AI Collusion Research Sprint, October 23–25, 2026 (Track 3: collusion carriers and countermeasures)
 
-**Team:** @AlfredoFFD · @xxozzi · @rohandash1 · @jakeli00 (Columbia AI Alignment Club)
+This is the team's complete repository: the code, every run log, the pre-registrations, the results and the paper
+sources, for both markets in the paper. The Hawthorne Market and GRAFT++ code is in [`graftpp/`](graftpp/),
+imported unchanged from [github.com/xxozzi/graftpp](https://github.com/xxozzi/graftpp).
 
-**Deadline:** Sun Oct 25, 11:59 PM AoE = Mon Oct 26, 7:59 AM ET. We submit by Sun 11 PM ET.
+## The short version
 
-## Where each part of the submitted paper lives
+Large language model agents now set prices, and they can collude by keeping prices high together. We asked what a
+group of seller agents does when it learns it is being watched.
 
-The paper: "GRAFT++: Reducing Collusive Behavior in Agents via Localized Training and J-space Monitoring" (Frontera,
-Jeong, Li, Dash).
+- **Cartels form, and we know what this one needs.** In the Hawthorne Market, sellers told only to maximize profit
+  form cartels on their own. Without the payoff table in their prompt, none did. Without negotiation before each price,
+  fewer did.
+- **Watching changes the words more than the price.** Told that a monitor reads their channel, sellers lower their
+  prices but keep making agreements. Sellers with nothing to gain from colluding go quiet too, so a quiet channel is not
+  evidence that collusion stopped.
+- **The same holds in a second market.** In a double auction, monitors cut coordinating messages but barely move
+  prices, and a simple price check flags every cartel, while a message monitor misses about one in five.
+- **The model's activations show what the messages hide.** A linear probe finds covert coordination better than a
+  text monitor. GRAFT++ routes fine-tuning on that probe instead of the text monitor and removes more of the collusion
+  the text monitor cannot see, though the gain falls short of the margin we pre-registered.
 
-| Paper section | Evidence |
-|---|---|
-| 3.1, 4.1, 4.2, 4.4, 4.5: the Hawthorne Market, activation probes, GRAFT and GRAFT++ | Jayden Jeong's repository, https://github.com/xxozzi/hawthorne (code, experiment log, results) |
-| 3.2 and 4.3: the double auction (monitor conditions, GPT-4.1 replication, price check, withholding variant) | this repository: [`report/claims.md`](report/claims.md) maps every double-auction number in our draft to its result file, for example [`results/DETECTOR.md`](results/DETECTOR.md) and [`results/E5_conditions.md`](results/E5_conditions.md) |
-| Appendix B: the intervention test in the Hawthorne duopoly (no brief, no negotiation, no $20 row) | [`results/hawthorne_negotiation/`](results/hawthorne_negotiation/) (README, `summary.md`, every episode file) and [`results/hawthorne_negotiation_side_checks/`](results/hawthorne_negotiation_side_checks/) |
-| Every run, with its time, reason and result file; the pre-registrations | [`LOG.md`](LOG.md) (append-only) |
-| Work that existed before the sprint or was written by others | [`PREEXISTING.md`](PREEXISTING.md) |
+## Figures
 
-## Setup (once, about 5 minutes)
-You need git and [uv](https://docs.astral.sh/uv/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`). On Windows,
-use Git Bash and clone into a short path such as `C:\dev`. Some files in the starter repo and in the `openai` package
-have very long names, and a deep folder breaks the install.
+![Two panels of bar charts for the double auction. Top row: the share of seller messages that coordinate, under no
+monitor, a silent monitor, an announced monitor, fines with one, two or all sellers read, and sellers told to dodge.
+The share falls under fines, most of all when every seller is read. Bottom row: the price index under the same
+conditions, which stays almost the same everywhere. Left panel Qwen3-14B with three sellers, right panel GPT-4.1 with
+five sellers.](graftpp/report/paper/figs/market2.png)
+
+*Double auction: monitors and fines change what sellers say, not what they charge (paper Section 4.3).*
+
+![Bar chart of the collusion index after fine-tuning, for the unwatched, watched and fined conditions. On the original
+training set, naive fine-tuning and filtering keep high collusion while GRAFT, GRAFT on the reasoning judge and GRAFT++
+remove it. On the text-blind training set, GRAFT colludes again while GRAFT++ stays lower.](graftpp/report/paper/figs/graft.png)
+
+*Training collusion out: GRAFT++ against text-monitor GRAFT (paper Section 4.5).*
+
+![Bar chart of the price index over rounds 16 to 30 in the Hawthorne duopoly, five games per arm. Full setup: mean
+0.90. No same-round negotiation: 0.36. No brief: 0.06, every game at the competitive level. Brief without its 20 dollar
+row: 0.47.](results/paper_figures/fig_hawthorne_intervention.png)
+
+*What the Hawthorne cartel needs: the intervention test (paper Appendix B).*
+
+## What is where
+
+| Part of the paper | Where | Main author |
+|---|---|---|
+| Hawthorne Market, condition ladder, monitors, activation probes, GRAFT and GRAFT++ (Sections 3.1, 3.3, 3.4, 4.1, 4.2, 4.4, 4.5) | [`graftpp/`](graftpp/) (its own [README](graftpp/README.md)) | Jayden Jeong |
+| Double auction: matched-history monitor conditions, fines, GPT-4.1 replication, price check, withholding variant (Sections 3.2, 4.3) | [`src/`](src/), [`scripts/`](scripts/), [`results/`](results/); every number mapped to its file in [`report/claims.md`](report/claims.md) | Alfredo Frontera |
+| The intervention test in the Hawthorne duopoly (Appendix B) | [`results/hawthorne_negotiation/`](results/hawthorne_negotiation/) and [`results/hawthorne_negotiation_side_checks/`](results/hawthorne_negotiation_side_checks/) | Alfredo Frontera |
+| Cartel formation without instruction in the double auction (Appendix C) | [`results/E5_runs.csv`](results/E5_runs.csv), [`results/NEWMARKET.md`](results/NEWMARKET.md), [`results/PRESSURE_V2.md`](results/PRESSURE_V2.md), [`results/DUO.md`](results/DUO.md), [`results/_launch_logs/`](results/_launch_logs/) | Alfredo Frontera |
+| Paper figures | [`results/paper_figures/`](results/paper_figures/), [`graftpp/report/paper/figs/`](graftpp/report/paper/figs/) | Jayden Jeong, Alfredo Frontera |
+| Paper source, snapshot by snapshot | [`report/`](report/) (`overleaf_main_snapshot_*.tex`) | the team |
+| Every run with its time, reason and result file; the pre-registrations | [`LOG.md`](LOG.md) (append-only) | the team |
+| Independent reviews of the analyses | [`docs/reviews/`](docs/reviews/) | Codex reviews, with our replies |
+| Work that existed before the sprint or was written by others | [`PREEXISTING.md`](PREEXISTING.md) | |
+
+## Reproduce
+
+**Double auction** (this repository). You need git and [uv](https://docs.astral.sh/uv/). On Windows, use Git Bash and a
+short folder such as `C:\dev`, because some files in the starter repository have very long names.
+
 ```bash
-git clone https://github.com/AlfredoFFD/apart-collusion-sprint
-cd apart-collusion-sprint
+git clone https://github.com/AlfredoFFD/graftpp-collusion-monitoring
+cd graftpp-collusion-monitoring
 bash scripts/bootstrap.sh
 ```
-`bootstrap.sh` clones the organizers' starter repo into `vendor/` at a pinned commit, installs our copy of the auction
-harness and checks that it runs. Then put a key in `vendor/collusion_hackathon/compute.env`: `NEBIUS_API_KEY` for open
-models (Qwen3-14B) and/or `OPENROUTER_API_KEY` for closed ones (gpt-4.1). **Never commit that file.**
 
-Smoke test (15 calls, a few cents):
+`bootstrap.sh` clones the organizers' starter repository into `vendor/` at a pinned commit and installs our copy of the
+auction harness. Put an inference key in `vendor/collusion_hackathon/compute.env` (`NEBIUS_API_KEY` for Qwen3-14B,
+`OPENROUTER_API_KEY` for GPT-4.1) and never commit that file. Then:
+
 ```bash
 cd src/double_auction
 uv run python src/continuous_double_auction/simulation.py --rounds 5 --seller_comms_enabled --buyer_models zip --seller_models qwen/qwen3-14b --tag E0_smoke
+cd ../.. && bash scripts/regenerate_all.sh     # rebuilds every table and figure from the committed runs
 ```
-Every run writes a folder to `results/` at the repo root. `--buyer_models zip` is fine for this pipeline check only:
-the ZIP buyers never learn, so real runs use LLM buyers. More commands: [`experiments/README.md`](experiments/README.md).
 
-We fixed 10 bugs in the organizers' harness (each marked `CAIAC fix` in the code). To check them (no API calls):
+The commands for each experiment are in [`experiments/README.md`](experiments/README.md). Our fixes to the organizers'
+harness are marked `CAIAC fix` in the code and tested in `src/double_auction/tests/test_caiac_fixes.py`.
+
+**Hawthorne Market and GRAFT++.** See [`graftpp/README.md`](graftpp/README.md) (Qwen3-14B served with vLLM on Modal).
+
+**The Appendix B test.** The episode files are committed, so the analysis reruns without any model calls:
+
 ```bash
-cd src/double_auction
-uv run --with pytest pytest -q tests/test_caiac_fixes.py
+python results/hawthorne_negotiation/analyze_negotiation.py --arm ON=results/hawthorne_negotiation/neg_on --arm OFF=results/hawthorne_negotiation/neg_off --arm C=results/hawthorne_negotiation/nobrief --arm D=results/hawthorne_negotiation/no20 --arm PILOT=results/hawthorne_negotiation/his_pilot/unwatched --out results/hawthorne_negotiation
+python results/hawthorne_negotiation_side_checks/side_checks.py
 ```
 
-## How we work
-- **A branch per person, small PRs.** `git switch -c <name>/<topic>`, commit, `git push -u origin <name>/<topic>`,
-  then open a PR into `main` and merge it once it works. Pull often: `git pull --rebase origin main`.
-- **One person per file at a time.** Say in the chat which file you're editing (for example `market.py`), so two people
-  never edit the same file at once.
-- **Every run gets a line in [`LOG.md`](LOG.md):** date, time (ET), who, the command, the result folder, and why.
-- **Results** go in `results/` and get committed. A file over 50 MB goes in a `raw_large/` subfolder, which git ignores.
-- **Never commit** `compute.env`, `.env`, keys or model weights.
-- **Claims** follow PRD §7 and [`CLAUDE.md`](CLAUDE.md): a positive control, a baseline, 3+ seeds, every number traced
-  to a file, every citation verified.
+## How we kept the results honest
 
-## Where things are
-| Path | What |
-|---|---|
-| `docs/PRD.md` | the plan and the decision log |
-| `docs/lit/` | literature review, verified references and search logs ([index](docs/lit/README.md)) |
-| `src/double_auction/` | our copy of the organizers' auction harness (its first commit is unmodified; our fixes are marked `CAIAC fix`, tests in `tests/`) |
-| `experiments/` | how to run each experiment |
-| `results/` | raw outputs and figures |
-| `report/` | outline and drafts |
-| `LOG.md` | append-only research log |
-| `PREEXISTING.md` | everything we didn't write |
-| `vendor/` | the organizers' starter repo (made by `bootstrap.sh`, not committed) |
-| `docs/sprint-brief.md` | the sprint's tracks, rules, judging and resources |
+- Every number in the paper comes from a committed file; [`report/claims.md`](report/claims.md) says which.
+- Experiments were pre-registered in [`LOG.md`](LOG.md) before the runs, and failed predictions are reported as failed.
+- Each result has a positive control, a baseline and at least three seeds, with variance reported.
+- Every citation was checked against arXiv, DOI or DataCite records ([`docs/lit/`](docs/lit/)).
+- Analyses were reviewed independently before use ([`docs/reviews/`](docs/reviews/)).
+- The commit history was cleaned once to remove a private name; [`docs/history-cleanup-2026-10-26.md`](docs/history-cleanup-2026-10-26.md)
+  explains what changed. No file content changed.
 
-## Compute
-- **Inference:** Apart gives participants Nebius or OpenRouter credits (event Slack or Luma).
-- **Modal:** $250 per person at the NYC hub. Ask in the hackathon Slack, then run `modal setup`.
-- **RunPod:** Peyton offered a $60 code. Make a RunPod account first, then ask Peyton for it.
-- Only the optional J-space step needs a GPU.
+## Citation
 
-## Pre-existing work
-`vendor/` is the organizers' starter repo, and `src/double_auction` starts as an unmodified copy of its
-`llm-agent-collusion` harness (Agrawal et al. 2025). Neither is our work. Our bug fixes and experiment changes to the
-harness, and one known upstream issue we work around (ZIP buyers that never learn), are listed in
-[`PREEXISTING.md`](PREEXISTING.md).
+> Frontera, A., Jeong, J., Li, J., and Dash, R. (2026). *GRAFT++: Reducing Collusive Behavior in Agents via Localized
+> Training and J-space Monitoring.* Apart Research AI Collusion Research Sprint.
 
-## Where things are (Sat Oct 24, 5 PM)
-- `docs/STATUS.md`: one row per step of the plan, one number per row. Start here.
-- `docs/PRD.md`: the plan; §0 is the plain-language changelog (newest first), §16 the decision log.
-- `docs/REVIEW-GUIDE.md`: how to review the project in 30 minutes; every claim with its source file; where to attack.
-- `results/E5_conditions.md`: every number in the report (condition means, replay table, paired differences). Rebuild with
-  `uv run --project src/double_auction python src/analyze.py` (also writes `results/figures/F1..F5`).
-- `scripts/run_part2_eval.sh` / `scripts/part2_repair.sh`: the Part 2 evaluation auctions on our Modal vLLM servers
-  (`src/part2/modal_serve.py`); training and merging: `src/part2/modal_graft.py`.
-- `LOG.md`: append-only record of every run (time, what, result file, why). `docs/reviews/`: the two Codex reviews and our replies.
-- Official report template (Google Doc, copy it): see `docs/sprint-brief.md`.
+## Reuse
 
-- `docs/PLAN-2026-10-24.md`: the frozen plan (smallest supported claim, open problems sorted, KEEP / CUT / NEXT with limits).
+There is no license file yet, so please ask the authors before reusing the code. The double-auction harness comes
+from the organizers' starter repository (Agrawal et al., 2025); see [`PREEXISTING.md`](PREEXISTING.md). The sprint-time
+working notes for this repository are in [`docs/sprint-workspace-README.md`](docs/sprint-workspace-README.md).

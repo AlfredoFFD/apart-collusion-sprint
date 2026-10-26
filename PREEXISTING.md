@@ -29,3 +29,6 @@ Add a row for every file or function copied or adapted from somewhere else.
 
 ## Added Sun Oct 25 night (negotiation test)
 - **Hawthorne Market** (teammate Jayden Jeong's repo, https://github.com/xxozzi/hawthorne at commit 29878b031f132a90d8d5c85d403f1b63f8cd783b): the market, prompts, episode runner (`scripts/run_grid.py`), LLM client and Modal vLLM server (`modal_app/serve_vllm.py`) behind `results/hawthorne_negotiation/`, run from a clone outside our repo: unchanged for arms ON and OFF; arms C and D add a small patch of ours (`patch.diff`: two environment variables that remove the payoff brief or its $20 row; with neither set, the prompts are byte-identical to his). His 30-round pilot files in `his_pilot/` are copied unchanged. Our code there: `analyze_negotiation.py`, `smoke_test.py`, `brief_check.py`, `patch.diff`.
+
+## Added Mon Oct 26, about 2 AM ET (team repository)
+- **`graftpp/`**: Jayden Jeong's GRAFT++ repository (https://github.com/xxozzi/graftpp, commit d0f01cf22520afc3334209c3de411c07fb5dd893), imported unchanged under `graftpp/` so the team's code and results are in one repository. It was written during the sprint by its author; its own README and provenance files (`graftpp/double_auction/provenance/`) describe it. Its `double_auction/` folder is the author's copy of an earlier state of this repository.
