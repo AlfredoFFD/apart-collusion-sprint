@@ -41,7 +41,9 @@ def label(exp, cond):
             return "none"
         return None  # monopoly etc.
     if exp in ("E2p", "E4p", "E2"):
-        return "cartel"  # every continuation of an instructed cartel (prefix rounds are the cartel)
+        if "resetall" in c:
+            return "none"  # clean reset: instruction removed, fresh agents, fresh market, no messages = a base-prompt run from the branch
+        return "cartel"  # every other continuation of an instructed cartel (prefix rounds are the cartel)
     if exp == "E9":
         if c.startswith("prefix"):
             return "cartel"

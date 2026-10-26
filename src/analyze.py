@@ -7,6 +7,7 @@ Writes results/E5_runs.csv, results/E5_conditions.md, results/figures/*.png. The
 Every number here traces to a run folder written by simulation.py (PRD section 7).
 """
 
+import hashlib
 import argparse
 import csv
 import json
@@ -236,7 +237,8 @@ def boot_ci(xs, n=2000):
         return float("nan"), float("nan"), float("nan")
     if len(xs) == 1:
         return float(xs[0]), float(xs[0]), float(xs[0])
-    means = [RNG.choice(xs, len(xs), replace=True).mean() for _ in range(n)]
+    rng = np.random.default_rng(int(hashlib.md5(np.round(np.sort(xs), 8).tobytes()).hexdigest()[:8], 16))  # seeded from the row's values
+    means = [rng.choice(xs, len(xs), replace=True).mean() for _ in range(n)]
     return float(xs.mean()), float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))
 
 
