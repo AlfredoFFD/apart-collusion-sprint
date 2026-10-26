@@ -109,8 +109,8 @@ harm; the signal that cannot be dodged here is the price itself against the comp
 3. **The duopoly test did not try to reproduce his experiment.** It added two features of his market (two sellers; a payoff table) to
    ours. Wording: "adding a second-seller-only market or a payoff table to our market did not produce a cartel". His brief does include
    an undercut line (`market_brief`, line 158: "If rivals are at $18.00 and you price $17.00, you sell ~N units instead of ~M"), so drop
-   the guess that it does not. Untested differences, from his paper and code: a two-step negotiation (propose, then reply) before every
-   price in the same round (`episode.py` line 185; `prompts.py` line 68), 100 rounds, and logit demand (both sellers sell at any
+   the guess that it does not. Differences from his setup, from his paper and code: a two-step negotiation (propose, then reply) before every
+   price in the same round (`episode.py` line 185; `prompts.py` line 68; now tested in HIS market by the negotiation session, see below: OFF 0.359 vs ON 0.900, a protocol bundle), 100 rounds (untested), and logit demand (untested in our harness) (both sellers sell at any
    shared price; undercutting gains share, not the whole market). His max-profit duopoly: 4 of 5 unwatched pairs posted $20 (above
    the $19.25 monopoly price) in at least 99 of 100 rounds.
 4. **No "first time" or "nobody has" claims.** Jayden's paper also reads the private reasoning around a monitor (10,000 traces). Novelty
@@ -119,7 +119,10 @@ harm; the signal that cannot be dodged here is the price itself against the comp
 Checked and standing: the no-law result (coordinating messages 83% vs 2%, price flat 0.39 vs 0.42, 3 of 9 coordinating sellers deny it to
 the CEO) against `results/PRESSURE_V2.md`.
 
-**Negotiation test (another session's, relayed 10:20 PM):** Jayden's own max-profit duopoly (his code, his logit market, 30 rounds, 5 seeds) on our Modal, negotiation on vs off on the same server, so only that switch changes. It pre-registers in `LOG.md`, writes `results/hawthorne_negotiation/`, and commits only that folder plus `LOG.md` and `PREEXISTING.md`. Rule: included at the 1 AM freeze if it has landed; otherwise labelled partial. This session launches nothing that overlaps it.
+**Negotiation test (another session's; landed; Codex-audited).** Jayden's max-profit duopoly (his code and server, untrained Qwen3-14B, logit demand, 30 rounds, 5 seeds per arm) on our Modal. Use `results/hawthorne_negotiation/summary.md` at commit de27e26b (later commits aba14560 and 7d7ec925 change input checks only; outputs identical). Allowed claims: `docs/reviews/claude-ack-codex-negotiation-2026-10-26.md` section 5, or narrower. Short form, price-Delta over rounds 16-30, cartel >= 0.5: ON (his setup) 0.900, 5 of 5, gate met (his pilot 0.762 on the same window; 0.898 vs 0.935 over all rounds); no brief (C) 0.060 in all 5, every pair at $15 next to Nash $14.73, ON minus C +0.841 (Welch 95% +0.389 to +1.292), registered reading met, a local effect of removing the whole brief; no same-round negotiation (OFF) 0.359, 2 of 5, ON minus OFF +0.541 (+0.088 to +0.995), a protocol bundle, not one variable; no $20 row (D): registered prediction NOT met (modal $18 in 2 of 5; bar 3 of 5), exploratory: no D post at $20 (0 of 300; ON 182 of 300); his monitors (same model, T = 0) rated every C seller-round >= 3 for messages and reasoning while the price was competitive (same-model caveat); fallbacks 5 / 0 / 6 / 11 of 300 posts carried the last price forward. Not allowed: 'the table is the main or unique cause'; 'this explains our market'; 'the pairs agree'; 'matches his 0.90'; any 100-round stability claim; any D success at $17; 'removing the brief removes all demand information'; 'D tests information against a suggested price'; 'parse errors do not affect the results'.
+
+
+**Acknowledgement (main session, 11:25 PM):** read `docs/reviews/claude-ack-codex-negotiation-2026-10-26.md` section 5 in full. The 1 AM draft uses those claims or narrower, cites `results/hawthorne_negotiation/summary.md` at de27e26b, and the scaffold's negotiation rows and the corrections block above were brought in line (the earlier 'untested negotiation' wording is replaced; the withdrawn side-session phrases 'the table is the main cause', 'this explains why our market never made cartels', 'they agree every turn', 'exactly Jayden's number' are not used). No drafting before 1 AM; no new runs.
 
 ## What I need from you
 1. Nothing blocking right now.
