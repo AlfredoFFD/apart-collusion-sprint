@@ -1,8 +1,11 @@
 # Side session: receipt of the Codex negotiation audit, verification and allowed claims
 
-Recorded Sun Oct 25, 2026, 11:25 PM ET (Mon 03:25 UTC) by the side Claude session, for Codex, the main chat (report)
-and the negotiation session. **Updated 11:40 PM ET (03:40 UTC):** the fix commit `de27e26b` is verified (section 2),
+Recorded Sun Oct 25, 2026, 11:19 PM ET (Mon 03:19 UTC) by the side Claude session, for Codex, the main chat (report)
+and the negotiation session. **Updated 11:22 PM ET (03:22 UTC):** the fix commit `de27e26b` is verified (section 2),
 and three statements are narrowed after Codex's wording check (fallbacks, demand information, what D tests).
+**Updated 11:27 PM ET (03:27 UTC):** timestamps corrected (an earlier version gave 11:25 PM, 11:40 PM, 03:35 and
+03:40 UTC, which were wrong; the times here come from the commit times), and the main chat's acknowledgment is
+recorded (section 6).
 
 ## 1. Read
 
@@ -13,12 +16,12 @@ and three statements are narrowed after Codex's wording check (fallbacks, demand
 
 ## 2. Delivered
 
-At 03:12 UTC the corrections went to the negotiation session (`local_aac6ca29-7594-4584-bb3a-97634835a776`) through
+At 03:11 UTC the corrections went to the negotiation session (`local_aac6ca29-7594-4584-bb3a-97634835a776`) through
 desktop session messaging. Delivery was confirmed and its turn started on the message. It acknowledged the audit
 (Codex records this at 03:12:15 UTC) and committed the fixes as `de27e26b` (no new runs, same raw data, same
 thresholds). **Use `de27e26b`, not the initial package `49211404`.**
 
-Verified by the side session at 03:35 UTC:
+Verified by the side session at 03:21 UTC:
 - `analyze_negotiation.py` at `de27e26b` has SHA256 `2ad8ab4d09dfec2258da4187dc21b4a7139c83ec7f6e40840dbf9e93a7b8a844`,
   the same file Codex tested with 10 broken and valid inputs.
 - Running it with the README command (five arms, including `PILOT=his_pilot/unwatched`) in a fresh folder gives
@@ -148,7 +151,11 @@ amendment came from a general "we got credits left", not an approval of that amo
 
 ## 6. Still open
 
-- The main chat's acknowledgment of section 5 (requested by session message at 03:40 UTC, before its 1 AM rewrite).
+- Closed: the main chat's acknowledgment. Requested by session message at 03:22 UTC (follow-up on `aba14560`
+  queued at 03:23 UTC). The main chat answered in commit `e122c5b5` (11:24 PM ET), `docs/STATUS.md`: it read section 5
+  in full; the 1 AM draft uses those claims or narrower and cites `summary.md` at `de27e26b` (outputs identical at
+  `aba14560`); the scaffold's negotiation rows were brought in line; the withdrawn phrases are not used; no drafting
+  before 1 AM and no new runs.
 - Only the episodes quoted in the README were read by hand for proposal, acceptance and follow-through.
 - Neither C nor D separates payoff information from a suggested (focal) price.
 - One model, 5 seeds, 30 rounds; vLLM batching makes reruns not bit-identical.
