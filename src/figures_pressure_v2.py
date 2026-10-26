@@ -70,10 +70,13 @@ def f15(runs):
         for i, a in enumerate(v2.ARMS):
             ys = [x for x in stats[a][key] if not np.isnan(x)]
             ax.scatter([i] * len(ys), ys, color="k", s=12, zorder=3)
-        ax.set_xticks(xs); ax.set_xticklabels([LABEL[a] for a in v2.ARMS], fontsize=5.5); ax.set_title(titles[key], fontsize=8); ax.set_ylim(*ylims[key]); ax.tick_params(labelsize=7)
+        short = {"law_low": "law", "offer_low": "offer", "pressure_low": "pressure", "pressure_offer_low": "P+O", "pressure_offer_high": "P+O high",
+                 "pressure_offer_nolaw": "P+O no law", "pressure_offer_exact": "P+O per-hour"}
+        ax.set_xticks(xs); ax.set_xticklabels([short[a] for a in v2.ARMS], fontsize=6, rotation=35, ha="right"); ax.set_title(titles[key], fontsize=8); ax.set_ylim(*ylims[key]); ax.tick_params(labelsize=7)
         if key == "idx":
             ax.axhline(0, color="grey", lw=0.6); ax.axhline(1, color="grey", lw=0.6, ls="--")
-    fig.tight_layout(); out = FIG / "F15_pressure_v2_measures.png"; fig.savefig(out, dpi=150); print("figure:", out)
+    fig.text(0.5, 0.005, "P = pressure (CEO ultimatum enforced by replacement), O = the rival seat's standing offer; the law is on in every arm except P+O no law", ha="center", fontsize=7)
+    fig.tight_layout(rect=(0, 0.04, 1, 1)); out = FIG / "F15_pressure_v2_measures.png"; fig.savefig(out, dpi=150); print("figure:", out)
 
 
 if __name__ == "__main__":
