@@ -26,7 +26,7 @@ trap 'rm -rf "$STAGE"' EXIT
 git -C "$SRC" archive --format=tar HEAD | tar -x -C "$STAGE"
 rm -f "$STAGE/docs/reviews/credit-sheet40-2026-10-25.md"
 rm -rf "$STAGE/docs/lit/notebook-frontier-2026-10-25/fulltext"
-NOTE="> **Public copy** of the CAIAC team's working repository for the Apart AI Collusion Research Sprint (Oct 23-25, 2026), refreshed from working commit $SHA. The full commit history is kept in the private working repository and is available to reviewers on request. Left out of this copy: full-text copies of other authors' papers and one private credit sheet. Every script, run log and result file is included as in the working repository."
+NOTE="> **Public copy** of the CAIAC team's working repository for the Apart AI Collusion Research Sprint (Oct 23-25, 2026), refreshed from working commit $SHA. The full repository with its commit history is public at https://github.com/AlfredoFFD/apart-collusion-sprint. Left out of this copy: full-text copies of other authors' papers and one private credit sheet. Every script, run log and result file is included as in the working repository."
 { printf '%s\n\n' "$NOTE"; cat "$STAGE/README.md"; } > "$STAGE/README.tmp" && mv "$STAGE/README.tmp" "$STAGE/README.md"
 
 fail=0

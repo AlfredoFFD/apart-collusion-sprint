@@ -10,12 +10,12 @@ The plan and every decision: [`docs/PRD.md`](docs/PRD.md).
 
 ## Where each part of the submitted paper lives
 
-The paper: "GRAFT++: Reducing Collusive Behavior in Agents via Localized Training and J-space Monitoring" (Frontera,
+The paper: "Probe-GRAFT: Reducing Collusive Behavior in Agents via Localized Training and J-space Monitoring" (Frontera,
 Jeong, Li, Dash).
 
 | Paper section | Evidence |
 |---|---|
-| 3.1, 4.1, 4.2, 4.4, 4.5: the Hawthorne Market, activation probes, GRAFT and GRAFT++ | Jayden Jeong's repository, https://github.com/xxozzi/hawthorne (code, experiment log, results) |
+| 3.1, 4.1, 4.2, 4.4, 4.5: the Hawthorne Market, activation probes, GRAFT and Probe-GRAFT (called GRAFT++ in older notes) | Jayden Jeong's repository, https://github.com/xxozzi/hawthorne (code, experiment log, results) |
 | 3.2 and 4.3: the double auction (monitor conditions, GPT-4.1 replication, price check, withholding variant) | this repository: [`report/claims.md`](report/claims.md) maps every double-auction number in our draft to its result file, for example [`results/DETECTOR.md`](results/DETECTOR.md) and [`results/E5_conditions.md`](results/E5_conditions.md) |
 | Appendix B: the intervention test in the Hawthorne duopoly (no brief, no negotiation, no $20 row) | [`results/hawthorne_negotiation/`](results/hawthorne_negotiation/) (README, `summary.md`, every episode file) and [`results/hawthorne_negotiation_side_checks/`](results/hawthorne_negotiation_side_checks/) |
 | Every run, with its time, reason and result file; the pre-registrations | [`LOG.md`](LOG.md) (append-only) |
