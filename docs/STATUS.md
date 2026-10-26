@@ -119,6 +119,8 @@ harm; the signal that cannot be dodged here is the price itself against the comp
 Checked and standing: the no-law result (coordinating messages 83% vs 2%, price flat 0.39 vs 0.42, 3 of 9 coordinating sellers deny it to
 the CEO) against `results/PRESSURE_V2.md`.
 
+**Negotiation test (another session's, relayed 10:20 PM):** Jayden's own max-profit duopoly (his code, his logit market, 30 rounds, 5 seeds) on our Modal, negotiation on vs off on the same server, so only that switch changes. It pre-registers in `LOG.md`, writes `results/hawthorne_negotiation/`, and commits only that folder plus `LOG.md` and `PREEXISTING.md`. Rule: included at the 1 AM freeze if it has landed; otherwise labelled partial. This session launches nothing that overlaps it.
+
 ## What I need from you
 1. Nothing blocking right now.
 2. Sunday morning: who writes which report section (I keep numbers and figures; the team owns prose and the template).

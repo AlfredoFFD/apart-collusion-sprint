@@ -1,0 +1,129 @@
+# Reference check via DataCite (export.arxiv.org unreachable from this network at 10:40 PM ET, Oct 25)
+
+120 OK of 121 arXiv ids; each row: id, status, DataCite title | first creator.
+
+- 2602.15198 · OK · Colosseum: Auditing Collusion in Cooperative Multi-Agent Systems | Nakamura, Mason
+- 2602.22755 · OK · AuditBench: Evaluating Alignment Auditing Techniques on Models with Hi | Sheshadri, Abhay
+- 2503.10965 · OK · Auditing language models for hidden objectives | Marks, Samuel
+- 2607.01033 · OK · The Model Organism Lottery: Model Organism Interpretability Strongly D | Szablewski, Andrzej
+- 2610.10203 · OK · How to train your model organism | Wang, Xilin
+- 2606.29646 · OK · Fuzzing Large Language Models to Elicit Hidden Behaviours | Baker, Mohammed Abu
+- 2510.01070 · OK · Eliciting Secret Knowledge from Language Models | Cywiński, Bartosz
+- 2609.06612 · OK · MechAudit-40: White-Box Auditing across 40 LLM Attack Mechanisms | Guo, Zhen
+- 2602.08877 · OK · Stress-Testing Alignment Audits With Prompt-Level Strategic Deception | Daniels, Oliver
+- 2512.07810 · OK · Auditing Games for Sandbagging | Taylor, Jordan
+- 2606.26071 · OK · Model Forensics: Investigating Whether Concerning Behavior Reflects Mi | Singh, Aditya
+- 2510.13900 · OK · Narrow Finetuning Leaves Clearly Readable Traces in Activation Differe | Minder, Julian
+- 2605.00994 · OK · Most Current Model Organisms Are Leaky: Perplexity Differencing Often  | Baker, Mohammed Abu
+- 2608.26462 · OK · Diff Mining: Logit Differences Reveal Finetuning Objectives | Kocher, Greg
+- 2603.04426 · OK · Delta-Crosscoder: Robust Crosscoder Model Diffing in Narrow Fine-Tunin | Kassem, Aly
+- 2504.02922 · OK · Overcoming Sparsity Artifacts in Crosscoders to Interpret Chat-Tuning | Minder, Julian
+- 2510.05092 · OK · Learning to Interpret Weight Differences in Language Models | Goel, Avichal
+- 2605.25902 · OK · Reading the Finetuning Prior: Verbatim Content Recovery via Contrastiv | Brzozowski, Michał
+- 2610.30934 · OK · Verbalizing Activation Differences with Natural Language Autoencoders | Núñez, Andrea Blasi
+- 2508.00161 · OK · Watch the Weights: Unsupervised monitoring and control of fine-tuned L | Zhong, Ziqian
+- 2607.22570 · OK · Reference Feature Atlases for Mechanistic Auditing of Language Models | Wu, Rui
+- 2610.12129 · OK · An Investigation of Model Coherence: Narrow Finetunes Contradict Thems | Graham, Robert
+- 2609.00351 · OK · Detecting Hidden Behaviors in LLMs via Activation-matched Finetuning | Haselhorst, Robin
+- 2602.03085 · OK · The Trigger in the Haystack: Extracting and Reconstructing LLM Backdoo | Bullwinkel, Blake
+- 2509.16203 · OK · Inverting Trojans in LLMs | Li, Zhengxing
+- 2411.03445 · OK · Solving Trojan Detection Competitions with Linear Weight Classificatio | Huster, Todd
+- 2608.02271 · OK · Z-PEFT: Zero-shot Backdoor Detection in Parameter-Efficient Fine-Tunin | Pitzalis, Nicola
+- 2610.07334 · OK · Weight Oracles: Reading Neural Network Weights with Language Models | Kabra, Krishna
+- 2608.07786 · OK · Who Built This Model? Tracing LLM Lineage via Spectral Fingerprints in | Chen, Yiwei
+- 2605.04209 · OK · Undetectable Backdoors in Model Parameters: Hiding Sparse Secrets in H | Choudhary, Sarthak
+- 10.1109/sp61157.2025.00103 · SKIP (not an arXiv id) · BAIT: Large Language Model Backdoor Scanning by Inverting At
+- 2609.32021 · OK · SilentCall: Hidden Tool-Call Backdoors in Open-Weight Agents, and How  | Pallakonda, Bhanu
+- 2510.16255 · OK · Detecting Adversarial Fine-tuning with Auditing Agents | Egler, Sarah
+- 2610.03960 · OK · Localize-and-Detect: Auditing Task-Level Poisoning in Instruction-Tune | Sun, Luze
+- 2402.10208 · OK · Recovering the Pre-Fine-Tuning Weights of Generative Models | Horwitz, Eliahu
+- 2507.01786 · OK · Probing and Steering Evaluation Awareness of Language Models | Nguyen, Jord
+- 2608.21766 · OK · Evaluation Awareness in Language Models: Representation, Verbalization | Heidari, Farzaneh
+- 2510.20487 · OK · Steering Evaluation-Aware Language Models to Act Like They Are Deploye | Hua, Tim Tian
+- 2506.19823 · OK · Persona Features Control Emergent Misalignment | Wang, Miles
+- 2605.05835 · OK · Evaluation Awareness in Language Models Has Limited Effect on Behaviou | Knecht, Amelie
+- 2401.05566 · OK · Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Tr | Hubinger, Evan
+- 2502.03407 · OK · Detecting Strategic Deception Using Linear Probes | Goldowsky-Dill, Nicholas
+- 2610.12445 · OK · Telling FIBS: Probes Effectively Detect Sabotage and Catch Unverbalize | Hollinsworth, Oskar J.
+- 2512.11949 · OK · Neural Chameleons: Language Models Can Learn to Hide Their Thoughts fr | McGuinness, Max
+- 2312.06681 · OK · Steering Llama 2 via Contrastive Activation Addition | Panickssery, Nina
+- 2406.11717 · OK · Refusal in Language Models Is Mediated by a Single Direction | Arditi, Andy
+- 2602.20628 · OK · When can we trust untrusted monitoring? A safety case sketch across co | Gardner-Challis, Nelson
+- 2607.04510 · OK · Transplanting, inverting, and preventing a misalignment persona: metho | Drake, Lyndon
+- 2610.05793 · OK · Topology-Conditioned Backdoors: Language Models That Insert Vulnerabil | Wang, Keegan
+- 2607.03640 · OK · Revealing Hidden Model Behaviors with Task-Specific Self-Reports | Kutsyk, Taras
+- 2609.21113 · OK · Decoupling Internal Representational Changes and Causal Importance in  | Li, Lingfang
+- 2610.07270 · OK · Does the Model Use the Feature? Separating Steering from Mechanism in  | Che, Tong
+- 2608.25460 · OK · Training Alignment Auditors via Reinforcement Learning | Rosu, Paul
+- 2610.16911 · OK · Audit tools of the trade: Automated Auditor Elicitation Can Be Sensiti | Slater, Ben
+- 2608.31105 · OK · BLOOM-WILT: Logit Tilting for Behaviour Elicitation in Automated LLM A | Skapars, Adrians
+- 2605.30322 · OK · Gram: Assessing sabotage propensities via automated alignment auditing | Lindner, David
+- 2512.09742 · OK · Weird Generalization and Inductive Backdoors: New Ways to Corrupt LLMs | Betley, Jan
+- 2610.26698 · OK · Towards Robust Model Organisms for Eliciting Latent Knowledge | Finke, Lennart
+- 2610.20887 · OK · Do Emergent Misalignment Models Share a Circuit? | Haseeb, Muhammad
+- 2610.26551 · OK · Training Natural Schemers: RL Can Amplify Oversight-Conditional Behavi | Jaworski, Bart
+- 2608.01085 · OK · When Collaboration Becomes a Trigger: Collective Evidence-Threshold Ba | Xiao, Jia-Hao
+- 2604.01151 · OK · Detecting Multi-Agent Collusion Through Multi-Agent Interpretability | Rose, Aaron
+- 2610.17062 · OK · Gradient Routing Localizes and Removes Unintended Behaviors in RL | Ward, Jake
+- 2609.03035 · OK · You Can't Escape Your Own Activations : Evaluation Awareness and Multi | Das, Aritra
+- 2603.16928 · OK · Noticing the Watcher: LLM Agents Can Infer CoT Monitoring from Blockin | Jiralerspong, Thomas
+- 2609.39050 · OK · Covert Assistance: Helpful LLM Agents Evade Oversight in Multi-Agent S | Alnuhait, Deema
+- 2609.32701 · OK · Despite Instructions: Frontier Agents Improvise Covert Channels at Tes | Dineen, Jacob
+- 2610.25032 · OK · Don't Judge an Agent by Its Messages: Private-State Leakage under Pass | Pandey, Daksh
+- 2604.23511 · OK · Breaking the Secret: Economic Interventions for Combating Collusion in | Liu, Qi
+- 2610.09002 · OK · Learning to Report Unsafe Tasks in a Multi-Agent Game | Casheekar, Avyay M.
+- 2609.13037 · OK · Mitigating Emergent Collusion in LLM Pricing Agents | Garra, Abdullah
+- 2507.01413 · OK · Evaluating LLM Agent Collusion in Double Auctions | Agrawal, Kushal
+- 2606.28425 · OK · Tool Use Enables Undetectable Steganography in Multi-Agent LLM Systems | Rippin, Jimmy Laurence
+- 2608.02698 · OK · Steganalysis of Adaptive Covert Collusion in Tool-Using Agent Populati | Ghanem, Mohamed Chahine
+- 2609.28900 · OK · Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusio | Pang, Qi
+- 2609.18346 · OK · Faithful yet Collusive: Why Chain-of-Thought Monitoring Cannot Detect  | Lee, Dohun
+- 2410.03768 · TITLE MISMATCH · Hidden in Plain Text: Emergence &amp; Mitigation of Steganographic Col | Mathew, Yohan
+- 2410.04332 · OK · Gradient Routing: Masking Gradients to Localize Computation in Neural  | Cloud, Alex
+- 2610.01630 · OK · After Cooperation Is Learned: Gradient Routing and Optimizer-Dependent | Hao, Chaoyuan
+- 2610.26664 · OK · Honeypots for AI Agent Insider Threats | Wehner, Jan
+- 2607.07368 · OK · Multi-Agent AI Control: Distributed Attacks Hamper Per-Instance Monito | Makins, Oliver
+- 2508.19461 · OK · Reliable Weak-to-Strong Monitoring of LLM Agents | Kale, Neil
+- 2605.29178 · OK · The Best-Laid SCHEMEs: Coordinated Sabotage and Monitoring in Multi-Ag | Radev, Nikolay
+- 2603.20281 · OK · On the Fragility of AI Agent Collusion | Keppo, Jussi
+- 2404.00806 · OK · Algorithmic Collusion by Large Language Models | Fish, Sara
+- 2607.26385 · OK · Collusion with Competitive Marginals: Price-Level Audits Are Blind by  | Xu, Xin
+- 2603.21398 · OK · Persona Vectors in Games: Measuring and Steering Strategies via Activa | Sun, Johnathan
+- 2606.17168 · OK · RepSelect: Robust LLM Unlearning via Representation Selectivity | Sondej, Filip
+- 2308.10248 · OK · Steering Language Models With Activation Engineering | Turner, Alexander Matt
+- 2609.24967 · OK · Emergent Collusion in Long-Horizon LLM Agent Interaction | Shi, Xinrui
+- 2604.17774 · OK · Prompt Optimization Enables Stable Algorithmic Collusion in LLM Agents | Tian, Yingtao
+- 2410.00031 · OK · Strategic Collusion of LLM Agents: Market Division in Multi-Commodity  | Lin, Ryan Y.
+- 2606.09854 · OK · Can Multi-Agent LLMs Identify Their Peers? Stylometric Fingerprinting  | Dietrich, Juergen
+- 2608.18078 · OK · Position: Collusion Risks Among AI Reasoning Agents Justify Certificat | Riemer, Matthew
+- 2507.02737 · OK · Early Signs of Steganographic Capabilities in Frontier LLMs | Zolkowski, Artur
+- 2506.01926 · OK · Large language models can learn and generalize steganographic chain-of | Skaf, Joey
+- 2503.11926 · OK · Monitoring Reasoning Models for Misbehavior and the Risks of Promoting | Baker, Bowen
+- 2605.16626 · OK · SLEIGHT-Bench: A Benchmark of Evasion Attacks Against Agent Monitors | Najt, Elle
+- 2511.21935 · OK · Breaking Algorithmic Collusion in Human-AI Ecosystems | Collina, Natalie
+- 2610.11256 · OK · Who Leads and Who Collects:Algorithmic Collusion in Markets of Heterog | Lee, Jun Yeong
+- 2601.00360 · OK · Mapping Human Anti-collusion Mechanisms to Multi-agent AI Systems | Idowu, Jamiu
+- 2603.13940 · OK · GroupGuard: A Framework for Modeling and Defending Collusive Attacks i | Tao, Yiling
+- 2609.35402 · OK · Persistent Partners Raise Prices Among Learning Agents | Arslan, Paul-Peter
+- 2605.27593 · OK · Voluntary Collusion with Secret Tools in Competing LLM Agents | Zeng, Xijie
+- 2606.10747 · OK · The Arbiter Agent: Continually Monitoring Multi-Agent Conversations to | Tonini, Filippo
+- 2506.15740 · OK · SHADE-Arena: Evaluating Sabotage and Monitoring in LLM Agents | Kutasov, Jonathan
+- 2510.09462 · OK · Adaptive Attacks on Trusted Monitors Subvert AI Control Protocols | Terekhov, Mikhail
+- 2402.07510 · OK · Secret Collusion among AI Agents: Multi-Agent Deception via Steganogra | Motwani, Sumeet Ramesh
+- 2511.21802 · OK · Tacit Bidder-Side Collusion: Artificial Intelligence in Dynamic Auctio | Tolety, Sriram
+- 2510.04303 · OK · Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent L | Tailor, Om
+- 2607.05132 · OK · When Agents Lie: Premeditation, Persistence, and Exploitation in Repea | Shi, Jerick
+- 2601.22184 · OK · Tacit Coordination of Large Language Models | Aharon, Ido
+- 2604.03968 · OK · TraceGuard: Structured Multi-Dimensional Monitoring as a Collusion-Res | Nguyen, Khanh Linh
+- 10.1257/aer.20190623 · SKIP (not an arXiv id) · Artificial Intelligence, Algorithmic Pricing, and Collusion
+- 2610.28787 · OK · Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LL | Tran, Hieu
+- 2609.02580 · OK · Competitive Market Behavior of LLMs | Struski, Pawel
+- 2610.21711 · OK · How language model agents reshape price competition | Bichler, Martin
+- 2609.20548 · OK · Mitigating Retaliatory Algorithmic Collusion in Repeated Games | Sivachandran, Karthik
+- 2606.03030 · OK · Do Matching Mechanisms Work with LLM Agents? | Hoshino, Yukihiro
+- 2411.16574 · OK · The Illusion of Collusion | Douglas, Connor
+- 2512.15674 · OK · Activation Oracles: Training and Evaluating LLMs as General-Purpose Ac | Karvonen, Adam
+- 2607.23379 · OK · When Activation Oracles Learn Not to Read: Concept-Specific Blind Spot | Bersia, Tobias
+- 2311.07590 · OK · Large Language Models can Strategically Deceive their Users when Put U | Scheurer, Jérémy
+
+Note: 2410.03768 reads TITLE MISMATCH only because DataCite returns the ampersand as an HTML entity (&amp;amp;); the title and first author (Mathew) match. The two DOI entries (BAIT, IEEE S&P 2025; Calvano et al., AER 2020) were verified through Crossref by lit.py verify-file earlier today (122 of 122 OK at the afternoon check).
