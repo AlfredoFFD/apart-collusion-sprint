@@ -28,6 +28,11 @@ Verified by the side session at 03:35 UTC:
 - The README at `de27e26b` states the bundles, the local scope, the fallbacks, the missing negotiation-step
   telemetry, the matched windows, the D miss and the cost against the $15 cap.
 - At this time `de27e26b` was not yet pushed (local `main` ahead of `origin/main`).
+- A later commit, `aba14560`, changes only the input checks: a file with a null or missing price, or missing fields,
+  is INVALID before any metric. Its script SHA256 is
+  `8af7cbdc96141b68fb84bb4bf7263361cfdb1ccf90f69deecb35700b95f3b261` (not the file Codex tested). Its outputs are
+  identical to `de27e26b`, a fresh regeneration with it is byte-identical, and its 7 input checks pass (6 broken
+  inputs get PARTIAL, the real data gets PASS). **Use `aba14560` or later.**
 
 What I asked it to fix (no new runs; keep raw data and registered thresholds):
 1. Complete-sample gate in `analyze_negotiation.py`: a final reading for an arm needs seeds 0-4 (distinct), rounds
