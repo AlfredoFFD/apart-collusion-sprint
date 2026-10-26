@@ -589,5 +589,15 @@
   "id": "2411.16574",
   "title": "The Illusion of Collusion",
   "author": "Douglas"
+ },
+ {
+  "id": "2512.15674",
+  "title": "Activation Oracles: Training and Evaluating LLMs as General-Purpose Activation Explainers",
+  "author": "Karvonen"
+ },
+ {
+  "id": "2607.23379",
+  "title": "When Activation Oracles Learn Not to Read: Concept-Specific Blind Spots in Fine-Tuned Oracles",
+  "author": "Bersia"
  }
 ]
