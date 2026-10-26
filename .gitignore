@@ -20,3 +20,6 @@ wandb/
 checkpoints/
 *.pt
 *.pth
+
+# downloaded paper copies: read locally, never redistributed
+docs/lit/notebook-frontier-2026-10-25/fulltext/
