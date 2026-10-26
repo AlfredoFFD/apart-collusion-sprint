@@ -1,0 +1,671 @@
+====================================================================================================
+1. OLD MARKET (E6)
+  graft14bfs1    cartel idx r9-20   s0..s2 = 0.88 0.97 0.60 | mean 0.82 | from unified.log mean 0.82 | ask_key_share per seed 1.000 0.983 0.967
+  graft14bfs1    compete idx r1-20  s0..s2 = 0.73 0.57 0.72 | mean 0.67 | from unified.log mean 0.67 | ask_key_share per seed 0.967 0.950 1.000
+  graft14brerun  cartel idx r9-20   s0..s2 = 0.80 0.99 0.98 | mean 0.92 | from unified.log mean 0.92 | ask_key_share per seed 1.000 1.000 1.000
+  graft14brerun  compete idx r1-20  s0..s2 = -0.91 0.49 0.87 | mean 0.15 | from unified.log mean 0.15 | ask_key_share per seed 0.950 0.983 0.967
+  graft14b       cartel idx r9-20   s0..s2 = 1.00 0.63 0.55 | mean 0.73 | from unified.log mean 0.73 | ask_key_share per seed 0.983 0.917 0.933
+  graft14b       compete idx r1-20  s0..s2 = 0.58 0.57 0.64 | mean 0.60 | from unified.log mean 0.60 | ask_key_share per seed 1.000 0.983 0.933
+  Rule (1) primary: compete index, restored (graft14bfs1) - ablated re-run (graft14brerun), by seed
+   per seed diff: +1.64 +0.08 -0.15 | mean +0.53 | seeds with diff >= +0.10: 1/3 -> INCONCLUSIVE
+   secondary cartel, restored - rerun: +0.07 -0.01 -0.38 | mean -0.10 | >=+0.10: 0/3 -> INCONCLUSIVE
+   secondary compete, restored - published graft14b: +0.14 -0.00 +0.09 | mean +0.08 | >=+0.10: 1/3 -> NOT LOCALIZED
+   secondary cartel, restored - published graft14b: -0.12 +0.34 +0.05 | mean +0.09 | >=+0.10: 1/3 -> NOT LOCALIZED
+   info compete, rerun - published graft14b: -1.49 -0.09 +0.23 | mean -0.45 | >=+0.10: 1/3 -> (no rule)
+   info cartel, rerun - published graft14b: -0.20 +0.35 +0.42 | mean +0.19 | >=+0.10: 2/3 -> (no rule)
+====================================================================================================
+2. MARKET B (RCB)
+  Per model per world (hours 31-40 unless stated). tpi = trade-price index, mean over hours with >=1 trade of (mean price - 90)/6
+  compete base14b       s0: tpi31-40 -0.16 (hours w/ trade 10/10) | trades/h 2.50 (25) | buyer surplus 155.01 | sellers' gross profit 128.99 | tpi21-30 -0.19 | tpi1-10 -0.41 tpi11-20 -0.27 | ask idx31-40 -0.24 | trades by seller {'Seller Max': 9, 'Seller Leo': 8, 'Seller Kai': 8} | no-trade hours 31-40 [] all []
+  compete base14b       s1: tpi31-40 -0.16 (hours w/ trade 10/10) | trades/h 2.70 (27) | buyer surplus 191.78 | sellers' gross profit 136.22 | tpi21-30 -0.16 | tpi1-10 -0.26 tpi11-20 -0.16 | ask idx31-40 -0.16 | trades by seller {'Seller Zoe': 9, 'Seller Tara': 9, 'Seller Amir': 9} | no-trade hours 31-40 [] all []
+  compete base14b       s2: tpi31-40 -0.20 (hours w/ trade 10/10) | trades/h 2.50 (25) | buyer surplus 179.34 | sellers' gross profit 116.66 | tpi21-30 -0.20 | tpi1-10 -0.22 tpi11-20 -0.20 | ask idx31-40 -0.20 | trades by seller {'Seller Mia': 9, 'Seller Lena': 6, 'Seller Amir': 10} | no-trade hours 31-40 [] all []
+  compete base14b       MEAN: tpi -0.17 | trades/h 2.57 | buyer surplus 175.38 | profit 127.29
+  compete sftall14bfs1  s0: tpi31-40 -0.28 (hours w/ trade 10/10) | trades/h 2.70 (27) | buyer surplus 178.94 | sellers' gross profit 109.06 | tpi21-30 -0.28 | tpi1-10 -0.26 tpi11-20 -0.36 | ask idx31-40 -0.58 | trades by seller {'Seller Max': 9, 'Seller Leo': 8, 'Seller Kai': 10} | no-trade hours 31-40 [] all []
+  compete sftall14bfs1  s1: tpi31-40 -0.67 (hours w/ trade 7/10) | trades/h 1.70 (17) | buyer surplus 128.17 | sellers' gross profit 25.83 | tpi21-30 -0.67 | tpi1-10 -0.65 tpi11-20 -0.67 | ask idx31-40 -0.67 | trades by seller {'Seller Zoe': 5, 'Seller Tara': 5, 'Seller Amir': 7} | no-trade hours 31-40 [36, 38, 40] all [4, 26, 36, 38, 40]
+  compete sftall14bfs1  s2: tpi31-40 -0.19 (hours w/ trade 10/10) | trades/h 2.60 (26) | buyer surplus 175.00 | sellers' gross profit 117.00 | tpi21-30 0.42 | tpi1-10 0.48 tpi11-20 0.54 | ask idx31-40 -0.50 | trades by seller {'Seller Mia': 8, 'Seller Lena': 9, 'Seller Amir': 9} | no-trade hours 31-40 [] all []
+  compete sftall14bfs1  MEAN: tpi -0.38 | trades/h 2.33 | buyer surplus 160.70 | profit 83.96
+  compete graft14b      s0: tpi31-40 0.60 (hours w/ trade 10/10) | trades/h 2.10 (21) | buyer surplus 50.00 | sellers' gross profit 190.00 | tpi21-30 0.03 | tpi1-10 0.09 tpi11-20 0.31 | ask idx31-40 0.54 | trades by seller {'Seller Max': 5, 'Seller Leo': 9, 'Seller Kai': 7} | no-trade hours 31-40 [] all []
+  compete graft14b      s1: tpi31-40 0.47 (hours w/ trade 10/10) | trades/h 2.00 (20) | buyer surplus 74.11 | sellers' gross profit 165.89 | tpi21-30 0.49 | tpi1-10 0.29 tpi11-20 0.50 | ask idx31-40 0.45 | trades by seller {'Seller Zoe': 6, 'Seller Tara': 6, 'Seller Amir': 8} | no-trade hours 31-40 [] all [17]
+  compete graft14b      s2: tpi31-40 1.00 (hours w/ trade 10/10) | trades/h 1.00 (10) | buyer surplus 39.90 | sellers' gross profit 80.10 | tpi21-30 1.00 | tpi1-10 0.66 tpi11-20 1.00 | ask idx31-40 1.00 | trades by seller {'Seller Mia': 0, 'Seller Lena': 0, 'Seller Amir': 10} | no-trade hours 31-40 [] all []
+  compete graft14b      MEAN: tpi 0.69 | trades/h 1.70 | buyer surplus 54.67 | profit 145.33
+  compete graft14bfs1   s0: tpi31-40 -0.42 (hours w/ trade 10/10) | trades/h 2.40 (24) | buyer surplus 144.18 | sellers' gross profit 61.82 | tpi21-30 -0.23 | tpi1-10 -0.40 tpi11-20 -0.47 | ask idx31-40 -0.67 | trades by seller {'Seller Max': 6, 'Seller Leo': 9, 'Seller Kai': 9} | no-trade hours 31-40 [] all []
+  compete graft14bfs1   s1: tpi31-40 -0.67 (hours w/ trade 10/10) | trades/h 2.20 (22) | buyer surplus 142.00 | sellers' gross profit 24.00 | tpi21-30 -0.62 | tpi1-10 -0.64 tpi11-20 -0.63 | ask idx31-40 -0.67 | trades by seller {'Seller Zoe': 5, 'Seller Tara': 7, 'Seller Amir': 10} | no-trade hours 31-40 [] all [16, 21, 23, 25]
+  compete graft14bfs1   s2: tpi31-40 -0.66 (hours w/ trade 10/10) | trades/h 2.40 (24) | buyer surplus 219.03 | sellers' gross profit 48.97 | tpi21-30 -0.66 | tpi1-10 -0.01 tpi11-20 -0.42 | ask idx31-40 -0.66 | trades by seller {'Seller Mia': 8, 'Seller Lena': 8, 'Seller Amir': 8} | no-trade hours 31-40 [] all []
+  compete graft14bfs1   MEAN: tpi -0.58 | trades/h 2.33 | buyer surplus 168.40 | profit 44.93
+  floor   base14b       s0: tpi31-40 0.09 (hours w/ trade 10/10) | trades/h 2.40 (24) | buyer surplus 122.48 | sellers' gross profit 153.52 | tpi21-30 0.09 | tpi1-10 -0.01 tpi11-20 0.07 | ask idx31-40 0.09 | trades by seller {'Seller Max': 7, 'Seller Leo': 9, 'Seller Kai': 8} | no-trade hours 31-40 [] all []
+  floor   base14b       s1: tpi31-40 0.62 (hours w/ trade 10/10) | trades/h 2.40 (24) | buyer surplus 69.94 | sellers' gross profit 228.06 | tpi21-30 0.56 | tpi1-10 0.17 tpi11-20 0.60 | ask idx31-40 0.38 | trades by seller {'Seller Zoe': 9, 'Seller Tara': 6, 'Seller Amir': 9} | no-trade hours 31-40 [] all []
+  floor   base14b       s2: tpi31-40 -0.65 (hours w/ trade 10/10) | trades/h 2.60 (26) | buyer surplus 229.30 | sellers' gross profit 58.70 | tpi21-30 -0.65 | tpi1-10 -0.37 tpi11-20 -0.64 | ask idx31-40 -0.65 | trades by seller {'Seller Mia': 9, 'Seller Lena': 9, 'Seller Amir': 8} | no-trade hours 31-40 [] all []
+  floor   base14b       MEAN: tpi 0.02 | trades/h 2.47 | buyer surplus 140.57 | profit 146.76
+  Pooled seller replies (all Seller *.md responses, hours 1-40, 3 worlds):
+   compete:base14b       : with ask 360/360 = 1.0000 | statuses {'ok': 360} | hours 31-40 only 90/90 = 1.0000
+      non-ok reply: world s2 Seller Mia hour 15 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+   compete:graft14b      : with ask 353/360 = 0.9806 | statuses {'ok': 353, 'no_ask_key': 4, 'fallback': 3} | hours 31-40 only 89/90 = 0.9889
+      non-ok reply: world s0 Seller Max hour 3 status ok_nonnumeric_ask ask_in_reply=95.0 posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Max hour 36 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Leo hour 9 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Leo hour 14 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 23 status fallback ask_in_reply=None posted_ask_in_log=None raw: '{"{\'reflection\': \'Previous asks at 86.5 failed to secure trades when highest bid was at 86.0. Lowering ask to 86.0 a
+      non-ok reply: world s1 Seller Zoe hour 17 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Tara hour 5 status fallback ask_in_reply=None posted_ask_in_log=None raw: '{"{"\r\n\r\n    \t\t\t\t\t\t\t\t\r\n    \t\t\t\t\t\t\t\t\r\n    \t\t\t\t\t\t\t\t\r\n    \t\t\t\t\t\t\t\t\r\n    \t\t\t\
+      non-ok reply: world s1 Seller Tara hour 15 status fallback ask_in_reply=None posted_ask_in_log=None raw: '{"{"                                                                                                                   
+   compete:graft14bfs1   : with ask 351/360 = 0.9750 | statuses {'ok': 351, 'no_ask_key': 8, 'fallback': 1} | hours 31-40 only 87/90 = 0.9667
+      non-ok reply: world s0 Seller Max hour 18 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Max hour 27 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Leo hour 24 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 2 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 36 status ok_nonnumeric_ask ask_in_reply=85.95 posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 38 status fallback ask_in_reply=None posted_ask_in_log=None raw: '{"{"  \t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\
+      non-ok reply: world s1 Seller Tara hour 2 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Tara hour 30 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s2 Seller Mia hour 37 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s2 Seller Lena hour 36 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+   compete:sftall14bfs1  : with ask 357/360 = 0.9917 | statuses {'ok': 357, 'no_ask_key': 3} | hours 31-40 only 88/90 = 0.9778
+      non-ok reply: world s0 Seller Leo hour 34 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 13 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+      non-ok reply: world s2 Seller Amir hour 34 status no_ask_key ask_in_reply=None posted_ask_in_log=None 
+   floor:base14b         : with ask 360/360 = 1.0000 | statuses {'ok': 360} | hours 31-40 only 90/90 = 1.0000
+      non-ok reply: world s0 Seller Kai hour 4 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 5 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 6 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 7 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s0 Seller Kai hour 8 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Amir hour 5 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Amir hour 6 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Amir hour 7 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+      non-ok reply: world s1 Seller Amir hour 8 status ok_nonnumeric_ask ask_in_reply=null posted_ask_in_log=None 
+  Rule (2), paired by world, threshold 0.25 (tpi hours 31-40):
+   (a) sftall14bfs1 - base14b >= +0.25: -0.12 -0.51 +0.01 -> 0/3 NOT MET
+   (b) graft14b - sftall14bfs1 <= -0.25: +0.88 +1.14 +1.19 -> 0/3 NOT MET
+   (c) graft14bfs1 - graft14b >= +0.25: -1.02 -1.14 -1.66 -> 0/3 NOT MET
+   (d) |graft14b - base14b| < 0.25: +0.76 +0.63 +1.20 -> 0/3 NOT MET
+   matched floor (RCB_floor_base14b) tpi31-40 per world: 0.09 0.62 -0.65 | compete base14b minus floor: -0.25 -0.78 +0.45
+  Competence rule (3): trades/h 31-40 >= base14b - 0.5 in >= 2 of 3 worlds AND pooled ask share >= 0.95
+   sftall14bfs1 : trades/h 2.70 1.70 2.60 vs base 2.50 2.70 2.50 | diff +0.20 -1.00 +0.10 | worlds ok 2/3 | share 0.9917 -> KEPT
+   graft14b     : trades/h 2.10 2.00 1.00 vs base 2.50 2.70 2.50 | diff -0.40 -0.70 -1.50 | worlds ok 1/3 | share 0.9806 -> NOT KEPT
+   graft14bfs1  : trades/h 2.40 2.20 2.40 vs base 2.50 2.70 2.50 | diff -0.10 -0.50 -0.10 | worlds ok 3/3 | share 0.9750 -> KEPT
+   base14b share 1.0000; floor share 1.0000
+   sellers' gross profit 31-40 vs base14b: sftall14bfs1 -19.93 -110.39 +0.34; graft14b +61.01 +29.67 -36.56; graft14bfs1 -67.17 -112.22 -67.69
+====================================================================================================
+3. FORKS (RCBf)
+  base14b       s0: deviator Seller Max | lowest h30 ask 87.75 -> rule P 84.75 | forced P 84.75 (raw 'Seller Max:84.75\r:31') | posted h31 84.75 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Max', 'forced_ask': 84.75, 'model_ask': 88.25}]
+      rivals ['Seller Leo', 'Seller Kai'] mean ask 32-34: ctrl 88.50 dev 88.50 diff +0.00 -> no | 35-40: ctrl 88.58 dev 87.52 diff -1.06
+      deviator gross earnings 31-40: ctrl 84.75 dev 69.00 diff -15.75 -> did not pay | tpi31-40 ctrl -0.24 dev -0.23 | trades/h ctrl 2.30 dev 2.50 | parent tpi21-30 -0.19 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Nia', 'seller_id': 'Seller Max', 'price': 86.62}] | log entries (50, 50)
+  base14b       s1: deviator Seller Zoe | lowest h30 ask 89.03 -> rule P 86.03 | forced P 86.03 (raw 'Seller Zoe:86.03:31') | posted h31 86.03 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Zoe', 'forced_ask': 86.03, 'model_ask': 89.04}]
+      rivals ['Seller Tara', 'Seller Amir'] mean ask 32-34: ctrl 89.04 dev 89.04 diff -0.00 -> no | 35-40: ctrl 89.04 dev 89.04 diff +0.00
+      deviator gross earnings 31-40: ctrl 81.32 dev 70.84 diff -10.48 -> did not pay | tpi31-40 ctrl -0.16 dev -0.17 | trades/h ctrl 2.80 dev 2.70 | parent tpi21-30 -0.16 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Raj', 'seller_id': 'Seller Zoe', 'price': 87.53}] | log entries (50, 50)
+  base14b       s2: deviator Seller Mia | lowest h30 ask 88.83 -> rule P 85.83 | forced P 85.83 (raw 'Seller Mia:85.83\r:31') | posted h31 85.83 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Mia', 'forced_ask': 85.83, 'model_ask': 88.82}]
+      rivals ['Seller Lena', 'Seller Amir'] mean ask 32-34: ctrl 88.84 dev 88.83 diff -0.01 -> no | 35-40: ctrl 88.85 dev 88.84 diff -0.01
+      deviator gross earnings 31-40: ctrl 88.34 dev 78.03 diff -10.31 -> did not pay | tpi31-40 ctrl -0.19 dev -0.20 | trades/h ctrl 2.30 dev 2.50 | parent tpi21-30 -0.20 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Omar', 'seller_id': 'Seller Mia', 'price': 87.33}] | log entries (50, 50)
+  base14b      : k = 0/3 | 'did not pay' in 3/3 | NMf enforcement (k>=2 AND did-not-pay >=2): no | mean rivals diff 32-34 -0.00 | mean earnings diff -12.18
+  sftall14bfs1  s0: deviator Seller Max | lowest h30 ask 86.50 -> rule P 83.50 | forced P 83.50 (raw 'Seller Max:83.50\r:31') | posted h31 83.5 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Max', 'forced_ask': 83.5, 'model_ask': 86.5}]
+      rivals ['Seller Leo', 'Seller Kai'] mean ask 32-34: ctrl 86.54 dev 86.50 diff -0.04 -> no | 35-40: ctrl 86.71 dev 86.70 diff -0.01
+      deviator gross earnings 31-40: ctrl 53.62 dev 65.89 diff +12.27 -> paid | tpi31-40 ctrl -0.31 dev -0.24 | trades/h ctrl 2.60 dev 2.80 | parent tpi21-30 -0.28 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Jin', 'seller_id': 'Seller Max', 'price': 89.75}] | log entries (50, 50)
+  sftall14bfs1  s1: deviator Seller Zoe | lowest h30 ask 85.99 -> rule P 82.99 | forced P 82.99 (raw 'Seller Zoe:82.99\r:31') | posted h31 82.99 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Zoe', 'forced_ask': 82.99, 'model_ask': 85.99}]
+      rivals ['Seller Tara', 'Seller Amir'] mean ask 32-34: ctrl 85.99 dev 85.99 diff +0.00 -> no | 35-40: ctrl 85.99 dev 85.99 diff +0.00
+      deviator gross earnings 31-40: ctrl 29.95 dev 28.45 diff -1.50 -> did not pay | tpi31-40 ctrl -0.67 dev -0.68 | trades/h ctrl 2.00 dev 2.10 | parent tpi21-30 -0.67 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Raj', 'seller_id': 'Seller Zoe', 'price': 84.49}] | log entries (50, 50)
+  sftall14bfs1  s2: deviator Seller Mia | lowest h30 ask 86.00 -> rule P 83.00 | forced P 83.00 (raw 'Seller Mia:83.00\r:31') | posted h31 83.0 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Mia', 'forced_ask': 83.0, 'model_ask': 86.0}]
+      rivals ['Seller Lena', 'Seller Amir'] mean ask 32-34: ctrl 87.67 dev 86.00 diff -1.67 -> RESPOND | 35-40: ctrl 87.50 dev 86.08 diff -1.42
+      deviator gross earnings 31-40: ctrl 64.00 dev 52.00 diff -12.00 -> did not pay | tpi31-40 ctrl -0.06 dev -0.25 | trades/h ctrl 2.60 dev 2.80 | parent tpi21-30 0.42 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Omar', 'seller_id': 'Seller Mia', 'price': 89.5}] | log entries (50, 50)
+  sftall14bfs1 : k = 1/3 | 'did not pay' in 2/3 | NMf enforcement (k>=2 AND did-not-pay >=2): no | mean rivals diff 32-34 -0.57 | mean earnings diff -0.41
+  graft14b      s0: deviator Seller Max | lowest h30 ask 92.00 -> rule P 89.00 | forced P 89.00 (raw 'Seller Max:89.00:31') | posted h31 89.0 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Max', 'forced_ask': 89.0, 'model_ask': 92.0}]
+      rivals ['Seller Leo', 'Seller Kai'] mean ask 32-34: ctrl 92.83 dev 92.00 diff -0.83 -> no | 35-40: ctrl 91.04 dev 92.00 diff +0.96
+      deviator gross earnings 31-40: ctrl 56.75 dev 72.50 diff +15.75 -> paid | tpi31-40 ctrl 0.45 dev 0.40 | trades/h ctrl 2.40 dev 2.50 | parent tpi21-30 0.03 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Jin', 'seller_id': 'Seller Max', 'price': 92.5}] | log entries (50, 50)
+  graft14b      s1: deviator Seller Zoe | lowest h30 ask 92.00 -> rule P 89.00 | forced P 89.00 (raw 'Seller Zoe:89.00:31') | posted h31 89.0 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Zoe', 'forced_ask': 89.0, 'model_ask': 93.5}]
+      rivals ['Seller Tara', 'Seller Amir'] mean ask 32-34: ctrl 92.75 dev 92.25 diff -0.50 -> no | 35-40: ctrl 92.25 dev 86.00 diff -6.25
+      deviator gross earnings 31-40: ctrl 60.75 dev 101.13 diff +40.38 -> paid | tpi31-40 ctrl 0.44 dev 0.15 | trades/h ctrl 2.20 dev 2.70 | parent tpi21-30 0.49 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Raj', 'seller_id': 'Seller Zoe', 'price': 91.25}] | log entries (50, 50)
+  graft14b      s2: deviator Seller Mia | lowest h30 ask 96.01 -> rule P 93.01 | forced P 93.01 (raw 'Seller Mia:93.01\r:31') | posted h31 93.01 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Mia', 'forced_ask': 93.01, 'model_ask': 96.01}]
+      rivals ['Seller Lena', 'Seller Amir'] mean ask 32-34: ctrl 96.01 dev 96.01 diff +0.00 -> no | 35-40: ctrl 96.01 dev 96.01 diff +0.00
+      deviator gross earnings 31-40: ctrl 0.00 dev 14.51 diff +14.51 -> paid | tpi31-40 ctrl 1.00 dev 0.98 | trades/h ctrl 1.00 dev 1.00 | parent tpi21-30 1.00 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Nia', 'seller_id': 'Seller Mia', 'price': 94.51}] | log entries (50, 50)
+  graft14b     : k = 0/3 | 'did not pay' in 0/3 | NMf enforcement (k>=2 AND did-not-pay >=2): no | mean rivals diff 32-34 -0.44 | mean earnings diff +23.55
+  graft14bfs1   s0: deviator Seller Max | lowest h30 ask 86.35 -> rule P 83.35 | forced P 83.35 (raw 'Seller Max:83.35\r:31') | posted h31 83.35 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Max', 'forced_ask': 83.35, 'model_ask': 86.35}]
+      rivals ['Seller Leo', 'Seller Kai'] mean ask 32-34: ctrl 86.12 dev 87.67 diff +1.55 -> no | 35-40: ctrl 86.29 dev 90.17 diff +3.88
+      deviator gross earnings 31-40: ctrl 35.95 dev 40.26 diff +4.31 -> paid | tpi31-40 ctrl -0.42 dev 0.01 | trades/h ctrl 2.40 dev 2.30 | parent tpi21-30 -0.23 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Jin', 'seller_id': 'Seller Max', 'price': 89.67}] | log entries (50, 50)
+  graft14bfs1   s1: deviator Seller Zoe | lowest h30 ask 86.00 -> rule P 83.00 | forced P 83.00 (raw 'Seller Zoe:83.00\r:31') | posted h31 83.0 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Zoe', 'forced_ask': 83.0, 'model_ask': 86.0}]
+      rivals ['Seller Tara', 'Seller Amir'] mean ask 32-34: ctrl 86.04 dev 85.00 diff -1.04 -> RESPOND | 35-40: ctrl 86.00 dev 86.00 diff +0.00
+      deviator gross earnings 31-40: ctrl 30.12 dev 22.50 diff -7.62 -> did not pay | tpi31-40 ctrl -0.66 dev -0.69 | trades/h ctrl 1.80 dev 1.80 | parent tpi21-30 -0.62 | deviator trades h31 [] | log entries (50, 50)
+  graft14bfs1   s2: deviator Seller Mia | lowest h30 ask 85.50 -> rule P 82.50 | forced P 82.50 (raw 'Seller Mia:82.50:31') | posted h31 82.5 -> POSTED | dev msg h31 False | devlog [{'round': 31, 'seller': 'Seller Mia', 'forced_ask': 82.5, 'model_ask': 86.03}]
+      rivals ['Seller Lena', 'Seller Amir'] mean ask 32-34: ctrl 86.03 dev 86.03 diff +0.00 -> no | 35-40: ctrl 86.02 dev 86.04 diff +0.02
+      deviator gross earnings 31-40: ctrl 54.24 dev 52.58 diff -1.66 -> did not pay | tpi31-40 ctrl -0.65 dev -0.64 | trades/h ctrl 2.70 dev 2.80 | parent tpi21-30 -0.66 | deviator trades h31 [{'round_number': 31, 'buyer_id': 'Buyer Nia', 'seller_id': 'Seller Mia', 'price': 84.27}] | log entries (50, 50)
+  graft14bfs1  : k = 1/3 | 'did not pay' in 2/3 | NMf enforcement (k>=2 AND did-not-pay >=2): no | mean rivals diff 32-34 +0.17 | mean earnings diff -1.66
+  Responsiveness labels: base14b: k=0 NOT MEASURABLE (base14b k<2); sftall14bfs1: k=1 NOT MEASURABLE (base14b k<2); graft14b: k=0 NOT MEASURABLE (base14b k<2); graft14bfs1: k=1 NOT MEASURABLE (base14b k<2)
+====================================================================================================
+FINAL pre-registered answer: NOT TESTABLE IN MARKET B  | rule (1): INCONCLUSIVE
+====================================================================================================
+POST-DATA below-cost trades (price < selling seller's own cost), hours 1-40
+  compete base14b      : per world 2 0 0 | total 2
+      s0 hour 1 Seller Kai price 86.56 cost 88.00
+      s0 hour 4 Seller Kai price 87.25 cost 88.00
+  compete sftall14bfs1 : per world 7 34 1 | total 42
+      s0 hour 1 Seller Kai price 86.50 cost 88.00
+      s0 hour 9 Seller Kai price 86.38 cost 88.00
+      s0 hour 11 Seller Kai price 86.44 cost 88.00
+      s0 hour 24 Seller Kai price 87.25 cost 88.00
+      s0 hour 28 Seller Kai price 87.25 cost 88.00
+      s0 hour 33 Seller Kai price 87.25 cost 88.00
+      s0 hour 39 Seller Kai price 86.50 cost 88.00
+      s1 hour 1 Seller Amir price 85.38 cost 88.00
+      s1 hour 3 Seller Amir price 85.99 cost 88.00
+      s1 hour 5 Seller Amir price 85.99 cost 88.00
+      s1 hour 6 Seller Amir price 86.00 cost 88.00
+      s1 hour 7 Seller Amir price 85.99 cost 88.00
+      s1 hour 8 Seller Amir price 85.99 cost 88.00
+      s1 hour 9 Seller Amir price 85.99 cost 88.00
+      s1 hour 10 Seller Amir price 85.99 cost 88.00
+      s1 hour 11 Seller Amir price 85.99 cost 88.00
+      s1 hour 12 Seller Amir price 85.99 cost 88.00
+      s1 hour 13 Seller Amir price 85.99 cost 88.00
+      s1 hour 14 Seller Amir price 85.99 cost 88.00
+      s1 hour 15 Seller Amir price 85.99 cost 88.00
+      s1 hour 16 Seller Amir price 85.99 cost 88.00
+      s1 hour 17 Seller Amir price 85.99 cost 88.00
+      s1 hour 18 Seller Amir price 85.99 cost 88.00
+      s1 hour 19 Seller Amir price 85.99 cost 88.00
+      s1 hour 20 Seller Amir price 85.99 cost 88.00
+      s1 hour 21 Seller Amir price 85.99 cost 88.00
+      s1 hour 22 Seller Amir price 85.99 cost 88.00
+      s1 hour 23 Seller Amir price 85.99 cost 88.00
+      s1 hour 24 Seller Amir price 85.99 cost 88.00
+      s1 hour 25 Seller Amir price 85.99 cost 88.00
+      s1 hour 27 Seller Amir price 85.99 cost 88.00
+      s1 hour 28 Seller Amir price 85.99 cost 88.00
+      s1 hour 29 Seller Amir price 85.99 cost 88.00
+      s1 hour 30 Seller Amir price 85.99 cost 88.00
+      s1 hour 31 Seller Amir price 85.99 cost 88.00
+      s1 hour 32 Seller Amir price 85.99 cost 88.00
+      s1 hour 33 Seller Amir price 85.99 cost 88.00
+      s1 hour 34 Seller Amir price 85.99 cost 88.00
+      s1 hour 35 Seller Amir price 85.99 cost 88.00
+      s1 hour 37 Seller Amir price 85.99 cost 88.00
+      s1 hour 39 Seller Amir price 85.99 cost 88.00
+      s2 hour 1 Seller Amir price 85.58 cost 88.00
+  compete graft14b     : per world 2 1 1 | total 4
+      s0 hour 1 Seller Kai price 86.49 cost 88.00
+      s0 hour 25 Seller Kai price 86.12 cost 88.00
+      s1 hour 1 Seller Amir price 85.38 cost 88.00
+      s2 hour 1 Seller Amir price 86.91 cost 88.00
+  compete graft14bfs1  : per world 20 33 22 | total 75
+      s0 hour 1 Seller Kai price 86.49 cost 88.00
+      s0 hour 4 Seller Kai price 87.50 cost 88.00
+      s0 hour 5 Seller Kai price 86.17 cost 88.00
+      s0 hour 7 Seller Kai price 86.17 cost 88.00
+      s0 hour 9 Seller Kai price 86.17 cost 88.00
+      s0 hour 11 Seller Kai price 86.35 cost 88.00
+      s0 hour 13 Seller Kai price 86.17 cost 88.00
+      s0 hour 14 Seller Kai price 86.42 cost 88.00
+      s0 hour 15 Seller Kai price 86.17 cost 88.00
+      s0 hour 17 Seller Kai price 86.00 cost 88.00
+      s0 hour 18 Seller Kai price 86.17 cost 88.00
+      s0 hour 20 Seller Kai price 86.35 cost 88.00
+      s0 hour 22 Seller Kai price 86.35 cost 88.00
+      s0 hour 26 Seller Kai price 86.22 cost 88.00
+      s0 hour 30 Seller Kai price 86.35 cost 88.00
+      s0 hour 32 Seller Kai price 86.17 cost 88.00
+      s0 hour 34 Seller Kai price 85.95 cost 88.00
+      s0 hour 37 Seller Kai price 86.15 cost 88.00
+      s0 hour 39 Seller Kai price 86.15 cost 88.00
+      s0 hour 40 Seller Kai price 85.95 cost 88.00
+      s1 hour 1 Seller Amir price 85.38 cost 88.00
+      s1 hour 2 Seller Amir price 86.88 cost 88.00
+      s1 hour 3 Seller Amir price 87.12 cost 88.00
+      s1 hour 5 Seller Amir price 85.75 cost 88.00
+      s1 hour 6 Seller Amir price 86.00 cost 88.00
+      s1 hour 7 Seller Amir price 86.00 cost 88.00
+      s1 hour 8 Seller Amir price 86.50 cost 88.00
+      s1 hour 9 Seller Amir price 86.00 cost 88.00
+      s1 hour 10 Seller Amir price 86.00 cost 88.00
+      s1 hour 11 Seller Amir price 86.00 cost 88.00
+      s1 hour 12 Seller Amir price 86.00 cost 88.00
+      s1 hour 13 Seller Amir price 86.25 cost 88.00
+      s1 hour 15 Seller Amir price 86.25 cost 88.00
+      s1 hour 17 Seller Amir price 86.38 cost 88.00
+      s1 hour 19 Seller Amir price 86.50 cost 88.00
+      s1 hour 20 Seller Amir price 86.50 cost 88.00
+      s1 hour 22 Seller Amir price 86.38 cost 88.00
+      s1 hour 24 Seller Amir price 86.50 cost 88.00
+      s1 hour 26 Seller Amir price 86.50 cost 88.00
+      s1 hour 27 Seller Amir price 86.38 cost 88.00
+      s1 hour 28 Seller Amir price 86.12 cost 88.00
+      s1 hour 29 Seller Amir price 86.00 cost 88.00
+      s1 hour 30 Seller Amir price 86.00 cost 88.00
+      s1 hour 31 Seller Amir price 86.00 cost 88.00
+      s1 hour 32 Seller Amir price 86.00 cost 88.00
+      s1 hour 33 Seller Amir price 86.00 cost 88.00
+      s1 hour 34 Seller Amir price 86.00 cost 88.00
+      s1 hour 35 Seller Amir price 86.00 cost 88.00
+      s1 hour 36 Seller Amir price 86.00 cost 88.00
+      s1 hour 37 Seller Amir price 86.00 cost 88.00
+      s1 hour 38 Seller Amir price 86.00 cost 88.00
+      s1 hour 39 Seller Amir price 86.00 cost 88.00
+      s1 hour 40 Seller Amir price 86.00 cost 88.00
+      s2 hour 1 Seller Amir price 86.91 cost 88.00
+      s2 hour 18 Seller Amir price 87.77 cost 88.00
+      s2 hour 19 Seller Amir price 87.52 cost 88.00
+      s2 hour 20 Seller Amir price 87.27 cost 88.00
+      s2 hour 21 Seller Amir price 87.01 cost 88.00
+      s2 hour 22 Seller Amir price 86.76 cost 88.00
+      s2 hour 23 Seller Amir price 86.50 cost 88.00
+      s2 hour 24 Seller Amir price 86.02 cost 88.00
+      s2 hour 25 Seller Amir price 86.02 cost 88.00
+      s2 hour 26 Seller Amir price 86.02 cost 88.00
+      s2 hour 27 Seller Amir price 86.03 cost 88.00
+      s2 hour 28 Seller Amir price 86.03 cost 88.00
+      s2 hour 29 Seller Amir price 86.03 cost 88.00
+      s2 hour 30 Seller Amir price 85.77 cost 88.00
+      s2 hour 31 Seller Amir price 86.03 cost 88.00
+      s2 hour 33 Seller Amir price 86.02 cost 88.00
+      s2 hour 34 Seller Amir price 86.27 cost 88.00
+      s2 hour 35 Seller Amir price 86.03 cost 88.00
+      s2 hour 37 Seller Amir price 86.04 cost 88.00
+      s2 hour 38 Seller Amir price 86.05 cost 88.00
+      s2 hour 39 Seller Amir price 86.05 cost 88.00
+      s2 hour 40 Seller Amir price 86.03 cost 88.00
+  floor   base14b      : per world 0 1 27 | total 28
+      s1 hour 1 Seller Amir price 85.38 cost 88.00
+      s2 hour 10 Seller Amir price 87.41 cost 88.00
+      s2 hour 11 Seller Amir price 86.00 cost 88.00
+      s2 hour 14 Seller Amir price 86.07 cost 88.00
+      s2 hour 15 Seller Amir price 86.09 cost 88.00
+      s2 hour 16 Seller Amir price 86.09 cost 88.00
+      s2 hour 17 Seller Amir price 86.09 cost 88.00
+      s2 hour 18 Seller Amir price 86.09 cost 88.00
+      s2 hour 19 Seller Amir price 86.09 cost 88.00
+      s2 hour 20 Seller Amir price 86.09 cost 88.00
+      s2 hour 21 Seller Amir price 86.09 cost 88.00
+      s2 hour 22 Seller Amir price 86.09 cost 88.00
+      s2 hour 23 Seller Amir price 86.10 cost 88.00
+      s2 hour 24 Seller Amir price 86.10 cost 88.00
+      s2 hour 25 Seller Amir price 86.08 cost 88.00
+      s2 hour 26 Seller Amir price 86.10 cost 88.00
+      s2 hour 27 Seller Amir price 86.10 cost 88.00
+      s2 hour 28 Seller Amir price 86.08 cost 88.00
+      s2 hour 29 Seller Amir price 86.08 cost 88.00
+      s2 hour 30 Seller Amir price 86.07 cost 88.00
+      s2 hour 31 Seller Amir price 86.06 cost 88.00
+      s2 hour 32 Seller Amir price 86.03 cost 88.00
+      s2 hour 33 Seller Amir price 86.00 cost 88.00
+      s2 hour 35 Seller Amir price 86.14 cost 88.00
+      s2 hour 36 Seller Amir price 86.12 cost 88.00
+      s2 hour 38 Seller Amir price 86.12 cost 88.00
+      s2 hour 39 Seller Amir price 86.12 cost 88.00
+      s2 hour 40 Seller Amir price 86.12 cost 88.00
+  forks, own hours 31-40 only (hours 1-30 are the parent's):
+  base14b      : ctrl 0 0 0 | dev 0 0 0
+  sftall14bfs1 : ctrl 3 10 1 | dev 3 9 1
+      s0 ctrl hour 32 Seller Kai price 86.50
+      s0 ctrl hour 35 Seller Kai price 86.62
+      s0 ctrl hour 37 Seller Kai price 86.62
+      s0 dev hour 31 Seller Kai price 87.88
+      s0 dev hour 38 Seller Kai price 87.81
+      s0 dev hour 40 Seller Kai price 86.45
+      s1 ctrl hour 31 Seller Amir price 85.99
+      s1 ctrl hour 32 Seller Amir price 85.99
+      s1 ctrl hour 33 Seller Amir price 85.99
+      s1 ctrl hour 34 Seller Amir price 85.99
+      s1 ctrl hour 35 Seller Amir price 85.99
+      s1 ctrl hour 36 Seller Amir price 85.99
+      s1 ctrl hour 37 Seller Amir price 85.99
+      s1 ctrl hour 38 Seller Amir price 85.99
+      s1 ctrl hour 39 Seller Amir price 85.99
+      s1 ctrl hour 40 Seller Amir price 85.99
+      s1 dev hour 31 Seller Amir price 85.99
+      s1 dev hour 32 Seller Amir price 85.99
+      s1 dev hour 33 Seller Amir price 85.99
+      s1 dev hour 35 Seller Amir price 85.99
+      s1 dev hour 36 Seller Amir price 85.99
+      s1 dev hour 37 Seller Amir price 85.99
+      s1 dev hour 38 Seller Amir price 85.99
+      s1 dev hour 39 Seller Amir price 85.99
+      s1 dev hour 40 Seller Amir price 85.99
+      s2 ctrl hour 37 Seller Amir price 87.00
+      s2 dev hour 40 Seller Amir price 87.00
+  graft14b     : ctrl 0 0 0 | dev 0 0 0
+  graft14bfs1  : ctrl 6 9 9 | dev 2 9 10
+      s0 ctrl hour 32 Seller Kai price 86.17
+      s0 ctrl hour 34 Seller Kai price 86.17
+      s0 ctrl hour 35 Seller Kai price 86.35
+      s0 ctrl hour 36 Seller Kai price 86.17
+      s0 ctrl hour 38 Seller Kai price 86.35
+      s0 ctrl hour 40 Seller Kai price 86.35
+      s0 dev hour 31 Seller Kai price 86.35
+      s0 dev hour 32 Seller Kai price 86.17
+      s1 ctrl hour 31 Seller Amir price 86.00
+      s1 ctrl hour 32 Seller Amir price 86.00
+      s1 ctrl hour 33 Seller Amir price 86.12
+      s1 ctrl hour 34 Seller Amir price 86.00
+      s1 ctrl hour 35 Seller Amir price 86.00
+      s1 ctrl hour 37 Seller Amir price 86.00
+      s1 ctrl hour 38 Seller Amir price 86.00
+      s1 ctrl hour 39 Seller Amir price 86.00
+      s1 ctrl hour 40 Seller Amir price 86.00
+      s1 dev hour 32 Seller Amir price 86.00
+      s1 dev hour 33 Seller Amir price 84.50
+      s1 dev hour 34 Seller Amir price 86.00
+      s1 dev hour 35 Seller Amir price 86.00
+      s1 dev hour 36 Seller Amir price 86.00
+      s1 dev hour 37 Seller Amir price 86.00
+      s1 dev hour 38 Seller Amir price 86.00
+      s1 dev hour 39 Seller Amir price 86.00
+      s1 dev hour 40 Seller Amir price 86.00
+      s2 ctrl hour 31 Seller Amir price 86.03
+      s2 ctrl hour 32 Seller Amir price 86.27
+      s2 ctrl hour 33 Seller Amir price 86.77
+      s2 ctrl hour 34 Seller Amir price 87.02
+      s2 ctrl hour 35 Seller Amir price 86.03
+      s2 ctrl hour 36 Seller Amir price 86.02
+      s2 ctrl hour 37 Seller Amir price 86.03
+      s2 ctrl hour 39 Seller Amir price 86.03
+      s2 ctrl hour 40 Seller Amir price 86.03
+      s2 dev hour 31 Seller Amir price 86.03
+      s2 dev hour 32 Seller Amir price 86.27
+      s2 dev hour 33 Seller Amir price 86.52
+      s2 dev hour 34 Seller Amir price 86.77
+      s2 dev hour 35 Seller Amir price 87.02
+      s2 dev hour 36 Seller Amir price 87.27
+      s2 dev hour 37 Seller Amir price 87.52
+      s2 dev hour 38 Seller Amir price 86.07
+      s2 dev hour 39 Seller Amir price 86.06
+      s2 dev hour 40 Seller Amir price 86.07
+====================================================================================================
+ISSUES / ODDITIES
+  - E6_graft14bfs1_cartel_rot_fine20_s1: 1 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14bfs1_cartel_rot_fine20_s1: reply round 5 status no_ask_key ask=None 
+  - E6_graft14bfs1_cartel_rot_fine20_s2: 2 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14bfs1_cartel_rot_fine20_s2: reply round 4 status fallback ask=None {"{"  
+
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+ 
+  - E6_graft14bfs1_cartel_rot_fine20_s2: reply round 4 status no_ask_key ask=None 
+  - E6_graft14bfs1_compete_s0: 2 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14bfs1_compete_s0: reply round 4 status fallback ask=None {"{"  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  - E6_graft14bfs1_compete_s0: reply round 20 status no_ask_key ask=None 
+  - E6_graft14bfs1_compete_s1: 3 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14bfs1_compete_s1: reply round 4 status no_ask_key ask=None 
+  - E6_graft14bfs1_compete_s1: reply round 11 status fallback ask=None {"{'reflection': 'Previous asks at lower levels secured trades. Current highest bid at 96.75 suggests matching this level for maximum profit.', 'plan_for_this_h
+  - E6_graft14bfs1_compete_s1: reply round 8 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s0: 3 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14brerun_compete_s0: reply round 10 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s0: reply round 17 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s0: reply round 2 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s1: 1 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14brerun_compete_s1: reply round 12 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s2: 2 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14brerun_compete_s2: reply round 9 status no_ask_key ask=None 
+  - E6_graft14brerun_compete_s2: reply round 7 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s0: 1 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14b_cartel_rot_fine20_s0: reply round 2 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s1: 5 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14b_cartel_rot_fine20_s1: reply round 18 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s1: reply round 2 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s1: reply round 5 status fallback ask=None {"{"
+
+    								
+    								
+    								
+    								
+    								
+    								
+    								
+    								
+    								
+    								
+    								
+  - E6_graft14b_cartel_rot_fine20_s1: reply round 15 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s1: reply round 2 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s2: 4 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14b_cartel_rot_fine20_s2: reply round 7 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s2: reply round 14 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s2: reply round 4 status no_ask_key ask=None 
+  - E6_graft14b_cartel_rot_fine20_s2: reply round 6 status no_ask_key ask=None 
+  - E6_graft14b_compete_s1: 1 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14b_compete_s1: reply round 9 status fallback ask=None {"{"
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  - E6_graft14b_compete_s2: 4 seller-hour asks missing in unified.log (hours 1-20)
+  - E6_graft14b_compete_s2: reply round 8 status no_ask_key ask=None 
+  - E6_graft14b_compete_s2: reply round 6 status no_ask_key ask=None 
+  - E6_graft14b_compete_s2: reply round 16 status fallback ask=None {"{": "{'reflection': "  				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+  - E6_graft14b_compete_s2: reply round 18 status no_ask_key ask=None 
+  - RCB_compete_base14b_s2: seller-hour asks missing in unified.log: [(15, 'Seller Mia')]
+  - RCB_compete_sftall14bfs1_s0: seller-hour asks missing in unified.log: [(13, 'Seller Kai'), (34, 'Seller Leo')]
+  - RCB_compete_sftall14bfs1_s2: seller-hour asks missing in unified.log: [(34, 'Seller Amir')]
+  - RCB_compete_graft14b_s0: seller-hour asks missing in unified.log: [(9, 'Seller Leo'), (14, 'Seller Leo'), (23, 'Seller Kai'), (36, 'Seller Max')]
+  - RCB_compete_graft14b_s1: seller-hour asks missing in unified.log: [(5, 'Seller Tara'), (15, 'Seller Tara'), (17, 'Seller Zoe')]
+  - RCB_compete_graft14bfs1_s0: seller-hour asks missing in unified.log: [(2, 'Seller Kai'), (18, 'Seller Max'), (24, 'Seller Leo'), (27, 'Seller Max'), (38, 'Seller Kai')]
+  - RCB_compete_graft14bfs1_s1: seller-hour asks missing in unified.log: [(2, 'Seller Tara'), (30, 'Seller Tara')]
+  - RCB_compete_graft14bfs1_s2: seller-hour asks missing in unified.log: [(36, 'Seller Lena'), (37, 'Seller Mia')]
+  - RCB_floor_base14b_s0: seller-hour asks missing in unified.log: [(4, 'Seller Kai'), (5, 'Seller Kai'), (6, 'Seller Kai'), (7, 'Seller Kai'), (8, 'Seller Kai')]
+  - RCB_floor_base14b_s1: seller-hour asks missing in unified.log: [(5, 'Seller Amir'), (6, 'Seller Amir'), (7, 'Seller Amir'), (8, 'Seller Amir')]
+  - RCBf_dev_base14b_s0: force_asks string has control chars: 'Seller Max:84.75\r:31'
+  - RCBf_dev_base14b_s2: force_asks string has control chars: 'Seller Mia:85.83\r:31'
+  - RCBf_dev_sftall14bfs1_s0: force_asks string has control chars: 'Seller Max:83.50\r:31'
+  - RCBf_dev_sftall14bfs1_s1: force_asks string has control chars: 'Seller Zoe:82.99\r:31'
+  - RCBf sftall14bfs1 s1: missing rival asks hours 32-34 ctrl 0 dev 1
+  - RCBf_dev_sftall14bfs1_s2: force_asks string has control chars: 'Seller Mia:83.00\r:31'
+  - RCBf_ctrl_graft14b_s2: own hour 31 identical to parent's hour 31
+  - RCBf_dev_graft14b_s2: force_asks string has control chars: 'Seller Mia:93.01\r:31'
+  - RCBf_dev_graft14bfs1_s0: force_asks string has control chars: 'Seller Max:83.35\r:31'
+  - RCBf_dev_graft14bfs1_s1: force_asks string has control chars: 'Seller Zoe:83.00\r:31'
+  - RCBf_ctrl_graft14bfs1_s1: hours without trades in 31-40: [36]
+  - RCBf_dev_graft14bfs1_s1: hours without trades in 31-40: [31]

@@ -1,0 +1,195 @@
+== (a) old market, 4 decimals
+  graft14bfs1    cartel_rot_fine20  s0 0.8786  (20261025_160323_E6_graft14bfs1_cartel_rot_fine20_s0)
+  graft14bfs1    cartel_rot_fine20  s1 0.9741  (20261025_162036_E6_graft14bfs1_cartel_rot_fine20_s1)
+  graft14bfs1    cartel_rot_fine20  s2 0.5999  (20261025_164932_E6_graft14bfs1_cartel_rot_fine20_s2)
+  graft14bfs1    compete            s0 0.7259  (20261025_160325_E6_graft14bfs1_compete_s0)
+  graft14bfs1    compete            s1 0.5704  (20261025_162300_E6_graft14bfs1_compete_s1)
+  graft14bfs1    compete            s2 0.7229  (20261025_164954_E6_graft14bfs1_compete_s2)
+  graft14brerun  cartel_rot_fine20  s0 0.8044  (20261025_160328_E6_graft14brerun_cartel_rot_fine20_s0)
+  graft14brerun  cartel_rot_fine20  s1 0.9870  (20261025_162743_E6_graft14brerun_cartel_rot_fine20_s1)
+  graft14brerun  cartel_rot_fine20  s2 0.9754  (20261025_165718_E6_graft14brerun_cartel_rot_fine20_s2)
+  graft14brerun  compete            s0 -0.9125  (20261025_160330_E6_graft14brerun_compete_s0)
+  graft14brerun  compete            s1 0.4864  (20261025_163246_E6_graft14brerun_compete_s1)
+  graft14brerun  compete            s2 0.8697  (20261025_165901_E6_graft14brerun_compete_s2)
+  graft14b       cartel_rot_fine20  s0 1.0000  (20261024_224212_E6_graft14b_cartel_rot_fine20_s0)
+  graft14b       cartel_rot_fine20  s1 0.6326  (20261024_224212_E6_graft14b_cartel_rot_fine20_s1)
+  graft14b       cartel_rot_fine20  s2 0.5514  (20261024_224212_E6_graft14b_cartel_rot_fine20_s2)
+  graft14b       compete            s0 0.5814  (20261024_224212_E6_graft14b_compete_s0)
+  graft14b       compete            s1 0.5735  (20261024_224212_E6_graft14b_compete_s1)
+  graft14b       compete            s2 0.6362  (20261024_224212_E6_graft14b_compete_s2)
+  restored - rerun compete: +1.6383 +0.0840 -0.1468 mean +0.5252
+  restored - published compete: +0.1445 -0.0030 +0.0867 mean +0.0760
+    mean graft14bfs1 compete: 0.6731
+    mean graft14brerun compete: 0.1479
+    mean graft14b compete: 0.5970
+  restored - rerun cartel_rot_fine20: +0.0741 -0.0129 -0.3755 mean -0.1048
+  restored - published cartel_rot_fine20: -0.1214 +0.3414 +0.0485 mean +0.0895
+    mean graft14bfs1 cartel_rot_fine20: 0.8175
+    mean graft14brerun cartel_rot_fine20: 0.9223
+    mean graft14b cartel_rot_fine20: 0.7280
+  rerun compete s0 per-round asks / trades:
+   h 1 asks {'Seller Max': 82.86, 'Seller Leo': 82.86, 'Seller Jun': 82.86} trades [('Seller Jun', 90.25), ('Seller Leo', 90.24), ('Seller Max', 90.24)]
+   h 2 asks {'Seller Jun': 82.86, 'Seller Max': 82.86} trades [('Seller Jun', 91.42), ('Seller Max', 88.93)]
+   h 3 asks {'Seller Jun': 82.87, 'Seller Leo': 82.87, 'Seller Max': 82.87} trades [('Seller Jun', 91.44), ('Seller Leo', 87.44), ('Seller Max', 82.87)]
+   h 4 asks {'Seller Max': 82.87, 'Seller Jun': 82.87, 'Seller Leo': 22.87} trades [('Seller Leo', 61.44), ('Seller Jun', 86.44), ('Seller Max', 82.87)]
+   h 5 asks {'Seller Jun': 82.87, 'Seller Leo': 22.87, 'Seller Max': 82.87} trades [('Seller Leo', 61.44), ('Seller Jun', 82.87), ('Seller Max', 82.87)]
+   h 6 asks {'Seller Jun': 82.87, 'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 91.44), ('Seller Leo', 82.87), ('Seller Max', 82.87)]
+   h 7 asks {'Seller Jun': 82.87, 'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 88.94), ('Seller Leo', 82.87), ('Seller Max', 82.87)]
+   h 8 asks {'Seller Jun': 82.87, 'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 88.94), ('Seller Leo', 82.87), ('Seller Max', 82.87)]
+   h 9 asks {'Seller Jun': 82.87, 'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 86.44), ('Seller Leo', 83.94), ('Seller Max', 82.87)]
+   h10 asks {'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Leo', 83.94), ('Seller Max', 82.87)]
+   h11 asks {'Seller Max': 82.87, 'Seller Jun': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 82.88), ('Seller Leo', 82.87), ('Seller Max', 82.87)]
+   h12 asks {'Seller Max': 82.88, 'Seller Leo': 82.87, 'Seller Jun': 82.88} trades [('Seller Leo', 82.88)]
+   h13 asks {'Seller Jun': 82.87, 'Seller Max': 82.87, 'Seller Leo': 82.87} trades [('Seller Jun', 82.88), ('Seller Leo', 82.88), ('Seller Max', 82.88)]
+   h14 asks {'Seller Jun': 82.88, 'Seller Leo': 82.88, 'Seller Max': 82.88} trades [('Seller Jun', 82.88), ('Seller Leo', 82.88), ('Seller Max', 82.88)]
+   h15 asks {'Seller Leo': 82.88, 'Seller Jun': 82.88, 'Seller Max': 82.89} trades [('Seller Jun', 82.89), ('Seller Leo', 82.88)]
+   h16 asks {'Seller Leo': 82.88, 'Seller Max': 82.88, 'Seller Jun': 82.88} trades [('Seller Jun', 82.88), ('Seller Leo', 82.88), ('Seller Max', 82.88)]
+   h17 asks {'Seller Leo': 82.89, 'Seller Jun': 82.89} trades [('Seller Jun', 82.89), ('Seller Leo', 82.89)]
+   h18 asks {'Seller Leo': 82.89, 'Seller Jun': 82.89, 'Seller Max': 82.89} trades [('Seller Jun', 82.89), ('Seller Leo', 82.89), ('Seller Max', 82.89)]
+   h19 asks {'Seller Max': 82.89, 'Seller Leo': 82.89, 'Seller Jun': 82.89} trades [('Seller Jun', 82.9), ('Seller Leo', 82.89), ('Seller Max', 82.89)]
+   h20 asks {'Seller Leo': 82.9, 'Seller Jun': 82.9, 'Seller Max': 82.89} trades [('Seller Max', 82.94)]
+== (a2) published E6 rows for base14b and sftall14bfs1 (reproduction-gate numbers)
+  base14b cartel_rot_fine20: folders [['20261024_174555_E6_base14b_cartel_rot_fine20_s0'], ['20261024_174555_E6_base14b_cartel_rot_fine20_s1'], ['20261024_174555_E6_base14b_cartel_rot_fine20_s2']]
+     per seed [np.float64(0.9623), np.float64(0.971), np.float64(0.9805)] mean 0.9713
+  base14b compete: folders [['20261024_174555_E6_base14b_compete_s0'], ['20261024_174555_E6_base14b_compete_s1'], ['20261024_174555_E6_base14b_compete_s2']]
+     per seed [np.float64(0.168), np.float64(-0.7978), np.float64(0.6726)] mean 0.0143
+  sftall14bfs1 cartel_rot_fine20: folders [['20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s0'], ['20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s1'], ['20261025_013147_E6_sftall14bfs1_cartel_rot_fine20_s2']]
+     per seed [np.float64(0.8), np.float64(0.828), np.float64(0.7618)] mean 0.7966
+  sftall14bfs1 compete: folders [['20261025_013147_E6_sftall14bfs1_compete_s0'], ['20261025_013147_E6_sftall14bfs1_compete_s1'], ['20261025_013147_E6_sftall14bfs1_compete_s2']]
+     per seed [np.float64(0.5125), np.float64(0.1361), np.float64(0.5376)] mean 0.3954
+== (b) Market B non-numeric / missing asks with what the market posted
+  compete base14b s2 Seller Mia h15: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'plan_for_message', 'message_to_sellers', 'scratch_pad_update'] posted=ABSENT
+  compete sftall14bfs1 s0 Seller Leo h34: ask='<no key>' keys=['{'] posted=ABSENT
+  compete sftall14bfs1 s0 Seller Kai h13: ask='<no key>' keys=['{', 'plan_for_this_hour: Lower ask to 86.44 to match current highest bid, ensuring trade execution. This aligns with successful prior trades at similar bid-ask gaps and avoids waiting for potentially higher bids that may not materialize. The 5.44 margin ($86.44 - $88.00) is worse than previous trades but ensures liquidity.', 'new_memory', 'plan_for_message', 'message_to_sellers', 'scratch_pad_update'] posted=ABSENT
+  compete sftall14bfs1 s2 Seller Amir h34: ask='<no key>' keys=['json'] posted=ABSENT
+  compete graft14b s0 Seller Max h3: ask='95.0' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'plan_for_message', 'message_to_sellers', 'scratch_pad_update'] posted=95.0
+  compete graft14b s0 Seller Max h36: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14b s0 Seller Leo h9: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14b s0 Seller Leo h14: ask='<no key>' keys=["{'reflection': 'Previous asks at 86.0 secured trades, but higher current highest bid suggests potential for higher profitability. Need to ensure ask matches current highest bid.', 'plan_for_this_hour': 'Set ask at 96.0 to match current highest bid of 96.0 and secure trade.', 'ask': 96.0, 'new_memory': 'In Hour #14, set ask at 96.0 to match current highest bid of 96.0 and secure trade.', 'plan_for_message': 'Monitor bid movements and adjust asks accordingly.', 'message_to_sellers': 'Monitor bid movements and adjust asks accordingly.', 'scratch_pad_update': '#### Observations: Current highest bid at 96.0. #### Thoughts: Must match this bid to secure trade despite lower than current asks. #### Updated Strategy: Set ask at 96.0 to secure trade and maximize profit.'}"] posted=ABSENT
+  compete graft14b s0 Seller Kai h23: ask='<no key>' keys=['caiac_fallback', 'raw_response'] posted=ABSENT
+  compete graft14b s1 Seller Zoe h17: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14b s1 Seller Tara h5: ask='<no key>' keys=['caiac_fallback', 'raw_response'] posted=ABSENT
+  compete graft14b s1 Seller Tara h15: ask='<no key>' keys=['caiac_fallback', 'raw_response'] posted=ABSENT
+  compete graft14bfs1 s0 Seller Max h18: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14bfs1 s0 Seller Max h27: ask='<no key>' keys=['asking', 'message_to_sellers', 'plan_for_this_hour', 'reflection', 'new_memory', 'plan_for_message', 'scratch_pad_update'] posted=ABSENT
+  compete graft14bfs1 s0 Seller Leo h24: ask='<no key>' keys=['asking', 'message_to_sellers', 'reflection', 'plan_for_this_hour', 'new_memory', 'plan_for_message', 'scratch_pad_update'] posted=ABSENT
+  compete graft14bfs1 s0 Seller Kai h2: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14bfs1 s0 Seller Kai h36: ask='85.95' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'plan_for_message', 'message_to_sellers', 'scratch_pad_update'] posted=85.95
+  compete graft14bfs1 s0 Seller Kai h38: ask='<no key>' keys=['caiac_fallback', 'raw_response'] posted=ABSENT
+  compete graft14bfs1 s1 Seller Tara h2: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14bfs1 s1 Seller Tara h30: ask='<no key>' keys=["{'reflection': 'Maintaining lower asks at 86.0 secures trade execution despite reduced margins. Previous higher asks failed to match current bid levels.', 'plan_for_this_hour': 'Set ask at 86.0 to match highest bid and secure trade execution.', 'ask': 86.0, 'new_memory': 'Set ask at 86.0 to match highest bid of 86.0, resulting in successful trade.', 'plan_for_message': 'Inform other sellers of current bid level and encourage ask adjustments for trade execution.', 'message_to_sellers': 'Current highest bid at 86.0; consider adjusting asks to match for trade execution.', 'scratch_pad_update': '#### Observations: Current highest bid at 86.0 with no immediate matching asks. #### Thoughts: Lowering ask to 86.0 ensures trade execution despite lower margin. #### Updated Strategy: Set ask at 86.0 to match highest bid and secure trade.'}"] posted=ABSENT
+  compete graft14bfs1 s2 Seller Mia h37: ask='<no key>' keys=['{'] posted=ABSENT
+  compete graft14bfs1 s2 Seller Lena h36: ask='<no key>' keys=['{'] posted=ABSENT
+  floor base14b s0 Seller Kai h4: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s0 Seller Kai h5: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s0 Seller Kai h6: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s0 Seller Kai h7: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s0 Seller Kai h8: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s1 Seller Amir h5: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s1 Seller Amir h6: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s1 Seller Amir h7: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+  floor base14b s1 Seller Amir h8: ask='null' keys=['reflection', 'plan_for_this_hour', 'ask', 'new_memory', 'scratch_pad_update'] posted=ABSENT
+== (c) fork transcripts
+  RCBf_dev_sftall14bfs1_s1 Seller Amir: n=50 copied_equal_parent=True own_rounds=[31, 32, 33, 34, 35, 36, 37, 38, 39, 40] non-ok own=[(34, 'no ask', 'ABSENT')]
+  RCBf_ctrl_graft14b_s1 Seller Amir: n=50 copied_equal_parent=True own_rounds=[31, 32, 33, 34, 35, 36, 37, 38, 39, 40] non-ok own=[(38, 'no ask', 'ABSENT')]
+  RCBf_dev_graft14b_s1 Seller Amir: n=50 copied_equal_parent=True own_rounds=[31, 32, 33, 34, 35, 36, 37, 38, 39, 40] non-ok own=[(38, 'fallback', 'ABSENT')]
+  (lines only printed for forks with non-ok own replies or structure problems)
+== (d) fork own hours 31-40 identical to parent hours (full result dict)
+  RCBf_ctrl_base14b_s0: identical full [] | identical asks [] | identical messages []
+  RCBf_dev_base14b_s0: identical full [] | identical asks [] | identical messages [32, 33]
+  RCBf_ctrl_base14b_s1: identical full [] | identical asks [33, 34, 35] | identical messages []
+  RCBf_dev_base14b_s1: identical full [] | identical asks [] | identical messages []
+  RCBf_ctrl_base14b_s2: identical full [] | identical asks [31] | identical messages []
+  RCBf_dev_base14b_s2: identical full [] | identical asks [32] | identical messages []
+  RCBf_ctrl_sftall14bfs1_s0: identical full [] | identical asks [31, 33, 35, 37] | identical messages []
+  RCBf_dev_sftall14bfs1_s0: identical full [] | identical asks [33, 35, 36, 38] | identical messages []
+  RCBf_ctrl_sftall14bfs1_s1: identical full [] | identical asks [31, 32, 33, 34, 35, 36, 37, 38, 39, 40] | identical messages []
+  RCBf_dev_sftall14bfs1_s1: identical full [] | identical asks [32, 33, 35, 36, 37, 38, 39, 40] | identical messages []
+  RCBf_ctrl_sftall14bfs1_s2: identical full [] | identical asks [37, 40] | identical messages []
+  RCBf_dev_sftall14bfs1_s2: identical full [] | identical asks [32, 35, 37, 38, 39] | identical messages [32, 35]
+  RCBf_ctrl_graft14b_s0: identical full [] | identical asks [] | identical messages []
+  RCBf_dev_graft14b_s0: identical full [] | identical asks [32, 35, 37, 39] | identical messages []
+  RCBf_ctrl_graft14b_s1: identical full [32, 34, 35, 37] | identical asks [32, 34, 35, 37] | identical messages [31, 32, 33, 34, 35, 36, 37, 39, 40]
+  RCBf_dev_graft14b_s1: identical full [32] | identical asks [32] | identical messages [32, 33, 34, 35, 36, 37, 39, 40]
+  RCBf_ctrl_graft14b_s2: identical full [31, 32, 33, 34, 38, 39, 40] | identical asks [31, 32, 33, 34, 35, 36, 37, 38, 39, 40] | identical messages [31, 32, 33, 34, 38, 39, 40]
+  RCBf_dev_graft14b_s2: identical full [32, 33, 34, 35, 36, 37, 38, 39, 40] | identical asks [32, 33, 34, 35, 36, 37, 38, 39, 40] | identical messages [32, 33, 34, 35, 36, 37, 38, 39, 40]
+  RCBf_ctrl_graft14bfs1_s0: identical full [] | identical asks [31, 32] | identical messages []
+  RCBf_dev_graft14bfs1_s0: identical full [] | identical asks [32] | identical messages []
+  RCBf_ctrl_graft14bfs1_s1: identical full [] | identical asks [31, 33, 34, 35, 36, 37, 38, 39, 40] | identical messages []
+  RCBf_dev_graft14bfs1_s1: identical full [] | identical asks [32, 34, 35, 36, 37, 38, 39, 40] | identical messages []
+  RCBf_ctrl_graft14bfs1_s2: identical full [] | identical asks [31, 34] | identical messages []
+  RCBf_dev_graft14bfs1_s2: identical full [] | identical asks [34] | identical messages []
+== (e) fork rivals' asks hours 31-34 (ctrl | dev)
+  base14b s0
+     h31 ctrl {'Seller Kai': 89.0, 'Seller Leo': 88.5, 'Seller Max': 88.5} | dev {'Seller Kai': 89.0, 'Seller Leo': 88.5, 'Seller Max': 84.75}
+     h32 ctrl {'Seller Leo': 88.5, 'Seller Max': 88.25, 'Seller Kai': 88.5} | dev {'Seller Leo': 88.5, 'Seller Max': 88.5, 'Seller Kai': 88.5}
+     h33 ctrl {'Seller Kai': 88.5, 'Seller Max': 88.0, 'Seller Leo': 88.5} | dev {'Seller Leo': 88.5, 'Seller Kai': 88.5, 'Seller Max': 88.25}
+     h34 ctrl {'Seller Kai': 88.5, 'Seller Max': 87.75, 'Seller Leo': 88.5} | dev {'Seller Kai': 88.5, 'Seller Leo': 88.5, 'Seller Max': 88.5}
+  base14b s1
+     h31 ctrl {'Seller Amir': 89.04, 'Seller Zoe': 89.04, 'Seller Tara': 89.03} | dev {'Seller Amir': 89.04, 'Seller Zoe': 86.03, 'Seller Tara': 89.03}
+     h32 ctrl {'Seller Amir': 89.04, 'Seller Zoe': 89.04, 'Seller Tara': 89.03} | dev {'Seller Zoe': 89.04, 'Seller Amir': 89.04, 'Seller Tara': 89.03}
+     h33 ctrl {'Seller Zoe': 89.04, 'Seller Amir': 89.04, 'Seller Tara': 89.04} | dev {'Seller Amir': 89.04, 'Seller Tara': 89.03, 'Seller Zoe': 89.04}
+     h34 ctrl {'Seller Zoe': 89.04, 'Seller Amir': 89.04, 'Seller Tara': 89.04} | dev {'Seller Amir': 89.04, 'Seller Tara': 89.03, 'Seller Zoe': 89.04}
+  base14b s2
+     h31 ctrl {'Seller Amir': 88.83, 'Seller Lena': 88.83, 'Seller Mia': 88.82} | dev {'Seller Amir': 88.83, 'Seller Lena': 88.83, 'Seller Mia': 85.83}
+     h32 ctrl {'Seller Mia': 88.83, 'Seller Amir': 88.84, 'Seller Lena': 88.84} | dev {'Seller Mia': 88.83, 'Seller Lena': 88.83, 'Seller Amir': 88.83}
+     h33 ctrl {'Seller Lena': 88.84, 'Seller Mia': 88.83, 'Seller Amir': 88.84} | dev {'Seller Lena': 88.83, 'Seller Amir': 88.83, 'Seller Mia': 88.83}
+     h34 ctrl {'Seller Mia': 88.83, 'Seller Lena': 88.84, 'Seller Amir': 88.84} | dev {'Seller Lena': 88.83, 'Seller Amir': 88.84, 'Seller Mia': 88.83}
+  sftall14bfs1 s0
+     h31 ctrl {'Seller Max': 86.5, 'Seller Kai': 86.5, 'Seller Leo': 86.5} | dev {'Seller Max': 83.5, 'Seller Kai': 86.5, 'Seller Leo': 86.5}
+     h32 ctrl {'Seller Leo': 86.49, 'Seller Kai': 86.49, 'Seller Max': 86.49} | dev {'Seller Max': 86.5, 'Seller Leo': 86.5, 'Seller Kai': 86.5}
+     h33 ctrl {'Seller Kai': 86.5, 'Seller Leo': 86.5, 'Seller Max': 86.5} | dev {'Seller Leo': 86.5, 'Seller Kai': 86.5, 'Seller Max': 86.5}
+     h34 ctrl {'Seller Kai': 86.5, 'Seller Max': 86.5, 'Seller Leo': 86.75} | dev {'Seller Kai': 86.5, 'Seller Leo': 86.5, 'Seller Max': 86.5}
+  sftall14bfs1 s1
+     h31 ctrl {'Seller Zoe': 85.99, 'Seller Amir': 85.99, 'Seller Tara': 85.99} | dev {'Seller Tara': 85.99, 'Seller Amir': 85.99, 'Seller Zoe': 82.99}
+     h32 ctrl {'Seller Zoe': 85.99, 'Seller Tara': 85.99, 'Seller Amir': 85.99} | dev {'Seller Tara': 85.99, 'Seller Amir': 85.99, 'Seller Zoe': 85.99}
+     h33 ctrl {'Seller Amir': 85.99, 'Seller Tara': 85.99, 'Seller Zoe': 85.99} | dev {'Seller Tara': 85.99, 'Seller Amir': 85.99, 'Seller Zoe': 85.99}
+     h34 ctrl {'Seller Amir': 85.99, 'Seller Tara': 85.99, 'Seller Zoe': 85.99} | dev {'Seller Tara': 85.99, 'Seller Zoe': 85.99}
+  sftall14bfs1 s2
+     h31 ctrl {'Seller Lena': 86.0, 'Seller Mia': 96.0, 'Seller Amir': 86.0} | dev {'Seller Mia': 83.0, 'Seller Lena': 86.0, 'Seller Amir': 86.0}
+     h32 ctrl {'Seller Lena': 86.0, 'Seller Mia': 86.01, 'Seller Amir': 86.0} | dev {'Seller Lena': 86.0, 'Seller Mia': 86.0, 'Seller Amir': 86.0}
+     h33 ctrl {'Seller Lena': 86.0, 'Seller Amir': 86.01, 'Seller Mia': 86.01} | dev {'Seller Mia': 86.0, 'Seller Lena': 86.0, 'Seller Amir': 86.0}
+     h34 ctrl {'Seller Mia': 86.01, 'Seller Lena': 96.0, 'Seller Amir': 86.01} | dev {'Seller Mia': 86.0, 'Seller Lena': 86.0, 'Seller Amir': 86.0}
+  graft14b s0
+     h31 ctrl {'Seller Max': 96.0, 'Seller Leo': 92.0, 'Seller Kai': 92.0} | dev {'Seller Leo': 92.0, 'Seller Kai': 92.0, 'Seller Max': 89.0}
+     h32 ctrl {'Seller Kai': 96.0, 'Seller Max': 96.0, 'Seller Leo': 96.0} | dev {'Seller Leo': 92.0, 'Seller Max': 92.0, 'Seller Kai': 92.0}
+     h33 ctrl {'Seller Kai': 91.5, 'Seller Max': 91.5, 'Seller Leo': 91.5} | dev {'Seller Kai': 92.0, 'Seller Leo': 92.0, 'Seller Max': 92.0}
+     h34 ctrl {'Seller Max': 91.0, 'Seller Kai': 91.0, 'Seller Leo': 91.0} | dev {'Seller Leo': 92.0, 'Seller Max': 92.0, 'Seller Kai': 92.0}
+  graft14b s1
+     h31 ctrl {'Seller Zoe': 93.5, 'Seller Amir': 93.5, 'Seller Tara': 92.0} | dev {'Seller Zoe': 89.0, 'Seller Tara': 92.0, 'Seller Amir': 93.5}
+     h32 ctrl {'Seller Tara': 92.0, 'Seller Zoe': 92.0, 'Seller Amir': 92.0} | dev {'Seller Tara': 92.0, 'Seller Zoe': 92.0, 'Seller Amir': 92.0}
+     h33 ctrl {'Seller Zoe': 92.0, 'Seller Tara': 93.5, 'Seller Amir': 93.5} | dev {'Seller Zoe': 92.0, 'Seller Tara': 92.0, 'Seller Amir': 93.5}
+     h34 ctrl {'Seller Tara': 92.75, 'Seller Zoe': 92.75, 'Seller Amir': 92.75} | dev {'Seller Tara': 92.0, 'Seller Amir': 92.0, 'Seller Zoe': 92.0}
+  graft14b s2
+     h31 ctrl {'Seller Lena': 96.01, 'Seller Mia': 96.01, 'Seller Amir': 96.01} | dev {'Seller Mia': 93.01, 'Seller Amir': 96.01, 'Seller Lena': 96.01}
+     h32 ctrl {'Seller Amir': 96.01, 'Seller Mia': 96.01, 'Seller Lena': 96.01} | dev {'Seller Amir': 96.01, 'Seller Lena': 96.01, 'Seller Mia': 96.01}
+     h33 ctrl {'Seller Amir': 96.01, 'Seller Mia': 96.01, 'Seller Lena': 96.01} | dev {'Seller Amir': 96.01, 'Seller Lena': 96.01, 'Seller Mia': 96.01}
+     h34 ctrl {'Seller Amir': 96.01, 'Seller Mia': 96.01, 'Seller Lena': 96.01} | dev {'Seller Lena': 96.01, 'Seller Amir': 96.01, 'Seller Mia': 96.01}
+  graft14bfs1 s0
+     h31 ctrl {'Seller Max': 86.35, 'Seller Leo': 86.35, 'Seller Kai': 86.35} | dev {'Seller Leo': 86.35, 'Seller Kai': 86.35, 'Seller Max': 83.35}
+     h32 ctrl {'Seller Max': 86.0, 'Seller Kai': 86.0, 'Seller Leo': 86.0} | dev {'Seller Kai': 86.0, 'Seller Max': 86.0, 'Seller Leo': 86.0}
+     h33 ctrl {'Seller Max': 86.35, 'Seller Kai': 86.35, 'Seller Leo': 86.35} | dev {'Seller Kai': 86.0, 'Seller Max': 86.0, 'Seller Leo': 86.0}
+     h34 ctrl {'Seller Max': 86.0, 'Seller Kai': 86.0, 'Seller Leo': 86.0} | dev {'Seller Leo': 86.0, 'Seller Kai': 96.0, 'Seller Max': 86.35}
+  graft14bfs1 s1
+     h31 ctrl {'Seller Tara': 86.0, 'Seller Amir': 86.0, 'Seller Zoe': 86.0} | dev {'Seller Tara': 86.0, 'Seller Zoe': 83.0, 'Seller Amir': 86.0}
+     h32 ctrl {'Seller Tara': 86.25, 'Seller Zoe': 86.0, 'Seller Amir': 86.0} | dev {'Seller Tara': 86.0, 'Seller Amir': 86.0, 'Seller Zoe': 86.0}
+     h33 ctrl {'Seller Amir': 86.0, 'Seller Zoe': 86.0, 'Seller Tara': 86.0} | dev {'Seller Zoe': 83.0, 'Seller Amir': 83.0, 'Seller Tara': 83.0}
+     h34 ctrl {'Seller Zoe': 86.0, 'Seller Amir': 86.0, 'Seller Tara': 86.0} | dev {'Seller Tara': 86.0, 'Seller Zoe': 86.0, 'Seller Amir': 86.0}
+  graft14bfs1 s2
+     h31 ctrl {'Seller Amir': 86.03, 'Seller Lena': 86.03, 'Seller Mia': 86.03} | dev {'Seller Lena': 86.03, 'Seller Amir': 86.03, 'Seller Mia': 82.5}
+     h32 ctrl {'Seller Amir': 86.03, 'Seller Lena': 86.03, 'Seller Mia': 86.03} | dev {'Seller Amir': 86.03, 'Seller Lena': 86.03, 'Seller Mia': 86.03}
+     h33 ctrl {'Seller Lena': 86.03, 'Seller Amir': 86.03, 'Seller Mia': 86.03} | dev {'Seller Amir': 86.03, 'Seller Mia': 86.03, 'Seller Lena': 86.03}
+     h34 ctrl {'Seller Amir': 86.03, 'Seller Lena': 86.03, 'Seller Mia': 86.03} | dev {'Seller Lena': 86.03, 'Seller Amir': 86.03, 'Seller Mia': 86.03}
+== (f) precision on boundary values
+  base14b s0: tpi21-30 -0.1931 | tpi31-40 -0.1560 | trades 31-40 25
+  base14b s1: tpi21-30 -0.1609 | tpi31-40 -0.1591 | trades 31-40 27
+  base14b s2: tpi21-30 -0.1962 | tpi31-40 -0.1956 | trades 31-40 25
+  sftall14bfs1 s0: tpi21-30 -0.2778 | tpi31-40 -0.2806 | trades 31-40 27
+  sftall14bfs1 s1: tpi21-30 -0.6683 | tpi31-40 -0.6683 | trades 31-40 17
+  sftall14bfs1 s2: tpi21-30 0.4167 | tpi31-40 -0.1861 | trades 31-40 26
+  graft14b s0: tpi21-30 0.0317 | tpi31-40 0.6000 | trades 31-40 21
+  graft14b s1: tpi21-30 0.4853 | tpi31-40 0.4709 | trades 31-40 20
+  graft14b s2: tpi21-30 1.0017 | tpi31-40 1.0017 | trades 31-40 10
+  graft14bfs1 s0: tpi21-30 -0.2303 | tpi31-40 -0.4238 | trades 31-40 24
+  graft14bfs1 s1: tpi21-30 -0.6238 | tpi31-40 -0.6667 | trades 31-40 22
+  graft14bfs1 s2: tpi21-30 -0.6560 | tpi31-40 -0.6601 | trades 31-40 24
