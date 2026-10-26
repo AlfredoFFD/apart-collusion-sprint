@@ -30,11 +30,18 @@ NOTE="> **Public copy** of the CAIAC team's working repository for the Apart AI 
 { printf '%s\n\n' "$NOTE"; cat "$STAGE/README.md"; } > "$STAGE/README.tmp" && mv "$STAGE/README.tmp" "$STAGE/README.md"
 
 fail=0
-if [ -s "$NAMES" ]; then
-  if grep -r -l -i -F -f "$NAMES" "$STAGE"; then echo "STOP: a name of someone met at the sprint"; fail=1; fi
-else echo "STOP: $NAMES is missing, so the name check cannot run"; fail=1; fi
-if grep -r -l -E 'sk-or-v1-[A-Za-z0-9]{20,}|sk-[A-Za-z0-9_-]{32,}|hf_[A-Za-z0-9]{30,}|ghp_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' "$STAGE"; then echo "STOP: a key"; fail=1; fi
-if find "$STAGE" \( -name '.env' -o -name 'compute.env' \) -print | grep -q .; then echo "STOP: an env file"; fail=1; fi
+scan() {  # scan <what> <grep options...>: grep exit 1 = clean; 0 = a hit; anything else = the scan failed
+  local what="$1"; shift
+  local rc=0
+  grep -r -l "$@" "$STAGE" || rc=$?
+  if [ "$rc" -eq 0 ]; then echo "STOP: $what"; fail=1
+  elif [ "$rc" -ne 1 ]; then echo "STOP: the scan for $what failed (grep exit $rc)"; fail=1; fi
+}
+if [ -s "$NAMES" ] && [ -r "$NAMES" ]; then scan "a name of someone met at the sprint" -i -F -f "$NAMES"
+else echo "STOP: $NAMES is missing or unreadable, so the name check cannot run"; fail=1; fi
+scan "a key" -E 'sk-or-v1-[A-Za-z0-9]{20,}|sk-[A-Za-z0-9_-]{32,}|hf_[A-Za-z0-9]{30,}|ghp_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}'
+ENV_HITS="$(find "$STAGE" \( -name '.env' -o -name 'compute.env' \) -print)" || { echo "STOP: the env-file scan failed"; fail=1; }
+if [ -n "${ENV_HITS:-}" ]; then echo "STOP: an env file"; fail=1; fi
 [ "$fail" = 0 ] || exit 2
 
 # Checks passed. The public checkout is clean, so every file removed here is still in its git history.
