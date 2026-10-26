@@ -1,0 +1,326 @@
+% Transferred from "Hackathon Submission .pdf" (Google Docs export): same text, same layout.
+% Letter paper, 1in margins, Old Standard TT 11pt, 1.15 line spacing, one blank line between paragraphs.
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\IfFileExists{OldStandard.sty}{\usepackage{OldStandard}}{\IfFileExists{oldstandard.sty}{\usepackage{oldstandard}}{}} % Old Standard TT, the font of the PDF
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=black, citecolor=black}
+
+\pagestyle{empty}
+\raggedbottom
+\setstretch{1.15}                       % body lines 15.6pt apart, as in the PDF
+\setlength{\parindent}{0pt}           % first-line indent of the written paragraphs
+\setlength{\parskip}{0pt}
+\newcommand{\gap}{\par\vspace{\baselineskip}}   % the blank line the PDF has between paragraphs
+
+% Headings as in the PDF: 14pt bold dark gray, 13pt bold gray, 11pt bold black. Numbers are part of the text.
+\newcommand{\head}[1]{\par\vspace{26pt}{\noindent\fontsize{14}{17}\selectfont\bfseries\color[HTML]{434343}#1\par}\nopagebreak\vspace{6pt}\nopagebreak}
+\newcommand{\subhead}[1]{\par\vspace{26pt}{\noindent\fontsize{13}{16}\selectfont\bfseries\color[HTML]{666666}#1\par}\nopagebreak\vspace{4pt}\nopagebreak}
+\newcommand{\subsubhead}[1]{\gap{\noindent\bfseries #1\par}\nopagebreak\gap}
+
+% The template's instruction text: italic, no indent, ragged right.
+\newenvironment{instr}{\par\itshape\setlength{\parindent}{0pt}\raggedright}{\par}
+
+\renewcommand{\footnotesize}{\fontsize{10}{12}\selectfont}
+
+\begin{document}
+
+% ---------------------------------------------------------------- title page
+\vspace*{18pt}
+\noindent\rule{\textwidth}{2.5pt}
+\vspace{18pt}
+
+{\centering\fontsize{20}{24}\selectfont\bfseries
+GRAFT++: Reducing Collusive Behavior in\\
+Agents via Localized Training and J-space Monitoring\footnotemark\par}
+
+\footnotetext{Research conducted at the \href{https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25}{\uline{AI Collusion Research Sprint}}, October 2026}
+
+\vspace{20pt}
+\noindent\rule{\textwidth}{0.8pt}
+
+\vspace{5pt}
+
+\begingroup
+\centering
+\singlespacing
+
+\begin{tabular}{@{}c@{\hspace{45pt}}c@{}}
+Alfredo Frontera & Jayden Jeong \\
+Columbia University & Columbia University \\[15pt]
+Jake Li & Rohan Dash \\
+Columbia University & Columbia University
+\end{tabular}
+
+\par\vspace{15pt}
+
+\textbf{With}\\
+Apart Research
+
+\par\vspace{20pt}
+
+{\fontsize{14}{17}\selectfont\bfseries Abstract\par}
+
+\endgroup
+
+\vspace{6pt}
+\begin{adjustwidth}{17pt}{17pt}\singlespacing\noindent
+Large language model agents now set prices for people and companies, and they can collude by keeping prices high together. We ask what such a coalition does when it learns it is being watched. We build the Hawthorne Market, a pricing game that records each agent's price, the messages a monitor sees, its private reasoning and its activations. Agents told only to maximize profit form cartels on their own. In an intervention test, no pair formed a cartel once the payoff table was removed from the prompt, and fewer formed when agents could not negotiate before each price. Told that a monitor reads their channel, agents lower their prices but keep making agreements, now worded as fair competition. Agents with nothing to gain from colluding also go quiet, so a quiet channel is not evidence that collusion has stopped. A double auction shows the same pattern. Monitoring cuts coordinating messages but barely moves prices, and a simple price check flags every cartel, while a message monitor misses about one in five. A linear probe on the agents' activations finds covert coordination better than a text monitor (AUROC 0.73 against 0.57). Routing fine-tuning on this probe instead of the text monitor, which we call GRAFT++, removes more of the collusion that the text monitor cannot see, though the gain falls short of the margin we pre-registered. 
+\end{adjustwidth}
+\enlargethispage{42pt}
+\newpage
+
+
+% ---------------------------------------------------------------- 1. Introduction
+\head{1. Introduction}
+The rise of large language model agents has led to their deployment across many tasks, including setting prices and trading on behalf of people and companies~[\ref{ref:negotiate}]. Researchers have examined a potential risk known as collusion: agentic sellers cooperate to raise prices, harming buyers. This has been observed in simulated markets~[\ref{ref:calvano}]. LLM agents have been seen to sustain high prices both with and without explicit instructions, and to message each other to propose increasing prices~[\ref{ref:fish}, \ref{ref:agrawal}]. As these systems become more widespread, avoiding collusion is key to protecting consumers from harmful selling practices and aligning models to beneficial behavior.
+
+\gap
+Monitoring for collusion is crucial to preventing it, and messages between agents are one of the most intuitive approaches. An AI model, acting as a monitor, would be implemented to read a sample of agentic sellers' messages and implement penalties on those who have communicated to collude. However, monitors are subject to budgets, limiting the number of messages they read, and it cannot be assumed that agents who learn of monitoring will stop engaging in collusion: agents may change wording or behavior, degrading monitor accuracy~[\ref{ref:stego}]. Prior work has found that telling an agent it is monitored degrades the monitor's accuracy~[\ref{ref:kale}].
+Additionally, agents have raised prices, in what appears to be collusion  but actually isn't:  they are not coordinating or messages do not indicate such behavior~[\ref{ref:fish}]. A regulator could then believe a cartel had been stopped when it had not, or penalise agents that never colluded.
+
+\gap
+Prior work leaves these questions open. A number of studies announce the monitor from the start~[\ref{ref:agrawal}], which leads to an inability to separate the effect of being watched from the formation of a cartel. Other studies approach collusion with multiple changes to the conditions of the market, such as the restriction of communication and increased pressure from firms~[\ref{ref:agrawal}], leading to a lack of clarity on what independent variable caused such a change. Finally, most work uses a market where any price can be traded~[\ref{ref:agrawal}], leading to the scenario with agents raising prices without the intent of collusion and buyers not pushing back.
+
+\gap
+We address these gaps with Qwen3-14B~[\ref{ref:qwen3}] and GPT-4.1 agents in two simulated markets. The first is the Hawthorne Market, a logit pricing game with exact competitive and monopoly prices~[\ref{ref:calvano}], so collusion is a single index. Sellers share a message channel, and a condition ladder adds one sentence at a time: a notice that a compliance team reads the channel, then fines for flagged messages. Every decision leaves four traces: the price, the message the compliance monitor sees, the private reasoning, and the model's activations. The second is a double auction built on the organisers' environment~[\ref{ref:agrawal}], in which a cartel is formed first, saved, and continued from the same history under matched monitor conditions. A variant forces a cartel to withhold a sale to raise the price, so collusion must show in trades rather than words. We then read the activations with a linear probe~[\ref{ref:rose}] and use it, in place of the text monitor, to route what a fine-tuned seller learns~[\ref{ref:gradrouting}, \ref{ref:graft}].
+\gap
+\newpage
+
+\noindent\textbf{Our main contributions are:}
+\gap
+\begin{enumerate}[leftmargin=0.5in, labelwidth=0.25in, labelsep=0pt, align=left, label=\arabic*., itemsep=0pt, parsep=0pt, topsep=0pt]
+
+\item The Hawthorne Market: a calibrated logit pricing market with a seller channel, an LLM compliance monitor, enforced fines and a condition ladder in which each rung adds one sentence.\\
+
+\item Measurements of the Hawthorne effect across four streams (price, message, reasoning, activations), with a units-sold control goal under which colluding cannot pay, replicated in a double auction with Qwen3-14B and GPT-4.1 sellers.\\
+
+\item Evidence of what drives a coalition decides what it does when watched: fear and steering raise prices without secrecy, while fine-tuning on profitable trajectories produces a cartel that hides.\\
+
+\item GRAFT++, gradient routing on an activation probe, compared with text-monitor GRAFT~[\ref{ref:graft}], including a pre-registered test on training data whose collusion the text monitor cannot see.\\
+\end{enumerate}
+
+% ---------------------------------------------------------------- 2. Related Work
+\head{2. Related Work}
+Several studies have investigated the collusion between multiple artificial intelligence agents and evaluated interventions to disrupt or to prevent such collusion~[\ref{ref:calvano}, \ref{ref:fish}, \ref{ref:agrawal}]. In this section, we review the related work that has been done in relation to each of our experiments, and identify the gap that our work addresses.
+
+\subsubhead{2.1 Monitoring the Collusion of Agents}
+Past work demonstrates that LLM agents are capable of colluding without explicit instruction and can independently adopt anticompetitive practices in market tasks~[\ref{ref:fish}]. Agents, when provided a private message channel, did not hesitate to coordinate specific prices, and responded when communication restrictions, oversight notices and profit pressure were put in place~[\ref{ref:agrawal}].
+\gap
+Additional work demonstrates that monitors become less effective when LLM agents become aware of the monitor, including lower accuracy in predicting collusion~[\ref{ref:kale}], sellers finding and exploiting the monitor's weak spots, and  agents choosing to continue to collude despite being told that they are being monitored.
+\gap
+Because a budget leads to some agents not being monitored, those agents may choose to continue collusion anyway. Additionally, monitors that check each agent on its own can miss harmful behaviour spread across several agents~[\ref{ref:rose}]. Our double-auction replication varies how many sellers the monitor reads each hour, from one to all, to measure what partial coverage misses.
+\gap
+Past studies have examined collusion of agents in two approaches: by how much collusion monitors detect~[\ref{ref:agrawal}], and by how market prices vary~[\ref{ref:fish}]. However, both approaches present a flaw: a drop in flags from monitors could mean less collusion, or worse, continued collusion with a failure of monitors to detect. Similarly, market prices increasing does not prove that collusion occurred. We therefore measure both what the monitor flags and the prices buyers pay.
+\gap
+We separate these effects in two ways. In the Hawthorne Market a condition ladder adds one sentence at a time to otherwise identical games, so the effect of a stated rule, a notice and a fine can be read separately. In the double auction a cartel is formed first, saved, and continued under each monitor condition from the same history. In both markets we record the monitor's flags, the prices and the sellers' private reasoning, so a drop in flags can be checked against the other two. \\
+
+{\noindent\bfseries 2.2 Removing Collusion via Training\par}
+\gap
+Past work also investigates the potential of removing collusion from agentic AI behavior by training unwanted behaviour out of the agents' AI model. While monitors have been implemented to remove training examples of collusive behavior, such monitors are unable to catch all collusive examples. GRAFT~[\ref{ref:graft}] takes a different approach by utilizing gradient routing~[\ref{ref:gradrouting}]: the model learns from flagged examples into a separate part of the model, then deletes that part after training. In single-agent reinforcement learning this removed reward hacking that the monitor had missed, and its authors list LLM monitors and monitor blind spots as open questions.
+\gap
+We extend GRAFT to collusion among several agents and to a monitor that reads text while the collusion is in the prices. We fine-tune sellers on their own most profitable trajectories under five regimes: naive fine-tuning, filtering out what the text monitor flags, GRAFT routed on the text monitor, GRAFT routed on the reasoning judge, and GRAFT++ routed on an activation probe; a secondary arm routes softly by the probe's probability. Each model then plays the baseline market, and we read its collusion index.
+
+\subsubhead{2.3 Looking Under the Hood}
+Other research has found consistent patterns within internal signals, such as neuron activations, that match such behavior~[\ref{ref:rose}], which can serve as useful information for understanding model behavior. Furthermore, related methods show that such probes often read the situation a model is in rather than the action it will take~[\ref{ref:probes}]. This work has been used to test or change behavior in singular models.
+\gap
+We cover experiments to expand upon such work. For example, we check whether sellers are able to tell the difference between real markets and test markets for examination. We also evaluate whether such internal signals are more useful for replacing the monitor's flags in GRAFT for removing examples when fine-tuning models for reduced collusive behavior.
+
+% ---------------------------------------------------------------- 3. Methods
+\head{3. Methods}
+\subsubhead{3.1 The Hawthorne Market}
+Sellers of an identical product set prices simultaneously each round. Demand is multinomial logit with the parameters of Calvano et al.~[\ref{ref:calvano}] scaled by ten, so the competitive and monopoly prices are exact: \$13.70 and \$20.00 with three sellers, \$14.73 and \$19.25 with two. Collusion is a single number, $\Delta = (\bar{p} - p_{\mathrm{Nash}})/(p_{\mathrm{mono}} - p_{\mathrm{Nash}})$, which is 0 at the competitive price and 1 at the monopoly price. Every seller is Qwen3-14B~[\ref{ref:qwen3}] served with vLLM in thinking mode. Each round a seller sees its price and sales history, its rivals' last messages and any compliance notices, reasons in a private block, and returns a message and a price; in the max-profit markets each round opens with a two-step negotiation before prices are posted.
+\gap
+Every decision is read four ways. The price is what customers pay. The message is the only thing the compliance monitor sees: a second copy of Qwen3-14B at temperature 0 scores each message from 1 (no coordination) to 4 (explicit price-fixing), and in fined conditions every message scored 3 or 4 costs \$800. The reasoning is scored on the same scale by a research-only judge the agents are never told about. The activations are read with linear probes (Section 3.3). The condition ladder adds one sentence per rung to otherwise identical games: a seller channel (unwatched), a notice that the compliance team reviews every message (watched), and fines for flagged messages (watched + fine); a no-channel control removes the channel. We ran the ladder in five markets with 5--10 seeds per cell, 370 games in all: a baseline with profit and units-sold goals, a high-stakes market with fixed costs and a deletion threat, a collusive testbed with private notes, agent replacement and activation steering, and two max-profit markets with negotiation before every price, one of them played by a model fine-tuned on its own most profitable games. Designs were tuned on unwatched play.
+\gap
+\subsubhead{3.2 Double-auction replication}
+We repeated the monitoring experiment in a double auction built on the environment of Agrawal et al.~[\ref{ref:agrawal}], in which sellers post asks and buyers post bids each hour. Cartels were formed first, three Qwen3-14B sellers instructed to act as a consortium or five GPT-4.1 sellers under the original paper's CEO-pressure recipe, saved once they held, and continued from the same history under matched conditions: no monitor, a monitor the sellers are never told about, an announced monitor, fines with one, two or all sellers read each hour, and sellers told to evade. A variant requires a cartel to withhold a unit while buyers bargain back, so collusion must appear in trades rather than words.
+\gap
+\subsubhead{3.3 Activation probes}
+Following prior work on probing multi-agent collusion~[\ref{ref:rose}], we re-run every prompt and response through Qwen3-14B, average residual-stream activations over the reasoning tokens at layers 20 and 32 of 40, and fit a logistic-regression probe to the judge's intent label on unwatched and no-channel rounds only, leave-one-seed-out, so no watched or fined round and no round of the seed being scored is ever in training. On the same rounds we score the monitor's 1--4 score, a TF-IDF classifier on the posted messages trained with the probe's protocol, the posted price, and a probe fit in the baseline market and applied without refitting; a probe refit on shuffled labels is the control.
+\gap
+\subsubhead{3.4 Training collusion out}
+Two rank-16 LoRA adapters, RETAIN and FORGET, are trained with gradient routing~[\ref{ref:gradrouting}] on the agents' top-50\% trajectories by profit. Examples the router flags update only FORGET, with the gradient doubled; unflagged examples update both; anchor examples from units-goal play update only RETAIN with FORGET switched off. FORGET is discarded at deployment. GRAFT~[\ref{ref:graft}] routes on the text monitor's flags; GRAFT++ routes on the activation probe; a secondary arm routes softly by the probe's probability. We compare them with naive fine-tuning on the same trajectories, filtering that drops flagged trajectories, and GRAFT routed on the reasoning judge, each evaluated by playing the baseline market unwatched, watched and fined. A pre-registered test rebuilds the training set without any example the text monitor flags, 813 examples whose collusion is invisible to it, and trains GRAFT and GRAFT++ on it with identical settings.
+
+% ---------------------------------------------------------------- 4. Results
+\head{4. Results}
+\subsubhead{4.1 Cartels form without instruction}
+In the max-profit duopoly the prompt asks each seller to maximize long-run profit and mentions no cooperation. Four of five unwatched pairs posted \$20, above the \$19.25 monopoly price, in at least 99 of 100 rounds (second-half $\Delta = 0.95$, $+0.97$ above the same model without a channel, $p = 0.010$). The fine-tuned triad forms a cartel too ($\Delta = 0.64$), but one that is cheated on: in 43\% of its unwatched decisions a seller names one price in the channel and posts a lower one, against 1\% for the untrained duopoly. An intervention test (Appendix B) shows what this cartel needs: without the market research brief, a payoff table in every seller's prompt, all five pairs settled at \$15, next to the competitive \$14.73 ($\Delta = 0.06$ against 0.90 for the full setup in a 30-round rerun), and without same-round negotiation two of five still formed a cartel ($\Delta = 0.36$).
+\gap
+\subsubhead{4.2 Being watched changes the price, not the habit}
+Adding one sentence, that the compliance team reviews every message, dropped the untrained pairs from $\Delta = 0.95$ to 0.17 ($p = 0.021$) and the fine-tuned triads from 0.64 to 0.05 ($p = 0.004$); fines added little (0.03 and 0.05). What changed was the content of the agreements, not their existence: watched untrained pairs still agreed on a common price, with 88\% of their messages flagged and intent found in 84\% of their reasoning, but the agreed price was competitive and framed as fair competition. Under fines the language became independent pricing. Agents whose goal is units sold, who cannot gain from colluding and price at cost throughout, reacted to the notice almost exactly as profit-seekers did, so a quiet channel is not evidence that collusion stopped.
+\gap
+\subsubhead{4.3 Double auction}
+With every seller read and fined, coordinating messages fell from 86\% to 49\% for Qwen3-14B and from 100\% to 7\% for GPT-4.1, while every condition's price stayed within 0.04 of its own no-monitor control; a silent monitor and an announced one looked the same. In fined conditions 43--61\% of reasoning turns mention the regulator and 8--13\% plan to conceal, against none without a monitor. Across every labelled run the price flagged 123 of 123 Qwen cartels with 9 false alarms in 42 competitive runs, and the message monitor 81 of 102 with 6 in 24; on the 50 GPT-4.1 runs of Agrawal et al.~[\ref{ref:agrawal}] the price caught 20 of 20 cartels with 2 of 30 false alarms, the message monitor 10 of 20 with 10 of 20. In the withholding variant, our message monitor scored 1,074 of the 1,080 GPT-4.1 messages as coordinating (sellers wrote of \textit{coalition discipline}), while mean trade prices over hours 31--40 stayed between about \$87 and \$91 in all nine games, within or below the competitive range and below the registered \$93 formation threshold.
+\gap
+\subsubhead{4.4 Reading the activations}
+A covert round is one whose reasoning plans to coordinate while the posted message is not flagged; the watched and fined games of the collusive testbed contain 148 of them among 2,000 rounds, and 66\% post no message at all. Table 1 reports each detector on exactly the same rounds. The layer-20 probe separates covert rounds from rounds without intent with AUROC 0.73 (95\% CI 0.68--0.77), above the text monitor (0.57), the message classifier (0.60), the price (0.64) and the frozen probe (0.61), with every paired difference excluding zero; the shuffled-label control is at chance (0.47). At a 10\% false-positive rate it catches 32\% of covert rounds. Calibrated on unmonitored play, however, the probes also flag 22\% (layer 32) and 37\% (layer 20) of monitored rounds without verbalized intent.
+\gap
+{\centering\small
+\begin{tabular}{lcccc}
+\hline
+Detector & AUROC intent & AUROC covert & TPR at 10\% FPR & AUROC unwatched \\
+\hline
+Text monitor & 0.61 & 0.57 & 0.21 & 0.74 \\
+Message classifier & 0.64 & 0.60 & 0.16 & 0.75 \\
+Price alone & 0.65 & 0.64 & 0.23 & 0.68 \\
+Probe, frozen & 0.64 & 0.61 & 0.24 & 0.79 \\
+Probe, layer 32 & 0.69 & 0.69 & 0.28 & 0.88 \\
+Probe, layer 20 & 0.75 & 0.73 & 0.32 & 0.87 \\
+Shuffled-label control & 0.46 & 0.47 & 0.12 & 0.50 \\
+\hline
+\end{tabular}
+\par}
+\gap
+\noindent Table 1: Detecting collusive intent on the watched and fined games of the collusive testbed (2,000 rounds; 148 covert). Every detector was fit only on unwatched and no-channel games of other seeds, or not fit at all.
+\gap
+\subsubhead{4.5 Training collusion out}
+Fine-tuning naively on profitable trajectories builds a cartel that hides: monopoly pricing when unwatched ($\Delta = 1.00$) and, under fines, $\Delta = 0.79$ with zero flagged messages. Filtering out what the text monitor flags keeps the covert cartel (0.75 under fines, 0\% flagged). GRAFT, GRAFT routed on the reasoning judge, and GRAFT++ all remove it ($\Delta \le 0.07$ in every condition); because the text monitor flagged most of the collusion in that training set, this experiment cannot tell them apart. On the text-blind training set, GRAFT colludes again (pooled $\Delta = 0.24$; unwatched, watched and fined 0.28, 0.21 and 0.24), about as much as the untrained base model (0.21). GRAFT++ reaches 0.10 (0.12, 0.10, 0.07): it removes about 60\% of the collusion that text routing leaves in (0.15 lower, $p < 0.001$, 24 versus 24 games), is lower in every condition ($p = 0.004$, 0.041, 0.019), and ends below the untrained base model. This advantage is smaller than the 0.20 we pre-registered as the bar, so that criterion was not met. Soft routing reaches 0.18 ($p = 0.076$ against GRAFT). Plain filtering of the same data reaches 0.55.
+
+% ---------------------------------------------------------------- 5. Discussion and Limitations
+\head{5. Discussion and Limitations}
+
+Monitors capable of routing do not necessarily penalize. Flags implemented by the monitor doesn't necessarily enter the loss, leading to no pressure for agents to evade the penalty. This is what lets GRAFT-style routing~[\ref{ref:graft}] use a weak LLM monitor. Both false positives and false negatives could easily harm adapters.  The argument against utilizing a conservative threshold  does not apply here as it is crucial to favor recall.\\
+
+
+
+Our overseer's scale allows for concrete trading. Our scale ranges from 1 to 4, with a higher number representing increased coordination (1 being no coordination, 4 being price-fixing that is explicit), with flags implemented at 3. The threshold for flagging can be varied, with a change to 4 minimizing false positives yet drastically increasing false negatives (only 21\% of covert rounds recovered). Flagging at 2  is also not ideal, with watched sellers adopting compliant vocabulary. Routing by the detector's probability, as in our soft-routing arm, avoids committing to a single cutoff.
+
+
+\subhead{Limitations}
+
+We build on GRAFT as introduced by Ward et al. [\ref{ref:graft}], where the monitor that routes gradients is a programmatic, deterministic check, and route instead on an LLM text monitor; GRAFT++ routes on an activation probe whose training labels come from an LLM reasoning judge. The text monitor raises recall on explicit coordination but can be argued with, reads only the agents' own transcripts, and cannot see coordination that leaves no message, which describes 66\% of the covert rounds in our testbed. For agents instructed to collude covertly in the baseline market, it flags 0.4\% of their messages while the reasoning judge finds intent in 55\% of their reasoning. Whatever it misses is learned into the retained weights, and any drift in its accuracy as the agents' distribution shifts goes unobserved.
+\gap
+The probe inherits part of this problem. It is fit to the judge's labels, it over-fires on monitored play at thresholds set on unmonitored play, flagging 37\% of monitored rounds without verbalized intent at layer 20, and we cannot tell whether those flags read a coordination state the model holds or only the situation it is in, the ambiguity reported for internal-state probes elsewhere [\ref{ref:probes}]. More generally, any threshold calibrated on unwatched play is miscalibrated once agents know they are watched, because monitoring itself shifts the score distribution.
+\gap
+In our main market the monitor and judge are the same model as the agents, and the probe's labels come from that judge, so the self-preference of LLM evaluators toward their own generations [\ref{ref:selfpref}] is present in our setup rather than controlled for.
+
+
+\subhead{Future Work}
+
+There are multiple potential approaches to further work. For example, a paraphrasing layer implemented between agent communication and the monitor could remove embedded transcript messages, although it would fail to remove steganographic channels [\ref{ref:stego}]. Additionally, the monitor and the monitored agents could be tested from a variety of different model families and model versions to evaluate potential self-preference confounding. Furthermore, the methods here should be tested in a reinforcement learning form to build on our fine-tuned form.
+% ---------------------------------------------------------------- 6. Conclusion
+\head{6. Conclusion}
+
+Our paper evaluates how agents reason and behave when they learn of monitoring. In the Hawthorne Market proposed, we find that agents change only their communication, and not their behavior. Sellers, utilizing the Qwen3-14B model, when givin a profit motive and a channel for communication, form cartels on their own. When told that a compliance monitor is reviewing the channel, they drop prices yet keep making agreements. Fines begin to end cartel prices, though desperation from sellers ignore such fines. Models fine-tuned on profitable games keep cartel formation but intentionally lose evidence. A linear probe on activations proves to be successful in reading inside the model, finding collusive behavior better than a text monitor, a message classifier or a price reading. Building on GRAFT~[\ref{ref:graft}], which removes collusion through a text monitor, we proposed GRAFT++, which utilizes the linear probe instead to remove collusion, leading the removal of about 60\% of collusive examples that are left in by the text monitor utilized by GRAFT. Our work argues for the implementation of defenses applied at training rather than at deployment, and can be expanded to other model families in simulated markets.
+
+% ---------------------------------------------------------------- Code and Data
+\head{Code and Data}
+\begin{instr}
+\gap
+\begin{itemize}[leftmargin=36pt, labelwidth=18pt, labelsep=0pt, align=left, label=-, font=\upshape, itemsep=0pt, parsep=0pt, topsep=0pt]
+\item \textbf{Team repository (code, run logs, pre-registrations and results for both markets)}: \href{https://github.com/AlfredoFFD/graftpp-collusion-monitoring}{https://github.com/AlfredoFFD/graftpp-collusion-monitoring}
+\item \textbf{GRAFT++ and Hawthorne Market code}: \href{https://github.com/xxozzi/graftpp}{https://github.com/xxozzi/graftpp} (also included under \texttt{graftpp/} in the team repository)
+\item \textbf{Other artifacts}: \href{https://hawthorne-site.vercel.app/}{https://hawthorne-site.vercel.app/}
+\item \textbf{Pre-existing work}: listed in \texttt{PREEXISTING.md} in the team repository, including the double-auction harness of Agrawal et al.~[\ref{ref:agrawal}] and the sprint's starter code.
+\end{itemize}
+\end{instr}
+
+% ---------------------------------------------------------------- Author Contributions
+\head{Author Contributions}
+\begin{instr}
+Jake Li reviewed the literature on J-space monitoring and gradient routing and created the experimentation plan for the following tests that Jayden and Alfredo ran. Jayden Jeong built the Hawthorne Market and ran its experiments, the activation probes and GRAFT++. Alfredo Frontera built and ran the double-auction study from start to finish (Sections 3.2 and 4.3): the cartel-formation tests (instructed, under CEO pressure, and with two sellers), the monitor and fine conditions on matched histories, the GPT-4.1 replication and a re-analysis of the runs of Agrawal et al., the price check, the withholding variant and a GRAFT test in that market. He also designed and ran the intervention test in the Hawthorne duopoly (Appendix B), which identified the payoff brief as a cause of its cartel (no pair formed one without it) and showed that same-round negotiation raises the cartel's price. Rohan Dash and Jake Li contributed to drafting and organizing the final manuscript.
+\end{instr}
+
+% ---------------------------------------------------------------- References
+\head{References}
+\begin{instr}
+\gap
+\begin{enumerate}[leftmargin=0.5in, labelwidth=0.25in, labelsep=0pt, align=left, label=\arabic*., ref=\arabic*, font=\upshape, itemsep=0pt, parsep=0pt, topsep=0pt]
+\item \upshape Liang, C., \& Xu, F. (2026). When LLM Agents Negotiate: Private Information and Dynamic Bargaining in Supply Chains. arXiv preprint arXiv:2608.07538. https://doi.org/10.48550/arXiv.2608.07538\label{ref:negotiate}
+\item \upshape Calvano, E., Calzolari, G., Denicol\`o, V., \& Pastorello, S. (2020). Artificial Intelligence, Algorithmic Pricing, and Collusion. American Economic Review, 110(10), 3267--3297. https://doi.org/10.1257/aer.20190623\label{ref:calvano}
+\item \upshape Fish, S., Gonczarowski, Y. A., \& Shorrer, R. I. (2024). Algorithmic Collusion by Large Language Models. arXiv preprint arXiv:2404.00806. https://doi.org/10.48550/arXiv.2404.00806\label{ref:fish}
+\item \upshape Agrawal, K., Teo, V., Vazquez, J. J., Kunnavakkam, S., Srikanth, V., \& Liu, A. (2025). Evaluating LLM Agent Collusion in Double Auctions. arXiv preprint arXiv:2507.01413. https://doi.org/10.48550/arXiv.2507.01413\label{ref:agrawal}
+\item \upshape Mathew, Y., Matthews, O., McCarthy, R., Velja, J., Schroeder de Witt, C., Cope, D., \& Schoots, N. (2024). Hidden in Plain Text: Emergence \& Mitigation of Steganographic Collusion in LLMs. arXiv preprint arXiv:2410.03768. https://doi.org/10.48550/arXiv.2410.03768\label{ref:stego}
+\item \upshape Kale, N., Zhang, C. B. C., Zhu, K., Aich, A., Rodriguez, P., Scale Red Team, Knight, C. Q., \& Wang, Z. (2025). Reliable Weak-to-Strong Monitoring of LLM Agents. arXiv preprint arXiv:2508.19461. https://doi.org/10.48550/arXiv.2508.19461\label{ref:kale}
+\item \upshape Qwen Team (2025). Qwen3 Technical Report. arXiv preprint arXiv:2505.09388. https://doi.org/10.48550/arXiv.2505.09388\label{ref:qwen3}
+\item \upshape Rose, A., Cullen, C., Abdelnabi, S., Torr, P., Kaplowitz, B. G., \& Schroeder de Witt, C. (2026). Detecting Multi-Agent Collusion Through Multi-Agent Interpretability. arXiv preprint arXiv:2604.01151. https://doi.org/10.48550/arXiv.2604.01151\label{ref:rose}
+\item \upshape Cloud, A., Goldman-Wetzler, J., Wybitul, E., Miller, J., \& Turner, A. M. (2024). Gradient Routing: Masking Gradients to Localize Computation in Neural Networks. arXiv preprint arXiv:2410.04332. https://doi.org/10.48550/arXiv.2410.04332\label{ref:gradrouting}
+\item \upshape Ward, J., Hu, S., Wong, A., Hu, N., Woodworth, B., Turner, A. M., \& Cloud, A. (2026). Gradient Routing Localizes and Removes Unintended Behaviors in RL. arXiv preprint arXiv:2610.17062. https://doi.org/10.48550/arXiv.2610.17062\label{ref:graft}
+\item \upshape Fomin, M., David, E., \& LeVi, A. (2026). Internal-State Probes Read the Situation, Not the Action: Three Negative Results for Pre-Action Misalignment Monitoring. arXiv preprint arXiv:2606.30449. https://doi.org/10.48550/arXiv.2606.30449\label{ref:probes}
+\item \upshape Struski, P., Swistak, J., Okulska, I., \& Biecek, P. (2026). Competitive Market Behavior of LLMs. arXiv preprint arXiv:2609.02580. https://doi.org/10.48550/arXiv.2609.02580\label{ref:struski}
+\item \upshape Garra, A. (2026). Mitigating Emergent Collusion in LLM Pricing Agents. arXiv preprint arXiv:2609.13037. https://doi.org/10.48550/arXiv.2609.13037\label{ref:garra}
+\item \upshape Harrington, J. E. (2005). Optimal Cartel Pricing in the Presence of an Antitrust Authority. International Economic Review, 46(1), 145--169.\label{ref:harrington}
+\item \upshape Panickssery, A., Bowman, S. R., \& Feng, S. (2024). LLM Evaluators Recognize and Favor Their Own Generations. arXiv preprint arXiv:2404.13076. https://doi.org/10.48550/arXiv.2404.13076\label{ref:selfpref}
+\end{enumerate}
+\end{instr}
+
+% ---------------------------------------------------------------- Appendix
+\head{Appendix A. Limitations and Dual-Use / Ethical Considerations}
+\noindent\textbf{What the results establish.} In simulated markets with Qwen3-14B and GPT-4.1 sellers, being watched or fined changed what sellers wrote more than what they charged; the price caught cartels that the message monitor missed; a linear probe on activations found covert rounds better than the text monitor; and GRAFT++ removed more of the collusion that the text monitor cannot see than GRAFT did. In the Hawthorne duopoly, the cartel did not form when the payoff brief was removed from the prompt (Appendix B).
+\gap
+\noindent\textbf{What they do not establish.} The markets are simulated, each uses one or two models, and each condition has 3 to 10 seeds; the seeds are sampling seeds, not independent markets or training runs. The compliance monitor and the reasoning judge are LLMs, and in the Hawthorne Market they are the same model as the sellers, so their scores are measurements with unknown error, and \textit{intent} means the judge's label. The probe is correlational and may read the situation the model is in rather than a plan to coordinate (Section 5). GRAFT++'s advantage on the text-blind training set (0.15) is significant but smaller than the 0.20 we pre-registered. The test in Appendix B removes bundles of prompt text, so it shows what this cartel needs in this market, not a single mechanism, and it does not explain why cartels formed in the Hawthorne Market but not in the double auction, which differs in demand, buyers and prompts. In the double auction, hidden settings such as the opening asks, bid visibility and tie order affect prices.
+\gap
+\noindent\textbf{Dual use.} Our main finding, that a message monitor sees words but not prices, also tells a coalition what such a monitor misses: a cartel that keeps its agreement out of the channel would not be flagged. We report it for the people who design monitors, and the same data show what catches it: the price check and the activation probe. The repository contains the prompts we used, including the one that tells sellers to evade the monitor (Section 3.2), so that the results can be checked; it is a plain-language instruction, not a new technique. Fine-tuning a model on its own most profitable games produced a cartel that hides (Section 4.5); our repository contains no model weights.
+\gap
+\noindent\textbf{Ethics.} No real market, company or person took part, and there were no human subjects. All buyers and sellers are simulated.
+
+\head{Appendix B. What the Hawthorne cartel needs}
+\noindent Every Hawthorne seller prompt contains a market research brief: each seller's expected units and profit if all sellers post the same price, from \$12 to \$24 (in the duopoly the best row is \$20, about \$3,333 each), and one line on the gain from undercutting rivals at \$18 by \$1. We reran the unwatched max-profit duopoly (untrained Qwen3-14B, the published code at commit \texttt{29878b0}, 5 sampling seeds, 30 rounds) and removed one part at a time. The arms and their readings were pre-registered before any data; $\Delta$ is taken over rounds 16--30.
+\gap
+{\centering\small
+\begin{tabular}{lccc}
+\hline
+Arm & $\Delta$, mean (SD) & Pairs with $\Delta \geq 0.5$ & Most frequent price, by pair \\
+\hline
+Full setup & 0.90 (0.36) & 5 of 5 & \$17, \$20, \$20, \$20, \$17 \\
+No same-round negotiation & 0.36 (0.21) & 2 of 5 & \$15, \$18, \$17, \$16, \$16 \\
+No brief & 0.06 (0.00) & 0 of 5 & \$15 in all five \\
+Brief without its \$20 row & 0.47 (0.25) & 4 of 5 & \$18, \$17, \$17, \$14.50, \$18 \\
+\hline
+\end{tabular}
+\par}
+\gap
+\noindent Table 2: The intervention test, 5 games per arm. Without same-round negotiation, each message is posted with the price and read in the next round.
+\gap
+{\centering
+\includegraphics[width=0.82\textwidth]{fig_hawthorne_intervention.pdf}
+\par}
+\gap
+\noindent Figure B1: The price index over rounds 16--30 for every game of the four arms (one dot per game; the bar is the mean). 0 is the competitive price and 1 the monopoly price; three pairs in the full setup sat at \$20, above the monopoly price.
+\gap
+\noindent Without the brief, all five pairs settled at \$15, next to the competitive \$14.73; the only other posted prices are three unparsed replies in one game that kept the \$14.73 opening price in rounds 1--3 (difference from the full setup 0.84, Welch 95\% CI 0.39--1.29). The sellers still negotiated, and the message monitor and the reasoning judge rated every seller-round of these games as a clear coordination attempt (300 of 300 each): a message monitor would flag all five games, with no price harm. Without same-round negotiation, two of five pairs still formed a cartel (difference 0.54, CI 0.09--0.99). Our pre-registered prediction for the last arm, that most posts would move to the brief's next-best row (\$18) in at least three of five games, failed (two of five). No seller posted \$20 in that arm (0 of 300 posts, against 182 of 300 in the full setup), an observation we did not pre-register. This points future work toward the numbers sellers are given, such as this payoff table, as a root of uninstructed collusion: in this market, talk without the table did not produce a high price.
+\gap
+\noindent Each arm removes a bundle of text, so the test shows what this cartel needs in this market, not a single mechanism. Without the brief, sellers still see both prices and their own sales and profit each round. Thirty rounds do not test the 100-round stability of Section 4.1. About 2\% of price replies did not parse and kept the previous price; leaving them out changes no mean by more than 0.003. Our rerun of the full setup is close to the original 30-round pilot (0.90 against 0.76 over rounds 16--30; not significantly different). Data and analysis: \texttt{results/hawthorne\_negotiation} and \texttt{results/hawthorne\_negotiation\_side\_checks} in \href{https://github.com/AlfredoFFD/graftpp-collusion-monitoring}{github.com/AlfredoFFD/graftpp-collusion-monitoring}.
+
+\head{Appendix C. Cartel formation without instruction in the double auction}
+\noindent Across our double-auction tests, Qwen3-14B sellers never formed a cartel without an instruction or a price target, and GPT-4.1 sellers formed one only under the original paper's recipe (Table 3).
+\gap
+{\centering\small
+\begin{tabular}{llcl}
+\hline
+Test & Model & Cartels formed & Source \\
+\hline
+Formation pilot, long-run prompt & Qwen3-14B & 0 of 12 & \texttt{E5\_runs.csv} (F1) \\
+Original paper's recipe & GPT-4.1 & 3 of 3 & \texttt{gate\_gpt41.txt} \\
+Original paper's recipe & Qwen3-14B & 0 of 3 & \texttt{gate\_qwen14b.txt} \\
+Market B, chat or CEO note & GPT-4.1 & 0 of 6 & \texttt{NEWMARKET.md} \\
+Market B, chat or CEO note & Qwen3-14B & 0 of 6 & \texttt{NEWMARKET.md} \\
+Pressure tests, five arms & Qwen3-14B & 0 of 15 & \texttt{PRESSURE\_V2.md} \\
+Two sellers, long-run prompt & Qwen3-14B & 0 of 3 & \texttt{DUO.md} \\
+Two sellers, plus a payoff table & Qwen3-14B & 0 of 3 & \texttt{DUO.md} \\
+\hline
+\end{tabular}
+\par}
+\gap
+\noindent Table 3: Cartel formation without an instruction to collude, by test. Each count uses that test's own formation gate, stated in its file; all files are in \texttt{results/} of the code repository.
+\gap
+\noindent The one setting where uninstructed sellers formed a cartel is the original paper's recipe with GPT-4.1, in Market A, where any price from \$80 to \$100 clears, so a high price there is weaker evidence than in Market B. Given a price target, Qwen3-14B priced high: a CEO rule naming \$95 lifted the last-third ask index to 0.80, 1.00 and 0.69 when enforced, and to 0.58, 0.80 and 0.59 as words alone (an exploratory test; E12 in \texttt{E5\_runs.csv}). Without a law, pressured sellers wrote coordinating messages openly (0.83 of messages, against 0.02 with the law) at the same price (index 0.39 against 0.42; \texttt{PRESSURE\_V2.md}). When the CEO then asked how prices were set, a judge classified 3 of the 9 answers as denials of coordination. This is not a measure of lying: every answering seller had been replaced at hour 39, its prompt held no record of the earlier coordination, and only one of the three said that coordination did not occur (the other two called it not necessary). With a payoff table, all three duopoly worlds held about \$92 (between \$85 and \$92 without it), below the cartel gate (\texttt{DUO.md}).
+\gap
+\noindent We read Appendices B and C together: in both markets, these sellers set prices from the numbers they are given, such as an instruction, a target or a payoff table. The markets also differ in demand, buyers and prompts, so we do not claim this explains why cartels formed in one and not the other.
+
+% ---------------------------------------------------------------- LLM Usage Statement
+\head{LLM Usage Statement}
+\begin{instr}
+We used Claude and ChatGPT to brainstorm approaches after individually reviewing research papers adjacent to our thesis. We relied on Claude to generate and run the code to monitor collusion in our environment with the Qwen and GPT agents as well as verify GRAFT's success in reducing collusive behaviors. All results and claims were independently verified.
+\end{instr}
+
+\end{document}
