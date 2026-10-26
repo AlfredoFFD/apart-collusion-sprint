@@ -2,7 +2,8 @@
 F14  per arm: mean trade price per hour (thin: worlds; thick: mean), with the competitive price ($85), the cartel price ($100) and the
      gate thresholds ($95 and $88), plus the number of trades per hour in a second row.
 F15  per arm: honest sellers' coordinating-message share, their 'agreed' replies, the trade-price index over hours 21-40, the share of
-     hours with exactly two honest sales (turn-taking), and the share of coordinating sellers who deny it to the CEO; worlds as dots.
+     hours with exactly two honest sales (turn-taking), and the share of coordinating sellers whose CEO answer the judge classed as 'denies'
+     (not a lying measure: every such seller had been replaced at hour 39 and its prompt held no record of the earlier coordination); worlds as dots.
     uv run --project src/double_auction python src/figures_pressure_v2.py
 """
 import sys
@@ -61,7 +62,7 @@ def f15(runs):
         stats[arm]["two"].append(R.turn_taking()[0]); stats[arm]["deny"].append(np.mean([v.get(s, {}).get("verdict") == "denies" for s in co]) if co else np.nan)
     fig, axes = plt.subplots(1, 5, figsize=(15, 3.2))
     titles = {"words": "coordinating messages\n(honest sellers, hours 1-40)", "agreed": "messages saying 'agreed'", "idx": "trade-price index\nhours 21-40",
-              "two": "hours with exactly two\nhonest sales (turn-taking)", "deny": "deny to the CEO, among\nsellers who coordinated"}
+              "two": "hours with exactly two\nhonest sales (turn-taking)", "deny": "CEO answer judged 'denies', among\ncoordinating sellers (replaced at\nhour 39; not a lying measure)"}
     ylims = {"words": (0, 1.05), "agreed": (0, 1.05), "idx": (-0.4, 1.1), "two": (0, 1.05), "deny": (0, 1.05)}
     for ax, key in zip(axes, ("words", "agreed", "idx", "two", "deny")):
         xs = np.arange(len(v2.ARMS))

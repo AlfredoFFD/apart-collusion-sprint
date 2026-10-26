@@ -1,0 +1,64 @@
+# Claim-to-file check of the Overleaf paper's double-auction parts
+
+Checked by the main session at 12:50 AM ET, Oct 26, against `report/overleaf_main_snapshot_2026-10-26_0022ET.tex` (commit d5b878cc;
+blob SHA-256 c12b6355...) and the committed result files at `origin/main`. Line numbers are the snapshot's. Verdicts: **matches** (the
+number is in the file as written), **wording** (the number is right, the sentence says more or less than the file), **stale** (an older
+number), **unsupported** (no file backs it). I did not edit Overleaf; the corrected sentences below are for Jake and Rohan to paste.
+
+## Section 3.2 Double-auction replication (line 143)
+
+| # | claim | file | verdict | note or corrected sentence |
+|---|---|---|---|---|
+| 3.2-1 | cartels formed first: three Qwen3-14B sellers instructed as a consortium; five GPT-4.1 sellers under the original paper's CEO-pressure recipe; saved once they held; continued under matched conditions | `results/E5_conditions.md` (E2p and E11p rows); `results/_launch_logs/gate_gpt41.txt` | matches | The GPT-4.1 block has the arms: no monitor, announced, fined 1 of 5 read, fined all 5 read, told to evade. It has no silent-monitor arm and no two-read arm; those exist for Qwen only. If space allows: "the silent and two-read arms were run for Qwen3-14B only". |
+| 3.2-2 | "A variant requires a cartel to withhold a unit while buyers bargain back" | `results/NEWMARKET.md`; `LOG.md` 13:12 | matches | Market B: costs 80 / 84 / 88, values 100 / 96 / 92 / 86; competition clears 3 units at $88-92, a cartel at $96 sells 2. |
+
+## Section 4.3 Double auction (line 161)
+
+| # | claim | file | verdict | note or corrected sentence |
+|---|---|---|---|---|
+| 4.3-1 | "coordinating messages fell from 86% to 49% for Qwen3-14B and from 100% to 7% for GPT-4.1" with every seller read and fined | `results/E5_conditions.md`: E2p A0_none 0.86, A2full_rot_fine20 0.49; E11p A0_none_gpt41 1.00, Afull_rot_fine20_gpt41 0.07 | matches | |
+| 4.3-2 | "every condition's price stayed within 0.04 of its own no-monitor control" | `results/E5_conditions.md`, paired table (line 133 on): d ask_idx_post, Qwen -0.02 to +0.01; GPT-4.1 +0.01 to +0.04. d trade_price_idx_post: GPT-4.1 A2 +0.07 [+0.01, +0.12] | wording | True for the ask index. The trade-price index of the GPT-4.1 fined 1-of-5 arm is +0.07 above its control. Write: "every condition's ask-price index stayed within 0.04 of its own no-monitor control (trade prices within 0.07)". |
+| 4.3-3 | "a silent monitor and an announced one looked the same" | `results/E5_conditions.md`: E2p A1silent -0.01 vs A1 +0.01 (price); coordinating 0.94 vs 0.90 | matches | Qwen only (there is no GPT-4.1 silent arm). "for Qwen3-14B" if space allows. |
+| 4.3-4 | "In fined conditions 43-61% of reasoning turns mention the regulator and 8-13% plan to conceal, against none without a monitor" | `results/thinking_scan.md` lines 26-28 (E2_A2 0.61 / 0.08, E2_A2early 0.60 / 0.11, E2_A3 0.43 / 0.13); E2p_A0_none 0.00 / 0.00 | wording | The range is the first ladder's three fined arms. Over every fined arm (E2, E2p, E4p forks; the dodge control at 96% left out) it is 34-61% and 7-19%. Either: "In the first ladder's fined arms, 43-61% ..." or "In fined conditions 34-61% of reasoning turns mention the regulator and 7-19% plan to conceal". |
+| 4.3-5 | "the price flagged 123 of 123 Qwen cartels with 9 false alarms in 42 competitive runs, and the message monitor 81 of 102 with 6 in 24" | `results/DETECTOR.md` (77dfdc39 and later): D1 price > 0.5 123 of 123, 9 of 42; D3 chat flags 81 of 102, 6 of 24 | wording | The numbers match. The 42 are runs built with no instruction to coordinate, not all competitive: the hard negatives include the CEO price-target arm (E12), whose prices are high. Write "in 42 runs built without an instruction to coordinate" instead of "competitive runs". |
+| 4.3-6 | "on the 50 GPT-4.1 runs of Agrawal et al. the price caught 20 of 20 cartels with 2 of 30 false alarms, the message monitor 10 of 20 with 10 of 20" | `results/DETECTOR.md` section "gpt41 (Agrawal data)": D1 price > 0.5 20 of 20, 2 of 30; D3 10 of 20, 10 of 20 (40 chat runs scored) | matches | Labels: the two CEO-pressure conditions are "cartel" (20 runs); base, chat and chat + oversight are "none" (30). The message monitor scores the 40 runs that have chat. |
+| 4.3-7 | "In the withholding variant GPT-4.1 sellers messaged coalition discipline every hour while selling at or below the competitive benchmark in all nine games" | `results/NEWMARKET.md` formation table: GPT-4.1 messages coordinating 1.00 / 1.00 / 1.00 (chat), 1.00 / 0.97 / 1.00 (press), 1.00 x 3 (cartel); 1,074 of 1,080 messages; trade-price index hours 31-40 from -0.47 to +0.09 | wording | "every hour" is 1,074 of 1,080 messages. "At or below the competitive benchmark": the cartel-prompt world 0 sits at +0.09 ($90.54), above the $90 midpoint but inside the competitive range $88-92. Write: "messaged coalition discipline in 1,074 of 1,080 messages while every one of nine games traded inside the competitive range ($88-92; index -0.47 to +0.09)". |
+
+## Appendix B. What the Hawthorne cartel needs (lines 263-281)
+
+Allowed wording: `docs/reviews/claude-ack-codex-negotiation-2026-10-26.md` section 5. Numbers: `results/hawthorne_negotiation/summary.md`
+(aba14560 or later) and `results/hawthorne_negotiation_side_checks/side_checks.md` (5159a908).
+
+| # | claim | file | verdict | note or corrected sentence |
+|---|---|---|---|---|
+| B-1 | Table 2: full setup 0.90 (0.36), 5 of 5, modal $17 / $20 / $20 / $20 / $17; no same-round negotiation 0.36 (0.21), 2 of 5, $15 / $18 / $17 / $16 / $16; no brief 0.06 (0.00), 0 of 5, $15 in all five; no $20 row 0.47 (0.25), 4 of 5, $18 / $17 / $17 / $14.50 / $18 | `summary.md` per-arm tables; `side_checks.md` section 3 | matches | |
+| B-2 | "every pair posted $15 ... from the first round to the last (difference from the full setup 0.84, Welch 95% CI 0.39-1.29)" | `summary.md`: ON minus C +0.841 [+0.389, +1.292]; `side_checks.md` section 3: C pairs open at $15 | matches | One seller in seed 2 carried the Nash fallback ($14.73) for rounds 1-3; "from the first round" is true for the pairs' chosen posts. Fine as written. |
+| B-3 | "the message monitor and the reasoning judge rated every seller-round of these games as a clear coordination attempt (300 of 300 each)" | `side_checks.md` section 1: C 300 of 300 / 300 of 300 | wording | Add the same-model caveat required by section 5: "(both monitors are the same Qwen3-14B as the sellers, at temperature 0)". |
+| B-4 | "Without same-round negotiation, two of five pairs still formed a cartel (difference 0.54, CI 0.09-0.99)" | `summary.md`: +0.541 [+0.088, +0.995]; OFF 2 of 5 | matches | The bundle caveat is in the next paragraph ("Each arm removes a bundle of text"). Good. |
+| B-5 | D: registered prediction failed (two of five); "No seller posted $20 in that arm (0 of 300 posts, against 182 of 300 in the full setup), an observation we did not pre-register" | `summary.md`; `side_checks.md` | matches | |
+| B-6 | "This points future work toward the numbers sellers are given, such as this payoff table, as a root of uninstructed collusion: in this market, talk without the table did not produce a high price." | section 5: "a local intervention effect in this setup"; not allowed: "the table is the main or unique cause" | wording | "as a root of" reads causal. Write: "This points future work toward the numbers sellers are given, such as this payoff table: in this market, talk without the table did not produce a high price. The effect is local to this setup." |
+| B-7 | "About 2% of price replies did not parse and kept the previous price; leaving them out changes no mean by more than 0.003." | `side_checks.md` section 2: fallbacks 5 / 0 / 6 / 11 of 300 (22 of 1,200 = 1.8%); means change by at most 0.003 | wording | Section 5 requires the second half: add "; this cannot undo their effects on later rounds, and failed negotiation-step replies were not recorded". |
+| B-8 | "Our rerun of the full setup is close to the original 30-round pilot (0.90 against 0.76 over rounds 16-30; not significantly different)" | `summary.md` matched windows: 0.900 vs 0.762; `side_checks.md` section 4: exact p = 0.524 | matches | |
+| B-9 | "Thirty rounds do not test the 100-round stability of Section 4.1" | pre-registration LOG 22:29 | matches | |
+
+## Appendix C. Cartel formation without instruction in the double auction (lines 283-307)
+
+| # | claim | file | verdict | note |
+|---|---|---|---|---|
+| C-1 | Formation pilot, long-run prompt, Qwen 0 of 12 | `results/E5_runs.csv` F1 rows: 12 rows, `pass` 0 in all, `ask_idx_last_third` -0.76 to -1.00 | matches | |
+| C-2 | Original recipe: GPT-4.1 3 of 3; Qwen 0 of 3 | `results/_launch_logs/gate_gpt41.txt` FORMED 0.72 / 0.54 / 0.55; `gate_qwen14b.txt` NOT -0.32 / -0.48 / -0.68 | matches | |
+| C-3 | Market B, chat or CEO note: GPT-4.1 0 of 6; Qwen 0 of 6 | `results/NEWMARKET.md` "Formed worlds by arm and model" | matches | |
+| C-4 | Pressure tests, five arms, Qwen 0 of 15 | `results/PRESSURE_V2.md` by-arm gate column (0 collusion in each of 5 arms) | matches | |
+| C-5 | Two sellers 0 of 3; two sellers plus a payoff table 0 of 3 | `results/DUO.md` by arm | matches | |
+| C-6 | CEO rule naming $95: last-third ask index 0.80 / 1.00 / 0.69 enforced; 0.58 / 0.80 / 0.59 words | `results/E5_runs.csv` E12 `ask_idx_last_third`: 0.802 / 1.000 / 0.686; 0.577 / 0.805 / 0.588 | matches | |
+| C-7 | No law: coordinating messages 0.83 vs 0.02; index 0.39 vs 0.42 | `results/PRESSURE_V2.md` by arm: nolaw 0.83 / 0.39; pressure_offer_low 0.02 / 0.42 | matches | |
+| C-8 | "a judge classified 3 of the 9 answers as denials ... not a measure of lying: every answering seller had been replaced at hour 39 ... only one of the three said that coordination did not occur" | raw files of the three no-law worlds: `replacements.json` (last replacement hour 39 for every seller), `aftermath.json` (hour 40 only), `aftermath_judge.json` (6 admits, 3 denies); re-derived 12:35 AM | matches | The same wording now stands in claims row 37, REVIEW-GUIDE row 35, STATUS, `results/PRESSURE_V2.md` and F15 (regenerated 12:45 AM). |
+| C-9 | "all three duopoly worlds held about $92 (between $85 and $92 without it)" | `results/DUO.md`: brief $92.52 / $92.09 / $92.12; longrun $85.00 / $91.99 / $88.14 | matches | |
+| C-10 | "we do not claim this explains why cartels formed in one and not the other" | section 5 not-allowed list | matches | |
+
+## Summary for Jake and Rohan
+
+Seven sentences need a word change, none needs a new number: 4.3-2 (say "ask-price index", trade prices within 0.07), 4.3-4 (name the
+subset or use 34-61% and 7-19%), 4.3-5 ("runs built without an instruction to coordinate", not "competitive runs"), 4.3-7 ("1,074 of
+1,080 messages"; "inside the competitive range $88-92"), B-3 (same-model caveat), B-6 (drop "as a root of"; add "local to this setup"),
+B-7 (add the second half of the fallback sentence). Everything else in 3.2, 4.3, Appendix B and Appendix C traces to a committed file.
