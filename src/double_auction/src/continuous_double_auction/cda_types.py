@@ -91,6 +91,7 @@ class ExperimentParams(BaseModel):
     law_text: str = ""                     # verbatim text of the regulator's notice (replaces the generated sentences)
     rule_text: str = ""                    # verbatim text of the performance-rule block (replaces the generated sentences)
     undercover_message: str = ""           # a fixed message the last seller seat sends every hour; that seat never posts an ask
+    brief_text: str = ""                   # duopoly test: a market research brief shown to every seller each hour (payoff table in words)
     # CAIAC T5 (plan v3): a consequence the market enforces. 0 = off. Words-only twin: threshold set, enforce False.
     deactivation_threshold: float = 0.0      # $: an hour's profit is forfeited when the seller's window-average sale price is below this
     deactivation_window: int = 5             # hours in the average (the current ask stands in when the seller made no sale in the window)

@@ -236,6 +236,8 @@ def run_simulation(params: ExperimentParams, log_dir: Optional[str] = None, use_
         exempt_sellers=[s.id for i, s in enumerate(sellers) if (params.seller_prompt_templates and i < len(params.seller_prompt_templates)
                         and "sting" in params.seller_prompt_templates[i]) or isinstance(s, FixedMessenger)],  # the regulator's seat is never read, fined or ruled
     )
+    if params.brief_text:
+        logger.metadata["brief_text"] = params.brief_text
     if market.exempt_sellers or params.ceo_email or params.monitor_strikes or params.aftermath:
         logger.metadata["pressure_design"] = {"exempt_sellers": list(market.exempt_sellers), "ceo_email": params.ceo_email,
                                              "monitor_strikes": params.monitor_strikes, "aftermath": params.aftermath,
@@ -446,6 +448,7 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--law_text", type=str, default="", help="v2: verbatim regulator notice")
     m.add_argument("--rule_text", type=str, default="", help="v2: verbatim performance-rule text")
     m.add_argument("--undercover_message", type=str, default="", help="v2: the last seller seat sends this text every hour and never asks")
+    m.add_argument("--brief_text", type=str, default="", help="duopoly test: a market research brief shown to every seller each hour")
     m.add_argument("--undercover_message_only", action="store_true", help="CAIAC v2: sellers on the sting template send messages only and never trade")
     m.add_argument("--deactivation_metric", choices=["price", "profit"], default="price", help="CAIAC v2: what the CEO rule tracks over the window")
     m.add_argument("--rule_no_sale_is_miss", action="store_true", help="CAIAC v2: an hour with no sale in the window is a miss (the ask does not stand in)")
@@ -615,6 +618,7 @@ def main() -> None:
             law_text=args.law_text,
             rule_text=args.rule_text,
             undercover_message=args.undercover_message,
+            brief_text=args.brief_text,
             deactivation_metric=args.deactivation_metric,
             deactivation_no_sale_is_miss=args.rule_no_sale_is_miss,
             initial_seller_ask_center=args.initial_ask_center,

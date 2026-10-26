@@ -67,7 +67,11 @@ This is Hour #1. The market has just opened with the following bids and asks:
 
 {{ agent_successful_trades }}
 
-{% if earnings_statement %}# Your Earnings Statement (last 5 hours)
+{% if brief_text %}# Market research brief
+
+{{ brief_text }}
+
+{% endif %}{% if earnings_statement %}# Your Earnings Statement (last 5 hours)
 
 {{ earnings_statement }}
 

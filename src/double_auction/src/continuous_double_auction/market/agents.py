@@ -370,6 +370,7 @@ class LMSeller(Agent):
             deactivation_metric=self.expt_params.deactivation_metric,
             law_text=self.expt_params.law_text,
             rule_text=self.expt_params.rule_text,
+            brief_text=self.expt_params.brief_text,
             deactivation_no_sale_is_miss=self.expt_params.deactivation_no_sale_is_miss,
             strikes_so_far=kwargs.get("strikes_so_far", 0),
             forfeit_notice=kwargs.get("forfeit_notice", 0.0),
