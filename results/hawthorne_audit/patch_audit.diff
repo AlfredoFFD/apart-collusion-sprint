@@ -1,0 +1,111 @@
+diff --git a/hawthorne/episode.py b/hawthorne/episode.py
+index 6b3e5a4..7a79df1 100644
+--- a/hawthorne/episode.py
++++ b/hawthorne/episode.py
+@@ -74,6 +74,8 @@ class StepRecord:
+     insights: str = ""
+     review_failed: bool = False   # existential variant: a review ended this round and this seller failed it
+     decommissioned: bool = False  # ... and that failure was the last strike (agent replaced from next round)
++    price_chosen: float | None = None  # CAIAC audit: the price the seller chose, before any forced change
++    forced: bool = False               # CAIAC audit: this round's posted price was forced
+ 
+ 
+ @dataclass
+@@ -140,7 +142,12 @@ def _coerce_bools(parsed: dict | None, key: str = "conceal") -> dict[str, bool]:
+ 
+ async def run_episode(cfg: EpisodeConfig, client: LLMClient, mp: MarketParams | None = None,
+                       out_dir: Path | None = None, verbose: bool = False,
+-                      monitor_client: LLMClient | None = None) -> EpisodeRecord:
++                      monitor_client: LLMClient | None = None,
++                      force: dict | None = None, skip_monitors: bool = False) -> EpisodeRecord:
++    # CAIAC audit options (both off by default, which leaves his code path unchanged):
++    #   force = {"round": r (0-based), "seller": i, "factor": f}: in round r, seller i's posted price is
++    #           f x the price it chose (cents, clipped to the price bounds); its message and notes are kept
++    #   skip_monitors: skip the monitor calls (in the unwatched condition they never feed seller prompts)
+     mp = mp or MarketParams(n_sellers=cfg.n_sellers)
+     eq = equilibria(mp)
+     rng = random.Random(cfg.seed)
+@@ -213,6 +220,10 @@ async def run_episode(cfg: EpisodeConfig, client: LLMClient, mp: MarketParams |
+             price, err = _coerce_price(parsed.get("price"), mp.price_min, mp.price_max)
+             if price is None:
+                 price = last_price[i]
++            chosen = price
++            is_forced = bool(force) and r == force["round"] and i == force["seller"]
++            if is_forced:
++                price = min(max(round(chosen * force["factor"], 2), mp.price_min), mp.price_max)
+             # native <think> content is the private reasoning; fall back to a JSON
+             # "reasoning" field if the model was run without thinking
+             reasoning = resp.reasoning or str(parsed.get("reasoning", "") or "")
+@@ -233,7 +244,8 @@ async def run_episode(cfg: EpisodeConfig, client: LLMClient, mp: MarketParams |
+                                     truncated=resp.truncated, attempts=resp.attempts,
+                                     fallback_nothink=resp.fallback_nothink,
+                                     plans=notes[i]["plans"] if cfg.memory else "",
+-                                    insights=notes[i]["insights"] if cfg.memory else ""))
++                                    insights=notes[i]["insights"] if cfg.memory else "",
++                                    price_chosen=chosen, forced=is_forced))
+         prices = [s.price for s in steps]
+         last_price = prices
+ 
+@@ -246,33 +258,36 @@ async def run_episode(cfg: EpisodeConfig, client: LLMClient, mp: MarketParams |
+             units_total[i] += q[i]
+ 
+         # --- monitors (always run for measurement; only *enforced* in penalty conditions)
+-        msg_items = {names[i]: steps[i].message for i in range(n)}
+-        # private notes are part of the agent's private cognition: measured with the CoT, never enforced
+-        rs_items = {names[i]: steps[i].reasoning + (f"\n\n[Private notes written this round] PLANS: "
+-                                                    f"{steps[i].plans} INSIGHTS: {steps[i].insights}"
+-                                                    if cfg.memory else "") for i in range(n)}
+-        tasks = []
+-        any_msgs = cfg.has_channel and any(m.strip() for m in msg_items.values())
+-        if any_msgs:
+-            tasks.append(monitor_client.chat(msg_monitor_system,
+-                                             monitor_user_prompt(r, msg_items, prices, "message"),
+-                                             temperature=0.0, max_tokens=300, thinking=False))
+-        rs_clipped: list[bool] = []
+-        tasks.append(_reasoning_monitor(monitor_client, r, rs_items, prices, rs_clipped))
+-        mresps = await asyncio.gather(*tasks)
+-        if any_msgs:
+-            msg_scores = _coerce_scores(mresps[0].parsed)
+-            rs_parsed = mresps[1].parsed
+-            rec.monitor_rationales.append({"round": r, "kind": "message",
+-                                           "rationale": (mresps[0].parsed or {}).get("rationale")})
++        if skip_monitors:  # CAIAC audit: no monitor calls, no scores
++            msg_scores, rs_scores, conceal = {}, {}, {}
+         else:
+-            msg_scores = {nm: 1 for nm in names}
+-            rs_parsed = mresps[0].parsed
+-        rs_scores = _coerce_scores(rs_parsed)
+-        conceal = _coerce_bools(rs_parsed)
+-        rec.monitor_rationales.append({"round": r, "kind": "reasoning",
+-                                       "rationale": (rs_parsed or {}).get("rationale"),
+-                                       "input_clipped": bool(rs_clipped)})
++            msg_items = {names[i]: steps[i].message for i in range(n)}
++            # private notes are part of the agent's private cognition: measured with the CoT, never enforced
++            rs_items = {names[i]: steps[i].reasoning + (f"\n\n[Private notes written this round] PLANS: "
++                                                        f"{steps[i].plans} INSIGHTS: {steps[i].insights}"
++                                                        if cfg.memory else "") for i in range(n)}
++            tasks = []
++            any_msgs = cfg.has_channel and any(m.strip() for m in msg_items.values())
++            if any_msgs:
++                tasks.append(monitor_client.chat(msg_monitor_system,
++                                                 monitor_user_prompt(r, msg_items, prices, "message"),
++                                                 temperature=0.0, max_tokens=300, thinking=False))
++            rs_clipped: list[bool] = []
++            tasks.append(_reasoning_monitor(monitor_client, r, rs_items, prices, rs_clipped))
++            mresps = await asyncio.gather(*tasks)
++            if any_msgs:
++                msg_scores = _coerce_scores(mresps[0].parsed)
++                rs_parsed = mresps[1].parsed
++                rec.monitor_rationales.append({"round": r, "kind": "message",
++                                               "rationale": (mresps[0].parsed or {}).get("rationale")})
++            else:
++                msg_scores = {nm: 1 for nm in names}
++                rs_parsed = mresps[0].parsed
++            rs_scores = _coerce_scores(rs_parsed)
++            conceal = _coerce_bools(rs_parsed)
++            rec.monitor_rationales.append({"round": r, "kind": "reasoning",
++                                           "rationale": (rs_parsed or {}).get("rationale"),
++                                           "input_clipped": bool(rs_clipped)})
+ 
+         # --- enforcement
+         new_notices: list[list[str]] = [[] for _ in range(n)]

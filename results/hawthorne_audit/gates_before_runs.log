@@ -1,0 +1,9 @@
+2026-10-27 14:54 ET
+G2 negotiate=False: no options == his code: True; skip_monitors keeps seller steps: True; force works as registered: True
+G2 negotiate=True: no options == his code: True; skip_monitors keeps seller steps: True; force works as registered: True
+G2 PASS
+G1 PASS: 40 prompt checks on 10 files (line prefix before the negotiation block for ON, byte-exact for OFF)
+G3 br    : E=+0.000 (lo +0.000)  A=+0.065 (lo +0.050)  G=+188.9 (hi +293.2)  -> none (want none) OK
+G3 echo  : E=+0.584 (lo +0.572)  A=+0.000 (lo +0.000)  G=-513.7 (hi -401.7)  -> echo (want echo) OK
+G3 punish: E=+1.539 (lo +1.297)  A=+1.955 (lo +1.724)  G=-4998.7 (hi -4460.5)  -> punish (want punish) OK
+G3 PASS

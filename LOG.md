@@ -211,3 +211,12 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
   - **Test 1:** fork rounds 1-15 and force a 10% cut or rise for one seller in round 16, with negotiation ON vs OFF, seeds 0-9, and a sham copy. Readings R1 to R3 (excess following over a static best responder, cut-specific, deterrence).
   - **Test 2:** re-score the 20 Oct 25 episodes with Qwen3-14B and three other families (Gemma 3 27B, DeepSeek V4.1 Flash, gpt-oss-120b) under the original rubric and a price-aware rubric. Readings PC, Q1 and Q2.
   - **Gates G1 to G3** must pass before any fork runs. Caps: Modal $10, Nebius $6. Why: these are the two open pieces found by the Oct 27 literature check (Tran & Yu 2610.28787 already ran the audit and the anchor test in this game).
+
+- **2026-10-27 14:55 ET, Claude Code for Alfredo. Gates passed before any run** (`results/hawthorne_audit/gates_before_runs.log`).
+  - **G1:** 40 rebuilt-state prompt checks on the 10 Oct 25 files.
+  - **G2:** in mock-LLM episodes, the patched code without options equals his code, and the forced price works as registered.
+  - **G3:** the synthetic best responder, echo rival and punisher are each classified correctly.
+  - **Clarification before data:** the reading is R1-first. In G3 the static best responder already gives A = +0.065 (lower bound +0.050), so R2 alone does not count.
+  - **Patch:** `patch_audit.diff`, applied to his commit 29878b03 in a local worktree on branch caiac-audit, never pushed to his repo.
+  - **Code:** `fork_audit.py` and `analyze_audit.py`.
+  - **Next:** deploy `hawthorne-vllm-audit` (H100, at most 2 containers), then run the prefixes for seeds 5-9.
