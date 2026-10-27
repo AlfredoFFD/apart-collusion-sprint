@@ -1,0 +1,11 @@
+start 2026-10-27 15:09:46 ET
+prefix OFF: 5 of 5 to run -> runs\prefix\OFF
+[llm] 1 errors so far; latest: RuntimeError:server 503: {"error":"no upstreams available"}
+[llm] 10 errors so far; latest: RuntimeError:server 503: {"error":"no upstreams available"}
+[llm] 100 errors so far; latest: RuntimeError:server 503: {"error":"no upstreams available"}
+done unwatched__profitDMI__r15__s6 mean price 15.93 perr=0 869s
+done unwatched__profitDMI__r15__s9 mean price 16.20 perr=0 964s
+done unwatched__profitDMI__r15__s5 mean price 17.13 perr=0 997s
+done unwatched__profitDMI__r15__s8 mean price 17.23 perr=0 1009s
+done unwatched__profitDMI__r15__s7 mean price 16.33 perr=0 1089s
+prefix OFF done in 1089s; calls=150 prompt_tok=167,753 completion_tok=425,203 errors={'RuntimeError:server 503: {"error":"no upstreams available"}': 110}

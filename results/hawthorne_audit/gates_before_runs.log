@@ -15,3 +15,5 @@ CAP TEST: requests sent 1, rows written 1 (want 1 and 1): PASS
 PARTIAL TEST: exit 0; status PARTIAL, no verdict; Q1 PARTIAL, no verdict; Q2 PARTIAL, no verdict: PASS
 CAP TEST (valid replies): requests sent 1, rows written 1 (want 1 and 1): PASS
 CAP TEST (invalid first reply): requests sent 1, rows written 0 (want 1 and 0): PASS
+2026-10-27 15:28 ET (after the prefix stage)
+G1 PASS: 60 prompt checks on 20 files (line prefix before the negotiation block for ON, byte-exact for OFF)

@@ -245,3 +245,10 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
   - **The fix:** each billable response now counts against the cap the moment it arrives, retries included. The overshoot is at most `concurrency` calls already in flight.
   - **`test_rescore_cap.py`** now also runs the reviewer case (every first reply is invalid JSON): 1 request sent, 0 rows written, **PASS**. The valid case and the partial test still PASS.
   - **Runs:** the audit server finished booting at 15:12 ET (the earlier 503s came from the cold start and were retried by his client), and the prefix runs are in progress.
+
+- **2026-10-27 15:29 ET, Claude Code. Prefix stage done; fork decision, before any fork runs.**
+  - **Prefixes:** the 10 new 15-round prefixes (seeds 5-9, ON and OFF) are in `results/hawthorne_audit/runs/prefix/`. Parse errors: ON 2 / 0 / 2 / 3 / 0, OFF 0. Completion tokens: 0.27M (ON) and 0.43M (OFF).
+  - **G1:** all 20 prefix files pass, 60 prompt checks.
+  - **Modal bill so far:** $2.64 for the audit app (smoke test, prefixes, concurrent Qwen re-score).
+  - **Projection:** the forks are 10x the prefix token work, about 7M completion tokens. At 2 H100s x about 3k tok/s they take about 30-40 min, so about $4.5 more and about $7 in total, under the $10 cap. **All five copies are kept** (the contingency is not triggered).
+  - **Guard:** if the audit app bill passes $9.50 during the forks, the runs stop and the result is PARTIAL.
