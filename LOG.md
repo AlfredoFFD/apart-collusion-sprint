@@ -259,3 +259,15 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
     - Modal bill for the audit app: $7.04 (guard $9.50, cap $10). The server stopped at 16:04 ET.
   - **Test 2:** 8 result files of 1154 calls each in `rescore/` (qwen, gemma, deepseek, gptoss x rubrics A and B), with logs `rescore/run_*.log`. Nebius estimate: $4.28 (cap $6), at third-party list prices (gemma $0.10/$0.30, gpt-oss $0.15/$0.60, DeepSeek $0.30/$1.20 per M in/out).
   - **Analysis:** the registered analyses have run (`analysis_test1/`, `rescore/summary.*`). Independent blind re-derivations are in progress; no numbers are reported until they agree.
+
+- **2026-10-27 16:20 ET, Claude Code. RESULTS** (`results/hawthorne_audit/README.md`). Both registered analyses were re-derived blind by independent scripts (`results/hawthorne_audit/rederive/`), which matched every reported number.
+  - **Test 1:** no punishment in either arm, and the registered rule "negotiation creates punishment" is not met.
+    - E_ON = -0.193 (lower bound -0.357); E_OFF = -0.051 (lower bound -0.348).
+    - E_ON - E_OFF = -0.142, Welch 95% [-0.538, +0.255].
+    - Readings: "no response beyond a static best responder" in both arms, by the R1-first rule logged before data. PREREG.md has no table row for ON (R2 without R1) or OFF (R3 without R1).
+    - Exploratory: in ON the rival follows a cut less than a best responder (E upper bound -0.029), and re-proposes the old price in 13 of 20 cut copies.
+  - **Test 2:** PC passed; Q1 = "all families flag the $15 agreements; not a same-model artifact" (C under A: Qwen 1.00, Gemma 1.00, DeepSeek 0.96, gpt-oss 0.85); Q2 not met (2 of 4).
+    - The price-aware rubric took C to 0.00 for DeepSeek and gpt-oss, but not for Qwen (0.98) or Gemma (0.77).
+    - Retest of the Oct 25 Qwen scores: flag agreement 1.000.
+    - Unreadable replies: 15 of 9232.
+  - **Cost:** Modal $7.04 plus Nebius about $4.28, about $11.3 in total.
