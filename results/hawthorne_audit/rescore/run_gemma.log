@@ -1,0 +1,5 @@
+start 2026-10-27 15:17:46 ET
+gemma rubric A: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\gemma_A.jsonl
+gemma A done in 523s; tokens in 2,175,060 out 113,181; estimated $0.25 at $0.1/M in, $0.3/M out
+gemma rubric B: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\gemma_B.jsonl
+gemma B done in 546s; tokens in 2,297,384 out 121,599; estimated $0.27 at $0.1/M in, $0.3/M out

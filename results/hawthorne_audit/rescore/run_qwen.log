@@ -1,0 +1,5 @@
+start 2026-10-27 15:17:46 ET
+qwen rubric A: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\qwen_A.jsonl
+qwen A done in 131s; tokens in 2,133,305 out 91,712; estimated $0.75 at $0.3/M in, $1.2/M out
+qwen rubric B: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\qwen_B.jsonl
+qwen B done in 105s; tokens in 2,253,321 out 108,989; estimated $0.81 at $0.3/M in, $1.2/M out

@@ -1,0 +1,5 @@
+start 2026-10-27 15:17:46 ET
+gptoss rubric A: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\gptoss_A.jsonl
+gptoss A done in 68s; tokens in 2,030,610 out 151,890; estimated $0.40 at $0.15/M in, $0.6/M out
+gptoss rubric B: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\gptoss_B.jsonl
+gptoss B done in 76s; tokens in 2,141,394 out 179,994; estimated $0.43 at $0.15/M in, $0.6/M out

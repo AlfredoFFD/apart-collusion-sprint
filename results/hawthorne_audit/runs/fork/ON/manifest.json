@@ -1,0 +1,612 @@
+[
+ {
+  "arm": "ON",
+  "seed": 0,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s0.json",
+  "source_sha256": "1db70540998611a9647bb5b651d1bfc19ced2fad9f816a81d5ac9e25bd72d45d",
+  "tag": "unwatched__profitDMIN__r30__s0"
+ },
+ {
+  "arm": "ON",
+  "seed": 0,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s0.json",
+  "source_sha256": "1db70540998611a9647bb5b651d1bfc19ced2fad9f816a81d5ac9e25bd72d45d",
+  "tag": "unwatched__profitDMIN__r30__s0"
+ },
+ {
+  "arm": "ON",
+  "seed": 0,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s0.json",
+  "source_sha256": "1db70540998611a9647bb5b651d1bfc19ced2fad9f816a81d5ac9e25bd72d45d",
+  "tag": "unwatched__profitDMIN__r30__s0"
+ },
+ {
+  "arm": "ON",
+  "seed": 0,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s0.json",
+  "source_sha256": "1db70540998611a9647bb5b651d1bfc19ced2fad9f816a81d5ac9e25bd72d45d",
+  "tag": "unwatched__profitDMIN__r30__s0"
+ },
+ {
+  "arm": "ON",
+  "seed": 0,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s0.json",
+  "source_sha256": "1db70540998611a9647bb5b651d1bfc19ced2fad9f816a81d5ac9e25bd72d45d",
+  "tag": "unwatched__profitDMIN__r30__s0"
+ },
+ {
+  "arm": "ON",
+  "seed": 1,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s1.json",
+  "source_sha256": "880c35d7ccd541fffc900d76c97f78205a34318903ae9a3eb302161d4892143e",
+  "tag": "unwatched__profitDMIN__r30__s1"
+ },
+ {
+  "arm": "ON",
+  "seed": 1,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s1.json",
+  "source_sha256": "880c35d7ccd541fffc900d76c97f78205a34318903ae9a3eb302161d4892143e",
+  "tag": "unwatched__profitDMIN__r30__s1"
+ },
+ {
+  "arm": "ON",
+  "seed": 1,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s1.json",
+  "source_sha256": "880c35d7ccd541fffc900d76c97f78205a34318903ae9a3eb302161d4892143e",
+  "tag": "unwatched__profitDMIN__r30__s1"
+ },
+ {
+  "arm": "ON",
+  "seed": 1,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s1.json",
+  "source_sha256": "880c35d7ccd541fffc900d76c97f78205a34318903ae9a3eb302161d4892143e",
+  "tag": "unwatched__profitDMIN__r30__s1"
+ },
+ {
+  "arm": "ON",
+  "seed": 1,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s1.json",
+  "source_sha256": "880c35d7ccd541fffc900d76c97f78205a34318903ae9a3eb302161d4892143e",
+  "tag": "unwatched__profitDMIN__r30__s1"
+ },
+ {
+  "arm": "ON",
+  "seed": 2,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s2.json",
+  "source_sha256": "62fea7a21e7bce7f9db5a8050cd3eee690c8c3ebfee7d273283c2ffeb33ec0d8",
+  "tag": "unwatched__profitDMIN__r30__s2"
+ },
+ {
+  "arm": "ON",
+  "seed": 2,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s2.json",
+  "source_sha256": "62fea7a21e7bce7f9db5a8050cd3eee690c8c3ebfee7d273283c2ffeb33ec0d8",
+  "tag": "unwatched__profitDMIN__r30__s2"
+ },
+ {
+  "arm": "ON",
+  "seed": 2,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s2.json",
+  "source_sha256": "62fea7a21e7bce7f9db5a8050cd3eee690c8c3ebfee7d273283c2ffeb33ec0d8",
+  "tag": "unwatched__profitDMIN__r30__s2"
+ },
+ {
+  "arm": "ON",
+  "seed": 2,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s2.json",
+  "source_sha256": "62fea7a21e7bce7f9db5a8050cd3eee690c8c3ebfee7d273283c2ffeb33ec0d8",
+  "tag": "unwatched__profitDMIN__r30__s2"
+ },
+ {
+  "arm": "ON",
+  "seed": 2,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s2.json",
+  "source_sha256": "62fea7a21e7bce7f9db5a8050cd3eee690c8c3ebfee7d273283c2ffeb33ec0d8",
+  "tag": "unwatched__profitDMIN__r30__s2"
+ },
+ {
+  "arm": "ON",
+  "seed": 3,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s3.json",
+  "source_sha256": "e772ef29bedde14fef4b6b4b21a9257a19e5eab5edc4c3745d56aa44e78f76ce",
+  "tag": "unwatched__profitDMIN__r30__s3"
+ },
+ {
+  "arm": "ON",
+  "seed": 3,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s3.json",
+  "source_sha256": "e772ef29bedde14fef4b6b4b21a9257a19e5eab5edc4c3745d56aa44e78f76ce",
+  "tag": "unwatched__profitDMIN__r30__s3"
+ },
+ {
+  "arm": "ON",
+  "seed": 3,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s3.json",
+  "source_sha256": "e772ef29bedde14fef4b6b4b21a9257a19e5eab5edc4c3745d56aa44e78f76ce",
+  "tag": "unwatched__profitDMIN__r30__s3"
+ },
+ {
+  "arm": "ON",
+  "seed": 3,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s3.json",
+  "source_sha256": "e772ef29bedde14fef4b6b4b21a9257a19e5eab5edc4c3745d56aa44e78f76ce",
+  "tag": "unwatched__profitDMIN__r30__s3"
+ },
+ {
+  "arm": "ON",
+  "seed": 3,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s3.json",
+  "source_sha256": "e772ef29bedde14fef4b6b4b21a9257a19e5eab5edc4c3745d56aa44e78f76ce",
+  "tag": "unwatched__profitDMIN__r30__s3"
+ },
+ {
+  "arm": "ON",
+  "seed": 4,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s4.json",
+  "source_sha256": "e045f56c61f6881b4afa5600fbb32e8ac6d8095eebac4f3a1c1648a78313aed2",
+  "tag": "unwatched__profitDMIN__r30__s4"
+ },
+ {
+  "arm": "ON",
+  "seed": 4,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s4.json",
+  "source_sha256": "e045f56c61f6881b4afa5600fbb32e8ac6d8095eebac4f3a1c1648a78313aed2",
+  "tag": "unwatched__profitDMIN__r30__s4"
+ },
+ {
+  "arm": "ON",
+  "seed": 4,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s4.json",
+  "source_sha256": "e045f56c61f6881b4afa5600fbb32e8ac6d8095eebac4f3a1c1648a78313aed2",
+  "tag": "unwatched__profitDMIN__r30__s4"
+ },
+ {
+  "arm": "ON",
+  "seed": 4,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s4.json",
+  "source_sha256": "e045f56c61f6881b4afa5600fbb32e8ac6d8095eebac4f3a1c1648a78313aed2",
+  "tag": "unwatched__profitDMIN__r30__s4"
+ },
+ {
+  "arm": "ON",
+  "seed": 4,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_on\\unwatched__profitDMIN__r30__s4.json",
+  "source_sha256": "e045f56c61f6881b4afa5600fbb32e8ac6d8095eebac4f3a1c1648a78313aed2",
+  "tag": "unwatched__profitDMIN__r30__s4"
+ },
+ {
+  "arm": "ON",
+  "seed": 5,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s5.json",
+  "source_sha256": "9d3b788a82d5e2662e547df234ef2cdc681ee44e1291e65931432e10440ec52b",
+  "tag": "unwatched__profitDMIN__r30__s5"
+ },
+ {
+  "arm": "ON",
+  "seed": 5,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s5.json",
+  "source_sha256": "9d3b788a82d5e2662e547df234ef2cdc681ee44e1291e65931432e10440ec52b",
+  "tag": "unwatched__profitDMIN__r30__s5"
+ },
+ {
+  "arm": "ON",
+  "seed": 5,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s5.json",
+  "source_sha256": "9d3b788a82d5e2662e547df234ef2cdc681ee44e1291e65931432e10440ec52b",
+  "tag": "unwatched__profitDMIN__r30__s5"
+ },
+ {
+  "arm": "ON",
+  "seed": 5,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s5.json",
+  "source_sha256": "9d3b788a82d5e2662e547df234ef2cdc681ee44e1291e65931432e10440ec52b",
+  "tag": "unwatched__profitDMIN__r30__s5"
+ },
+ {
+  "arm": "ON",
+  "seed": 5,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s5.json",
+  "source_sha256": "9d3b788a82d5e2662e547df234ef2cdc681ee44e1291e65931432e10440ec52b",
+  "tag": "unwatched__profitDMIN__r30__s5"
+ },
+ {
+  "arm": "ON",
+  "seed": 6,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s6.json",
+  "source_sha256": "13f07a21793423168e828c6f2c47f3e482a63a4dddf7428e4731a092704bc44c",
+  "tag": "unwatched__profitDMIN__r30__s6"
+ },
+ {
+  "arm": "ON",
+  "seed": 6,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s6.json",
+  "source_sha256": "13f07a21793423168e828c6f2c47f3e482a63a4dddf7428e4731a092704bc44c",
+  "tag": "unwatched__profitDMIN__r30__s6"
+ },
+ {
+  "arm": "ON",
+  "seed": 6,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s6.json",
+  "source_sha256": "13f07a21793423168e828c6f2c47f3e482a63a4dddf7428e4731a092704bc44c",
+  "tag": "unwatched__profitDMIN__r30__s6"
+ },
+ {
+  "arm": "ON",
+  "seed": 6,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s6.json",
+  "source_sha256": "13f07a21793423168e828c6f2c47f3e482a63a4dddf7428e4731a092704bc44c",
+  "tag": "unwatched__profitDMIN__r30__s6"
+ },
+ {
+  "arm": "ON",
+  "seed": 6,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s6.json",
+  "source_sha256": "13f07a21793423168e828c6f2c47f3e482a63a4dddf7428e4731a092704bc44c",
+  "tag": "unwatched__profitDMIN__r30__s6"
+ },
+ {
+  "arm": "ON",
+  "seed": 7,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s7.json",
+  "source_sha256": "56ba2dba3d6323afb07d554ccb7d0e2b818b71cf3aa61e3055aaeadfcaadda8a",
+  "tag": "unwatched__profitDMIN__r30__s7"
+ },
+ {
+  "arm": "ON",
+  "seed": 7,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s7.json",
+  "source_sha256": "56ba2dba3d6323afb07d554ccb7d0e2b818b71cf3aa61e3055aaeadfcaadda8a",
+  "tag": "unwatched__profitDMIN__r30__s7"
+ },
+ {
+  "arm": "ON",
+  "seed": 7,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s7.json",
+  "source_sha256": "56ba2dba3d6323afb07d554ccb7d0e2b818b71cf3aa61e3055aaeadfcaadda8a",
+  "tag": "unwatched__profitDMIN__r30__s7"
+ },
+ {
+  "arm": "ON",
+  "seed": 7,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s7.json",
+  "source_sha256": "56ba2dba3d6323afb07d554ccb7d0e2b818b71cf3aa61e3055aaeadfcaadda8a",
+  "tag": "unwatched__profitDMIN__r30__s7"
+ },
+ {
+  "arm": "ON",
+  "seed": 7,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s7.json",
+  "source_sha256": "56ba2dba3d6323afb07d554ccb7d0e2b818b71cf3aa61e3055aaeadfcaadda8a",
+  "tag": "unwatched__profitDMIN__r30__s7"
+ },
+ {
+  "arm": "ON",
+  "seed": 8,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s8.json",
+  "source_sha256": "1237fdfd6b3d3fb2d26fe38a323db9c20344fbf5421dab26f8e6c1a6bc0aa9d5",
+  "tag": "unwatched__profitDMIN__r30__s8"
+ },
+ {
+  "arm": "ON",
+  "seed": 8,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s8.json",
+  "source_sha256": "1237fdfd6b3d3fb2d26fe38a323db9c20344fbf5421dab26f8e6c1a6bc0aa9d5",
+  "tag": "unwatched__profitDMIN__r30__s8"
+ },
+ {
+  "arm": "ON",
+  "seed": 8,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s8.json",
+  "source_sha256": "1237fdfd6b3d3fb2d26fe38a323db9c20344fbf5421dab26f8e6c1a6bc0aa9d5",
+  "tag": "unwatched__profitDMIN__r30__s8"
+ },
+ {
+  "arm": "ON",
+  "seed": 8,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s8.json",
+  "source_sha256": "1237fdfd6b3d3fb2d26fe38a323db9c20344fbf5421dab26f8e6c1a6bc0aa9d5",
+  "tag": "unwatched__profitDMIN__r30__s8"
+ },
+ {
+  "arm": "ON",
+  "seed": 8,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s8.json",
+  "source_sha256": "1237fdfd6b3d3fb2d26fe38a323db9c20344fbf5421dab26f8e6c1a6bc0aa9d5",
+  "tag": "unwatched__profitDMIN__r30__s8"
+ },
+ {
+  "arm": "ON",
+  "seed": 9,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s9.json",
+  "source_sha256": "52ea27944b13a5269542b46d20919c62c4faecdb87ac623d902974c49b58a13e",
+  "tag": "unwatched__profitDMIN__r30__s9"
+ },
+ {
+  "arm": "ON",
+  "seed": 9,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s9.json",
+  "source_sha256": "52ea27944b13a5269542b46d20919c62c4faecdb87ac623d902974c49b58a13e",
+  "tag": "unwatched__profitDMIN__r30__s9"
+ },
+ {
+  "arm": "ON",
+  "seed": 9,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s9.json",
+  "source_sha256": "52ea27944b13a5269542b46d20919c62c4faecdb87ac623d902974c49b58a13e",
+  "tag": "unwatched__profitDMIN__r30__s9"
+ },
+ {
+  "arm": "ON",
+  "seed": 9,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s9.json",
+  "source_sha256": "52ea27944b13a5269542b46d20919c62c4faecdb87ac623d902974c49b58a13e",
+  "tag": "unwatched__profitDMIN__r30__s9"
+ },
+ {
+  "arm": "ON",
+  "seed": 9,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\ON\\unwatched__profitDMIN__r15__s9.json",
+  "source_sha256": "52ea27944b13a5269542b46d20919c62c4faecdb87ac623d902974c49b58a13e",
+  "tag": "unwatched__profitDMIN__r30__s9"
+ }
+]

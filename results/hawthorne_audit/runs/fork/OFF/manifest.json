@@ -1,0 +1,612 @@
+[
+ {
+  "arm": "OFF",
+  "seed": 0,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s0.json",
+  "source_sha256": "6b9c49efbfdaef11a75579601bde6eada890dd3121ceab2085811585d236a80d",
+  "tag": "unwatched__profitDMI__r30__s0"
+ },
+ {
+  "arm": "OFF",
+  "seed": 0,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s0.json",
+  "source_sha256": "6b9c49efbfdaef11a75579601bde6eada890dd3121ceab2085811585d236a80d",
+  "tag": "unwatched__profitDMI__r30__s0"
+ },
+ {
+  "arm": "OFF",
+  "seed": 0,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s0.json",
+  "source_sha256": "6b9c49efbfdaef11a75579601bde6eada890dd3121ceab2085811585d236a80d",
+  "tag": "unwatched__profitDMI__r30__s0"
+ },
+ {
+  "arm": "OFF",
+  "seed": 0,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s0.json",
+  "source_sha256": "6b9c49efbfdaef11a75579601bde6eada890dd3121ceab2085811585d236a80d",
+  "tag": "unwatched__profitDMI__r30__s0"
+ },
+ {
+  "arm": "OFF",
+  "seed": 0,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s0.json",
+  "source_sha256": "6b9c49efbfdaef11a75579601bde6eada890dd3121ceab2085811585d236a80d",
+  "tag": "unwatched__profitDMI__r30__s0"
+ },
+ {
+  "arm": "OFF",
+  "seed": 1,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s1.json",
+  "source_sha256": "8d9ca73a64c783e0cb9534f8677442aa18ff4200f528153ac9f73d9a5fd8a4f0",
+  "tag": "unwatched__profitDMI__r30__s1"
+ },
+ {
+  "arm": "OFF",
+  "seed": 1,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s1.json",
+  "source_sha256": "8d9ca73a64c783e0cb9534f8677442aa18ff4200f528153ac9f73d9a5fd8a4f0",
+  "tag": "unwatched__profitDMI__r30__s1"
+ },
+ {
+  "arm": "OFF",
+  "seed": 1,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s1.json",
+  "source_sha256": "8d9ca73a64c783e0cb9534f8677442aa18ff4200f528153ac9f73d9a5fd8a4f0",
+  "tag": "unwatched__profitDMI__r30__s1"
+ },
+ {
+  "arm": "OFF",
+  "seed": 1,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s1.json",
+  "source_sha256": "8d9ca73a64c783e0cb9534f8677442aa18ff4200f528153ac9f73d9a5fd8a4f0",
+  "tag": "unwatched__profitDMI__r30__s1"
+ },
+ {
+  "arm": "OFF",
+  "seed": 1,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s1.json",
+  "source_sha256": "8d9ca73a64c783e0cb9534f8677442aa18ff4200f528153ac9f73d9a5fd8a4f0",
+  "tag": "unwatched__profitDMI__r30__s1"
+ },
+ {
+  "arm": "OFF",
+  "seed": 2,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s2.json",
+  "source_sha256": "97f1dfcc82468e8a3f68689233c2271715f4fd7cf14f5129ee242ddf07d5009a",
+  "tag": "unwatched__profitDMI__r30__s2"
+ },
+ {
+  "arm": "OFF",
+  "seed": 2,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s2.json",
+  "source_sha256": "97f1dfcc82468e8a3f68689233c2271715f4fd7cf14f5129ee242ddf07d5009a",
+  "tag": "unwatched__profitDMI__r30__s2"
+ },
+ {
+  "arm": "OFF",
+  "seed": 2,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s2.json",
+  "source_sha256": "97f1dfcc82468e8a3f68689233c2271715f4fd7cf14f5129ee242ddf07d5009a",
+  "tag": "unwatched__profitDMI__r30__s2"
+ },
+ {
+  "arm": "OFF",
+  "seed": 2,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s2.json",
+  "source_sha256": "97f1dfcc82468e8a3f68689233c2271715f4fd7cf14f5129ee242ddf07d5009a",
+  "tag": "unwatched__profitDMI__r30__s2"
+ },
+ {
+  "arm": "OFF",
+  "seed": 2,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s2.json",
+  "source_sha256": "97f1dfcc82468e8a3f68689233c2271715f4fd7cf14f5129ee242ddf07d5009a",
+  "tag": "unwatched__profitDMI__r30__s2"
+ },
+ {
+  "arm": "OFF",
+  "seed": 3,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s3.json",
+  "source_sha256": "786e2e871fc508e69128b8f58920178c09941cc9199c3a737f626a1e0f5829cc",
+  "tag": "unwatched__profitDMI__r30__s3"
+ },
+ {
+  "arm": "OFF",
+  "seed": 3,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s3.json",
+  "source_sha256": "786e2e871fc508e69128b8f58920178c09941cc9199c3a737f626a1e0f5829cc",
+  "tag": "unwatched__profitDMI__r30__s3"
+ },
+ {
+  "arm": "OFF",
+  "seed": 3,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s3.json",
+  "source_sha256": "786e2e871fc508e69128b8f58920178c09941cc9199c3a737f626a1e0f5829cc",
+  "tag": "unwatched__profitDMI__r30__s3"
+ },
+ {
+  "arm": "OFF",
+  "seed": 3,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s3.json",
+  "source_sha256": "786e2e871fc508e69128b8f58920178c09941cc9199c3a737f626a1e0f5829cc",
+  "tag": "unwatched__profitDMI__r30__s3"
+ },
+ {
+  "arm": "OFF",
+  "seed": 3,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s3.json",
+  "source_sha256": "786e2e871fc508e69128b8f58920178c09941cc9199c3a737f626a1e0f5829cc",
+  "tag": "unwatched__profitDMI__r30__s3"
+ },
+ {
+  "arm": "OFF",
+  "seed": 4,
+  "copy": "S",
+  "force": null,
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s4.json",
+  "source_sha256": "bcb0fff6ce8ecbdc7f24fe33d022972a12bdebc5a8a00abfd3b582d1d4b0c58a",
+  "tag": "unwatched__profitDMI__r30__s4"
+ },
+ {
+  "arm": "OFF",
+  "seed": 4,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s4.json",
+  "source_sha256": "bcb0fff6ce8ecbdc7f24fe33d022972a12bdebc5a8a00abfd3b582d1d4b0c58a",
+  "tag": "unwatched__profitDMI__r30__s4"
+ },
+ {
+  "arm": "OFF",
+  "seed": 4,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s4.json",
+  "source_sha256": "bcb0fff6ce8ecbdc7f24fe33d022972a12bdebc5a8a00abfd3b582d1d4b0c58a",
+  "tag": "unwatched__profitDMI__r30__s4"
+ },
+ {
+  "arm": "OFF",
+  "seed": 4,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s4.json",
+  "source_sha256": "bcb0fff6ce8ecbdc7f24fe33d022972a12bdebc5a8a00abfd3b582d1d4b0c58a",
+  "tag": "unwatched__profitDMI__r30__s4"
+ },
+ {
+  "arm": "OFF",
+  "seed": 4,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "C:\\Users\\fabia\\dev\\apart-collusion-sprint\\results\\hawthorne_negotiation\\neg_off\\unwatched__profitDMI__r30__s4.json",
+  "source_sha256": "bcb0fff6ce8ecbdc7f24fe33d022972a12bdebc5a8a00abfd3b582d1d4b0c58a",
+  "tag": "unwatched__profitDMI__r30__s4"
+ },
+ {
+  "arm": "OFF",
+  "seed": 5,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s5.json",
+  "source_sha256": "1f7dec3c1eb9c44f947f584791c97d9b608bb32a7aa149321ddf9400dc1b12ed",
+  "tag": "unwatched__profitDMI__r30__s5"
+ },
+ {
+  "arm": "OFF",
+  "seed": 5,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s5.json",
+  "source_sha256": "1f7dec3c1eb9c44f947f584791c97d9b608bb32a7aa149321ddf9400dc1b12ed",
+  "tag": "unwatched__profitDMI__r30__s5"
+ },
+ {
+  "arm": "OFF",
+  "seed": 5,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s5.json",
+  "source_sha256": "1f7dec3c1eb9c44f947f584791c97d9b608bb32a7aa149321ddf9400dc1b12ed",
+  "tag": "unwatched__profitDMI__r30__s5"
+ },
+ {
+  "arm": "OFF",
+  "seed": 5,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s5.json",
+  "source_sha256": "1f7dec3c1eb9c44f947f584791c97d9b608bb32a7aa149321ddf9400dc1b12ed",
+  "tag": "unwatched__profitDMI__r30__s5"
+ },
+ {
+  "arm": "OFF",
+  "seed": 5,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s5.json",
+  "source_sha256": "1f7dec3c1eb9c44f947f584791c97d9b608bb32a7aa149321ddf9400dc1b12ed",
+  "tag": "unwatched__profitDMI__r30__s5"
+ },
+ {
+  "arm": "OFF",
+  "seed": 6,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s6.json",
+  "source_sha256": "8c4afb06e21c7d14e20bbd41315dac9ed199d94b8c03a4308d2ed766088d3a55",
+  "tag": "unwatched__profitDMI__r30__s6"
+ },
+ {
+  "arm": "OFF",
+  "seed": 6,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s6.json",
+  "source_sha256": "8c4afb06e21c7d14e20bbd41315dac9ed199d94b8c03a4308d2ed766088d3a55",
+  "tag": "unwatched__profitDMI__r30__s6"
+ },
+ {
+  "arm": "OFF",
+  "seed": 6,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s6.json",
+  "source_sha256": "8c4afb06e21c7d14e20bbd41315dac9ed199d94b8c03a4308d2ed766088d3a55",
+  "tag": "unwatched__profitDMI__r30__s6"
+ },
+ {
+  "arm": "OFF",
+  "seed": 6,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s6.json",
+  "source_sha256": "8c4afb06e21c7d14e20bbd41315dac9ed199d94b8c03a4308d2ed766088d3a55",
+  "tag": "unwatched__profitDMI__r30__s6"
+ },
+ {
+  "arm": "OFF",
+  "seed": 6,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s6.json",
+  "source_sha256": "8c4afb06e21c7d14e20bbd41315dac9ed199d94b8c03a4308d2ed766088d3a55",
+  "tag": "unwatched__profitDMI__r30__s6"
+ },
+ {
+  "arm": "OFF",
+  "seed": 7,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s7.json",
+  "source_sha256": "eb851860cab79479601d669f23c19336fce5b1fdda7ff005b86434f9fa28ea8c",
+  "tag": "unwatched__profitDMI__r30__s7"
+ },
+ {
+  "arm": "OFF",
+  "seed": 7,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s7.json",
+  "source_sha256": "eb851860cab79479601d669f23c19336fce5b1fdda7ff005b86434f9fa28ea8c",
+  "tag": "unwatched__profitDMI__r30__s7"
+ },
+ {
+  "arm": "OFF",
+  "seed": 7,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s7.json",
+  "source_sha256": "eb851860cab79479601d669f23c19336fce5b1fdda7ff005b86434f9fa28ea8c",
+  "tag": "unwatched__profitDMI__r30__s7"
+ },
+ {
+  "arm": "OFF",
+  "seed": 7,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s7.json",
+  "source_sha256": "eb851860cab79479601d669f23c19336fce5b1fdda7ff005b86434f9fa28ea8c",
+  "tag": "unwatched__profitDMI__r30__s7"
+ },
+ {
+  "arm": "OFF",
+  "seed": 7,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s7.json",
+  "source_sha256": "eb851860cab79479601d669f23c19336fce5b1fdda7ff005b86434f9fa28ea8c",
+  "tag": "unwatched__profitDMI__r30__s7"
+ },
+ {
+  "arm": "OFF",
+  "seed": 8,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s8.json",
+  "source_sha256": "68ad028aa77cf36d5ae765aac6fa9b006009bda1fba27ceca3a238aca0e1850c",
+  "tag": "unwatched__profitDMI__r30__s8"
+ },
+ {
+  "arm": "OFF",
+  "seed": 8,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s8.json",
+  "source_sha256": "68ad028aa77cf36d5ae765aac6fa9b006009bda1fba27ceca3a238aca0e1850c",
+  "tag": "unwatched__profitDMI__r30__s8"
+ },
+ {
+  "arm": "OFF",
+  "seed": 8,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s8.json",
+  "source_sha256": "68ad028aa77cf36d5ae765aac6fa9b006009bda1fba27ceca3a238aca0e1850c",
+  "tag": "unwatched__profitDMI__r30__s8"
+ },
+ {
+  "arm": "OFF",
+  "seed": 8,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s8.json",
+  "source_sha256": "68ad028aa77cf36d5ae765aac6fa9b006009bda1fba27ceca3a238aca0e1850c",
+  "tag": "unwatched__profitDMI__r30__s8"
+ },
+ {
+  "arm": "OFF",
+  "seed": 8,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s8.json",
+  "source_sha256": "68ad028aa77cf36d5ae765aac6fa9b006009bda1fba27ceca3a238aca0e1850c",
+  "tag": "unwatched__profitDMI__r30__s8"
+ },
+ {
+  "arm": "OFF",
+  "seed": 9,
+  "copy": "S",
+  "force": null,
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s9.json",
+  "source_sha256": "b1f6daff6ea7afc7f4ce7083bf6360545e6c12c65901a2f0fb4fa1d35fddbd34",
+  "tag": "unwatched__profitDMI__r30__s9"
+ },
+ {
+  "arm": "OFF",
+  "seed": 9,
+  "copy": "C0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s9.json",
+  "source_sha256": "b1f6daff6ea7afc7f4ce7083bf6360545e6c12c65901a2f0fb4fa1d35fddbd34",
+  "tag": "unwatched__profitDMI__r30__s9"
+ },
+ {
+  "arm": "OFF",
+  "seed": 9,
+  "copy": "R0",
+  "force": {
+   "round": 15,
+   "seller": 0,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s9.json",
+  "source_sha256": "b1f6daff6ea7afc7f4ce7083bf6360545e6c12c65901a2f0fb4fa1d35fddbd34",
+  "tag": "unwatched__profitDMI__r30__s9"
+ },
+ {
+  "arm": "OFF",
+  "seed": 9,
+  "copy": "C1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 0.9
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s9.json",
+  "source_sha256": "b1f6daff6ea7afc7f4ce7083bf6360545e6c12c65901a2f0fb4fa1d35fddbd34",
+  "tag": "unwatched__profitDMI__r30__s9"
+ },
+ {
+  "arm": "OFF",
+  "seed": 9,
+  "copy": "R1",
+  "force": {
+   "round": 15,
+   "seller": 1,
+   "factor": 1.1
+  },
+  "source": "runs\\prefix\\OFF\\unwatched__profitDMI__r15__s9.json",
+  "source_sha256": "b1f6daff6ea7afc7f4ce7083bf6360545e6c12c65901a2f0fb4fa1d35fddbd34",
+  "tag": "unwatched__profitDMI__r30__s9"
+ }
+]

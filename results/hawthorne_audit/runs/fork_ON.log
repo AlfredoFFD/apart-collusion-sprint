@@ -1,0 +1,108 @@
+start 2026-10-27 15:29:22 ET
+fork ON: 50 copies to run -> runs\fork\ON
+[unwatched__profitDMIN__r30__s0] resuming at round 16
+[unwatched__profitDMIN__r30__s0] resuming at round 16
+[unwatched__profitDMIN__r30__s0] resuming at round 16
+[unwatched__profitDMIN__r30__s0] resuming at round 16
+[unwatched__profitDMIN__r30__s0] resuming at round 16
+[unwatched__profitDMIN__r30__s1] resuming at round 16
+[unwatched__profitDMIN__r30__s1] resuming at round 16
+[unwatched__profitDMIN__r30__s1] resuming at round 16
+[unwatched__profitDMIN__r30__s1] resuming at round 16
+[unwatched__profitDMIN__r30__s1] resuming at round 16
+[unwatched__profitDMIN__r30__s2] resuming at round 16
+[unwatched__profitDMIN__r30__s2] resuming at round 16
+[unwatched__profitDMIN__r30__s2] resuming at round 16
+[unwatched__profitDMIN__r30__s2] resuming at round 16
+[unwatched__profitDMIN__r30__s2] resuming at round 16
+[unwatched__profitDMIN__r30__s3] resuming at round 16
+[unwatched__profitDMIN__r30__s3] resuming at round 16
+[unwatched__profitDMIN__r30__s3] resuming at round 16
+[unwatched__profitDMIN__r30__s3] resuming at round 16
+[unwatched__profitDMIN__r30__s3] resuming at round 16
+[unwatched__profitDMIN__r30__s4] resuming at round 16
+[unwatched__profitDMIN__r30__s4] resuming at round 16
+[unwatched__profitDMIN__r30__s4] resuming at round 16
+[unwatched__profitDMIN__r30__s4] resuming at round 16
+[unwatched__profitDMIN__r30__s4] resuming at round 16
+[unwatched__profitDMIN__r30__s5] resuming at round 16
+[unwatched__profitDMIN__r30__s5] resuming at round 16
+[unwatched__profitDMIN__r30__s5] resuming at round 16
+[unwatched__profitDMIN__r30__s5] resuming at round 16
+[unwatched__profitDMIN__r30__s5] resuming at round 16
+[unwatched__profitDMIN__r30__s6] resuming at round 16
+[unwatched__profitDMIN__r30__s6] resuming at round 16
+[unwatched__profitDMIN__r30__s6] resuming at round 16
+[unwatched__profitDMIN__r30__s6] resuming at round 16
+[unwatched__profitDMIN__r30__s6] resuming at round 16
+[unwatched__profitDMIN__r30__s7] resuming at round 16
+[unwatched__profitDMIN__r30__s7] resuming at round 16
+[unwatched__profitDMIN__r30__s7] resuming at round 16
+[unwatched__profitDMIN__r30__s7] resuming at round 16
+[unwatched__profitDMIN__r30__s7] resuming at round 16
+[unwatched__profitDMIN__r30__s8] resuming at round 16
+[unwatched__profitDMIN__r30__s8] resuming at round 16
+[unwatched__profitDMIN__r30__s8] resuming at round 16
+[unwatched__profitDMIN__r30__s8] resuming at round 16
+[unwatched__profitDMIN__r30__s8] resuming at round 16
+[unwatched__profitDMIN__r30__s9] resuming at round 16
+[unwatched__profitDMIN__r30__s9] resuming at round 16
+[unwatched__profitDMIN__r30__s9] resuming at round 16
+[unwatched__profitDMIN__r30__s9] resuming at round 16
+[unwatched__profitDMIN__r30__s9] resuming at round 16
+FAILED ON C1 unwatched__profitDMIN__r30__s7: PermissionError(13, 'Access is denied')
+done ON S unwatched__profitDMIN__r30__s8 perr=3 496s
+done ON S unwatched__profitDMIN__r30__s1 perr=0 500s
+done ON S unwatched__profitDMIN__r30__s3 perr=2 515s
+done ON R0 unwatched__profitDMIN__r30__s8 perr=3 549s
+FAILED ON R1 unwatched__profitDMIN__r30__s6: PermissionError(13, 'Access is denied')
+done ON R1 unwatched__profitDMIN__r30__s1 perr=1 572s
+done ON S unwatched__profitDMIN__r30__s9 perr=1 573s
+done ON S unwatched__profitDMIN__r30__s2 perr=1 577s
+done ON R0 unwatched__profitDMIN__r30__s3 perr=2 579s
+done ON R1 unwatched__profitDMIN__r30__s9 perr=3 581s
+done ON R1 unwatched__profitDMIN__r30__s3 perr=5 603s
+done ON R0 unwatched__profitDMIN__r30__s1 perr=5 610s
+done ON C0 unwatched__profitDMIN__r30__s9 perr=2 651s
+done ON R0 unwatched__profitDMIN__r30__s9 perr=5 658s
+done ON R1 unwatched__profitDMIN__r30__s2 perr=0 666s
+done ON R0 unwatched__profitDMIN__r30__s6 perr=1 671s
+done ON C0 unwatched__profitDMIN__r30__s6 perr=1 677s
+done ON R0 unwatched__profitDMIN__r30__s2 perr=2 684s
+done ON C0 unwatched__profitDMIN__r30__s2 perr=1 699s
+done ON C1 unwatched__profitDMIN__r30__s1 perr=2 701s
+done ON S unwatched__profitDMIN__r30__s6 perr=1 713s
+done ON C1 unwatched__profitDMIN__r30__s6 perr=1 717s
+done ON C1 unwatched__profitDMIN__r30__s8 perr=4 768s
+done ON C0 unwatched__profitDMIN__r30__s8 perr=3 785s
+done ON C0 unwatched__profitDMIN__r30__s5 perr=2 790s
+done ON C1 unwatched__profitDMIN__r30__s5 perr=2 795s
+done ON C0 unwatched__profitDMIN__r30__s1 perr=1 819s
+done ON S unwatched__profitDMIN__r30__s7 perr=2 825s
+done ON R0 unwatched__profitDMIN__r30__s4 perr=1 836s
+done ON R1 unwatched__profitDMIN__r30__s4 perr=1 846s
+done ON R0 unwatched__profitDMIN__r30__s5 perr=2 848s
+done ON S unwatched__profitDMIN__r30__s0 perr=3 865s
+done ON R1 unwatched__profitDMIN__r30__s0 perr=1 864s
+done ON S unwatched__profitDMIN__r30__s4 perr=1 867s
+done ON R1 unwatched__profitDMIN__r30__s5 perr=2 875s
+done ON C0 unwatched__profitDMIN__r30__s3 perr=1 899s
+done ON C1 unwatched__profitDMIN__r30__s0 perr=1 916s
+done ON R1 unwatched__profitDMIN__r30__s7 perr=3 921s
+done ON C1 unwatched__profitDMIN__r30__s9 perr=0 932s
+done ON R1 unwatched__profitDMIN__r30__s8 perr=3 933s
+done ON C1 unwatched__profitDMIN__r30__s4 perr=2 968s
+done ON C0 unwatched__profitDMIN__r30__s4 perr=1 980s
+done ON R0 unwatched__profitDMIN__r30__s0 perr=2 981s
+done ON C0 unwatched__profitDMIN__r30__s0 perr=1 1009s
+done ON R0 unwatched__profitDMIN__r30__s7 perr=2 1039s
+done ON C1 unwatched__profitDMIN__r30__s3 perr=1 1040s
+done ON S unwatched__profitDMIN__r30__s5 perr=3 1073s
+done ON C1 unwatched__profitDMIN__r30__s2 perr=0 1095s
+done ON C0 unwatched__profitDMIN__r30__s7 perr=2 1098s
+retrying 2
+[unwatched__profitDMIN__r30__s6] resuming at round 26
+[unwatched__profitDMIN__r30__s7] resuming at round 21
+done ON R1 unwatched__profitDMIN__r30__s6 perr=1 625s
+done ON C1 unwatched__profitDMIN__r30__s7 perr=2 543s
+fork ON done in 1343s; calls=4512 prompt_tok=8,004,375 completion_tok=2,359,721 errors={}

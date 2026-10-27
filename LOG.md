@@ -252,3 +252,10 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
   - **Modal bill so far:** $2.64 for the audit app (smoke test, prefixes, concurrent Qwen re-score).
   - **Projection:** the forks are 10x the prefix token work, about 7M completion tokens. At 2 H100s x about 3k tok/s they take about 30-40 min, so about $4.5 more and about $7 in total, under the $10 cap. **All five copies are kept** (the contingency is not triggered).
   - **Guard:** if the audit app bill passes $9.50 during the forks, the runs stop and the result is PARTIAL.
+
+- **2026-10-27 16:11 ET, Claude Code. Raw data committed before any interpretation is reported.**
+  - **Test 1:** 100 fork copies in `runs/fork/{ON,OFF}/{S,C0,R0,C1,R1}/`, with manifests and the runner logs `runs/fork_ON.log` and `runs/fork_OFF.log`. Ran 15:29-16:03 ET.
+    - Three copies (ON C1 s7, ON R1 s6, OFF C1 s7) hit a Windows PermissionError while saving a checkpoint. They resumed from their last saved round (rounds 21, 26 and 18; all after the forced round 16), as his runner is designed to do.
+    - Modal bill for the audit app: $7.04 (guard $9.50, cap $10). The server stopped at 16:04 ET.
+  - **Test 2:** 8 result files of 1154 calls each in `rescore/` (qwen, gemma, deepseek, gptoss x rubrics A and B), with logs `rescore/run_*.log`. Nebius estimate: $4.28 (cap $6), at third-party list prices (gemma $0.10/$0.30, gpt-oss $0.15/$0.60, DeepSeek $0.30/$1.20 per M in/out).
+  - **Analysis:** the registered analyses have run (`analysis_test1/`, `rescore/summary.*`). Independent blind re-derivations are in progress; no numbers are reported until they agree.

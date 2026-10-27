@@ -2,3 +2,5 @@ _gate_g2/
 __pycache__/
 rescore/inputs.jsonl
 rescore_smoke/
+runs/fork/*/*/_ckpt/
+runs/prefix/*/_ckpt/

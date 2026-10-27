@@ -1,0 +1,5 @@
+start 2026-10-27 15:17:46 ET
+deepseek rubric A: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\deepseek_A.jsonl
+deepseek A done in 1340s; tokens in 2,264,397 out 606,649; estimated $1.41 at $0.3/M in, $1.2/M out
+deepseek rubric B: 1154 of 1154 calls to run -> C:\Users\fabia\dev\apart-collusion-sprint\results\hawthorne_audit\rescore\deepseek_B.jsonl
+deepseek B done in 1771s; tokens in 2,321,556 out 688,987; estimated $1.52 at $0.3/M in, $1.2/M out
