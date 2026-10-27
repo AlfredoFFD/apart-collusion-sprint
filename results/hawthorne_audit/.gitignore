@@ -1,2 +1,4 @@
 _gate_g2/
 __pycache__/
+rescore/inputs.jsonl
+rescore_smoke/

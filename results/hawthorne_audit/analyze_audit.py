@@ -189,8 +189,8 @@ def analyse(runs: Path, copies_reg: list[str], out: Path) -> dict:
     else:
         result["verdict"] = "PARTIAL, no verdict"
     out.mkdir(parents=True, exist_ok=True)
-    (out / "summary.json").write_text(json.dumps(result, indent=1, default=str))
-    with open(out / "per_copy.csv", "w", newline="") as f:
+    (out / "summary.json").write_text(json.dumps(result, indent=1, default=str), encoding="utf-8")
+    with open(out / "per_copy.csv", "w", newline="", encoding="utf-8") as f:
         cols = ["arm", "seed", "copy", "delta", "F", "F5", "B", "G", "return_round", "rival_msg_threat",
                 "rival_msg_reproposal"]
         wr = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
@@ -229,7 +229,7 @@ def write_md(res: dict, path: Path) -> None:
         L += ["## Negotiation", "",
               f"E_ON − E_OFF = {_f(w['diff'])}, Welch 95% [{_f(w['lo'])}, {_f(w['hi'])}].",
               f"Negotiation creates punishment (registered rule): **{res['negotiation_creates_punishment']}**.", ""]
-    path.write_text("\n".join(L) + "\n")
+    path.write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
 # ------------------------------------------------------------------------------------------------ gate G3

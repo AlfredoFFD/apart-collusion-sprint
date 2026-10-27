@@ -220,3 +220,12 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
   - **Patch:** `patch_audit.diff`, applied to his commit 29878b03 in a local worktree on branch caiac-audit, never pushed to his repo.
   - **Code:** `fork_audit.py` and `analyze_audit.py`.
   - **Next:** deploy `hawthorne-vllm-audit` (H100, at most 2 containers), then run the prefixes for seeds 5-9.
+
+- **2026-10-27 15:02 ET, Claude Code.** The Codex pre-push review blocked commit 6085de2a.
+  - **The bug:** `analyze_audit.py` wrote its UTF-8 report with the Windows default encoding, so it would crash on characters like "−" and "≥".
+  - **The fix:** every analysis write now uses encoding="utf-8".
+  - **Added `test_analysis_e2e.py`:** synthetic files in the real format, run through the real loader and writer. It gives ON (punisher) = punishment and OFF (best responder) = none, and the UTF-8 report is written: **PASS** (appended to `gates_before_runs.log`).
+  - **Added `rescore_monitors.py` (Test 2):**
+    - `build` gives 1154 monitor inputs (554 message, 600 reasoning) from the 20 Oct 25 files; `rescore/inputs.jsonl`, sha256 54d77b970eb58dc0..., not committed because it can be rebuilt.
+    - Nebius smoke test: 4 calls each for gemma, deepseek and gptoss, all parsed. Written to `rescore_smoke/`, not part of the data.
+  - **Server:** `hawthorne-vllm-audit` passed `smoke_test.py` (`results/hawthorne_audit/smoke_test.log`). No experiment data yet.
