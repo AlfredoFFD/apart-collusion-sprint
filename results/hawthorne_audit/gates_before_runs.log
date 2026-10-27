@@ -12,3 +12,4 @@ E2E PASS
 STOP: estimated $1.00 passed this run's cap $0.50
 gemma A done in 0s; tokens in 1,000,000 out 0; estimated $1.00 at $1.0/M in, $0.0/M out
 CAP TEST: requests sent 1, rows written 1 (want 1 and 1): PASS
+PARTIAL TEST: exit 0; status PARTIAL, no verdict; Q1 PARTIAL, no verdict; Q2 PARTIAL, no verdict: PASS

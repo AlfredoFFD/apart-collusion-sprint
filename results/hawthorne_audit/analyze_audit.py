@@ -296,6 +296,10 @@ def selftest() -> bool:
 
 
 def main() -> None:
+    try:  # never crash on a Windows cp1252 console
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:  # noqa: BLE001
+        pass
     p = argparse.ArgumentParser()
     p.add_argument("--runs", default=None)
     p.add_argument("--copies", default="S,C0,R0,C1,R1")

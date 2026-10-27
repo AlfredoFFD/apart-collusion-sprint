@@ -233,3 +233,10 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
 - **2026-10-27 15:06 ET, Claude Code.** The Codex pre-push review blocked again, on a real bug: in `rescore_monitors.py`, requests already queued would still be sent after the spending cap was passed.
   - **The fix:** the stop flag is now checked after the wait, right before each request.
   - **Added `test_rescore_cap.py`:** mocked API, $1 per call, $0.50 cap. It sent 1 request and wrote 1 row: **PASS** (appended to `gates_before_runs.log`).
+
+- **2026-10-27 15:10 ET, Claude Code.** The Codex pre-push review blocked a third time, on two real bugs in `rescore_monitors.py analyse`.
+  - **Bug 1:** printing "≥" would crash a cp1252 console.
+  - **Bug 2:** an incomplete set of monitors still produced Q1/Q2 conclusions.
+  - **Fixes:** stdout is reconfigured to UTF-8 (also in `analyze_audit.py`), and an incomplete set now gives Q1/Q2 = "PARTIAL, no verdict".
+  - **Added `test_rescore_partial.py`:** fake rows for qwen_A and gemma_A only, run with a cp1252 stdout. Result: exit 0 and PARTIAL with no conclusion, **PASS**. The cap test, the end-to-end test and G3 were re-run: all PASS.
+  - **Runs:** the prefix runs (seeds 5-9, ON and OFF) started at 15:09 ET with `fork_audit.py` from commit 6085de2a, unchanged since.
