@@ -56,6 +56,7 @@ row: 0.47.](results/paper_figures/fig_hawthorne_intervention.png)
 | Cartel formation without instruction in the double auction (Appendix C) | [`results/E5_runs.csv`](results/E5_runs.csv), [`results/NEWMARKET.md`](results/NEWMARKET.md), [`results/PRESSURE_V2.md`](results/PRESSURE_V2.md), [`results/DUO.md`](results/DUO.md), [`results/_launch_logs/`](results/_launch_logs/) | Alfredo Frontera |
 | Paper figures | [`results/paper_figures/`](results/paper_figures/), [`graftpp/report/paper/figs/`](graftpp/report/paper/figs/) | Jayden Jeong, Alfredo Frontera |
 | Paper source, snapshot by snapshot | [`report/overleaf-snapshots/`](report/overleaf-snapshots/) | the team |
+| Every file and link the submitted paper cites, and where it is here | [`PAPER_SOURCES.md`](PAPER_SOURCES.md) | the team |
 | Long-form companion report for the double auction, with the results the 8-page paper had no room for (formation without instruction, what holds a cartel's price, the removal check), and its claim-to-file table | [`report/draft.md`](report/draft.md), [`report/claims.md`](report/claims.md), [`report/overleaf_claim_check.md`](report/overleaf_claim_check.md) | Alfredo Frontera |
 | Every run with its time, reason and result file; the pre-registrations | [`LOG.md`](LOG.md) (append-only) | the team |
 | Independent reviews of the analyses | [`docs/reviews/`](docs/reviews/) (start at its [README](docs/reviews/README.md); the 15-minute monitor notes are in `heartbeats/`) | Codex reviews, with our replies |
