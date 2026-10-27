@@ -36,3 +36,9 @@ report/report_test_unpolished.pdf
 # Remotion video project: dependencies and renders
 video/node_modules/
 video/out/
+
+# abandoned video project (kept locally, not published) and local report builds
+video/
+report/*.docx
+report/*.pdf
+report/test_doc_b_id.txt

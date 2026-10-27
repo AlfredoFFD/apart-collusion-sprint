@@ -55,9 +55,10 @@ row: 0.47.](results/paper_figures/fig_hawthorne_intervention.png)
 | The intervention test in the Hawthorne duopoly (Appendix B) | [`results/hawthorne_negotiation/`](results/hawthorne_negotiation/) and [`results/hawthorne_negotiation_side_checks/`](results/hawthorne_negotiation_side_checks/) | Alfredo Frontera |
 | Cartel formation without instruction in the double auction (Appendix C) | [`results/E5_runs.csv`](results/E5_runs.csv), [`results/NEWMARKET.md`](results/NEWMARKET.md), [`results/PRESSURE_V2.md`](results/PRESSURE_V2.md), [`results/DUO.md`](results/DUO.md), [`results/_launch_logs/`](results/_launch_logs/) | Alfredo Frontera |
 | Paper figures | [`results/paper_figures/`](results/paper_figures/), [`graftpp/report/paper/figs/`](graftpp/report/paper/figs/) | Jayden Jeong, Alfredo Frontera |
-| Paper source, snapshot by snapshot | [`report/`](report/) (`overleaf_main_snapshot_*.tex`) | the team |
+| Paper source, snapshot by snapshot | [`report/overleaf-snapshots/`](report/overleaf-snapshots/) | the team |
+| Long-form companion report for the double auction, with the results the 8-page paper had no room for (formation without instruction, what holds a cartel's price, the removal check), and its claim-to-file table | [`report/draft.md`](report/draft.md), [`report/claims.md`](report/claims.md), [`report/overleaf_claim_check.md`](report/overleaf_claim_check.md) | Alfredo Frontera |
 | Every run with its time, reason and result file; the pre-registrations | [`LOG.md`](LOG.md) (append-only) | the team |
-| Independent reviews of the analyses | [`docs/reviews/`](docs/reviews/) | Codex reviews, with our replies |
+| Independent reviews of the analyses | [`docs/reviews/`](docs/reviews/) (start at its [README](docs/reviews/README.md); the 15-minute monitor notes are in `heartbeats/`) | Codex reviews, with our replies |
 | Work that existed before the sprint or was written by others | [`PREEXISTING.md`](PREEXISTING.md) | |
 
 ## Reproduce
@@ -108,8 +109,11 @@ python results/hawthorne_negotiation_side_checks/side_checks.py
 > Frontera, A., Jeong, J., Li, J., and Dash, R. (2026). *GRAFT++: Reducing Collusive Behavior in Agents via Localized
 > Training and J-space Monitoring.* Apart Research AI Collusion Research Sprint.
 
-## Reuse
+## License and reuse
 
-There is no license file yet, so please ask the authors before reusing the code. The double-auction harness comes
-from the organizers' starter repository (Agrawal et al., 2025); see [`PREEXISTING.md`](PREEXISTING.md). The sprint-time
+The team's code, scripts, results and text in this repository are released under the MIT License ([`LICENSE`](LICENSE)).
+Two parts carry their own terms: [`graftpp/`](graftpp/) is Jayden Jeong's code, imported unchanged from
+[github.com/xxozzi/graftpp](https://github.com/xxozzi/graftpp), and is licensed as that repository states; the double-auction
+harness comes from the organizers' starter repository (Agrawal et al., 2025), which `scripts/bootstrap.sh` clones into
+`vendor/` and which is not committed here; see [`PREEXISTING.md`](PREEXISTING.md) for what we changed. The sprint-time
 working notes for this repository are in [`docs/sprint-workspace-README.md`](docs/sprint-workspace-README.md).
