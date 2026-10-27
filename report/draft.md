@@ -1,6 +1,6 @@
 # What the messages say and what the price does: LLM sellers under a monitor, in markets that bargain back, and under a CEO's ultimatum
 
-Alfredo Frontera, Jayden Jeong, Rohan Li, Jake Dash. Columbia AI Alignment Club (CAIAC). Apart AI Collusion Research Sprint, Oct 23 to 25, 2026, Track 3.4 (what does a coalition do when it learns it is being watched?).
+Alfredo Frontera, Jayden Jeong, Jake Li, Rohan Dash. Columbia AI Alignment Club (CAIAC). Apart AI Collusion Research Sprint, Oct 23 to 25, 2026, Track 3.4 (what does a coalition do when it learns it is being watched?).
 
 **What this document is.** The team's submission is the paper "GRAFT++: Reducing Collusive Behavior in Agents via Localized Training and J-space Monitoring" (Frontera, Jeong, Li, Dash). This is the long-form companion for the double-auction work that the paper summarises in its Sections 3.2 and 4.3 and in Appendices B and C. It is written from the files at git tag `results-freeze` (Mon Oct 26, 1:01 AM ET). Every number is in a file under `results/` named in its section; `report/claims.md` maps each one to its file and row; `bash scripts/regenerate_all.sh` rebuilds every table and figure from the run folders. `LOG.md` records every run with its time, command, result folder and reason, and every pre-registration. Exploratory tests are labelled.
 
@@ -245,7 +245,7 @@ A cartel of AI sellers that learns it is watched talks less and charges the same
 
 ## Code and data
 
-Public copy: https://github.com/AlfredoFFD/apart-collusion-sprint-public (the market with our changes, every run folder, `LOG.md` with timestamps and the pre-registered rules and amendments, `PREEXISTING.md`, the prompts including the undercover-seller and dodge prompts, `report/claims.md`). The teammate's market, probes and training code: https://github.com/xxozzi/hawthorne. The negotiation test's episodes and analysis: `results/hawthorne_negotiation/` and `results/hawthorne_negotiation_side_checks/`.
+This repository: https://github.com/AlfredoFFD/graftpp-collusion-monitoring (the market with our changes, every run folder, `LOG.md` with timestamps and the pre-registered rules and amendments, `PREEXISTING.md`, the prompts including the undercover-seller and dodge prompts, `report/claims.md`). The teammate's market, probes and training code: https://github.com/xxozzi/hawthorne. The negotiation test's episodes and analysis: `results/hawthorne_negotiation/` and `results/hawthorne_negotiation_side_checks/`.
 
 ## Author contributions
 
