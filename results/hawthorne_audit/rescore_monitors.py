@@ -101,7 +101,7 @@ class Stopped(Exception):
     """The run's spending cap was reached; no further request is sent."""
 
 
-async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str, stop: dict) -> dict:
+async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str, stop: dict, account) -> dict:
     payload = {"model": mon["model"], "temperature": 0.0, "max_tokens": mon["max_tokens"][kind],
                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
                **mon.get("extra", {})}
@@ -123,8 +123,10 @@ async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str
                 r.raise_for_status()
                 data = r.json()
                 u = data.get("usage") or {}
-                usage["prompt_tokens"] += u.get("prompt_tokens", 0) or 0
-                usage["completion_tokens"] += u.get("completion_tokens", 0) or 0
+                tin, tout = u.get("prompt_tokens", 0) or 0, u.get("completion_tokens", 0) or 0
+                usage["prompt_tokens"] += tin
+                usage["completion_tokens"] += tout
+                account(tin, tout)   # every billable response counts against the cap at once, retries included
                 text = (data["choices"][0]["message"].get("content") or "")
                 break
             except Stopped:
@@ -155,6 +157,16 @@ async def run(monitor: str, rubric: str, kinds: set[str], base_url: str | None, 
     t0 = time.time()
     stop = {"flag": False}
 
+    def account(tin: int, tout: int) -> None:
+        """Count one billable response; no await inside, so it is atomic under asyncio. Requests already in
+        flight when the cap trips still finish, so the overshoot is at most `concurrency` calls."""
+        spent["in"] += tin
+        spent["out"] += tout
+        usd = spent["in"] / 1e6 * price_in + spent["out"] / 1e6 * price_out
+        if monitor != "qwen" and usd > usd_cap and not stop["flag"]:
+            stop["flag"] = True
+            print(f"STOP: estimated ${usd:.2f} passed this run's cap ${usd_cap:.2f}", flush=True)
+
     if monitor == "qwen":
         client = LLMClient(LLMConfig(base_url=base_url, model="hawthorne", concurrency=concurrency, max_tokens=400))
 
@@ -162,6 +174,7 @@ async def run(monitor: str, rubric: str, kinds: set[str], base_url: str | None, 
             mt = 300 if row["kind"] == "message" else 400
             resp = await client.chat(system_for(row, rubric), row["user"], temperature=0.0, max_tokens=mt,
                                      thinking=False)
+            account(resp.prompt_tokens, resp.completion_tokens)
             return {"text": resp.text, "parsed": resp.parsed, "attempts": resp.attempts,
                     "usage": {"prompt_tokens": resp.prompt_tokens, "completion_tokens": resp.completion_tokens}}
     else:
@@ -170,7 +183,8 @@ async def run(monitor: str, rubric: str, kinds: set[str], base_url: str | None, 
         sem = asyncio.Semaphore(concurrency)
 
         async def call(row):
-            return await _nebius_call(client, sem, mon, system_for(row, rubric), row["user"], row["kind"], stop)
+            return await _nebius_call(client, sem, mon, system_for(row, rubric), row["user"], row["kind"], stop,
+                                      account)
 
     f = open(path, "a", encoding="utf-8")
 
@@ -191,12 +205,6 @@ async def run(monitor: str, rubric: str, kinds: set[str], base_url: str | None, 
         async with lock:
             f.write(json.dumps(out) + "\n")
             f.flush()
-            spent["in"] += res["usage"]["prompt_tokens"]
-            spent["out"] += res["usage"]["completion_tokens"]
-            usd = spent["in"] / 1e6 * price_in + spent["out"] / 1e6 * price_out
-            if monitor != "qwen" and usd > usd_cap and not stop["flag"]:
-                stop["flag"] = True
-                print(f"STOP: estimated ${usd:.2f} passed this run's cap ${usd_cap:.2f}", flush=True)
 
     await asyncio.gather(*[one(r) for r in todo])
     f.close()

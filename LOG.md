@@ -240,3 +240,8 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
   - **Fixes:** stdout is reconfigured to UTF-8 (also in `analyze_audit.py`), and an incomplete set now gives Q1/Q2 = "PARTIAL, no verdict".
   - **Added `test_rescore_partial.py`:** fake rows for qwen_A and gemma_A only, run with a cp1252 stdout. Result: exit 0 and PARTIAL with no conclusion, **PASS**. The cap test, the end-to-end test and G3 were re-run: all PASS.
   - **Runs:** the prefix runs (seeds 5-9, ON and OFF) started at 15:09 ET with `fork_audit.py` from commit 6085de2a, unchanged since.
+
+- **2026-10-27 15:14 ET, Claude Code.** The Codex pre-push review blocked a fourth time, on a real bug: spending was counted only after the JSON retries finished, so the cap could be overrun and the cost undercounted.
+  - **The fix:** each billable response now counts against the cap the moment it arrives, retries included. The overshoot is at most `concurrency` calls already in flight.
+  - **`test_rescore_cap.py`** now also runs the reviewer case (every first reply is invalid JSON): 1 request sent, 0 rows written, **PASS**. The valid case and the partial test still PASS.
+  - **Runs:** the audit server finished booting at 15:12 ET (the earlier 503s came from the cold start and were retried by his client), and the prefix runs are in progress.
