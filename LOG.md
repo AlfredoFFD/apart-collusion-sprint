@@ -229,3 +229,7 @@ Format: `YYYY-MM-DD HH:MM ET · who · what was run (command or experiment) · r
     - `build` gives 1154 monitor inputs (554 message, 600 reasoning) from the 20 Oct 25 files; `rescore/inputs.jsonl`, sha256 54d77b970eb58dc0..., not committed because it can be rebuilt.
     - Nebius smoke test: 4 calls each for gemma, deepseek and gptoss, all parsed. Written to `rescore_smoke/`, not part of the data.
   - **Server:** `hawthorne-vllm-audit` passed `smoke_test.py` (`results/hawthorne_audit/smoke_test.log`). No experiment data yet.
+
+- **2026-10-27 15:06 ET, Claude Code.** The Codex pre-push review blocked again, on a real bug: in `rescore_monitors.py`, requests already queued would still be sent after the spending cap was passed.
+  - **The fix:** the stop flag is now checked after the wait, right before each request.
+  - **Added `test_rescore_cap.py`:** mocked API, $1 per call, $0.50 cap. It sent 1 request and wrote 1 row: **PASS** (appended to `gates_before_runs.log`).

@@ -9,3 +9,6 @@ G3 punish: E=+1.539 (lo +1.297)  A=+1.955 (lo +1.724)  G=-4998.7 (hi -4460.5)  -
 G3 PASS
 E2E: verdict COMPLETE; ON punish; OFF none; negotiation creates punishment True; UTF-8 report written: True
 E2E PASS
+STOP: estimated $1.00 passed this run's cap $0.50
+gemma A done in 0s; tokens in 1,000,000 out 0; estimated $1.00 at $1.0/M in, $0.0/M out
+CAP TEST: requests sent 1, rows written 1 (want 1 and 1): PASS

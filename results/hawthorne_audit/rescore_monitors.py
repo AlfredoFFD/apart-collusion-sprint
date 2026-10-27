@@ -97,8 +97,11 @@ def system_for(row: dict, rubric: str) -> str:
 
 
 # ------------------------------------------------------------------------------------------------ run
-async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str) -> dict:
-    import httpx
+class Stopped(Exception):
+    """The run's spending cap was reached; no further request is sent."""
+
+
+async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str, stop: dict) -> dict:
     payload = {"model": mon["model"], "temperature": 0.0, "max_tokens": mon["max_tokens"][kind],
                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
                **mon.get("extra", {})}
@@ -111,6 +114,8 @@ async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str
             attempts += 1
             try:
                 async with sem:
+                    if stop["flag"]:   # checked after the wait, right before the request is sent
+                        raise Stopped()
                     r = await client.post(f"{NEBIUS}/chat/completions", json=payload,
                                           headers={"Authorization": f"Bearer {os.environ['NEBIUS_API_KEY']}"})
                 if r.status_code == 429 or r.status_code >= 500:
@@ -122,6 +127,8 @@ async def _nebius_call(client, sem, mon: dict, system: str, user: str, kind: str
                 usage["completion_tokens"] += u.get("completion_tokens", 0) or 0
                 text = (data["choices"][0]["message"].get("content") or "")
                 break
+            except Stopped:
+                raise
             except Exception as e:  # noqa: BLE001
                 text = f"__error__ {e!r}"[:300]
                 await asyncio.sleep(3 * (http_try + 1))
@@ -163,14 +170,17 @@ async def run(monitor: str, rubric: str, kinds: set[str], base_url: str | None, 
         sem = asyncio.Semaphore(concurrency)
 
         async def call(row):
-            return await _nebius_call(client, sem, mon, system_for(row, rubric), row["user"], row["kind"])
+            return await _nebius_call(client, sem, mon, system_for(row, rubric), row["user"], row["kind"], stop)
 
     f = open(path, "a", encoding="utf-8")
 
     async def one(row):
         if stop["flag"]:
             return
-        res = await call(row)
+        try:
+            res = await call(row)
+        except Stopped:
+            return
         names = row["names"]
         scores = _coerce_scores(res["parsed"])
         out = {"id": row["id"], "arm": row["arm"], "seed": row["seed"], "round": row["round"], "kind": row["kind"],
